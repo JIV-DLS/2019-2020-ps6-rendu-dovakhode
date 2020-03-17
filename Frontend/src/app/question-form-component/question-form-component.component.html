@@ -1,0 +1,26 @@
+<div class="col-sm-8 col-sm-offset-2">
+  <form [formGroup]="questionForm" >
+    <div class="form-group">
+    <label for="label"> Title</label>
+    <input type="text" class="form-control" formControlName="label" id="label">
+    </div>
+    <div formArrayName="answers">
+      <h3>Answers</h3>
+      <div class="form-group" *ngFor="let answers of getAnswers().controls; let i=index">
+        <div class="answer-form"[formGroupName]="i" style="width: 100%;">
+          <label> Answer
+        <input type="text" class="form-control"  [formControlName]="'value'">
+            <br>
+            Correct
+            <input type="checkbox" [formControlName]="'isCorrect'">
+          </label>
+        </div>
+      </div>
+      <button class="btn btn-success" type="button" (click)="addAnswer()">
+        Add answer
+      </button>
+    </div>
+    <button class="btn btn-primary" type="submit" > Valider</button>
+
+  </form>
+</div>

@@ -1,0 +1,27 @@
+<div class="card">
+  <h2>{{quiz!=null?'Create a new':'modify the'}} Quiz</h2>
+  <form class="quiz-form" [formGroup]="quizForm">
+    <label for="title">
+      Title <br>
+      <input class="input-custom" type="text" id="name" [formControlName]="'name'">
+    </label>
+    <br>
+    <label for="theme">
+      Thème <br>
+      <select name="theme-field" id="theme" [formControlName]="'theme'">
+        <option *ngFor="let val of themvalues" [value]="val">
+{{val}}
+        </option>
+      </select>
+    </label>
+    <br>
+    <label>
+      <button [disabled]="this.questionDialogOpened" type="button" class="btn btn-sm btn-primary" (click)="addQuestion()">Manage question <span class="badge">{{quizFormValue().questions.length}}</span></button>
+    </label>
+    <br/>
+    <button *ngIf="quiz==null; else modifySection" mat-button type="submit" class=" btn btn-lg btn-block m-1 btn-success" (click)="addQuiz()">Create the quiz</button>
+    <ng-template #modifySection><button mat-button type="submit" class=" btn btn-lg btn-block m-1 btn-warning" (click)="modifyQuiz()">Modify the quiz</button></ng-template>
+  </form>
+</div>
+<!-- Uncomment below to see your form structure and how it changes-->
+<!-- <br><br>{{quizForm.getRawValue() | json}} -->
