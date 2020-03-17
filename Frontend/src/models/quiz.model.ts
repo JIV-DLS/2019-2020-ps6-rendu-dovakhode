@@ -9,7 +9,7 @@ export class Quiz {
     dateCreation?: Date;
     dateModification?: Date;
 
-    static quizFormValues(quizForm: FormGroup){
+    static quizFormValues(quizForm: FormGroup) {
       return quizForm.getRawValue() as Quiz;
     }
 }

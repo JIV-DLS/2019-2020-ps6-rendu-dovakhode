@@ -36,6 +36,7 @@ import { UserComponent } from './user/user.component';
 import { UserNavComponent } from './user/user-nav/user-nav.component';
 import { EditQuestionComponent } from './questions/edit-question/edit-question.component';
 import { EditableQuestionComponent } from './questions/editable-question/editable-question.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 const routes: Routes = [
   {path: '', component: QuizListComponent},
@@ -75,23 +76,24 @@ const routes: Routes = [
     QuestionsDialogComponent,
     SnackModificationComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatCardModule,
-    MatGridListModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatSnackBarModule,
-    _MatMenuDirectivesModule,
-    MatMenuModule
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(routes),
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatCardModule,
+        MatGridListModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatSnackBarModule,
+        _MatMenuDirectivesModule,
+        MatMenuModule,
+        MatSidenavModule
+    ],
   providers: [
   {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
 ],

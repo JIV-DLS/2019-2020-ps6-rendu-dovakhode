@@ -54,4 +54,4 @@ export const DEFAULT_QUIZ: Quiz = {
   theme: Object.values(theme)[0],
   questions: []
 
-}
+};
