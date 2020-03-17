@@ -25,8 +25,7 @@ export class QuizComponent implements OnInit {
    selectQuiz() {
     this.quizSelected.emit(true);
   }
-  deleteQuiz()
-  {
+  deleteQuiz() {
     this.quizDeleted.emit(this.quiz);
   }
 }

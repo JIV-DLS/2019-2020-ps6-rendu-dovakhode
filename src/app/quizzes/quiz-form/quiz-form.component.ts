@@ -29,7 +29,10 @@ export class QuizFormComponent implements OnInit {
   public quizForm: FormGroup;
   public themvalues = Object.values(theme);
   private questionDialogOpened = false;
-  constructor(private _location: Location, private _snackBar: MatSnackBar,public dialog: MatDialog, public formBuilder: FormBuilder, public quizService: QuizService) {
+  constructor(private location: Location, private snackBar: MatSnackBar,
+              public dialog: MatDialog,
+              public formBuilder: FormBuilder,
+              public quizService: QuizService) {
     // Form creation
     // You can also question-add validators to your inputs such as required, maxlength or even create your own validator!
     // More information: https://angular.io/guide/reactive-forms#simple-form-validation
@@ -65,22 +68,22 @@ export class QuizFormComponent implements OnInit {
      this.quizService.addQuiz(quizToCreate).subscribe(() => {
        console.log('success');
      }); // getQuiz().push(quizToCreate);
-     this._snackBar.openFromComponent(SnackModificationComponent, {
+     this.snackBar.openFromComponent(SnackModificationComponent, {
       duration: 1000,
       data: 'Quizz created succesfuly!'
     });
      this.initializeTheForm();
   }
-  modifyQuiz(){
+  modifyQuiz() {
     const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
     // quizToCreate.questions = [];
     quizToModify.dateModification = new Date();
     this.quizService.updateQuiz(quizToModify);
-    this._snackBar.openFromComponent(SnackModificationComponent, {
+    this.snackBar.openFromComponent(SnackModificationComponent, {
       duration: 1000,
       data: 'Quizz modified succesfuly!'
     });
-    this._location.back();
+    this.location.back();
   }
 
   quizFormValue() {

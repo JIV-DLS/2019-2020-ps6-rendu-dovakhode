@@ -50,7 +50,8 @@ export class QuestionService {
   }
   addQuestions(questions: Question[], quizId: string): BehaviorSubject<Question[]> {
     const newQuestions = [];
-    let newQuestions$ = new BehaviorSubject(questions);
+    const newQuestions$ = new BehaviorSubject(questions);
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < questions.length; i++) {
       this.addQuestion( questions[i], quizId).subscribe((question) => {
          newQuestions.push(question);
@@ -63,6 +64,7 @@ export class QuestionService {
     const updatedQuestions = [];
     // tslint:disable-next-line:prefer-const
     let updatedQuestions$: BehaviorSubject<Question[]>;
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < questions.length; i++) {
       this.updateQuestion( questions[i], quizId).subscribe((updatedQuestion) => {
          updatedQuestions.push(updatedQuestion);

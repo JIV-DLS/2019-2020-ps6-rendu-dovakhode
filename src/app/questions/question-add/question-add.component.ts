@@ -4,12 +4,17 @@ import {Quiz} from '../../../models/quiz.model';
 import {Question} from '../../../models/question.model';
 import {Answer} from '../../../models/answer.model';
 
+// @ts-ignore
 @Component({
   selector: 'app-question-add',
   templateUrl: './question-add.component.html',
   styleUrls: ['./question-add.component.scss']
 })
 export class QuestionAddComponent implements OnInit {
+  constructor(public formBuilder: FormBuilder) { }
+  get answers() {
+    return this.questionForm.get('answers') as FormArray;
+  }
   full = false;
   questionForm: FormGroup;
   @Input() questionEdition = null;
@@ -19,18 +24,17 @@ export class QuestionAddComponent implements OnInit {
   fullState: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   editQuestion: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
   changeFull() {
     this.full = !this.full;
     this.fullState.emit(this.full);
   }
-  @Output()
-  questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
-  constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.initializeQuestionForm();
   }
-  private initializeQuestionForm(){
+  private initializeQuestionForm() {
     this.questionForm = this.formBuilder.group({
       label: [this.questionEdition ? (this.questionEdition as Question).label : ''],
       answers: this.formBuilder.array( [])
@@ -38,9 +42,6 @@ export class QuestionAddComponent implements OnInit {
     if (this.questionEdition) {
       (this.questionEdition as Question).answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
     }
-  }
-  get answers() {
-    return this.questionForm.get('answers') as FormArray;
   }
 
   addAnswer() {
