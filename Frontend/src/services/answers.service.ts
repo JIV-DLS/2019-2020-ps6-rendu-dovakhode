@@ -1,0 +1,70 @@
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../environments/environment';
+import {Answer} from '../models/answer.model';
+import {catchError, tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {Question} from '../models/question.model';
+export class AnswersService {
+  constructor(private http: HttpClient) {
+  }
+
+  answerUrl(questionId, quizId) {
+    return environment.url + '/' + quizId.toString() + '/questions' + '/' + questionId.toString() + '/answers';
+  }
+
+  addQuestion(answer: Answer,  quizId: string , questionId: string) {
+    return this.http.post<Answer>(this.answerUrl(questionId, quizId), answer).pipe(
+      tap((newAnswer) => {
+        console.log('Ajout Reussi');
+      }),
+      catchError(this.handleError<Question>('PostAnswer', undefined))
+    );
+  }
+  getAnswerById(id: number , quizId: string , questionId: string) {
+    return this.http.get<Answer>(this.answerUrl(questionId, quizId) + '/' + id.toString()).pipe(
+      tap((answer) => {
+        console.log('Récupération par Id Reussie');
+      }),
+      catchError(this.handleError<Question>('getAnswerById', undefined))
+    );
+  }
+  getAnswer( quizId: string , questionId: string) {
+    return this.http.get<Answer[]>(this.answerUrl(questionId, quizId)).pipe(
+      tap((answer) => {
+        console.log('Récupération Reussie');
+      }),
+      catchError(this.handleError<Question>('getAnswer', undefined))
+    );
+  }
+
+  deleteAnswer( answer: Answer, quizId: string , question: Question) {
+    return this.http.get<Answer>(this.answerUrl(question, quizId) + '/' + answer.id).pipe(
+      tap((theanswer) => {
+        console.log('Récupération Reussie');
+      }),
+      catchError(this.handleError<Question>('deleteAnswer', undefined))
+    );
+  }
+
+  UpdateAnswer( answer: Answer, quizId: string , question: Question) {
+    return this.http.put<Answer>(this.answerUrl(question, quizId) + '/' + answer.id, answer).pipe(
+      tap((theanswer) => {
+        console.log('Récupération Reussie');
+      }),
+      catchError(this.handleError<Question>('getAnswer', undefined))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      // this.logRefresh(idMessage, `${operation} failed: ${error.message}`, 'danger');
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+}

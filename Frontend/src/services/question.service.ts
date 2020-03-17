@@ -23,14 +23,14 @@ export class QuestionService {
    * The list of question.
    * The list is retrieved from the mock.
    */
-  private questions: Question[] = [];
+ // private questions: Question[] = [];
 
 
   /**
    * Observable which contains the list of the question.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
-  public questions$: BehaviorSubject<Question[]> = new BehaviorSubject(this.questions);
+  // public questions$: BehaviorSubject<Question[]> = new BehaviorSubject(this.questions);
   index: number;
   // url = 'https://api.myjson.com/bins/13ajhy';
   questionUrl(quizId) {
@@ -75,11 +75,9 @@ export class QuestionService {
   }
 
   deleteQuestion(question: Question, quizId: string): Observable<Question>  {
-   return this.http.delete<Question>(this.questionUrl(quizId) + '\\' + question.id).pipe(
+   return this.http.delete<Question>(this.questionUrl(quizId) + '/' + question.id).pipe(
       tap((questionDeleted) => {
-        this.index = this.questions.indexOf(question);
-        this.questions.splice(this.index, 1);
-        this.questions$.next(this.questions);
+       console.log('Suppression reussie');
       }),
      catchError(this.handleError<Question>('deleteQuestion', undefined))
    );
@@ -88,28 +86,27 @@ export class QuestionService {
   setQuestionsFromUrl( quizId: string) {
     this.http.get<Question[]>(this.questionUrl(quizId)).subscribe(
       (question) => {
-        this.questions = question;
-        this.questions$.next(this.questions);
+       // this.questions = question;
+        // this.questions$.next(this.questions);
       }
     );
   }
   getQuestion( quizId: string): Observable<Question[]>  {
     return this.http.get<Question[]>(this.questionUrl(quizId)).pipe(
       tap((question) => {
-        this.questions = question;
-        this.questions$.next(this.questions);
+       console.log('Récupération reussie');
       }),
       catchError(this.handleError<Question[]>('getQuestion', undefined))
     );
   }
 
-  getQuestionByIndex(index: number) {
+  /*getQuestionByIndex(index: number) {
     return index >= 0 && index < this.questions.length ? this.questions[index] : null;
-  }
+  }*/
   getQuestionById(id: number, quizId: string): Observable<Question> {
-    return this.http.get<Question>(this.questionUrl(quizId)).pipe(
+    return this.http.get<Question>(this.questionUrl(quizId) + '/' + id.toString()).pipe(
       tap((question) => {
-        return question;
+       console.log('Récupération reussie');
       }),
       catchError(this.handleError<Question>('getQuestion', undefined))
     );
@@ -120,9 +117,10 @@ export class QuestionService {
   }*/
   updateQuestion(questionToModify: Question, quizId: string): Observable<Question> {
     // this.questions[+questionToModify.id - 1] = questionToModify;
-    return this.http.put<Question>(this.questionUrl(quizId)  + '\\' + questionToModify.id, questionToModify).pipe(
+    return this.http.put<Question>(this.questionUrl(quizId)  + '/' + questionToModify.id, questionToModify).pipe(
       tap((question) => {
         // this.questions[+questionToModify.id - 1] = questionToModify;
+        console.log('Modification reussie avec succcès');
       }),
       catchError(this.handleError<Question>('updateQuestion', undefined))
     );
