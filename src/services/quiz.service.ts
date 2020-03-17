@@ -39,6 +39,7 @@ export class QuizService {
   addQuiz(quiz: Quiz): Observable<Quiz> {
     return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
       tap((newQuiz: Quiz) => {
+        this.quizzes.push(newQuiz);
          }),
       catchError(this.handleError<Quiz>('addQuiz', undefined))
     );
@@ -77,7 +78,8 @@ export class QuizService {
     return index >= 0 && index < this.quizzes.length ? this.quizzes[index] : null;
   }
   getQuizById(id: number): Observable<Quiz> {
-    return this.http.get<Quiz>(QuizService.quizUrl).pipe(
+    const url = QuizService.quizUrl + '/' + id.toString();
+    return this.http.get<Quiz>(url).pipe(
       tap((quiz) => {
       }),
       catchError(this.handleError<Quiz>('getQuiz', undefined))
