@@ -39,36 +39,32 @@ export class QuizService {
   addQuiz(quiz: Quiz): Observable<Quiz> {
     return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
       tap((newQuiz: Quiz) => {
-        this.quizzes.push(newQuiz);
+       console.log('Ajout reussi');
          }),
       catchError(this.handleError<Quiz>('addQuiz', undefined))
     );
   }
 
   deleteQuiz(quiz: Quiz): Observable<Quiz>  {
-   return this.http.delete<Quiz>(QuizService.quizUrl + '\\' + quiz.id).pipe(
+   return this.http.delete<Quiz>(QuizService.quizUrl + '/' + quiz.id).pipe(
       tap((quizDeleted) => {
-        this.index = this.quizzes.indexOf(quiz);
-        this.quizzes.splice(this.index, 1);
-        this.quizzes$.next(this.quizzes);
+        console.log('Suppression reussie');
       }),
      catchError(this.handleError<Quiz>('deleteQuiz', undefined))
    );
   }
 
-  setQuizzesFromUrl() {
+/*  setQuizzesFromUrl() {
     this.http.get<Quiz[]>(QuizService.quizUrl).subscribe(
       (quiz) => {
         this.quizzes = quiz;
         this.quizzes$.next(this.quizzes);
       }
     );
-  }
+  }*/
   getQuiz(): Observable<Quiz[]>  {
     return this.http.get<Quiz[]>(QuizService.quizUrl).pipe(
       tap((quiz) => {
-        this.quizzes = quiz;
-        this.quizzes$.next(this.quizzes);
       }),
       catchError(this.handleError<Quiz[]>('getQuiz', undefined))
     );
@@ -81,6 +77,7 @@ export class QuizService {
     const url = QuizService.quizUrl + '/' + id.toString();
     return this.http.get<Quiz>(url).pipe(
       tap((quiz) => {
+        console.log('Récupération reussie');
       }),
       catchError(this.handleError<Quiz>('getQuiz', undefined))
     );
@@ -90,8 +87,9 @@ export class QuizService {
     return this.quizzes;
   }*/
   updateQuiz(quizToModify: Quiz): Observable<Quiz> {
-    return this.http.put<Quiz>(QuizService.quizUrl  + '\\' + quizToModify.id, quizToModify).pipe(
+    return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizToModify).pipe(
       tap((createdQuiz) => {
+        console.log('Modification reussie');
       }),
       catchError(this.handleError<Quiz>('updateQuiz', undefined))
     );
