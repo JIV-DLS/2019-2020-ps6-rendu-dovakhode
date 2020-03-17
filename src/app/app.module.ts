@@ -9,10 +9,6 @@ import { HeaderComponent } from './header/header.component';
 import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
 import {HttpClientModule} from '@angular/common/http';
 import {Router, RouterModule, Routes} from '@angular/router';
-import { EditQuizComponent } from './edit-quiz/edit-quiz.component';
-import { QuestionsComponentComponent } from './questions-component/questions-component.component';
-import { QuestionFormComponentComponent } from './question-form-component/question-form-component.component';
-import { QuestionListComponentComponent } from './question-list-component/question-list-component.component';
 import { QuestionComponent } from './questions/question/question.component';
 import {QuestionsComponent, QuestionsDialogComponent} from './questions/questions.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,7 +37,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 const routes: Routes = [
   {path: '', component: QuizListComponent},
   {path: 'quiz-list', component: QuizListComponent},
-  {path: 'edit-quiz' , component: EditQuizComponent},
   {path: 'quizz-edit/:id' , component: QuizzeEditComponent}
 
 ];
@@ -53,10 +48,6 @@ const routes: Routes = [
     QuizComponent,
     HeaderComponent,
     QuizFormComponent,
-    EditQuizComponent,
-    QuestionsComponentComponent,
-    QuestionFormComponentComponent,
-    QuestionListComponentComponent,
     QuestionComponent,
     QuestionsComponent,
     QuestionsDialogComponent,
