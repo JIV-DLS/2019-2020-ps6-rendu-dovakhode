@@ -1,0 +1,49 @@
+
+<mat-card>
+  <mat-card-header>
+    <b layout-align="center">{{editable?'Modify the question':'Create a new question'}}</b>
+    <button *ngIf="fullScrenable" (click)="changeFull()" mat-flat-button aria-label="Full Screen" style="position:absolute; right:10px;">
+      <mat-icon>{{full? 'fullscreen_exit':'fullscreen'}}</mat-icon>
+    </button>
+    <button *ngIf="editable" (click)="edit()" mat-flat-button aria-label="Edit" style="position:absolute; right:10px;">
+      <mat-icon>done</mat-icon>
+    </button>
+    <button *ngIf="editable" (click)="cancel()" mat-flat-button aria-label="Cancel" style="position:absolute; right:20px;">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="questionForm">
+      <mat-form-field style="width: 100%">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="title" [formControlName]="'label'" >
+      </mat-form-field>
+      <div  formArrayName="answers" [class.small]="!full" [class.big]="full" style="width: 100%;">
+        <mat-grid-list cols="{{full? 2:1}}" rowHeight="140px">
+
+          <mat-grid-tile
+            *ngFor="let answer of answers.controls; let i=index"
+            colspan="1"
+            rowspan="1">
+            <div [formGroupName]="i">
+              <mat-form-field style="width: 55%;">
+                <mat-label>Answer</mat-label>
+                <input [formControlName]="'value'" matInput placeholder="answer" >
+              </mat-form-field>
+              <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
+              <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon">
+                <mat-icon>close</mat-icon>
+              </button>
+
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+      </div>
+      <button class="mt-2 btn btn-sm" mat-button (click)="addAnswer()">Add Answer <span class="badge">{{answers.length}}</span></button>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>    <button *ngIf="questionEdition==null" mat-button (click)="createQuestion()" type="submit" class=" btn btn-lg btn-block btn-success">Create the question</button>
+  </mat-card-footer>
+</mat-card>
+

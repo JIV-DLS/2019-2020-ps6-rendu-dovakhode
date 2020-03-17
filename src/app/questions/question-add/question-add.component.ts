@@ -1,0 +1,83 @@
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {Quiz} from '../../../models/quiz.model';
+import {Question} from '../../../models/question.model';
+import {Answer} from '../../../models/answer.model';
+
+@Component({
+  selector: 'app-question-add',
+  templateUrl: './question-add.component.html',
+  styleUrls: ['./question-add.component.scss']
+})
+export class QuestionAddComponent implements OnInit {
+  full = false;
+  questionForm: FormGroup;
+  @Input() questionEdition = null;
+  @Input() fullScrenable = false;
+  @Input() editable = false;
+  @Output()
+  fullState: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  editQuestion: EventEmitter<boolean> = new EventEmitter<boolean>();
+  changeFull() {
+    this.full = !this.full;
+    this.fullState.emit(this.full);
+  }
+  @Output()
+  questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
+  constructor(public formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.initializeQuestionForm();
+  }
+  private initializeQuestionForm(){
+    this.questionForm = this.formBuilder.group({
+      label: [this.questionEdition ? (this.questionEdition as Question).label : ''],
+      answers: this.formBuilder.array( [])
+    });
+    if (this.questionEdition) {
+      (this.questionEdition as Question).answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
+    }
+  }
+  get answers() {
+    return this.questionForm.get('answers') as FormArray;
+  }
+
+  addAnswer() {
+    this.answers.push(this.createAnswer());
+  }
+
+  private createAnswer() {
+    return this.formBuilder.group({
+      value: ' ',
+      isCorrect: false,
+    });
+  }
+  private createAnswerByData(answer: Answer) {
+    return this.formBuilder.group({
+      value: answer.value,
+      isCorrect: answer.isCorrect,
+    });
+  }
+  questionFormValue() {
+    return Question.quizFormValues(this.questionForm) as Question;
+  }
+  createQuestion() {
+    this.questionCreated.emit(this.questionFormValue());
+    // console.log(this.questionFormValue());
+  }
+
+  clean(i: number) {
+    this.answers.removeAt(i);
+    // this.answers.setValue(this.questionFormValue().answers.splice(i, 0));
+    // (this.answers as unknown as Answer[]).splice(i,0);
+  }
+
+  edit() {
+    this.editQuestion.emit(true);
+  }
+
+  cancel() {
+    this.editQuestion.emit(false);
+  }
+}
