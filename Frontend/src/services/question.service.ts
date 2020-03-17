@@ -37,18 +37,18 @@ export class QuestionService {
     return environment.url + '/' + quizId + '/questions';
   }
 
-  addQuestion(question: Question, quizId: string): Observable<Question> {
+  addQuestion(question: Question): Observable<Question> {
     const questions = question.answers;
     deleteProperty(question, 'answers');
     console.log(question);
-    return this.http.post<Question>(this.questionUrl(quizId), question).pipe(
+    return this.http.post<Question>(this.questionUrl(question.quizId), question).pipe(
       tap((newQuestion: Question) => {
 
          }),
       catchError(this.handleError<Question>('addQuestion', undefined))
     );
   }
-  addQuestions(questions: Question[], quizId: string): BehaviorSubject<Question[]> {
+  /*addQuestions(questions: Question[], quizId: string): BehaviorSubject<Question[]> {
     const newQuestions = [];
     const newQuestions$ = new BehaviorSubject(questions);
     // tslint:disable-next-line:prefer-for-of
@@ -59,7 +59,7 @@ export class QuestionService {
       });
     }
     return newQuestions$;
-  }
+  }*/
   updateQuestions(questions: Question[], quizId: string): BehaviorSubject<Question[]> {
     const updatedQuestions = [];
     // tslint:disable-next-line:prefer-const
@@ -74,8 +74,8 @@ export class QuestionService {
     return updatedQuestions$;
   }
 
-  deleteQuestion(question: Question, quizId: string): Observable<Question>  {
-   return this.http.delete<Question>(this.questionUrl(quizId) + '/' + question.id).pipe(
+  deleteQuestion(question: Question): Observable<Question>  {
+   return this.http.delete<Question>(this.questionUrl(question.quizId) + '/' + question.id).pipe(
       tap((questionDeleted) => {
        console.log('Suppression reussie');
       }),
@@ -115,9 +115,9 @@ export class QuestionService {
  /* getQuestion() {
     return this.questions;
   }*/
-  updateQuestion(questionToModify: Question, quizId: string): Observable<Question> {
+  updateQuestion(questionToModify: Question): Observable<Question> {
     // this.questions[+questionToModify.id - 1] = questionToModify;
-    return this.http.put<Question>(this.questionUrl(quizId)  + '/' + questionToModify.id, questionToModify).pipe(
+    return this.http.put<Question>(this.questionUrl(questionToModify.quizId)  + '/' + questionToModify.id, questionToModify).pipe(
       tap((question) => {
         // this.questions[+questionToModify.id - 1] = questionToModify;
         console.log('Modification reussie avec succcès');

@@ -14,7 +14,6 @@ import {QuestionService} from './question.service';
 export class QuizService {
 
   constructor(private http: HttpClient, private questionService: QuestionService) {
-    this.setQuizzesFromUrl();
   }
   // url = 'https://api.myjson.com/bins/13ajhy';
   public static quizUrl = environment.url + '/quizzes';
