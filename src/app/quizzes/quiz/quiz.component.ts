@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
+import {QuestionsDialogComponent} from '../../questions/questions.component';
+import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-quiz',
@@ -16,7 +19,7 @@ export class QuizComponent implements OnInit {
   @Output()
   quizDeleted: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -27,5 +30,22 @@ export class QuizComponent implements OnInit {
   }
   deleteQuiz() {
     this.quizDeleted.emit(this.quiz);
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(QuestionsDialogComponent, {
+      width: '950px',
+      maxHeight: '500px',
+      data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
+    });
+    dialogRef.afterClosed().subscribe(questions => {
+      /* this.questionDialogOpened = false;
+      this.questions.setValue( questions ? questions : this.questions ); */
+    });
+  }
+
+  deleteQuestion(deleteState: boolean) {
+    /* if(deleteState){
+
+    } */
   }
 }
