@@ -5,9 +5,19 @@ h2 {
     // Add some CSS here! What if you try to change the background?
 }
 
-.example-container {
-  width: 400px;
-  height: 200px;
-  margin: 10px;
-  border: 1px solid #555;
+.cdk-virtual-scroll-data-source-example .example-viewport {
+  height: 134px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.cdk-virtual-scroll-data-source-example .example-viewport .cdk-virtual-scroll-content-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.cdk-virtual-scroll-data-source-example .example-item {
+  width: 50px;
+  height: 100%;
+  writing-mode: vertical-lr;
 }
