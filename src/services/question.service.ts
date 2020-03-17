@@ -66,7 +66,7 @@ export class QuestionService {
     let updatedQuestions$: BehaviorSubject<Question[]>;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < questions.length; i++) {
-      this.updateQuestion( questions[i], quizId).subscribe((updatedQuestion) => {
+      this.updateQuestion( questions[i]).subscribe((updatedQuestion) => {
          updatedQuestions.push(updatedQuestion);
          updatedQuestions$.next(updatedQuestions);
       });

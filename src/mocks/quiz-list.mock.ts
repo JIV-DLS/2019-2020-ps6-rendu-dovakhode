@@ -49,7 +49,7 @@ export const QUIZ_LIST: Quiz[] = [
 */
 export const DEFAULT_QUIZ: Quiz = {
 
-  id: '',
+  id: 2,
   name: 'nom du quiz',
   theme: Object.values(theme)[0],
   questions: []

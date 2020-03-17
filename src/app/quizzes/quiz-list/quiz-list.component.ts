@@ -13,6 +13,7 @@ export class QuizListComponent implements OnInit {
 
   constructor(public quizService: QuizService) {
     this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
+    this.quizList.push(new Quiz());
   }
 
   ngOnInit() {
