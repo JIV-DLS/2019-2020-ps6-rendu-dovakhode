@@ -12,8 +12,8 @@ export class AnswersService {
     return environment.url + '/' + quizId.toString() + '/questions' + '/' + questionId.toString() + '/answers';
   }
 
-  addQuestion(answer: Answer,  quizId: string , questionId: string) {
-    return this.http.post<Answer>(this.answerUrl(questionId, quizId), answer).pipe(
+  addQuestion(answer: Answer) {
+    return this.http.post<Answer>(this.answerUrl(answer.questionId, answer.quizId), answer).pipe(
       tap((newAnswer) => {
         console.log('Ajout Reussi');
       }),
@@ -37,8 +37,8 @@ export class AnswersService {
     );
   }
 
-  deleteAnswer( answer: Answer, quizId: string , question: Question) {
-    return this.http.get<Answer>(this.answerUrl(question, quizId) + '/' + answer.id).pipe(
+  deleteAnswer( answer: Answer) {
+    return this.http.get<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id).pipe(
       tap((theanswer) => {
         console.log('Récupération Reussie');
       }),
@@ -46,8 +46,8 @@ export class AnswersService {
     );
   }
 
-  UpdateAnswer( answer: Answer, quizId: string , question: Question) {
-    return this.http.put<Answer>(this.answerUrl(question, quizId) + '/' + answer.id, answer).pipe(
+  UpdateAnswer( answer: Answer) {
+    return this.http.put<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id, answer).pipe(
       tap((theanswer) => {
         console.log('Récupération Reussie');
       }),

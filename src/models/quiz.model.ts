@@ -2,7 +2,7 @@ import { Question } from './question.model';
 import {FormGroup} from '@angular/forms';
 
 export class Quiz {
-    id: string;
+    id: number;
     name: string;
     theme?: string;
     questions: Question[];
