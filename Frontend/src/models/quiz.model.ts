@@ -8,7 +8,9 @@ export class Quiz {
     questions: Question[];
     dateCreation?: Date;
     dateModification?: Date;
-
+    constructor() {
+      this.questions = [];
+    }
     static quizFormValues(quizForm: FormGroup) {
       return quizForm.getRawValue() as Quiz;
     }
