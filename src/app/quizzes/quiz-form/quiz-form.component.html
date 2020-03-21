@@ -1,4 +1,111 @@
-<div class="card">
+<!--
+<div class="card" style="background-color: deepskyblue">
+  <span>{{quiz.theme}} </span>
+    <h2>
+      <i *ngIf="quiz.theme==='Actor'" class="fab fa-leanpub"></i>
+      <i *ngIf="quiz.theme==='Basket-Ball'" class="fas fa-basketball-ball"></i>
+      {{quiz.name}}
+    </h2>
+  <h4>{{quiz.questions?.length}} <span *ngIf="quiz.questions?.length>1">  questions</span>
+    <span *ngIf="quiz.questions?.length===1 || quiz.questions?.length===0 ">  questions</span> </h4>
+    <button class="btn button-card" routerLink="/quizz-edit/{{quiz.id}}" (click)="selectQuiz()">Select</button>
+  <button class="btn button-card" (click)="deleteQuiz()">Delete</button>
+  <h6 *ngIf="quiz.dateModification!=null;"> Modified at: {{quiz.dateModification | date}}</h6>
+  <h6 *ngIf="quiz.dateModification==null && quiz.dateCreation!=null"> Créated at: {{quiz.dateModification | date}}</h6>
+</div>
+-->
+<form class="quiz-form" [formGroup]="quizForm">
+<mat-card style="width: 400px;">
+  <mat-card-header>
+
+  </mat-card-header>
+  <mat-card-content>
+    <!--<mat-drawer-container class="example-container">
+      <mat-drawer mode="side" opened>Drawer content</mat-drawer>
+      <mat-drawer-content>
+        <mat-form-field style="width: 100%">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="title" [formControlName]="'label'" >
+        </mat-form-field>
+      </mat-drawer-content>
+    </mat-drawer-container>-->
+    <mat-grid-list cols="4" rowHeight="10px" style="width: 100%">
+      <mat-grid-tile colspan="2" rowspan="4">
+        <mat-form-field style="width: 100%">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="title" [formControlName]="'label'" >
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2" rowspan="16">
+        <mat-card style="border: black solid 3px; height: 90%;width: 90%;">
+          <mat-card-content style=" height: 100%;width: 100%;">
+            <div class="container">
+              <img src="../../../assets/Default/imageNotFound.png" style=" height: 100%;width: 100%;" alt="NotFound Image"/>
+              <button mat-flat-button aria-label="Example icon-button with a heart icon">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="4">
+        <mat-form-field>
+          <mat-label>Thème</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let theme of themesValues" [value]="theme">
+              {{theme}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2" rowspan="4">
+        <mat-form-field>
+          <mat-label>Sous-Thème</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let theme of themesValues" [value]="theme">
+              {{theme}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="4">
+        <mat-form-field>
+          <mat-label>Difficulté</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let difficulty of difficultiesValues" [value]="difficulty">
+              {{difficulty}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1">
+        <mat-divider></mat-divider>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="3" >
+        <span style="text-decoration: underline #555555; text-align: left;">Listes des questions(<span class="badge">{{quiz.questions.length}}</span>):</span>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="3">
+        <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="openDialog()">Ajouter</button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="16">
+        <div class="cdk-virtual-scroll-data-source-example" style="border: black solid 3px; height: 90%;width: 100%; overflow-x: scroll">
+          <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
+            <app-question (delete)="deleteQuestion($event)" *cdkVirtualFor="let question of quiz.questions" [question]="question" ></app-question>
+          </cdk-virtual-scroll-viewport>
+        </div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+  </mat-card-content>
+  <mat-card-footer>
+
+  </mat-card-footer>
+</mat-card>
+</form>
+<!--<div class="card">
   <h2>{{quiz!=null?'Create a new':'modify the'}} Quiz</h2>
   <form class="quiz-form" [formGroup]="quizForm">
     <label for="title">
@@ -22,6 +129,6 @@
     <button *ngIf="quiz==null; else modifySection" mat-button type="submit" class=" btn btn-lg btn-block m-1 btn-success" (click)="addQuiz()">Create the quiz</button>
     <ng-template #modifySection><button mat-button type="submit" class=" btn btn-lg btn-block m-1 btn-warning" (click)="modifyQuiz()">Modify the quiz</button></ng-template>
   </form>
-</div>
+</div>-->
 <!-- Uncomment below to see your form structure and how it changes-->
 <!-- <br><br>{{quizForm.getRawValue() | json}} -->
