@@ -4,3 +4,10 @@ export enum theme {
   HightSchoolStudie= 'Hight School Studie' ,
 
 }
+
+export enum difficulte {
+  Difficile= 'Difficile',
+  Normale= 'Normal',
+  Facile= 'Facile' ,
+
+}

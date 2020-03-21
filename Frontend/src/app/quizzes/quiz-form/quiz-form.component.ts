@@ -3,7 +3,7 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
-import {theme} from '../../../models/theme.models';
+import {difficulte, theme} from '../../../models/theme.models';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {QuestionsDialogComponent} from '../../questions/questions.component';
@@ -27,7 +27,8 @@ export class QuizFormComponent implements OnInit {
    */
   @Input() quiz: Quiz = null;
   public quizForm: FormGroup;
-  public themvalues = Object.values(theme);
+  public themesValues = Object.values(theme);
+  public difficultiesValues = Object.values(difficulte);
   private questionDialogOpened = false;
   constructor(private location: Location, private snackBar: MatSnackBar,
               public dialog: MatDialog,
@@ -107,6 +108,12 @@ export class QuizFormComponent implements OnInit {
       this.questionDialogOpened = false;
       this.questions.setValue( questions ? questions : this.questions );
     });
+  }
+
+  deleteQuestion(deleteState: boolean) {
+    /* if(deleteState){
+
+    } */
   }
 }
 

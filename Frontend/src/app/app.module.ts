@@ -35,6 +35,7 @@ import { EditableQuestionComponent } from './questions/editable-question/editabl
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSelectModule} from '@angular/material/select';
 
 const routes: Routes = [
   {path: '', component: QuizListComponent},
@@ -87,7 +88,8 @@ const routes: Routes = [
     MatMenuModule,
     MatSidenavModule,
     MatDividerModule,
-    ScrollingModule
+    ScrollingModule,
+    MatSelectModule
   ],
   providers: [
   {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
