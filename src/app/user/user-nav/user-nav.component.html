@@ -1,10 +1,10 @@
 <button mat-card-avatar class="example-header-image" style="position:absolute; right:10px;" mat-fab [matMenuTriggerFor]="menu"></button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
+  <button (click)="checkProfil()" mat-menu-item>
     <mat-icon>person</mat-icon>
     See profil
   </button>
-  <button mat-menu-item>
+  <button (click)="logout()" mat-menu-item>
     <mat-icon>logout</mat-icon>
     Logout
   </button>

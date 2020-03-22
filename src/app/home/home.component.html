@@ -1,0 +1,42 @@
+<div style="text-align: center; padding-top: 20px;">
+  <mat-grid-list cols="6" rowHeight="25px" style="width: 100%">
+    <mat-grid-tile colspan="1" rowspan="3">
+      <mat-form-field appearance="legacy">
+        <mat-label>Rechercher</mat-label>
+        <input matInput placeholder="nom et/ou prénom">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="3">
+      <h3>Profil par patients</h3>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="3">
+      <button (click)="addProfile()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Ajouter un profil
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="6" rowspan="12">
+      <div class="cdk-virtual-scroll-data-source-example" style="border: black solid 3px; height: 90%;width: 100%; overflow-x: scroll">
+        <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
+          <!--<app-question *cdkVirtualFor="let question of [2,3]"  ></app-question>-->
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="4">
+      <button (click)="createAQuiz()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Créer un quiz
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="4">
+      <button routerLink="/quiz-list" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Modifier un quiz
+      </button>    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="4">
+      <button (click)="quiqQuiz()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Quiz rapide
+      </button>    </mat-grid-tile>
+    <!--<mat-grid-tile colspan="6" rowspan="4">
+      <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-danger" (click)="openDialog()">Annuler</button>
+    </mat-grid-tile>-->
+  </mat-grid-list>
+</div>

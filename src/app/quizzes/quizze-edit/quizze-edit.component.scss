@@ -1,0 +1,21 @@
+.Jbtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  opacity: 0.5;
+}
+.Jbtn:hover{
+  opacity: 1;
+}
+mat-form-field{
+  width: 100%;
+}

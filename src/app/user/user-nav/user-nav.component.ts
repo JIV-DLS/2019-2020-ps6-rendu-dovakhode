@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-user-nav',
@@ -12,4 +13,11 @@ export class UserNavComponent implements OnInit {
   ngOnInit() {
   }
 
+  checkProfil() {
+    alert(environment.maintenanceMessage);
+  }
+
+  logout() {
+    alert(environment.maintenanceMessage);
+  }
 }
