@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  url : 'http://localhost:9428/api'
+  url : 'http://localhost:9428/api',
+  maintenanceMessage: 'coming soon ...'
 };
 
 /*

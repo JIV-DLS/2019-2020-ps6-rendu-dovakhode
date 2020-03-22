@@ -4,13 +4,7 @@
   width: 100%;
   max-width: 400px;
 }
-
-.container img {
-  width: 100%;
-  height: auto;
-}
-
-.container .btn {
+.Jbtn {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -19,13 +13,15 @@
   background-color: #555;
   color: white;
   font-size: 16px;
-  padding: 12px 24px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
+  opacity: 0.5;
 }
-
-.container .btn:hover {
-  background-color: black;
+.Jbtn:hover{
+  opacity: 1;
+}
+mat-form-field{
+  width: 100%;
 }

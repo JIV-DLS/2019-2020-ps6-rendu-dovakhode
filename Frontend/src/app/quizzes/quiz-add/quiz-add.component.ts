@@ -12,11 +12,11 @@ import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-quiz-form',
-  templateUrl: './quiz-form.component.html',
-  styleUrls: ['./quiz-form.component.scss']
+  templateUrl: './quiz-add.component.html',
+  styleUrls: ['./quiz-add.component.scss']
 })
 
-export class QuizFormComponent implements OnInit {
+export class QuizAddComponent implements OnInit {
 
   // Note: We are using here ReactiveForms to create our form. Be careful when you look for some documentation to
   // avoid TemplateDrivenForm (another type of form)
@@ -41,6 +41,7 @@ export class QuizFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.quiz = new Quiz();
     this.initializeTheForm();
   }
   initializeTheForm() {
@@ -49,7 +50,7 @@ export class QuizFormComponent implements OnInit {
   quizzFormInitializer() {
     return this.formBuilder.group({
       id: [this.quiz ? this.quiz.id : DEFAULT_QUIZ.id],
-      name: [this.quiz ? this.quiz.name : DEFAULT_QUIZ.name],
+      label: [this.quiz ? this.quiz.name : DEFAULT_QUIZ.name],
       theme: [this.quiz ? this.quiz.theme : DEFAULT_QUIZ.theme],
       questions: [this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions]
     });
@@ -75,17 +76,7 @@ export class QuizFormComponent implements OnInit {
     });
      this.initializeTheForm();
   }
-  modifyQuiz() {
-    const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
-    // quizToCreate.questions = [];
-    quizToModify.dateModification = new Date();
-    this.quizService.updateQuiz(quizToModify);
-    this.snackBar.openFromComponent(SnackModificationComponent, {
-      duration: 1000,
-      data: 'Quizz modified succesfuly!'
-    });
-    this.location.back();
-  }
+
 
   quizFormValue() {
     return Quiz.quizFormValues(this.quizForm);
@@ -109,7 +100,17 @@ export class QuizFormComponent implements OnInit {
       this.questions.setValue( questions ? questions : this.questions );
     });
   }
-
+  modifyQuiz() {
+    const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
+    // quizToCreate.questions = [];
+    quizToModify.dateModification = new Date();
+    this.quizService.updateQuiz(quizToModify);
+    this.snackBar.openFromComponent(SnackModificationComponent, {
+      duration: 1000,
+      data: 'Quizz modified succesfuly!'
+    });
+    this.location.back();
+  }
   deleteQuestion(deleteState: boolean) {
     /* if(deleteState){
 

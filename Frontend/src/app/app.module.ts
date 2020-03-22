@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { QuizListComponent } from './quizzes/quiz-list/quiz-list.component';
 import { QuizComponent } from './quizzes/quiz/quiz.component';
 import { HeaderComponent } from './header/header.component';
-import { QuizFormComponent } from './quizzes/quiz-form/quiz-form.component';
+import { QuizAddComponent } from './quizzes/quiz-add/quiz-add.component';
 import {HttpClientModule} from '@angular/common/http';
 import {Router, RouterModule, Routes} from '@angular/router';
 import { QuestionComponent } from './questions/question/question.component';
@@ -36,9 +36,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatSelectModule} from '@angular/material/select';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: '', component: QuizListComponent},
+  {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
   {path: 'quizz-edit/:id' , component: QuizzeEditComponent}
 
@@ -50,7 +51,7 @@ const routes: Routes = [
     QuizListComponent,
     QuizComponent,
     HeaderComponent,
-    QuizFormComponent,
+    QuizAddComponent,
     QuestionComponent,
     QuestionsComponent,
     QuestionsDialogComponent,
@@ -64,10 +65,13 @@ const routes: Routes = [
     UserComponent,
     UserNavComponent,
     EditQuestionComponent,
-    EditableQuestionComponent
+    EditableQuestionComponent,
+    HomeComponent
   ],
   entryComponents: [
     QuestionsDialogComponent,
+    QuizAddComponent,
+    QuizzeEditComponent,
     SnackModificationComponent
   ],
   imports: [
@@ -92,7 +96,7 @@ const routes: Routes = [
     MatSelectModule
   ],
   providers: [
-  {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
 ],
   bootstrap: [AppComponent]
 })
