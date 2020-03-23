@@ -9,11 +9,13 @@ const QuestionsRouter = require('./questions')
 function createQuiz(obj) {
   const { questions } = obj
   delete obj.questions
+  delete obj.id
   const quiz = Quiz.create({ ...obj })
 
   for (let i = 0; i < questions.length; i++) {
+    delete questions[i].id
     questions[i].quizId = quiz.id
-    QuestionsRouter.createQuestion({ ...questions[i] })
+    questions[i] = QuestionsRouter.createQuestion({ ...questions[i] })
   }
   quiz.questions = questions
   return quiz

@@ -1,13 +1,16 @@
-<mat-grid-list cols="3" rowHeight="30px" style="width: 100%; border-bottom: #1b1e21 1px solid;">
+<mat-grid-list cols="8" rowHeight="30px" style="width: 100%; border-bottom: #1b1e21 1px solid;">
 
-  <mat-grid-tile colspan="1" rowspan="1">
-    <h4>{{quiz.name}}</h4>
+  <mat-grid-tile (click)="select()" [class.jhover]="hover" colspan="3" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
+    <h4>{{quiz.label}}</h4>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
+  <mat-grid-tile (click)="select()" [class.jhover]="hover" colspan="2" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
     <h4>{{quiz.theme}}</h4>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
+  <mat-grid-tile (click)="select()" [class.jhover]="hover" colspan="2" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
     <h4>{{quiz.difficulty}}</h4>
+  </mat-grid-tile>
+  <mat-grid-tile (click)="delete()" class="j" colspan="1" rowspan="1">
+    <mat-icon>delete</mat-icon>
   </mat-grid-tile>
 
 </mat-grid-list>
