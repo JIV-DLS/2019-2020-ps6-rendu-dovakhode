@@ -5,10 +5,13 @@ export class Quiz {
     id: number;
     name: string;
     theme?: string;
+    subTheme?: string;
+    difficulty?: string;
     questions: Question[];
     dateCreation?: Date;
     dateModification?: Date;
     constructor() {
+      this.id = 34894;
       this.questions = [];
     }
     static quizFormValues(quizForm: FormGroup) {
