@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  appName: 'DOVA QUIZ',
   url : 'http://localhost:9428/api',
   maintenanceMessage: 'disponible bientôt ...'
 };
