@@ -48,7 +48,7 @@
     </mat-grid-tile>
   </mat-grid-list>
   <div style="max-height: 430px;overflow-y: scroll;">
-    <app-quiz-less-info class="quiz" routerLink="/quiz-edit/{{quiz.id}}"  *ngFor="let quiz of quizList" [quiz]="quiz"></app-quiz-less-info>
+    <app-quiz-less-info class="quiz" (deleteEmitter)="deleteQuiz($event,quiz)" (selectEmitter)="selectQuiz(quiz)" *ngFor="let quiz of quizList" [quiz]="quiz"></app-quiz-less-info>
   </div>
 
 </div>

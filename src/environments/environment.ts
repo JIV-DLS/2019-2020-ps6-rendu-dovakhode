@@ -7,7 +7,10 @@ export const environment = {
   production: false,
   appName: 'DOVA QUIZ',
   url : 'http://localhost:9428/api',
-  maintenanceMessage: 'disponible bientôt ...'
+  maintenanceMessage: 'disponible bientôt ...',
+  formFieldsRequired: 'Veuiller remplir tous les champs requis(*)',
+  formFieldRequired: 'Veuiller remplir ce champs',
+  formSelectRequired: 'Veuillez choisir une valeur',
 };
 
 /*

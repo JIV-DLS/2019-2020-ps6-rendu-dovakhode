@@ -49,9 +49,9 @@ export const QUIZ_LIST: Quiz[] = [
 */
 export const DEFAULT_QUIZ: Quiz = {
 
-  id: 2,
-  name: 'nom du quiz',
-  theme: Object.values(theme)[0],
+  id: null,
+  label: null,
+  theme: null,
   questions: []
 
 };

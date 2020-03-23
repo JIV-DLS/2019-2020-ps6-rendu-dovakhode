@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
 
 @Component({
@@ -8,9 +8,19 @@ import {Quiz} from '../../../models/quiz.model';
 })
 export class QuizLessInfoComponent implements OnInit {
   @Input() quiz: Quiz;
+  @Output()
+  selectEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  deleteEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor() { }
-
+  hover: boolean;
   ngOnInit() {
+    this.hover = false;
   }
-
+  select() {
+    this.selectEmitter.emit(true);
+  }
+  delete() {
+    this.deleteEmitter.emit(confirm('voulez-vous vraiment supprimer (' + this.quiz.label + ')'));
+  }
 }
