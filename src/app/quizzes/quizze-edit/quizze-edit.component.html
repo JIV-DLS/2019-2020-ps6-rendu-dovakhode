@@ -14,7 +14,7 @@
   <h6 *ngIf="quiz.dateModification==null && quiz.dateCreation!=null"> Créated at: {{quiz.dateModification | date}}</h6>
 </div>
 -->
-<form class="quiz-form" [formGroup]="quizForm">
+<form *ngIf="!loading" class="quiz-form" [formGroup]="quizForm">
   <mat-card style="width: 100%; ">
     <mat-card-header>
 
@@ -39,13 +39,14 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="4" rowspan="8">
+        <mat-grid-tile colspan="4" rowspan="16">
           <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
             <mat-card-content style=" height: 100%;width: 100%;">
               <img src="../../../assets/Default/imageNotFound.png" style=" height: 100%;width: 100%;" alt="NotFound Image"/>
-              <button class="Jbtn" mat-flat-button aria-label="Example icon-button with a heart icon">
-                <mat-icon>build</mat-icon>
-              </button>
+              <mat-form-field class="Jbtn" appearance="legacy">
+                <input matInput  placeholder="title" [formControlName]="'label'" >
+                <mat-icon matSuffix>build</mat-icon>
+              </mat-form-field>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
@@ -80,7 +81,7 @@
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile colspan="16" rowspan="1">
+        <mat-grid-tile colspan="8" rowspan="1">
           <mat-divider></mat-divider>
         </mat-grid-tile>
         <mat-grid-tile colspan="4" rowspan="3" >
@@ -102,10 +103,13 @@
     </mat-card-content>
     <mat-card-footer style="padding-right: 12px;">
       <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
-        <mat-grid-tile colspan="5" rowspan="4">
+        <mat-grid-tile colspan="2" rowspan="4">
         </mat-grid-tile>
         <mat-grid-tile colspan="3" rowspan="4">
-          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="mo()">Modifier</button>
+          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="modifyQuiz()">Modifier</button>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3" rowspan="4">
+          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-danger" (click)="cancel()">Annuler</button>
         </mat-grid-tile>
         <!--<mat-grid-tile colspan="3" rowspan="4">
           <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-danger" (click)="openDialog()">Annuler</button>
