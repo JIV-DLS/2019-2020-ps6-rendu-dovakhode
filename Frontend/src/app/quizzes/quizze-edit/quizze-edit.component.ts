@@ -82,6 +82,7 @@ export class QuizzeEditComponent implements OnInit {
         this.quiz = quiz;
         this.initializeTheForm(quiz);
       }
+      this.location.back();
     });
   }
 

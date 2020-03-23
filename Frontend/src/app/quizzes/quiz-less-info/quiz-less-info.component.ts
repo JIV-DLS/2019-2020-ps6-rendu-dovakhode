@@ -21,6 +21,6 @@ export class QuizLessInfoComponent implements OnInit {
     this.selectEmitter.emit(true);
   }
   delete() {
-    this.deleteEmitter.emit(confirm('voulez-vous vraiment supprimer (' + this.quiz.label + ')'));
+    this.deleteEmitter.emit(confirm('voulez-vous vraiment supprimer (' + this.quiz.label + ') ?'));
   }
 }
