@@ -43,7 +43,9 @@ export class QuizzeEditComponent implements OnInit {
       id: this.quiz.id,
       label: [this.quiz.label, [ Validators.required, Validators.minLength(5)]],
       theme: [this.quiz.theme, [ Validators.required, Validators.minLength(3)]],
-      questions: this.quiz.questions
+      subTheme: [this.quiz.subTheme],
+      difficulty: [this.quiz.difficulty],
+      questions: this.quiz.questions,
     });
   }
   get questions() {

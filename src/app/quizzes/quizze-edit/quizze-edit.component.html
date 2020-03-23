@@ -53,7 +53,7 @@
         <mat-grid-tile colspan="4" rowspan="4">
           <mat-form-field>
             <mat-label>Difficulté</mat-label>
-            <mat-select>
+            <mat-select [formControlName]="'difficulty'">
               <mat-option *ngFor="let difficulty of difficultiesValues" [value]="difficulty">
                 {{difficulty}}
               </mat-option>
@@ -75,7 +75,7 @@
         <mat-grid-tile colspan="4" rowspan="4">
           <mat-form-field>
             <mat-label>Sous-Thème</mat-label>
-            <mat-select>
+            <mat-select [formControlName]="'subTheme'">
               <mat-option *ngFor="let theme of themesValues" [value]="theme">
                 {{theme}}
               </mat-option>
