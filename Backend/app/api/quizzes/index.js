@@ -67,27 +67,6 @@ router.delete('/:id', (req, res) => {
   }
 })
 function updateQuiz(id, obj) {
-  /* const { questions } = obj
-  // eslint-disable-next-line no-param-reassign
-  delete obj.questions
-  console.log('before')
-  console.log(obj)
-  const Obji = {}
-  Obji.label = obj.label
-  Obji.theme = obj.theme
-  Obji.subTheme = obj.subTheme
-  Obji.difficulty = obj.difficulty
-  Obji.dateCreation = obj.dateCreation
-  Obji.dateModification = obj.dateModification
-
-  const quiz = Quiz.update(id, { ...Obji })
-  console.log('after')
-  console.log(obj)
-  for (let i = 0; i < questions.length; i++) {
-    QuestionsRouter.updateQuestion(questions[i].id, { ...questions[i] })
-  }
-  quiz.questions = questions
-  return quiz */
   const { questions } = obj
   delete obj.questions
   delete obj.id
@@ -99,7 +78,6 @@ router.put('/:id', (req, res) => {
   try {
     res.status(201).json(updateQuiz(req.params.id, { ...req.body }))
   } catch (err) {
-    console.log(err)
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
     } else {

@@ -84,7 +84,7 @@ export class QuizAddComponent implements OnInit {
     this.quizService.addQuiz(quizToCreate).subscribe((quiz) => {
       if (quiz !== undefined) {
        this.quiz = quiz;
-       console.log(quiz);
+       this.dialog.closeAll();
       }
      }); // getQuiz().push(quizToCreate);
      /*this.snackBar.openFromComponent(SnackModificationComponent, {
