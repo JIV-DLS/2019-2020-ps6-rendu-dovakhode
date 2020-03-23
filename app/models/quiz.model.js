@@ -8,5 +8,6 @@ module.exports = new BaseModel('Quiz', {
   label: Joi.string().required(),
   difficulty: Joi.string(),
   dateCreation: Joi.date(),
-  dateModification: Joi.date()
+  dateModification: Joi.date(),
+  questions: Joi.array(),
 })
