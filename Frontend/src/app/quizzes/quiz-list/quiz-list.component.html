@@ -1,51 +1,54 @@
-<mat-grid-list cols="5" rowHeight="80px" style="width: 100%; margin-top: 10px; padding-top: 50px;" >
-  <mat-grid-tile colspan="1" rowspan="1">
+<div style="background-color: white">
+  <mat-grid-list cols="5" rowHeight="80px" style="width: 100%; margin-top: 10px; padding-top: 50px;" >
+    <mat-grid-tile colspan="1" rowspan="1">
       <mat-form-field appearance="legacy">
         <mat-label>Rechercher</mat-label>
         <input matInput placeholder="nom du quiz">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-    <mat-form-field>
-      <mat-label>Thème</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let theme of themesValues" [value]="theme">
-          {{theme}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-    <mat-form-field>
-      <mat-label>Sous Thème</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let subtheme of themesValues" [value]="subtheme">
-          {{subtheme}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-    <mat-form-field>
-      <mat-label>Difficulté</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let difficulty of difficultiesValues" [value]="difficulty">
-          {{difficulty}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-    <button routerLink="/" mat-flat-button aria-label="Example icon-button with a heart icon">
-      <mat-icon>home</mat-icon>
-      Retour à l'acceuil
-    </button>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="5" rowspan="1">
-    <mat-divider></mat-divider>
-  </mat-grid-tile>
-</mat-grid-list>
-<div style="max-height: 430px;overflow-y: scroll;">
-  <app-quiz-less-info routerLink="/quiz-edit/{{quiz.id}}"  *ngFor="let quiz of quizList" [quiz]="quiz"></app-quiz-less-info>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Thème</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let theme of themesValues" [value]="theme">
+            {{theme}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Sous Thème</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let subtheme of themesValues" [value]="subtheme">
+            {{subtheme}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Difficulté</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let difficulty of difficultiesValues" [value]="difficulty">
+            {{difficulty}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <button routerLink="/" mat-flat-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>home</mat-icon>
+        Retour à l'acceuil
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="5" rowspan="1">
+      <mat-divider></mat-divider>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div style="max-height: 430px;overflow-y: scroll;">
+    <app-quiz-less-info class="quiz" routerLink="/quiz-edit/{{quiz.id}}"  *ngFor="let quiz of quizList" [quiz]="quiz"></app-quiz-less-info>
+  </div>
+
 </div>

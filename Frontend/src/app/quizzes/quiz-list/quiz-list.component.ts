@@ -14,8 +14,7 @@ export class QuizListComponent implements OnInit {
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
   constructor(public quizService: QuizService) {
-    this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
-    this.quizList.push(new Quiz());
+    this.quizService.getQuiz().subscribe((quiz) => this.quizList = quiz);
   }
 
   ngOnInit() {
@@ -24,6 +23,6 @@ export class QuizListComponent implements OnInit {
   quizSelected(selected: boolean) {
   }
   deleteQuizz(quiz: Quiz) {
-this.quizService.deleteQuiz(quiz);
+    this.quizService.deleteQuiz(quiz);
   }
 }
