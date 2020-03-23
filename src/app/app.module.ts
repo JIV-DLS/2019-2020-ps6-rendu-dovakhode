@@ -37,11 +37,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatSelectModule} from '@angular/material/select';
 import { HomeComponent } from './home/home.component';
+import { QuizLessInfoComponent } from './quizzes/quiz-less-info/quiz-less-info.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
-  {path: 'quizz-edit/:id' , component: QuizzeEditComponent}
+  {path: 'quiz-edit/:id' , component: QuizzeEditComponent}
 
 ];
 
@@ -66,7 +67,8 @@ const routes: Routes = [
     UserNavComponent,
     EditQuestionComponent,
     EditableQuestionComponent,
-    HomeComponent
+    HomeComponent,
+    QuizLessInfoComponent
   ],
   entryComponents: [
     QuestionsDialogComponent,
