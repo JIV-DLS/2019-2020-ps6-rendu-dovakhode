@@ -53,6 +53,8 @@ export class QuizAddComponent implements OnInit {
       id: [DEFAULT_QUIZ.id],
       label: [ DEFAULT_QUIZ.label , [ Validators.required, Validators.minLength(5)]],
       theme: [ DEFAULT_QUIZ.theme, [ Validators.required, Validators.minLength(3)]],
+      subTheme: [null],
+      difficulty: [null],
       questions: [DEFAULT_QUIZ.questions]
     });
   }
@@ -65,6 +67,12 @@ export class QuizAddComponent implements OnInit {
     }
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
      // quizToCreate.questions = [];
+    if (quizToCreate.subTheme == null) {
+      quizToCreate.subTheme = quizToCreate.theme;
+    }
+    if (quizToCreate.difficulty == null) {
+      quizToCreate.difficulty = difficulte.Normale;
+    }
     quizToCreate.dateCreation = new Date();
     quizToCreate.dateModification = quizToCreate.dateCreation;
     // Do you need to log your object here in your class? Uncomment the code below

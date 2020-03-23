@@ -41,7 +41,7 @@ function createQuestion(obj = {}) {
   const { answers } = obj
   delete obj.answers
   const question = Question.create({ ...obj })
-  console.log(question);
+  console.log(question)
   for (let i = 0; i < answers.length; i++) {
     answers[i].questionId = question.id
     require('./answers').createAnswer({ ...answers[i] })
