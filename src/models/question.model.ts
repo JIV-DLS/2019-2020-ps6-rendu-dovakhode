@@ -6,6 +6,11 @@ export class Question {
     label: string;
     answers: Answer[];
     quizId: number;
+
+  constructor() {
+    this.id = 34894;
+    this.answers = [];
+  }
   static quizFormValues(questionForm: FormGroup) {
     return questionForm.getRawValue() as Question;
   }

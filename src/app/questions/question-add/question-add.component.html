@@ -40,7 +40,7 @@
         </mat-grid-list>
 
       </div>
-      <button class="mt-2 btn btn-sm" mat-button (click)="addAnswer()">Add Answer <span class="badge">{{answers.length}}</span></button>
+      <button class="mt-2 btn btn-sm" mat-button (click)="openDialog()">Add Answer <span class="badge">{{answers.length}}</span></button>
     </form>
   </mat-card-content>
   <mat-card-footer>    <button *ngIf="questionEdition==null" mat-button (click)="createQuestion()" type="submit" class=" btn btn-lg btn-block btn-success">Create the question</button>

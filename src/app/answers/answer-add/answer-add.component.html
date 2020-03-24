@@ -1,0 +1,26 @@
+
+ <form [formGroup]="answerForm" style="height: 250px">
+   <mat-grid-list cols="3" rowHeight="50px" style="height: 100%">
+     <mat-grid-tile colspan="1" rowspan="1">
+       <p>Réponse</p>
+     </mat-grid-tile>
+     <mat-grid-tile colspan="2" rowspan="1">
+       <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
+     </mat-grid-tile>
+     <mat-grid-tile colspan="3" rowspan="3">
+      <mat-form-field style="width: 100%">
+     <mat-label>answer </mat-label>
+        <input matInput placeholder="title" [formControlName]="'value'" >
+      </mat-form-field>
+     </mat-grid-tile>
+     <mat-grid-tile colspan="2" rowspan="1">
+     </mat-grid-tile>
+     <mat-grid-tile colspan="1" rowspan="1">
+       <button (click)="addAnswer()" mat-flat-button aria-label="Example icon-button with a heart icon">
+         <mat-icon>add</mat-icon>
+         Ajouter
+       </button>
+     </mat-grid-tile>
+   </mat-grid-list>
+ </form>
+
