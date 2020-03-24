@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
@@ -9,6 +9,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {QuestionsDialogComponent} from '../../questions/questions.component';
 import {SnackModificationComponent} from '../../snack/snack-modification/snack-modification.component';
 import {Location} from '@angular/common';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-quiz-form',
@@ -49,32 +50,48 @@ export class QuizAddComponent implements OnInit {
   }
   quizzFormInitializer() {
     return this.formBuilder.group({
-      id: [this.quiz ? this.quiz.id : DEFAULT_QUIZ.id],
-      label: [this.quiz ? this.quiz.name : DEFAULT_QUIZ.name],
-      theme: [this.quiz ? this.quiz.theme : DEFAULT_QUIZ.theme],
-      questions: [this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions]
+      id: [DEFAULT_QUIZ.id],
+      label: [ DEFAULT_QUIZ.label , [ Validators.required, Validators.minLength(5)]],
+      theme: [ DEFAULT_QUIZ.theme, [ Validators.required, Validators.minLength(3)]],
+      subTheme: [null],
+      difficulty: [null],
+      questions: [DEFAULT_QUIZ.questions]
     });
   }
   addQuiz() {
     // We retrieve here the quiz object from the quizForm and we cast the type "as Quiz".
-     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
+    if (this.quizForm.invalid) {
+      alert(environment.formFieldsRequired);
+      this.quizForm.markAllAsTouched();
+      return;
+    }
+    const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
      // quizToCreate.questions = [];
-     quizToCreate.dateCreation = new Date();
-     quizToCreate.dateModification = quizToCreate.dateCreation;
+    if (quizToCreate.subTheme == null) {
+      quizToCreate.subTheme = quizToCreate.theme;
+    }
+    if (quizToCreate.difficulty == null) {
+      quizToCreate.difficulty = difficulte.Normale;
+    }
+    quizToCreate.dateCreation = new Date();
+    quizToCreate.dateModification = quizToCreate.dateCreation;
     // Do you need to log your object here in your class? Uncomment the code below
     // and open your console in your browser by pressing F12 and choose the tab "Console".
     // You will see your quiz object when you click on the create button.
      // console.log('Add quiz: ', quizToCreate);
 
     // Now, question-add your quiz in the list!
-     this.quizService.addQuiz(quizToCreate).subscribe(() => {
-       console.log('success');
+    this.quizService.addQuiz(quizToCreate).subscribe((quiz) => {
+      if (quiz !== undefined) {
+       this.quiz = quiz;
+       this.dialog.closeAll();
+      }
      }); // getQuiz().push(quizToCreate);
-     this.snackBar.openFromComponent(SnackModificationComponent, {
+     /*this.snackBar.openFromComponent(SnackModificationComponent, {
       duration: 1000,
       data: 'Quizz created succesfuly!'
-    });
-     this.initializeTheForm();
+    });*/
+    this.initializeTheForm();
   }
 
 
@@ -88,6 +105,12 @@ export class QuizAddComponent implements OnInit {
   }
   get questions() {
     return this.quizForm.get('questions') as FormArray;
+  }
+  get theme() {
+    return this.quizForm.get('theme') as FormArray;
+  }
+  get label() {
+    return this.quizForm.get('label') as FormArray;
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionsDialogComponent, {
@@ -115,6 +138,19 @@ export class QuizAddComponent implements OnInit {
     /* if(deleteState){
 
     } */
+  }
+
+  getLabelErrorMessage() {
+      if (this.label.hasError('required')) {
+        return environment.formFieldRequired;
+      }
+      return this.label.hasError('minLenght') ? 'Veuillez entrer 5 caractère au minimum' : '';
+  }
+  getThemeErrorMessage() {
+      if (this.theme.hasError('required')) {
+        return environment.formSelectRequired;
+      }
+      return this.theme.hasError('minLenght') ? 'Veuillez entrer 3 caractère au minimum' : '';
   }
 }
 

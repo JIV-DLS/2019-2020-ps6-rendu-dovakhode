@@ -36,6 +36,7 @@ export class QuizService {
   index: number;
 
   addQuiz(quiz: Quiz): Observable<Quiz> {
+    console.log(quiz);
     return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
       tap((newQuiz: Quiz) => {
        console.log('Ajout reussi');
