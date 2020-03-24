@@ -1,8 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {Quiz} from '../../../models/quiz.model';
 import {Question} from '../../../models/question.model';
 import {Answer} from '../../../models/answer.model';
+import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {AnswersComponent} from '../../answers/answers.component';
+import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component';
+
 
 // @ts-ignore
 @Component({
@@ -11,13 +15,16 @@ import {Answer} from '../../../models/answer.model';
   styleUrls: ['./question-add.component.scss']
 })
 export class QuestionAddComponent implements OnInit {
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder, public dialog: MatDialog
+  ) { }
   get answers() {
     return this.questionForm.get('answers') as FormArray;
   }
   full = false;
   questionForm: FormGroup;
+  answerDialogOpened = false;
   @Input() questionEdition = null;
+  @Input() question: Question = null;
   @Input() fullScrenable = false;
   @Input() editable = false;
   @Output()
@@ -32,6 +39,7 @@ export class QuestionAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.question = new Question();
     this.initializeQuestionForm();
   }
   private initializeQuestionForm() {
@@ -43,21 +51,21 @@ export class QuestionAddComponent implements OnInit {
       (this.questionEdition as Question).answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
     }
   }
-
-  addAnswer() {
-    this.answers.push(this.createAnswer());
-  }
-
-  private createAnswer() {
-    return this.formBuilder.group({
-      value: ' ',
-      isCorrect: false,
-    });
-  }
   private createAnswerByData(answer: Answer) {
     return this.formBuilder.group({
       value: answer.value,
       isCorrect: answer.isCorrect,
+    });
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AnswerAddComponent, {
+      width: '950px',
+      maxHeight: '500px',
+      data: this.question ? this.question.answers : DEFAULT_QUESTION.answers
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      console.log(data.answer);
+      this.answers.push(this.createAnswerByData(data.answer));
     });
   }
   questionFormValue() {

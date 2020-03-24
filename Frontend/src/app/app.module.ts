@@ -22,7 +22,10 @@ import {
   MatInputModule, MatMenuModule, MatSnackBar, MatSnackBarModule
 } from '@angular/material';
 import { QuestionAddComponent } from './questions/question-add/question-add.component';
-import { AnswersComponent } from './answers/answers.component';
+import {AnswersComponent } from './answers/answers.component';
+import {AnswerEditComponent} from './answers/answer-edit/answer-edit.component';
+import {AnswerAddComponent} from './answers/answer-add/answer-add.component';
+import {AnswerComponent} from './answers/answer/answer.component';
 import { QuizzeEditComponent } from './quizzes/quizze-edit/quizze-edit.component';
 import { SnackComponent } from './snack/snack.component';
 import { ModificationComponent } from './snack/modification/modification.component';
@@ -58,6 +61,9 @@ const routes: Routes = [
     QuestionsDialogComponent,
     QuestionAddComponent,
     AnswersComponent,
+    AnswerEditComponent,
+    AnswerAddComponent,
+    AnswerComponent,
     QuizzeEditComponent,
     SnackComponent,
     ModificationComponent,
@@ -74,6 +80,7 @@ const routes: Routes = [
     QuestionsDialogComponent,
     QuizAddComponent,
     QuizzeEditComponent,
+    AnswerAddComponent,
     SnackModificationComponent
   ],
   imports: [
