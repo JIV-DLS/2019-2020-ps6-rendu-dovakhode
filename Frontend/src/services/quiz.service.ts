@@ -54,7 +54,7 @@ export class QuizService {
             duration: environment.snackinformations.duration,
             horizontalPosition:  environment.snackinformations.horizontalPosition,
             verticalPosition:  environment.snackinformations.verticalPosition,
-            panelClass: ['green-snackbar']
+            panelClass: [environment.snackinformations.succes.class]
           })
         ;
       }),
