@@ -69,7 +69,6 @@ export class QuizService {
         horizontalPosition:  environment.snackinformations.horizontalPosition,
         verticalPosition:  environment.snackinformations.verticalPosition,
         panelClass: ['yellow-snackbar']
-
       })
     ;
     return this.http.delete<Quiz>(QuizService.quizUrl + '/' + quiz.id).pipe(
