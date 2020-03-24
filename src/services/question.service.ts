@@ -43,7 +43,9 @@ export class QuestionService {
     deleteProperty(question, 'answers');
     console.log(question);
     return this.http.post<Question>(this.questionUrl(question.quizId), question).pipe(
+
       tap((newQuestion: Question) => {
+        this.snack.dismiss();
         this.snack.open('Enrégistrement en cours...', 'close',
           {
             duration: 3000,
