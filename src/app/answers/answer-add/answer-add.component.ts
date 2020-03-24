@@ -2,6 +2,8 @@ import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/c
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Answer} from '../../../models/answer.model';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Question} from '../../../models/question.model';
+import {AnswersService} from '../../../services/answers.service';
 
 @Component({
   selector: 'app-answer-add',
@@ -10,7 +12,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 })
 export class AnswerAddComponent implements OnInit {
 constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<AnswerAddComponent>,
-            @Inject(MAT_DIALOG_DATA) public answers: Answer[]) {}
+            @Inject(MAT_DIALOG_DATA) public question: Question, public answersService: AnswersService) {}
 
 
   answerForm: FormGroup;
@@ -27,7 +29,17 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
   }
   addAnswer() {
     console.log((this.answerForm.getRawValue() as Answer));
-    this.dialogRef.close( {answer : (Answer.questionFormValues(this.answerForm))});
+    const answerConst = (Answer.questionFormValues(this.answerForm));
+    if (this.question.id && this.question.quizId) {
+      answerConst.quizId = this.question.quizId;
+      answerConst.questionId = this.question.id;
+      this.answersService.addAnswer(answerConst).subscribe((ans) => {
+        console.log('ok');
+        this.dialogRef.close( {answer : ans});
+      });
+    } else {
+      this.dialogRef.close({answer:  answerConst});
+    }
   }
   createAnswer() {
    // this.answerCreated.emit(this.answerFormValue());

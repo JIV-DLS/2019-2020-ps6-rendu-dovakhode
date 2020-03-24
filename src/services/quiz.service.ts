@@ -39,10 +39,17 @@ export class QuizService {
 
   addQuiz(quiz: Quiz): Observable<Quiz> {
     console.log(quiz);
+    this.snack.open('Enrégistrement en cours...', 'close',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['red-snackbar']
+      })
+    ;
     return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
       tap((newQuiz: Quiz) => {
         console.log('Ajout reussi');
-        this.snack.open('Enrégistrement en cours...', 'close',
+        this.snack.open('Enrégistrement du quiz réussi...', 'close',
           {
             duration: 3000,
             horizontalPosition: 'center',
@@ -130,11 +137,19 @@ export class QuizService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      /* switch (operation) {
-        case 'getBdcs':
-          this.bdcsState = false;
+       switch (operation) {
+        case 'addQuiz':
+          // this.bdcsState = false;
+          this.snack.open('Echec de l\'enregistrement du quiz...', 'close',
+            {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+              panelClass: ['red-snackbar']
+            })
+          ;
           break;
-        case 'getBdc':
+        /*case 'getBdc':
           this.bdcState = false;
           break;
         case 'addBdc':
@@ -146,16 +161,16 @@ export class QuizService {
         case 'updateBdc':
           console.log('url');
           this.bdcUpdateState = false;
-          break;
-      } */
+          break;*/
+      }
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
       // this.logRefresh(idMessage, `${operation} failed: ${error.message}`, 'danger');
 
       // Let the app keep running by returning an empty result.
-      return of(result as T);
+       return of(result as T);
     };
   }
 }

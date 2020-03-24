@@ -13,7 +13,7 @@ export class AnswersService {
     return environment.url + '/' + quizId.toString() + '/questions' + '/' + questionId.toString() + '/answers';
   }
 
-  addQuestion(answer: Answer) {
+  addAnswer(answer: Answer) {
     return this.http.post<Answer>(this.answerUrl(answer.questionId, answer.quizId), answer).pipe(
       tap((newAnswer) => {
         console.log('Ajout Reussi');
