@@ -11,6 +11,32 @@ export const environment = {
   formFieldsRequired: 'Veuiller remplir tous les champs requis(*)',
   formFieldRequired: 'Veuiller remplir ce champs',
   formSelectRequired: 'Veuillez choisir une valeur',
+  snackinformations: {
+    loadingSuffix: ' en cour...',
+    duration: 3000,
+    horizontalPosition: 'center',
+    verticalPosition: 'bottom',
+    post: {
+      label: 'Enregistrement de ',
+      class: 'green-snackbar'
+    },
+    delete: {
+      label: 'Enregistrement de ',
+      class: 'red-snackbar'
+    },
+    update: {
+      label: 'Mise à jour de ',
+      class: 'blue-snackbar'
+    },
+    error: {
+      label: ' échoué...',
+      class: 'red-snackbar'
+    }, succes: {
+      label: '  réussi...',
+    class: 'green-snackbar'
+}
+
+  }
 };
 
 /*

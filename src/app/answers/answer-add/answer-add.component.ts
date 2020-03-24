@@ -29,7 +29,7 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
   }
   addAnswer() {
     console.log((this.answerForm.getRawValue() as Answer));
-    const answerConst = (Answer.questionFormValues(this.answerForm));
+    const answerConst =  (Answer.questionFormValues(this.answerForm)) as Answer;
     if (this.question.id && this.question.quizId) {
       answerConst.quizId = this.question.quizId;
       answerConst.questionId = this.question.id;

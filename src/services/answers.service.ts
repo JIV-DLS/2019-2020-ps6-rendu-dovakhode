@@ -14,19 +14,27 @@ export class AnswersService {
   }
 
   addAnswer(answer: Answer) {
-    return this.http.post<Answer>(this.answerUrl(answer.questionId, answer.quizId), answer).pipe(
-      tap((newAnswer) => {
-        console.log('Ajout Reussi');
-        this.snack.open('Enrégistrement en cours...', 'close',
+
+        this.snack.open('Enrégistrement de la réponse en cours...', 'close',
           {
             duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: 'red-snackbar'
+            verticalPosition: environment.snackinformations.horizontalPosition,
+            verticalPosition:  environment.snackinformations.verticalPosition,
+          })
+        ;
+        return this.http.post<Answer>(this.answerUrl(answer.questionId, answer.quizId), answer).pipe(
+      tap((newAnswer) => {
+        console.log('Ajout Reussi');
+        this.snack.open('Enrégistrement de la réponse éffectuée avec succès...', 'close',
+          {
+            duration: environment.snackinformations.duration,
+            horizontalPosition:  environment.snackinformations.horizontalPosition,
+            verticalPosition:  environment.snackinformations.verticalPosition,
+            panelClass: ['green-snackbar']
           })
         ;
       }),
-      catchError(this.handleError<Question>('PostAnswer', undefined))
+      catchError(this.handleError<Question>('addAnswer', undefined))
     );
   }
   getAnswerById(id: number , quizId: string , questionId: string) {
@@ -47,15 +55,23 @@ export class AnswersService {
   }
 
   deleteAnswer( answer: Answer) {
-    return this.http.get<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id).pipe(
+    this.snack.open('Supression de la question en cours...', 'close',
+      {
+        duration: environment.snackinformations.duration,
+        horizontalPosition:  environment.snackinformations.horizontalPosition,
+        verticalPosition:  environment.snackinformations.verticalPosition,
+        panelClass: ['yellow-snackbar']
+      })
+    ;
+    return this.http.delete<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id).pipe(
       tap((theanswer) => {
         console.log('Récupération Reussie');
-        this.snack.open('Supression encours...', 'close',
+        this.snack.open('Supression éffectuée avec succès avec succès', 'close',
           {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: 'red-snackbar'
+            duration: environment.snackinformations.duration,
+            horizontalPosition:  environment.snackinformations.horizontalPosition,
+            verticalPosition:  environment.snackinformations.verticalPosition,
+            panelClass: ['green-snackbar']
           })
         ;
       }),
@@ -64,24 +80,103 @@ export class AnswersService {
   }
 
   UpdateAnswer( answer: Answer) {
+    this.snack.open('Modification de la réponse en cours...', 'close',
+      {
+        duration: environment.snackinformations.duration,
+        horizontalPosition:  environment.snackinformations.horizontalPosition,
+        verticalPosition:  environment.snackinformations.verticalPosition,
+        panelClass: ['blue-snackbar']
+      })
+    ;
     return this.http.put<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id, answer).pipe(
       tap((theanswer) => {
         console.log('Modification Reussie');
-        this.snack.open('Modification en cours...', 'close',
+        this.snack.open('Modification de la réponse éffectuée avec succès', 'close',
           {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: 'red-snackbar'
+            duration: environment.snackinformations.duration,
+            horizontalPosition:  environment.snackinformations.horizontalPosition,
+            verticalPosition:  environment.snackinformations.verticalPosition,
+            panelClass: ['green-snackbar']
           })
         ;
       }),
-      catchError(this.handleError<Question>('getAnswer', undefined))
+      catchError(this.handleError<Question>('UpdateAnswer', undefined))
     );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      switch (operation) {
+        case 'addAnswer':
+          // this.bdcsState = false;
+          this.snack.open('Echec de l\'enregistrement de la réponse...', 'close',
+            {
+              duration: environment.snackinformations.duration,
+              horizontalPosition: environment.snackinformations.horizontalPosition,
+              verticalPosition: environment.snackinformations.verticalPosition,
+              panelClass: ['red-snackbar']
+            })
+          ;
+          break;
+        case 'deleteAnswer':
+          // this.bdcsState = false;
+          this.snack.open('Echec de la suppression de la réponse...', 'close',
+            {
+              duration: environment.snackinformations.duration,
+              horizontalPosition: environment.snackinformations.horizontalPosition,
+              verticalPosition: environment.snackinformations.verticalPosition,
+              panelClass: ['red-snackbar']
+            })
+          ;
+          break;
+        case 'updateAnswer':
+          // this.bdcsState = false;
+          this.snack.open('Echec de la modification de la réponse ...', 'close',
+            {
+              duration: environment.snackinformations.duration,
+              horizontalPosition: environment.snackinformations.horizontalPosition,
+              verticalPosition: environment.snackinformations.verticalPosition,
+              panelClass: ['red-snackbar']
+            })
+          ;
+          break;
+        case 'getAnswer':
+          // this.bdcsState = false;
+          this.snack.open('Impossible de charger les réponses', 'close',
+            {
+              duration: environment.snackinformations.duration,
+              horizontalPosition: environment.snackinformations.horizontalPosition,
+              verticalPosition: environment.snackinformations.verticalPosition,
+              panelClass: ['red-snackbar']
+            })
+          ;
+          break;
+
+        case 'getAnswerById':
+          // this.bdcsState = false;
+          this.snack.open('Impossible de charger la réponse', 'close',
+            {
+              duration: environment.snackinformations.duration,
+              horizontalPosition: environment.snackinformations.horizontalPosition,
+              verticalPosition: environment.snackinformations.verticalPosition,
+              panelClass: ['red-snackbar']
+            })
+          ;
+          break;
+        /*case 'getBdc':
+          this.bdcState = false;
+          break;
+        case 'addBdc':
+          this.bdcAddState = false;
+          break;
+        case 'deleteBdc':
+          this.bdcDeleteState = false;
+          break;
+        case 'updateBdc':
+          console.log('url');
+          this.bdcUpdateState = false;
+          break;*/
+      }
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
