@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
 import {difficulte, theme} from '../../../models/theme.models';
+import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: ' app-quiz-list',
@@ -13,17 +15,26 @@ export class QuizListComponent implements OnInit {
   public quizList: Quiz[] = [];
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
-  constructor(public quizService: QuizService) {
-    this.quizService.quizzes$.subscribe((quiz) => this.quizList = quiz);
-    this.quizList.push(new Quiz());
+  constructor(private router: Router,
+              private location: Location,
+              public quizService: QuizService) {
+    this.getAllQuiz();
   }
 
   ngOnInit() {
   }
-
+  getAllQuiz() {
+    this.quizService.getQuiz().subscribe((quiz) => this.quizList = quiz);
+  }
   quizSelected(selected: boolean) {
   }
-  deleteQuizz(quiz: Quiz) {
-this.quizService.deleteQuiz(quiz);
+  deleteQuiz(comfirm: boolean, quiz: Quiz) {
+    if (comfirm) {this.quizService.deleteQuiz(quiz).subscribe(() => {
+      this.getAllQuiz();
+    }); }
+  }
+
+  selectQuiz(quiz: Quiz) {
+    this.router.navigateByUrl('/quiz-edit/' + quiz.id);
   }
 }

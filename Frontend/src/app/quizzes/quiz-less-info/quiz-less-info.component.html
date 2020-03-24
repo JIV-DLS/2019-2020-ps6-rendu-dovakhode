@@ -1,13 +1,19 @@
-<mat-grid-list cols="3" rowHeight="30px" style="width: 100%">
+<mat-grid-list cols="10" rowHeight="30px" style="width: 100%;">
 
-  <mat-grid-tile colspan="1" rowspan="1">
-    <h4>{{quiz.name}}hhuih</h4>
+  <mat-grid-tile class="leftBorder" (click)="select()" [class.jhover]="hover" colspan="3" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
+    <h5>{{quiz.label}}</h5>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-    <h4>{{quiz.theme}}hyuh</h4>
+  <mat-grid-tile class="leftBorder" (click)="select()" [class.jhover]="hover" colspan="2" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
+    <h5>{{quiz.theme}}</h5>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-    <h4>{{quiz.difficulty}}byt</h4>
+  <mat-grid-tile class="leftBorder" (click)="select()" [class.jhover]="hover" colspan="2" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
+    <h5>{{quiz.difficulty}}</h5>
+  </mat-grid-tile>
+  <mat-grid-tile class="leftBorder" (click)="select()" [class.jhover]="hover" colspan="2" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
+    <h5>{{quiz.questions?.length}}</h5>
+  </mat-grid-tile>
+  <mat-grid-tile (click)="delete()" class="j" colspan="1" rowspan="1">
+    <mat-icon>delete</mat-icon>
   </mat-grid-tile>
 
 </mat-grid-list>

@@ -102,11 +102,11 @@ const routes: Routes = [
     MatSidenavModule,
     MatDividerModule,
     ScrollingModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [
-  {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
-],
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

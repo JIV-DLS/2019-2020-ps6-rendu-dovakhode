@@ -3,7 +3,7 @@ import {FormGroup} from '@angular/forms';
 
 export class Quiz {
     id: number;
-    name: string;
+    label: string;
     theme?: string;
     subTheme?: string;
     difficulty?: string;

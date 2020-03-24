@@ -5,7 +5,7 @@ const { Answer } = require('../../../../models')
 const router = new Router({ mergeParams: true })
 
 
-function getByQuestionId(id){
+function getByQuestionId(id) {
   id += ''
   const arr = Answer.get()
   const indexes = []; let i
@@ -27,7 +27,8 @@ router.get('/', (req, res) => {
     res.status(500).json(err)
   }
 })
-function createAnswer(obj = {}){
+function createAnswer(obj = {}) {
+  delete Answer.id
   return Answer.create({ ...obj })
 }
 router.post('/', (req, res) => {
@@ -72,4 +73,6 @@ router.put('/:idQ', (req, res) => {
 })
 
 
-module.exports = { createAnswer, updateAnswer, getByQuestionId, router }
+module.exports = {
+  createAnswer, updateAnswer, getByQuestionId, router,
+}
