@@ -10,7 +10,7 @@ import { QuizAddComponent } from './quizzes/quiz-add/quiz-add.component';
 import {HttpClientModule} from '@angular/common/http';
 import {Router, RouterModule, Routes} from '@angular/router';
 import { QuestionComponent } from './questions/question/question.component';
-import {QuestionsComponent, QuestionsDialogComponent} from './questions/questions.component';
+import {QuestionsComponent} from './questions/questions.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   _MatMenuDirectivesModule,
@@ -58,7 +58,6 @@ const routes: Routes = [
     QuizAddComponent,
     QuestionComponent,
     QuestionsComponent,
-    QuestionsDialogComponent,
     QuestionAddComponent,
     AnswersComponent,
     AnswerEditComponent,
@@ -77,7 +76,7 @@ const routes: Routes = [
     QuizLessInfoComponent
   ],
   entryComponents: [
-    QuestionsDialogComponent,
+    QuestionsComponent,
     QuizAddComponent,
     QuizzeEditComponent,
     AnswerAddComponent,

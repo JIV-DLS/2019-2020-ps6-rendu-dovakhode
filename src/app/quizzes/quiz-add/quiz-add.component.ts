@@ -6,7 +6,7 @@ import { Quiz } from '../../../models/quiz.model';
 import {difficulte, theme} from '../../../models/theme.models';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {QuestionsDialogComponent} from '../../questions/questions.component';
+import {QuestionsComponent} from '../../questions/questions.component';
 import {SnackModificationComponent} from '../../snack/snack-modification/snack-modification.component';
 import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
@@ -113,7 +113,7 @@ export class QuizAddComponent implements OnInit {
     return this.quizForm.get('label') as FormArray;
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(QuestionsDialogComponent, {
+    const dialogRef = this.dialog.open(QuestionsComponent, {
       width: '950px',
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
