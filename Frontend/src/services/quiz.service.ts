@@ -41,9 +41,9 @@ export class QuizService {
     console.log(quiz);
     this.snack.open('Enrégistrement du quizz en cours...', 'close',
       {
-        duration: environment.snackinformations.duration,
-        horizontalPosition:  environment.snackinformations.horizontalPosition,
-        verticalPosition:  environment.snackinformations.verticalPosition,
+        duration: environment.snackInformations.duration,
+        horizontalPosition:  environment.snackInformations.horizontalPosition,
+        verticalPosition:  environment.snackInformations.verticalPosition,
       })
     ;
     return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
@@ -51,10 +51,10 @@ export class QuizService {
         console.log('Ajout reussi');
         this.snack.open('Enrégistrement du quiz réussi...', 'close',
           {
-            duration: environment.snackinformations.duration,
-            horizontalPosition:  environment.snackinformations.horizontalPosition,
-            verticalPosition:  environment.snackinformations.verticalPosition,
-            panelClass: [environment.snackinformations.succes.class]
+            duration: environment.snackInformations.duration,
+            horizontalPosition:  environment.snackInformations.horizontalPosition,
+            verticalPosition:  environment.snackInformations.verticalPosition,
+            panelClass: [environment.snackInformations.succes.class]
           })
         ;
       }),
@@ -65,9 +65,9 @@ export class QuizService {
   deleteQuiz(quiz: Quiz): Observable<Quiz>  {
     this.snack.open('Suppression du quiz  en cours...', 'close',
       {
-        duration: environment.snackinformations.duration,
-        horizontalPosition:  environment.snackinformations.horizontalPosition,
-        verticalPosition:  environment.snackinformations.verticalPosition,
+        duration: environment.snackInformations.duration,
+        horizontalPosition:  environment.snackInformations.horizontalPosition,
+        verticalPosition:  environment.snackInformations.verticalPosition,
         panelClass: ['yellow-snackbar']
       })
     ;
@@ -76,9 +76,9 @@ export class QuizService {
         console.log('Suppression reussie');
         this.snack.open('Suppression du quiz éffectuée avec succès...', 'close',
           {
-            duration: environment.snackinformations.duration,
-            horizontalPosition:  environment.snackinformations.horizontalPosition,
-            verticalPosition:  environment.snackinformations.verticalPosition,
+            duration: environment.snackInformations.duration,
+            horizontalPosition:  environment.snackInformations.horizontalPosition,
+            verticalPosition:  environment.snackInformations.verticalPosition,
             panelClass:  ['green-snackbar']
           })
         ;
@@ -123,9 +123,9 @@ export class QuizService {
   updateQuiz(quizToModify: Quiz): Observable<Quiz> {
     this.snack.open('Modification du quiz en cours...', 'close',
       {
-        duration: environment.snackinformations.duration,
-        horizontalPosition:  environment.snackinformations.horizontalPosition,
-        verticalPosition:  environment.snackinformations.verticalPosition,
+        duration: environment.snackInformations.duration,
+        horizontalPosition:  environment.snackInformations.horizontalPosition,
+        verticalPosition:  environment.snackInformations.verticalPosition,
         panelClass: ['blue-snackbar']
       })
     ;
@@ -134,9 +134,9 @@ export class QuizService {
         console.log('Modification reussie');
         this.snack.open('Modification du quiz reussi...', 'close',
           {
-            duration: environment.snackinformations.duration,
-            horizontalPosition:  environment.snackinformations.horizontalPosition,
-            verticalPosition:  environment.snackinformations.verticalPosition,
+            duration: environment.snackInformations.duration,
+            horizontalPosition:  environment.snackInformations.horizontalPosition,
+            verticalPosition:  environment.snackInformations.verticalPosition,
             panelClass: ['green-snackbar']
           })
         ;
@@ -158,9 +158,9 @@ export class QuizService {
           // this.bdcsState = false;
           this.snack.open('Echec de l\'enregistrement du quiz...', 'close',
             {
-              duration: environment.snackinformations.duration,
-              horizontalPosition:  environment.snackinformations.horizontalPosition,
-              verticalPosition:  environment.snackinformations.verticalPosition,
+              duration: environment.snackInformations.duration,
+              horizontalPosition:  environment.snackInformations.horizontalPosition,
+              verticalPosition:  environment.snackInformations.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -169,9 +169,9 @@ export class QuizService {
            // this.bdcsState = false;
            this.snack.open('Echec de la suppression du quiz...', 'close',
              {
-               duration: environment.snackinformations.duration,
-               horizontalPosition:  environment.snackinformations.horizontalPosition,
-               verticalPosition:  environment.snackinformations.verticalPosition,
+               duration: environment.snackInformations.duration,
+               horizontalPosition:  environment.snackInformations.horizontalPosition,
+               verticalPosition:  environment.snackInformations.verticalPosition,
                panelClass: ['red-snackbar']
              })
            ;
@@ -180,9 +180,9 @@ export class QuizService {
            // this.bdcsState = false;
            this.snack.open('Echec de la modification du quiz ...', 'close',
              {
-               duration: environment.snackinformations.duration,
-               horizontalPosition:  environment.snackinformations.horizontalPosition,
-               verticalPosition:  environment.snackinformations.verticalPosition,
+               duration: environment.snackInformations.duration,
+               horizontalPosition:  environment.snackInformations.horizontalPosition,
+               verticalPosition:  environment.snackInformations.verticalPosition,
                panelClass: ['red-snackbar']
              })
            ;
@@ -191,9 +191,9 @@ export class QuizService {
            // this.bdcsState = false;
            this.snack.open('Impossible de charger les données', 'close',
              {
-               duration: environment.snackinformations.duration,
-               horizontalPosition:  environment.snackinformations.horizontalPosition,
-               verticalPosition:  environment.snackinformations.verticalPosition,
+               duration: environment.snackInformations.duration,
+               horizontalPosition:  environment.snackInformations.horizontalPosition,
+               verticalPosition:  environment.snackInformations.verticalPosition,
                panelClass: ['red-snackbar']
              })
            ;
@@ -202,9 +202,9 @@ export class QuizService {
            // this.bdcsState = false;
            this.snack.open('Impossible de charger le quiz', 'close',
              {
-               duration: environment.snackinformations.duration,
-               horizontalPosition:  environment.snackinformations.horizontalPosition,
-               verticalPosition:  environment.snackinformations.verticalPosition,
+               duration: environment.snackInformations.duration,
+               horizontalPosition:  environment.snackInformations.horizontalPosition,
+               verticalPosition:  environment.snackInformations.verticalPosition,
                panelClass: ['red-snackbar']
              })
            ;
