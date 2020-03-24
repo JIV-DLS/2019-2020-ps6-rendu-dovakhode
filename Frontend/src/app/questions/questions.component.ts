@@ -9,23 +9,10 @@ import {Question} from '../../models/question.model';
 })
 export class QuestionsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
-
-@Component({
-  selector: 'app-questions-dialog',
-  templateUrl: './questions.component.html',
-  styleUrls: ['./questions.component.scss'],
-})
-export class QuestionsDialogComponent implements OnInit {
   addFull = false;
   @Input() questionEdition = null;
   constructor(
-    public dialogRef: MatDialogRef<QuestionsDialogComponent>,
+    public dialogRef: MatDialogRef<QuestionsComponent>,
     @Inject(MAT_DIALOG_DATA) public questions: Question[]) {}
 
 
@@ -42,3 +29,4 @@ export class QuestionsDialogComponent implements OnInit {
     this.dialogRef.close(this.questions);
   }
 }
+

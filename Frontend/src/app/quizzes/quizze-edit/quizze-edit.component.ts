@@ -3,7 +3,7 @@ import {Quiz} from '../../../models/quiz.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute} from '@angular/router';
 import {difficulte, theme} from '../../../models/theme.models';
-import {QuestionsDialogComponent} from '../../questions/questions.component';
+import {QuestionsComponent} from '../../questions/questions.component';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
@@ -58,7 +58,7 @@ export class QuizzeEditComponent implements OnInit {
     return this.quizForm.get('label') as FormArray;
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(QuestionsDialogComponent, {
+    const dialogRef = this.dialog.open(QuestionsComponent, {
       width: '950px',
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions

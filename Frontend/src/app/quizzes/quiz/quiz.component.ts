@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
-import {QuestionsDialogComponent} from '../../questions/questions.component';
+import {QuestionsComponent} from '../../questions/questions.component';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -32,7 +32,7 @@ export class QuizComponent implements OnInit {
     this.quizDeleted.emit(this.quiz);
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(QuestionsDialogComponent, {
+    const dialogRef = this.dialog.open(QuestionsComponent, {
       width: '950px',
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
