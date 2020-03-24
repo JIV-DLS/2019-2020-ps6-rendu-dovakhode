@@ -4,8 +4,9 @@ import {Answer} from '../models/answer.model';
 import {catchError, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {Question} from '../models/question.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 export class AnswersService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snack: MatSnackBar ) {
   }
 
   answerUrl(questionId, quizId) {
@@ -16,6 +17,14 @@ export class AnswersService {
     return this.http.post<Answer>(this.answerUrl(answer.questionId, answer.quizId), answer).pipe(
       tap((newAnswer) => {
         console.log('Ajout Reussi');
+        this.snack.open('Enrégistrement en cours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: 'red-snackbar'
+          })
+        ;
       }),
       catchError(this.handleError<Question>('PostAnswer', undefined))
     );
@@ -41,6 +50,14 @@ export class AnswersService {
     return this.http.get<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id).pipe(
       tap((theanswer) => {
         console.log('Récupération Reussie');
+        this.snack.open('Supression encours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: 'red-snackbar'
+          })
+        ;
       }),
       catchError(this.handleError<Question>('deleteAnswer', undefined))
     );
@@ -49,7 +66,15 @@ export class AnswersService {
   UpdateAnswer( answer: Answer) {
     return this.http.put<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id, answer).pipe(
       tap((theanswer) => {
-        console.log('Récupération Reussie');
+        console.log('Modification Reussie');
+        this.snack.open('Modification en cours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: 'red-snackbar'
+          })
+        ;
       }),
       catchError(this.handleError<Question>('getAnswer', undefined))
     );

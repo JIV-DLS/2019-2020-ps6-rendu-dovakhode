@@ -6,6 +6,8 @@ import {catchError, tap} from 'rxjs/operators';
 import {environment} from '../environments/environment';
 import deleteProperty = Reflect.deleteProperty;
 import {QuestionService} from './question.service';
+import {SnackSuccessComponent} from '../app/snack/snack-success/snack-success.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Injectable({
@@ -13,7 +15,7 @@ import {QuestionService} from './question.service';
 })
 export class QuizService {
 
-  constructor(private http: HttpClient, private questionService: QuestionService) {
+  constructor(private http: HttpClient, private questionService: QuestionService, private snack: MatSnackBar) {
   }
   // url = 'https://api.myjson.com/bins/13ajhy';
   public static quizUrl = environment.url + '/quizzes';
@@ -39,8 +41,16 @@ export class QuizService {
     console.log(quiz);
     return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
       tap((newQuiz: Quiz) => {
-       console.log('Ajout reussi');
-         }),
+        console.log('Ajout reussi');
+        this.snack.open('Enrégistrement en cours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['red-snackbar']
+          })
+        ;
+      }),
       catchError(this.handleError<Quiz>('addQuiz', undefined))
     );
   }
@@ -49,6 +59,15 @@ export class QuizService {
    return this.http.delete<Quiz>(QuizService.quizUrl + '/' + quiz.id).pipe(
       tap((quizDeleted) => {
         console.log('Suppression reussie');
+        this.snack.open('Suppression en cours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['red-snackbar']
+          })
+        ;
+
       }),
      catchError(this.handleError<Quiz>('deleteQuiz', undefined))
    );
@@ -90,6 +109,14 @@ export class QuizService {
     return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizToModify).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');
+        this.snack.open('Modification en cours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: 'red-snackbar'
+          })
+        ;
       }),
       catchError(this.handleError<Quiz>('updateQuiz', undefined))
     );
