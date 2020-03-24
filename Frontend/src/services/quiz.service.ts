@@ -39,11 +39,11 @@ export class QuizService {
 
   addQuiz(quiz: Quiz): Observable<Quiz> {
     console.log(quiz);
-    this.snack.open('Enrégistrement en cours...', 'close',
+    this.snack.open('Enrégistrement du quizz en cours...', 'close',
       {
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        panelClass: ['red-snackbar']
+        duration: environment.snackinformations.duration,
+        horizontalPosition:  environment.snackinformations.horizontalPosition,
+        verticalPosition:  environment.snackinformations.verticalPosition,
       })
     ;
     return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
@@ -51,10 +51,10 @@ export class QuizService {
         console.log('Ajout reussi');
         this.snack.open('Enrégistrement du quiz réussi...', 'close',
           {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: ['blue-snackbar']
+            duration: environment.snackinformations.duration,
+            horizontalPosition:  environment.snackinformations.horizontalPosition,
+            verticalPosition:  environment.snackinformations.verticalPosition,
+            panelClass: ['green-snackbar']
           })
         ;
       }),
@@ -63,15 +63,24 @@ export class QuizService {
   }
 
   deleteQuiz(quiz: Quiz): Observable<Quiz>  {
-   return this.http.delete<Quiz>(QuizService.quizUrl + '/' + quiz.id).pipe(
+    this.snack.open('Suppression du quiz  en cours...', 'close',
+      {
+        duration: environment.snackinformations.duration,
+        horizontalPosition:  environment.snackinformations.horizontalPosition,
+        verticalPosition:  environment.snackinformations.verticalPosition,
+        panelClass: ['yellow-snackbar']
+
+      })
+    ;
+    return this.http.delete<Quiz>(QuizService.quizUrl + '/' + quiz.id).pipe(
       tap((quizDeleted) => {
         console.log('Suppression reussie');
-        this.snack.open('Suppression en cours...', 'close',
+        this.snack.open('Suppression du quiz éffectuée avec succès...', 'close',
           {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: ['red-snackbar']
+            duration: environment.snackinformations.duration,
+            horizontalPosition:  environment.snackinformations.horizontalPosition,
+            verticalPosition:  environment.snackinformations.verticalPosition,
+            panelClass:  ['green-snackbar']
           })
         ;
 
@@ -113,15 +122,23 @@ export class QuizService {
     return this.quizzes;
   }*/
   updateQuiz(quizToModify: Quiz): Observable<Quiz> {
+    this.snack.open('Modification du quiz en cours...', 'close',
+      {
+        duration: environment.snackinformations.duration,
+        horizontalPosition:  environment.snackinformations.horizontalPosition,
+        verticalPosition:  environment.snackinformations.verticalPosition,
+        panelClass: ['blue-snackbar']
+      })
+    ;
     return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizToModify).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');
-        this.snack.open('Modification en cours...', 'close',
+        this.snack.open('Modification du quiz reussi...', 'close',
           {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: 'red-snackbar'
+            duration: environment.snackinformations.duration,
+            horizontalPosition:  environment.snackinformations.horizontalPosition,
+            verticalPosition:  environment.snackinformations.verticalPosition,
+            panelClass: ['green-snackbar']
           })
         ;
       }),
@@ -142,13 +159,57 @@ export class QuizService {
           // this.bdcsState = false;
           this.snack.open('Echec de l\'enregistrement du quiz...', 'close',
             {
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
+              duration: environment.snackinformations.duration,
+              horizontalPosition:  environment.snackinformations.horizontalPosition,
+              verticalPosition:  environment.snackinformations.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
           break;
+         case 'deleteQuiz':
+           // this.bdcsState = false;
+           this.snack.open('Echec de la suppression du quiz...', 'close',
+             {
+               duration: environment.snackinformations.duration,
+               horizontalPosition:  environment.snackinformations.horizontalPosition,
+               verticalPosition:  environment.snackinformations.verticalPosition,
+               panelClass: ['red-snackbar']
+             })
+           ;
+           break;
+         case 'updateQuiz':
+           // this.bdcsState = false;
+           this.snack.open('Echec de la modification du quiz ...', 'close',
+             {
+               duration: environment.snackinformations.duration,
+               horizontalPosition:  environment.snackinformations.horizontalPosition,
+               verticalPosition:  environment.snackinformations.verticalPosition,
+               panelClass: ['red-snackbar']
+             })
+           ;
+           break;
+         case 'getQuiz':
+           // this.bdcsState = false;
+           this.snack.open('Impossible de charger les données', 'close',
+             {
+               duration: environment.snackinformations.duration,
+               horizontalPosition:  environment.snackinformations.horizontalPosition,
+               verticalPosition:  environment.snackinformations.verticalPosition,
+               panelClass: ['red-snackbar']
+             })
+           ;
+           break;
+         case 'getQuizById':
+           // this.bdcsState = false;
+           this.snack.open('Impossible de charger le quiz', 'close',
+             {
+               duration: environment.snackinformations.duration,
+               horizontalPosition:  environment.snackinformations.horizontalPosition,
+               verticalPosition:  environment.snackinformations.verticalPosition,
+               panelClass: ['red-snackbar']
+             })
+           ;
+           break;
         /*case 'getBdc':
           this.bdcState = false;
           break;
