@@ -13,7 +13,7 @@ export const environment = {
   formFieldsRequired: 'Veuiller remplir tous les champs requis(*)',
   formFieldRequired: 'Veuiller remplir ce champs',
   formSelectRequired: 'Veuillez choisir une valeur',
-  snackinformations: {
+  snackInformations: {
     loadingSuffix: ' en cour...',
     duration: 3000,
     horizontalPosition: 'center' as CanvasTextAlign,
