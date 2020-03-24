@@ -61,7 +61,7 @@ export class QuestionAddComponent implements OnInit {
     const dialogRef = this.dialog.open(AnswerAddComponent, {
       width: '950px',
       maxHeight: '500px',
-      data: this.question ? this.question.answers : DEFAULT_QUESTION.answers
+      data: this.question ? this.question : DEFAULT_QUESTION
     });
     dialogRef.afterClosed().subscribe(data => {
       console.log(data.answer);
