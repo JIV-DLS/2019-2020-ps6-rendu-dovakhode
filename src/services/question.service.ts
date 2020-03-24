@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import {environment} from '../environments/environment';
 import deleteProperty = Reflect.deleteProperty;
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import deleteProperty = Reflect.deleteProperty;
 })
 export class QuestionService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snack: MatSnackBar) {
   }
   /**
    * Services Documentation:
@@ -43,7 +44,14 @@ export class QuestionService {
     console.log(question);
     return this.http.post<Question>(this.questionUrl(question.quizId), question).pipe(
       tap((newQuestion: Question) => {
-
+        this.snack.open('Enrégistrement en cours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: 'red-snackbar'
+          })
+        ;
          }),
       catchError(this.handleError<Question>('addQuestion', undefined))
     );
@@ -78,6 +86,14 @@ export class QuestionService {
    return this.http.delete<Question>(this.questionUrl(question.quizId) + '/' + question.id).pipe(
       tap((questionDeleted) => {
        console.log('Suppression reussie');
+       this.snack.open('Suppression en cours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: 'red-snackbar'
+          })
+        ;
       }),
      catchError(this.handleError<Question>('deleteQuestion', undefined))
    );
@@ -121,6 +137,14 @@ export class QuestionService {
       tap((question) => {
         // this.questions[+questionToModify.id - 1] = questionToModify;
         console.log('Modification reussie avec succcès');
+        this.snack.open('Modification en cours...', 'close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: 'red-snackbar'
+          })
+        ;
       }),
       catchError(this.handleError<Question>('updateQuestion', undefined))
     );

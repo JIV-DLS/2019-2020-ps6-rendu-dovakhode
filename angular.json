@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "starter-quiz"
+  "defaultProject": "starter-quiz",
+  "cli": {
+    "analytics": false
+  }
 }
