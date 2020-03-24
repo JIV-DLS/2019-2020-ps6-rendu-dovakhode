@@ -3,6 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 
+import {MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+
 export const environment = {
   production: false,
   appName: 'DOVA QUIZ',
@@ -14,8 +16,8 @@ export const environment = {
   snackinformations: {
     loadingSuffix: ' en cour...',
     duration: 3000,
-    horizontalPosition: 'center',
-    verticalPosition: 'bottom',
+    horizontalPosition: 'center' as CanvasTextAlign,
+    verticalPosition: 'bottom' as MatSnackBarVerticalPosition,
     post: {
       label: 'Enregistrement de ',
       class: 'green-snackbar'

@@ -18,7 +18,7 @@ export class AnswersService {
         this.snack.open('Enrégistrement de la réponse en cours...', 'close',
           {
             duration: 3000,
-            verticalPosition: environment.snackinformations.horizontalPosition,
+            horizontalPosition: environment.snackinformations.horizontalPosition,
             verticalPosition:  environment.snackinformations.verticalPosition,
           })
         ;
