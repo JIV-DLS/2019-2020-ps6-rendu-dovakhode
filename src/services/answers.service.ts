@@ -15,24 +15,19 @@ export class AnswersService {
 
   addAnswer(answer: Answer) {
 
-        this.snack.open('Enrégistrement de la réponse en cours...', 'close',
+        this.snack.open(environment.snackInformation.operation.loading.post.answer, 'close',
           {
-            duration: 3000,
-            horizontalPosition: environment.snackData.horizontalPosition,
-            verticalPosition:  environment.snackData.verticalPosition,
+            ...environment.snackInformation.loadingPost
           })
         ;
         return this.http.post<Answer>(this.answerUrl(answer.questionId, answer.quizId), answer).pipe(
       tap((newAnswer) => {
         console.log('Ajout Reussi');
-        this.snack.open('Enrégistrement de la réponse éffectuée avec succès...', 'close',
+        this.snack.open(environment.snackInformation.operation.succeeded.post.answer, 'close',
           {
-            duration: environment.snackData.duration,
-            horizontalPosition:  environment.snackData.horizontalPosition,
-            verticalPosition:  environment.snackData.verticalPosition,
-            panelClass: ['green-snackbar']
-          })
-        ;
+            ...environment.snackInformation.successForAll
+
+          });
       }),
       catchError(this.handleError<Question>('addAnswer', undefined))
     );
@@ -55,23 +50,17 @@ export class AnswersService {
   }
 
   deleteAnswer( answer: Answer) {
-    this.snack.open('Supression de la question en cours...', 'close',
+    this.snack.open (environment.snackInformation.operation.loading.delete.answer, 'close',
       {
-        duration: environment.snackData.duration,
-        horizontalPosition:  environment.snackData.horizontalPosition,
-        verticalPosition:  environment.snackData.verticalPosition,
-        panelClass: ['yellow-snackbar']
+        ...environment.snackInformation.loadingDelete
       })
     ;
     return this.http.delete<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id).pipe(
       tap((theanswer) => {
         console.log('Récupération Reussie');
-        this.snack.open('Supression éffectuée avec succès avec succès', 'close',
+        this.snack.open( environment.snackInformation.operation.succeeded.delete.answer, 'close',
           {
-            duration: environment.snackData.duration,
-            horizontalPosition:  environment.snackData.horizontalPosition,
-            verticalPosition:  environment.snackData.verticalPosition,
-            panelClass: ['green-snackbar']
+            ...environment.snackInformation.successForAll
           })
         ;
       }),
@@ -80,23 +69,17 @@ export class AnswersService {
   }
 
   UpdateAnswer( answer: Answer) {
-    this.snack.open('Modification de la réponse en cours...', 'close',
+    this.snack.open(environment.snackInformation.operation.loading.update.answer, 'close',
       {
-        duration: environment.snackData.duration,
-        horizontalPosition:  environment.snackData.horizontalPosition,
-        verticalPosition:  environment.snackData.verticalPosition,
-        panelClass: ['blue-snackbar']
+        ...environment.snackInformation.loadingUpdate
       })
     ;
     return this.http.put<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id, answer).pipe(
       tap((theanswer) => {
         console.log('Modification Reussie');
-        this.snack.open('Modification de la réponse éffectuée avec succès', 'close',
+        this.snack.open(environment.snackInformation.operation.succeeded.update.answer, 'close',
           {
-            duration: environment.snackData.duration,
-            horizontalPosition:  environment.snackData.horizontalPosition,
-            verticalPosition:  environment.snackData.verticalPosition,
-            panelClass: ['green-snackbar']
+            ...environment.snackInformation.successForAll
           })
         ;
       }),
@@ -111,10 +94,7 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Echec de l\'enregistrement de la réponse...', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition: environment.snackData.horizontalPosition,
-              verticalPosition: environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
@@ -122,10 +102,7 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Echec de la suppression de la réponse...', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition: environment.snackData.horizontalPosition,
-              verticalPosition: environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
@@ -133,10 +110,7 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Echec de la modification de la réponse ...', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition: environment.snackData.horizontalPosition,
-              verticalPosition: environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
@@ -144,10 +118,7 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Impossible de charger les réponses', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition: environment.snackData.horizontalPosition,
-              verticalPosition: environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
@@ -156,10 +127,7 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Impossible de charger la réponse', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition: environment.snackData.horizontalPosition,
-              verticalPosition: environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
