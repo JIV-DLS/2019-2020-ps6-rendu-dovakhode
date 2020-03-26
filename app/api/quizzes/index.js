@@ -69,10 +69,14 @@ router.post('/', multer, (req, res) => {
 router.delete('/:id', (req, res) => {
   try {
     const tmp = Quiz.getById(req.params.id)
-    const filename = tmp.imageUrl.split('/images/')[1]
-    fs.unlink(`images/quiz/${filename}`, () => {
+    const filename = tmp.image.split('/images/')[1]
+    if (filename != null && filename.length > 1) {
+      fs.unlink(`images/quiz/${filename}`, () => {
+        Quiz.delete(req.params.id)
+      })
+    } else {
       Quiz.delete(req.params.id)
-    })
+    }
     res.status(201).json(`${tmp.name}(id= ${tmp.id}) is deleted`)
   } catch (err) {
     if (err.name === 'ValidationError') {
