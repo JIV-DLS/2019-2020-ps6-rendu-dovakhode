@@ -49,7 +49,7 @@ export class QuizService {
     return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
       tap((newQuiz: Quiz) => {
         console.log('Ajout reussi');
-        this.snack.open('Enrégistrement du quiz réussi...', 'close',
+        this.snack.open('Enrégistrement du quiz réussi ...', 'close',
           {
             duration: environment.snackInformations.duration,
             horizontalPosition:  environment.snackInformations.horizontalPosition,
@@ -69,6 +69,7 @@ export class QuizService {
         horizontalPosition:  environment.snackInformations.horizontalPosition,
         verticalPosition:  environment.snackInformations.verticalPosition,
         panelClass: ['yellow-snackbar']
+
       })
     ;
     return this.http.delete<Quiz>(QuizService.quizUrl + '/' + quiz.id).pipe(
