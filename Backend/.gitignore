@@ -5,5 +5,5 @@ mocks/*
 images/questions/*
 images/quiz/*
 images/answer/*
-images
+images/
 !mocks/.gitkeep
