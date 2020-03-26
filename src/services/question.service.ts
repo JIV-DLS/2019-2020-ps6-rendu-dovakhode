@@ -41,9 +41,9 @@ export class QuestionService {
   addQuestion(question: Question): Observable<Question> {
     this.snack.open('Enrégistrement de la question en cours...', 'close',
       {
-        duration: environment.snackInformations.duration,
-        horizontalPosition:  environment.snackInformations.horizontalPosition,
-        verticalPosition:  environment.snackInformations.verticalPosition,
+        duration: environment.snackData.duration,
+        horizontalPosition:  environment.snackData.horizontalPosition,
+        verticalPosition:  environment.snackData.verticalPosition,
       })
     ;
     const questions = question.answers;
@@ -55,9 +55,9 @@ export class QuestionService {
         this.snack.dismiss();
         this.snack.open('Enrégistrement de la question éffectué avec succès...', 'close',
           {
-            duration: environment.snackInformations.duration,
-            horizontalPosition:  environment.snackInformations.horizontalPosition,
-            verticalPosition:  environment.snackInformations.verticalPosition,
+            duration: environment.snackData.duration,
+            horizontalPosition:  environment.snackData.horizontalPosition,
+            verticalPosition:  environment.snackData.verticalPosition,
             panelClass: ['green-snackbar']
           })
         ;
@@ -94,9 +94,9 @@ export class QuestionService {
   deleteQuestion(question: Question): Observable<Question>  {
     this.snack.open('Suppression de la question en cours...', 'close',
       {
-        duration: environment.snackInformations.duration,
-        horizontalPosition:  environment.snackInformations.horizontalPosition,
-        verticalPosition:  environment.snackInformations.verticalPosition,
+        duration: environment.snackData.duration,
+        horizontalPosition:  environment.snackData.horizontalPosition,
+        verticalPosition:  environment.snackData.verticalPosition,
         panelClass: ['yellow-snackbar']
       })
     ;
@@ -105,9 +105,9 @@ export class QuestionService {
        console.log('Suppression reussie');
        this.snack.open('Suppression de la question éffectuée avec succès...', 'close',
           {
-            duration: environment.snackInformations.duration,
-            horizontalPosition:  environment.snackInformations.horizontalPosition,
-            verticalPosition:  environment.snackInformations.verticalPosition,
+            duration: environment.snackData.duration,
+            horizontalPosition:  environment.snackData.horizontalPosition,
+            verticalPosition:  environment.snackData.verticalPosition,
             panelClass: ['green-snackbar']
           })
         ;
@@ -154,9 +154,9 @@ export class QuestionService {
     // @ts-ignore
     this.snack.open('Modification de la question en cours...', 'close',
       {
-        duration: environment.snackInformations.duration,
-        horizontalPosition:  environment.snackInformations.horizontalPosition,
-        verticalPosition:  environment.snackInformations.verticalPosition,
+        duration: environment.snackData.duration,
+        horizontalPosition:  environment.snackData.horizontalPosition,
+        verticalPosition:  environment.snackData.verticalPosition,
         panelClass: ['blue-snackbar']
       })
     ;
@@ -166,9 +166,9 @@ export class QuestionService {
         console.log('Modification de la question éffectuée avec succès');
         this.snack.open('Modification de la question éffectuée avec succès', 'close',
           {
-            duration: environment.snackInformations.duration,
-            horizontalPosition:  environment.snackInformations.horizontalPosition,
-            verticalPosition:  environment.snackInformations.verticalPosition,
+            duration: environment.snackData.duration,
+            horizontalPosition:  environment.snackData.horizontalPosition,
+            verticalPosition:  environment.snackData.verticalPosition,
             panelClass: ['green-snackbar']
           })
         ;
@@ -190,9 +190,9 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Echec de l\'enregistrement de la question...', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition:  environment.snackInformations.horizontalPosition,
-              verticalPosition:  environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition:  environment.snackData.horizontalPosition,
+              verticalPosition:  environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -201,9 +201,9 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Echec de la suppression de la question...', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition:  environment.snackInformations.horizontalPosition,
-              verticalPosition:  environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition:  environment.snackData.horizontalPosition,
+              verticalPosition:  environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -212,9 +212,9 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Echec de la modification de la question ...', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition:  environment.snackInformations.horizontalPosition,
-              verticalPosition:  environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition:  environment.snackData.horizontalPosition,
+              verticalPosition:  environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -223,9 +223,9 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Impossible de charger les questions', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition:  environment.snackInformations.horizontalPosition,
-              verticalPosition:  environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition:  environment.snackData.horizontalPosition,
+              verticalPosition:  environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -235,9 +235,9 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Impossible de charger la question', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition:  environment.snackInformations.horizontalPosition,
-              verticalPosition:  environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition:  environment.snackData.horizontalPosition,
+              verticalPosition:  environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;

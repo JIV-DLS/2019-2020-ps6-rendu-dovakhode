@@ -13,7 +13,7 @@ export const environment = {
   formFieldsRequired: 'Veuiller remplir tous les champs requis(*)',
   formFieldRequired: 'Veuiller remplir ce champs',
   formSelectRequired: 'Veuillez choisir une valeur',
-  snackInformations: {
+  snackData: {
     loadingSuffix: ' en cour...',
     duration: 3000,
     horizontalPosition: 'center' as MatSnackBarHorizontalPosition,
@@ -36,7 +36,21 @@ export const environment = {
     }, succes: {
       label: '  réussi...',
     class: 'green-snackbar'
-}
+},
+    snackInformation: {
+      update: {
+        duration: this.snackData.duration,
+        horizontalPosition:  this.snackData.horizontalPosition,
+        verticalPosition: this.snackData.verticalPosition,
+        panelClass: [this.snackData.succes.class]
+      },
+      delete: {
+
+      },
+      post: {
+
+      }
+    }
 
   }
 };
