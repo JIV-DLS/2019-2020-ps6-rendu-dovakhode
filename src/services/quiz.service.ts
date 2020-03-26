@@ -65,7 +65,6 @@ export class QuizService {
     this.snack.open( environment.snackInformation.operation.loading.delete.quiz, 'close',
       {
         ...environment.snackInformation.loadingDelete
-
       })
     ;
     return this.http.delete<Quiz>(QuizService.quizUrl + '/' + quiz.id).pipe(
@@ -91,8 +90,18 @@ export class QuizService {
     );
   }*/
   getQuiz(): Observable<Quiz[]>  {
+    this.snack.open( environment.snackInformation.operation.loading.getAll.quiz, 'close',
+      {
+        ...environment.snackInformation.loadingGet
+      })
+    ;
     return this.http.get<Quiz[]>(QuizService.quizUrl).pipe(
       tap((quiz) => {
+        this.snack.open(environment.snackInformation.operation.succeeded.getAll.quiz, 'close',
+          {
+            ...environment.snackInformation.successForAll
+          })
+        ;
       }),
       catchError(this.handleError<Quiz[]>('getQuiz', undefined))
     );

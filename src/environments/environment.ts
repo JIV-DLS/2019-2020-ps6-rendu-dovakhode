@@ -45,8 +45,24 @@ export const environment = {
       panelClass: [snackData.delete.class]
 
     },
+    loadingGet: {
+      horizontalPosition:  snackData.horizontalPosition,
+      verticalPosition: snackData.verticalPosition,
+      panelClass: [snackData.get.class]
+
+    },
     operation: {
       loading: {
+        getAll: {
+          quiz: 'Récupération de tous les quizs en cours...',
+          question: 'Récupération de les questions en cours...',
+          answer: 'Récupération de toutes les réponses en cours...'
+        },
+        get: {
+          quiz: 'Récupération d\'un quiz en cours...',
+          question: 'Récupération d\'une question en cours...',
+          answer: 'Récupération d\'une réponse en cours...'
+        },
         update: {
           quiz: 'Modification du quiz en cours...',
           question: 'Modification de la question en cours...',
@@ -63,6 +79,16 @@ export const environment = {
           answer: 'Enregistrement de la réponse en cours...'
         }},
       succeeded: {
+        getAll: {
+          quiz: 'Récupération des quizs terminé!',
+          question: 'Récupération des questions terminé!',
+          answer: 'Récupération des réponses terminé!'
+        },
+        get: {
+          quiz: 'Récupération du quiz éffectuée avec succès!',
+          question: 'Récupération de la question éffectuée avec succès!',
+          answer: 'Récupération de la réponse éffectuée avec succès!'
+        },
         update: {
           quiz: 'Modification du quiz éffectuée avec succès...',
           question: 'Modification de la question éffectuée avec succès...',
