@@ -126,6 +126,7 @@ export class QuizzeEditComponent implements OnInit {
   }
 
   deleteImage() {
+    this.savedImage = this.imagePreview;
     this.imageChanged = true;
     this.quizForm.markAsDirty();
     this.quizForm.get('image').reset();
