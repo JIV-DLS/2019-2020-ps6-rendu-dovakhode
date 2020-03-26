@@ -1,8 +1,8 @@
-import {Component, OnInit, Input, Output, EventEmitter, Inject} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, Inject, Injectable} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
 import {QuestionsComponent} from '../../questions/questions.component';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Question} from '../../../models/question.model';
 import {ActivatedRoute} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
@@ -25,6 +25,7 @@ export class QuizComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private route: ActivatedRoute,
               private quizService: QuizService,
+              public dialogRef: MatDialogRef<QuizComponent>,
               @Inject(MAT_DIALOG_DATA) public quizDialog: Quiz) {
   }
 

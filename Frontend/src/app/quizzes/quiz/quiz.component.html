@@ -63,7 +63,7 @@
         <mat-divider></mat-divider>
       </mat-grid-tile>
       <mat-grid-tile colspan="2" rowspan="3" >
-        <span style="text-decoration: underline #555555; text-align: left;">Listes des questions(<span class="badge">{{quiz.questions.length}}</span>):</span>
+        <span style="text-decoration: underline #555555; text-align: left;">Listes des questions(<span class="badge">{{quiz.questions?.length}}</span>):</span>
       </mat-grid-tile>
       <mat-grid-tile colspan="2" rowspan="3">
         <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="openDialog()">Ajouter</button>
@@ -80,6 +80,6 @@
 
   </mat-card-content>
   <mat-card-footer>
-    <button style="height: 100%;width: 100%;" routerLink="/quiz/{{quiz.id}}" mat-button type="button" class="btn btn-primary" (click)="openDialog()">modifier</button>
+    <button style="height: 100%;width: 100%;" routerLink="/quiz-edit/{{quiz.id}}" mat-button type="button" class="btn btn-primary" (click)="dialogRef.close();">modifier</button>
   </mat-card-footer>
 </mat-card>
