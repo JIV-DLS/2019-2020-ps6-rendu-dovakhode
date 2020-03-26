@@ -8,6 +8,7 @@ import deleteProperty = Reflect.deleteProperty;
 import {QuestionService} from './question.service';
 import {SnackSuccessComponent} from '../app/snack/snack-success/snack-success.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 
 @Injectable({
@@ -15,7 +16,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class QuizService {
 
-  constructor(private http: HttpClient, private questionService: QuestionService, private snack: MatSnackBar) {
+  constructor(private http: HttpClient,
+              private questionService: QuestionService,
+              private snack: MatSnackBar,
+              private router: Router) {
   }
   // url = 'https://api.myjson.com/bins/13ajhy';
   public static quizUrl = environment.url + '/quizzes';
@@ -51,11 +55,12 @@ export class QuizService {
     return this.http.post<Quiz>(QuizService.quizUrl, quizData).pipe(
       tap((newQuiz: Quiz) => {
         console.log('Ajout reussi');
-        this.snack.open( environment.snackInformation.operation.succeeded.post.quiz, 'close',
+        this.snack.open( environment.snackInformation.operation.succeeded.post.quiz, 'Afficher',
           {
             ...environment.snackInformation.successForAll
-          })
-        ;
+          }).onAction().subscribe(() => {
+            this.router.navigateByUrl('/quiz/' + newQuiz.id);
+        });
       }),
       catchError(this.handleError<Quiz>('addQuiz', undefined))
     );

@@ -32,8 +32,9 @@ export class QuizComponent implements OnInit {
   ngOnInit() {
     if (this.quizDialog != null) {
     this.quiz = this.quizDialog;
-    } else if (this.route.snapshot.paramMap.has('id')) {
-      this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
+    }
+    if (this.route.snapshot.paramMap.has('idShowQuiz')) {
+      this.quizService.getQuizById(+this.route.snapshot.paramMap.get('idShowQuiz'))
         .subscribe((quiz) => {
           this.quiz = quiz; });
     }

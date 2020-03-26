@@ -28,20 +28,20 @@ export class HomeComponent implements OnInit {
           width: this.dialogWidth,
           maxHeight: this.dialogHeight
         });
-        dialogRef.afterClosed().subscribe(quiz => {
-        if (quiz != null) {
-          this.dialog.open(QuizComponent, {
-            width: this.dialogWidth,
-            maxHeight: this.dialogHeight,
-            data: quiz
-          });
-        }
-          /* this.questionDialogOpened = false;
-          this.questions.setValue( questions ? questions : this.questions ); */
-          });
+      /*dialogRef.afterClosed().subscribe(quiz => {
+      /*f (quiz != null) {
+        this.dialog.open(QuizComponent, {
+          width: this.dialogWidth,
+          maxHeight: this.dialogHeight,
+          data: quiz
+        });
+        };
+          })*/
+        /* this.questionDialogOpened = false;
+        this.questions.setValue( questions ? questions : this.questions ); */
         break;
       case 1:
-        break;
+    break;
     }
 
   }

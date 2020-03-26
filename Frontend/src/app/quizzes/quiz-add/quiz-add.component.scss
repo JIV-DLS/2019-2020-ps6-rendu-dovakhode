@@ -4,12 +4,10 @@
   width: 100%;
   max-width: 400px;
 }
-.Jbtn {
+.Jbtn-edit,.Jbtn-delete {
   height: 33px;
   width: 60px;
   position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color: #555;
@@ -21,7 +19,17 @@
   text-align: center;
   opacity: 0.5;
 }
-.Jbtn:hover{
+.Jbtn-edit {
+
+  top: 50%;
+  left: 50%;
+}
+.Jbtn-delete {
+
+  top: 90%;
+  left: 90%;
+}
+.Jbtn-edit:hover,.Jbtn-delete:hover{
   opacity: 1;
 }
 mat-form-field{
