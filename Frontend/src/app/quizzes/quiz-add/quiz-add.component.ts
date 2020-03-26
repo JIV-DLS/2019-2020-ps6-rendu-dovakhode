@@ -10,6 +10,7 @@ import {QuestionsComponent} from '../../questions/questions.component';
 import {SnackModificationComponent} from '../../snack/snack-modification/snack-modification.component';
 import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
+import { mimeType } from 'src/app/mime-type.validator';
 
 @Component({
   selector: 'app-quiz-form',
@@ -31,6 +32,8 @@ export class QuizAddComponent implements OnInit {
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
   private questionDialogOpened = false;
+  private imagePreview: string;
+
   constructor(private location: Location, private snackBar: MatSnackBar,
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
@@ -55,7 +58,8 @@ export class QuizAddComponent implements OnInit {
       theme: [ DEFAULT_QUIZ.theme, [ Validators.required, Validators.minLength(3)]],
       subTheme: [null],
       difficulty: [null],
-      questions: [DEFAULT_QUIZ.questions]
+      questions: [DEFAULT_QUIZ.questions],
+      image: [null]
     });
   }
   addQuiz() {
@@ -81,17 +85,17 @@ export class QuizAddComponent implements OnInit {
      // console.log('Add quiz: ', quizToCreate);
 
     // Now, question-add your quiz in the list!
-    this.quizService.addQuiz(quizToCreate).subscribe((quiz) => {
+    this.quizService.addQuiz(quizToCreate, this.quizForm.get('image').value).subscribe((quiz) => {
       if (quiz !== undefined) {
        this.quiz = quiz;
        this.dialog.closeAll();
+       this.initializeTheForm();
       }
      }); // getQuiz().push(quizToCreate);
      /*this.snackBar.openFromComponent(SnackModificationComponent, {
       duration: 1000,
       data: 'Quizz created succesfuly!'
     });*/
-    this.initializeTheForm();
   }
 
 
@@ -123,17 +127,6 @@ export class QuizAddComponent implements OnInit {
       this.questions.setValue( questions ? questions : this.questions );
     });
   }
-  modifyQuiz() {
-    const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
-    // quizToCreate.questions = [];
-    quizToModify.dateModification = new Date();
-    this.quizService.updateQuiz(quizToModify);
-    this.snackBar.openFromComponent(SnackModificationComponent, {
-      duration: 1000,
-      data: 'Quizz modified succesfuly!'
-    });
-    this.location.back();
-  }
   deleteQuestion(deleteState: boolean) {
     /* if(deleteState){
 
@@ -151,6 +144,21 @@ export class QuizAddComponent implements OnInit {
         return environment.formSelectRequired;
       }
       return this.theme.hasError('minLenght') ? 'Veuillez entrer 3 caractère au minimum' : '';
+  }
+
+  onImagePick(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.quizForm.get('image').patchValue(file);
+    this.quizForm.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (this.quizForm.get('image').valid) {
+        this.imagePreview = reader.result as string;
+      } else {
+        this.imagePreview = null;
+      }
+    };
+    reader.readAsDataURL(file);
   }
 }
 
