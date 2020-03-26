@@ -17,6 +17,8 @@ import {environment} from '../../../environments/environment';
 })
 export class QuizzeEditComponent implements OnInit {
   quiz: Quiz;
+  private imageChanged: boolean;
+  private savedImage: string;
   private questionDialogOpened = false;
   public quizForm: FormGroup;
   public themesValues = Object.values(theme);
@@ -38,6 +40,7 @@ export class QuizzeEditComponent implements OnInit {
         this.imagePreview = quiz.image.length > 1 ? quiz.image : null; }, (error) => {this.retour(); });
   }
   initializeTheForm(quiz) {
+    this.imageChanged = false;
     this.quiz = quiz;
     this.quizForm = this.quizzFormInitializer();
   }
@@ -84,6 +87,7 @@ export class QuizzeEditComponent implements OnInit {
     this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value).subscribe((quiz) => {
       if (quiz !== undefined) {
         this.quiz = quiz;
+        this.savedImage = quiz.image;
         this.initializeTheForm(quiz);
       }
     });
@@ -112,6 +116,7 @@ export class QuizzeEditComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       if (this.quizForm.get('image').valid) {
+        this.imageChanged = true;
         this.imagePreview = reader.result as string;
       } else {
         this.imagePreview = null;
@@ -121,11 +126,17 @@ export class QuizzeEditComponent implements OnInit {
   }
 
   deleteImage() {
+    this.imageChanged = true;
+    this.quizForm.markAsDirty();
     this.quizForm.get('image').reset();
+    this.quiz.image = '';
     this.imagePreview = null;
   }
 
   resetQuiz() {
+    this.imageChanged = false;
     this.initializeTheForm(this.quiz);
+    this.imagePreview = this.savedImage;
+    this.quiz.image = this.savedImage;
   }
 }
