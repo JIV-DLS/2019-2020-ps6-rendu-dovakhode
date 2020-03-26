@@ -91,19 +91,19 @@ export const environment = {
           answer: 'Récupération de la réponse éffectuée avec succès!'
         },
         update: {
-          quiz: '✅ Modification du quiz éffectuée avec succès...',
-          question: '✅ Modification de la question éffectuée avec succès...',
-          answer: '✅ Modification de la réponse éffectuée avec succès...'
+          quiz: '✅ Modification du quiz éffectuée avec succès!',
+          question: '✅ Modification de la question éffectuée avec succès!',
+          answer: '✅ Modification de la réponse éffectuée avec succès!'
         },
         delete:  {
-          quiz: '✅ Suppression du quiz éffectuée avec succès...',
-          question: '✅ Suppression de la question éffectuée avec succès...',
-          answer: '✅ Suppression de la réponse éffectuée avec succès...'
+          quiz: '✅ Suppression du quiz éffectuée avec succès!',
+          question: '✅ Suppression de la question éffectuée avec succès!',
+          answer: '✅ Suppression de la réponse éffectuée avec succès!'
         },
         post: {
-          quiz: '✅ Enregistrement du quiz éffectué avec succès...',
-          question: '✅ Enregistrement de la question éffectuée avec succès...',
-          answer: '✅ Enregistrement de la réponse éffectuée avec succès...'
+          quiz: '✅ Enregistrement du quiz éffectué avec succès!',
+          question: '✅ Enregistrement de la question éffectuée avec succès!',
+          answer: '✅ Enregistrement de la réponse éffectuée avec succès!'
         }
 
       }

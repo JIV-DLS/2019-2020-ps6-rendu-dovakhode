@@ -95,18 +95,8 @@ export class QuizService {
     );
   }*/
   getQuiz(): Observable<Quiz[]>  {
-    this.snack.open( environment.snackInformation.operation.loading.getAll.quiz, 'close',
-      {
-        ...environment.snackInformation.loadingGet
-      })
-    ;
     return this.http.get<Quiz[]>(QuizService.quizUrl).pipe(
       tap((quiz) => {
-        this.snack.open(environment.snackInformation.operation.succeeded.getAll.quiz, 'close',
-          {
-            ...environment.snackInformation.successForAll
-          })
-        ;
       }),
       catchError(this.handleError<Quiz[]>('getQuiz', undefined))
     );
