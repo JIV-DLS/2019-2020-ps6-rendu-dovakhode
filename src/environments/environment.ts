@@ -4,6 +4,7 @@
 
 
 import {MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import {snackData} from '../mocks/snack.mock';
 
 export const environment = {
   production: false,
@@ -13,60 +14,35 @@ export const environment = {
   formFieldsRequired: 'Veuiller remplir tous les champs requis(*)',
   formFieldRequired: 'Veuiller remplir ce champs',
   formSelectRequired: 'Veuillez choisir une valeur',
-  snackData: {
-    loadingSuffix: ' en cour...',
-    duration: 3000,
-    horizontalPosition: 'center' as MatSnackBarHorizontalPosition,
-    verticalPosition: 'bottom' as MatSnackBarVerticalPosition,
-    post: {
-      label: 'Enregistrement de ',
-      class: 'green-snackbar'
-    },
-    delete: {
-      label: 'Enregistrement de ',
-      class: 'red-snackbar'
-    },
-    update: {
-      label: 'Mise à jour de ',
-      class: 'blue-snackbar'
-    },
-    error: {
-      label: ' échoué...',
-      class: 'red-snackbar'
-    }, succes: {
-      label: '  réussi...',
-    class: 'green-snackbar'
-},
-  },
   snackInformation: {
     successForAll: {
-      duration: this.snackData.duration,
-      horizontalPosition:  this.snackData.horizontalPosition,
-      verticalPosition: this.snackData.verticalPosition,
-      panelClass: [this.snackData.succes.class]
+      duration: snackData.duration,
+      horizontalPosition:  snackData.horizontalPosition,
+      verticalPosition: snackData.verticalPosition,
+      panelClass: [snackData.succes.class]
     },
     errorForAll: {
-      duration: this.snackData.duration,
-      horizontalPosition:  this.snackData.horizontalPosition,
-      verticalPosition: this.snackData.verticalPosition,
-      panelClass: [this.snackData.error.class]
+      duration:  snackData.duration,
+      horizontalPosition:  snackData.horizontalPosition,
+      verticalPosition: snackData.verticalPosition,
+      panelClass: [snackData.error.class]
     },
     loadingUpdate: {
-      horizontalPosition:  this.snackData.horizontalPosition,
-      verticalPosition: this.snackData.verticalPosition,
-      panelClass: [this.snackData.update.class]
+      horizontalPosition:  snackData.horizontalPosition,
+      verticalPosition: snackData.verticalPosition,
+      panelClass: [snackData.update.class]
 
     },
     loadingPost: {
-      horizontalPosition:  this.snackData.horizontalPosition,
-      verticalPosition: this.snackData.verticalPosition,
-      panelClass: [this.snackData.succes.class]
+      horizontalPosition:  snackData.horizontalPosition,
+      verticalPosition: snackData.verticalPosition,
+      panelClass: [snackData.succes.class]
 
     },
     loadingDelete: {
-      horizontalPosition:  this.snackData.horizontalPosition,
-      verticalPosition: this.snackData.verticalPosition,
-      panelClass: [this.snackData.delete.class]
+      horizontalPosition:  snackData.horizontalPosition,
+      verticalPosition: snackData.verticalPosition,
+      panelClass: [snackData.delete.class]
 
     },
     operation: {
@@ -105,7 +81,7 @@ export const environment = {
 
       }
     }
-  },
+  }
 
 
 
