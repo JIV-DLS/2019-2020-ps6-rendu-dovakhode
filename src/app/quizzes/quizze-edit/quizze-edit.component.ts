@@ -19,7 +19,6 @@ export class QuizzeEditComponent implements OnInit {
   quiz: Quiz;
   private questionDialogOpened = false;
   public quizForm: FormGroup;
-  public savedImageUrl: string;
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
   private imagePreview: string;
@@ -35,7 +34,6 @@ export class QuizzeEditComponent implements OnInit {
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
         this.loading = false;
-        this.savedImageUrl = quiz.image;
         this.initializeTheForm(quiz);
         this.imagePreview = quiz.image.length > 1 ? quiz.image : null; }, (error) => {this.retour(); });
   }
@@ -82,7 +80,7 @@ export class QuizzeEditComponent implements OnInit {
     }
     const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
     quizToModify.dateModification = new Date();
-    quizToModify.image = this.savedImageUrl;
+    quizToModify.image = this.quiz.image;
     this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value).subscribe((quiz) => {
       if (quiz !== undefined) {
         this.quiz = quiz;
@@ -125,5 +123,9 @@ export class QuizzeEditComponent implements OnInit {
   deleteImage() {
     this.quizForm.get('image').reset();
     this.imagePreview = null;
+  }
+
+  resetQuiz() {
+    this.initializeTheForm(this.quiz);
   }
 }
