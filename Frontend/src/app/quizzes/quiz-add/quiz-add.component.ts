@@ -10,7 +10,6 @@ import {QuestionsComponent} from '../../questions/questions.component';
 import {SnackModificationComponent} from '../../snack/snack-modification/snack-modification.component';
 import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
-import { mimeType } from 'src/app/mime-type.validator';
 
 @Component({
   selector: 'app-quiz-form',

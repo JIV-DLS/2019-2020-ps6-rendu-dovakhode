@@ -18,8 +18,8 @@ export class AnswersService {
         this.snack.open('Enrégistrement de la réponse en cours...', 'close',
           {
             duration: 3000,
-            horizontalPosition: environment.snackInformations.horizontalPosition,
-            verticalPosition:  environment.snackInformations.verticalPosition,
+            horizontalPosition: environment.snackData.horizontalPosition,
+            verticalPosition:  environment.snackData.verticalPosition,
           })
         ;
         return this.http.post<Answer>(this.answerUrl(answer.questionId, answer.quizId), answer).pipe(
@@ -27,9 +27,9 @@ export class AnswersService {
         console.log('Ajout Reussi');
         this.snack.open('Enrégistrement de la réponse éffectuée avec succès...', 'close',
           {
-            duration: environment.snackInformations.duration,
-            horizontalPosition:  environment.snackInformations.horizontalPosition,
-            verticalPosition:  environment.snackInformations.verticalPosition,
+            duration: environment.snackData.duration,
+            horizontalPosition:  environment.snackData.horizontalPosition,
+            verticalPosition:  environment.snackData.verticalPosition,
             panelClass: ['green-snackbar']
           })
         ;
@@ -57,9 +57,9 @@ export class AnswersService {
   deleteAnswer( answer: Answer) {
     this.snack.open('Supression de la question en cours...', 'close',
       {
-        duration: environment.snackInformations.duration,
-        horizontalPosition:  environment.snackInformations.horizontalPosition,
-        verticalPosition:  environment.snackInformations.verticalPosition,
+        duration: environment.snackData.duration,
+        horizontalPosition:  environment.snackData.horizontalPosition,
+        verticalPosition:  environment.snackData.verticalPosition,
         panelClass: ['yellow-snackbar']
       })
     ;
@@ -68,9 +68,9 @@ export class AnswersService {
         console.log('Récupération Reussie');
         this.snack.open('Supression éffectuée avec succès avec succès', 'close',
           {
-            duration: environment.snackInformations.duration,
-            horizontalPosition:  environment.snackInformations.horizontalPosition,
-            verticalPosition:  environment.snackInformations.verticalPosition,
+            duration: environment.snackData.duration,
+            horizontalPosition:  environment.snackData.horizontalPosition,
+            verticalPosition:  environment.snackData.verticalPosition,
             panelClass: ['green-snackbar']
           })
         ;
@@ -82,9 +82,9 @@ export class AnswersService {
   UpdateAnswer( answer: Answer) {
     this.snack.open('Modification de la réponse en cours...', 'close',
       {
-        duration: environment.snackInformations.duration,
-        horizontalPosition:  environment.snackInformations.horizontalPosition,
-        verticalPosition:  environment.snackInformations.verticalPosition,
+        duration: environment.snackData.duration,
+        horizontalPosition:  environment.snackData.horizontalPosition,
+        verticalPosition:  environment.snackData.verticalPosition,
         panelClass: ['blue-snackbar']
       })
     ;
@@ -93,9 +93,9 @@ export class AnswersService {
         console.log('Modification Reussie');
         this.snack.open('Modification de la réponse éffectuée avec succès', 'close',
           {
-            duration: environment.snackInformations.duration,
-            horizontalPosition:  environment.snackInformations.horizontalPosition,
-            verticalPosition:  environment.snackInformations.verticalPosition,
+            duration: environment.snackData.duration,
+            horizontalPosition:  environment.snackData.horizontalPosition,
+            verticalPosition:  environment.snackData.verticalPosition,
             panelClass: ['green-snackbar']
           })
         ;
@@ -111,9 +111,9 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Echec de l\'enregistrement de la réponse...', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition: environment.snackInformations.horizontalPosition,
-              verticalPosition: environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition: environment.snackData.horizontalPosition,
+              verticalPosition: environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -122,9 +122,9 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Echec de la suppression de la réponse...', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition: environment.snackInformations.horizontalPosition,
-              verticalPosition: environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition: environment.snackData.horizontalPosition,
+              verticalPosition: environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -133,9 +133,9 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Echec de la modification de la réponse ...', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition: environment.snackInformations.horizontalPosition,
-              verticalPosition: environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition: environment.snackData.horizontalPosition,
+              verticalPosition: environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -144,9 +144,9 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Impossible de charger les réponses', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition: environment.snackInformations.horizontalPosition,
-              verticalPosition: environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition: environment.snackData.horizontalPosition,
+              verticalPosition: environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
@@ -156,9 +156,9 @@ export class AnswersService {
           // this.bdcsState = false;
           this.snack.open('Impossible de charger la réponse', 'close',
             {
-              duration: environment.snackInformations.duration,
-              horizontalPosition: environment.snackInformations.horizontalPosition,
-              verticalPosition: environment.snackInformations.verticalPosition,
+              duration: environment.snackData.duration,
+              horizontalPosition: environment.snackData.horizontalPosition,
+              verticalPosition: environment.snackData.verticalPosition,
               panelClass: ['red-snackbar']
             })
           ;
