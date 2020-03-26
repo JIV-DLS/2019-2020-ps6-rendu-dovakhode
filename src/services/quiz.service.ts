@@ -147,7 +147,7 @@ export class QuizService {
        switch (operation) {
         case 'addQuiz':
           // this.bdcsState = false;
-          this.snack.open('Echec de l\'enregistrement du quiz...', 'close',
+          this.snack.open('❌ Echec de l\'enregistrement du quiz...', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -155,7 +155,7 @@ export class QuizService {
           break;
          case 'deleteQuiz':
            // this.bdcsState = false;
-           this.snack.open('Echec de la suppression du quiz...', 'close',
+           this.snack.open('❌ Echec de la suppression du quiz...', 'close',
              {
                ...environment.snackInformation.errorForAll
              })
@@ -163,7 +163,7 @@ export class QuizService {
            break;
          case 'updateQuiz':
            // this.bdcsState = false;
-           this.snack.open('Echec de la modification du quiz ...', 'close',
+           this.snack.open('❌ Echec de la modification du quiz ...', 'close',
              {
                ...environment.snackInformation.errorForAll
              })
@@ -171,7 +171,7 @@ export class QuizService {
            break;
          case 'getQuiz':
            // this.bdcsState = false;
-           this.snack.open('Impossible de charger les données', 'close',
+           this.snack.open('❌ Impossible de charger les données', 'close',
              {
                ...environment.snackInformation.errorForAll
              })
@@ -179,7 +179,7 @@ export class QuizService {
            break;
          case 'getQuizById':
            // this.bdcsState = false;
-           this.snack.open('Impossible de charger le quiz', 'close',
+           this.snack.open('❌ Impossible de charger le quiz', 'close',
              {
                ...environment.snackInformation.errorForAll
              })

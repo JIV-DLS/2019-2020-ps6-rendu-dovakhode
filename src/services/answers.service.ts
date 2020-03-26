@@ -92,7 +92,7 @@ export class AnswersService {
       switch (operation) {
         case 'addAnswer':
           // this.bdcsState = false;
-          this.snack.open('Echec de l\'enregistrement de la réponse...', 'close',
+          this.snack.open('❌ Echec de l\'enregistrement de la réponse...', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -100,7 +100,7 @@ export class AnswersService {
           break;
         case 'deleteAnswer':
           // this.bdcsState = false;
-          this.snack.open('Echec de la suppression de la réponse...', 'close',
+          this.snack.open('❌ Echec de la suppression de la réponse...', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -108,7 +108,7 @@ export class AnswersService {
           break;
         case 'updateAnswer':
           // this.bdcsState = false;
-          this.snack.open('Echec de la modification de la réponse ...', 'close',
+          this.snack.open('❌ Echec de la modification de la réponse ...', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -116,7 +116,7 @@ export class AnswersService {
           break;
         case 'getAnswer':
           // this.bdcsState = false;
-          this.snack.open('Impossible de charger les réponses', 'close',
+          this.snack.open('❌ Impossible de charger les réponses', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -125,7 +125,7 @@ export class AnswersService {
 
         case 'getAnswerById':
           // this.bdcsState = false;
-          this.snack.open('Impossible de charger la réponse', 'close',
+          this.snack.open('❌ Impossible de charger la réponse', 'close',
             {
               ...environment.snackInformation.errorForAll
             })

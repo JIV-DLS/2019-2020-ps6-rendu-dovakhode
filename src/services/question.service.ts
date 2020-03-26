@@ -173,7 +173,7 @@ export class QuestionService {
       switch (operation) {
         case 'addQuestion':
           // this.bdcsState = false;
-          this.snack.open('Echec de l\'enregistrement de la question...', 'close',
+          this.snack.open('❌ Echec de l\'enregistrement de la question...', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -181,7 +181,7 @@ export class QuestionService {
           break;
         case 'deleteQuestion':
           // this.bdcsState = false;
-          this.snack.open('Echec de la suppression de la question...', 'close',
+          this.snack.open('❌ Echec de la suppression de la question...', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -189,7 +189,7 @@ export class QuestionService {
           break;
         case 'updateQuestion':
           // this.bdcsState = false;
-          this.snack.open('Echec de la modification de la question ...', 'close',
+          this.snack.open('❌ Echec de la modification de la question ...', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -197,7 +197,7 @@ export class QuestionService {
           break;
         case 'getQuestion':
           // this.bdcsState = false;
-          this.snack.open('Impossible de charger les questions', 'close',
+          this.snack.open('❌ Impossible de charger les questions', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
@@ -206,7 +206,7 @@ export class QuestionService {
 
         case 'getQuestionById':
           // this.bdcsState = false;
-          this.snack.open('Impossible de charger la question', 'close',
+          this.snack.open('❌ Impossible de charger la question', 'close',
             {
               ...environment.snackInformation.errorForAll
             })
