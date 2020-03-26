@@ -36,7 +36,8 @@ export class QuizComponent implements OnInit {
     if (this.route.snapshot.paramMap.has('idShowQuiz')) {
       this.quizService.getQuizById(+this.route.snapshot.paramMap.get('idShowQuiz'))
         .subscribe((quiz) => {
-          this.quiz = quiz; });
+          this.quiz = quiz;
+        });
     }
   }
 
