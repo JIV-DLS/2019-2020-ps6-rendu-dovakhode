@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-import {MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import {MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 
 export const environment = {
   production: false,
@@ -13,10 +13,10 @@ export const environment = {
   formFieldsRequired: 'Veuiller remplir tous les champs requis(*)',
   formFieldRequired: 'Veuiller remplir ce champs',
   formSelectRequired: 'Veuillez choisir une valeur',
-  snackInformations: {
+  snackData: {
     loadingSuffix: ' en cour...',
     duration: 3000,
-    horizontalPosition: 'center' as CanvasTextAlign,
+    horizontalPosition: 'center' as MatSnackBarHorizontalPosition,
     verticalPosition: 'bottom' as MatSnackBarVerticalPosition,
     post: {
       label: 'Enregistrement de ',
@@ -36,7 +36,21 @@ export const environment = {
     }, succes: {
       label: '  réussi...',
     class: 'green-snackbar'
-}
+},
+    snackInformation: {
+      update: {
+        duration: this.snackData.duration,
+        horizontalPosition:  this.snackData.horizontalPosition,
+        verticalPosition: this.snackData.verticalPosition,
+        panelClass: [this.snackData.succes.class]
+      },
+      delete: {
+
+      },
+      post: {
+
+      }
+    }
 
   }
 };
