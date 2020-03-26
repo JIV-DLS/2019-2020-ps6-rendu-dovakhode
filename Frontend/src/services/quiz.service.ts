@@ -136,7 +136,7 @@ export class QuizService {
     ;
     const quizData = new FormData();
     quizData.append('quiz', JSON.stringify(quizToModify));
-    if (image !== null) { quizData.append('image', image, quizToModify.label); }
+    if (image !== null) {quizData.append('image', image, quizToModify.label); }
     return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizData).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');

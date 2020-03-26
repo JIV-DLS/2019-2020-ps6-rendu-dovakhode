@@ -101,7 +101,6 @@ router.put('/:id', multer, (req, res) => {
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
     } : {
       ...JSON.parse(req.body.quiz),
-      image: ' ',
     }))
   } catch (err) {
     if (err.name === 'ValidationError') {
