@@ -7,6 +7,7 @@ export class Quiz {
     theme?: string;
     subTheme?: string;
     difficulty?: string;
+    image?: string;
     questions: Question[];
     dateCreation?: Date;
     dateModification?: Date;
