@@ -7,11 +7,11 @@ const { Question } = require('../../../models')
 const router = new Router({ mergeParams: true })
 
 function getByQuizId(id) {
-  id += ''
+  const idN = parseInt(id, 10)
   const arr = Question.get()
   const indexes = []; let i
   for (i = 0; i < arr.length; i++) {
-    if ((arr[i].quizId === id)) {
+    if ((arr[i].quizId === idN)) {
       arr[i].answers = require('./answers').getByQuestionId(arr[i].id)
       indexes.push(arr[i])
     }
@@ -95,6 +95,7 @@ router.put('/:idQ', (req, res) => {
     }
   }
 })
+
 
 router.use('/:id/answers', require('./answers').router)
 
