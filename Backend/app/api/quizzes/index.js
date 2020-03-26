@@ -6,6 +6,8 @@ const router = new Router()
 
 const QuestionsRouter = require('./questions')
 
+const multer = require('../../../middleware/multer-config')
+
 function createQuiz(obj) {
   const { questions } = obj
   delete obj.questions
@@ -41,13 +43,20 @@ router.get('/', (req, res) => {
   }
 })
 
-router.post('/', (req, res) => {
+router.post('/', multer, (req, res) => {
   try {
-    res.status(201).json(createQuiz({ ...req.body }))
+    res.status(201).json(createQuiz(req.file ? {
+      ...JSON.parse(req.body.quiz),
+      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    } : {
+      ...JSON.parse(req.body.quiz),
+      image: ' ',
+    }))
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
     } else {
+      console.log(err)
       res.status(500).json(err)
     }
   }
@@ -74,9 +83,15 @@ function updateQuiz(id, obj) {
   quiz.questions = questions
   return quiz
 }
-router.put('/:id', (req, res) => {
+router.put('/:id', multer, (req, res) => {
   try {
-    res.status(201).json(updateQuiz(req.params.id, { ...req.body }))
+    res.status(201).json(updateQuiz(req.params.id, req.file ? {
+      ...JSON.parse(req.body.quiz),
+      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    } : {
+      ...JSON.parse(req.body.quiz),
+      image: ' ',
+    }))
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)

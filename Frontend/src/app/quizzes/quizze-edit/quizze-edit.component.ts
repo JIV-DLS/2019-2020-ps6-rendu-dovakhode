@@ -21,6 +21,7 @@ export class QuizzeEditComponent implements OnInit {
   public quizForm: FormGroup;
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
+  private imagePreview: string;
   loading: boolean;
   constructor(private location: Location,
               public quizService: QuizService, private route: ActivatedRoute,
@@ -32,7 +33,8 @@ export class QuizzeEditComponent implements OnInit {
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
         this.loading = false;
-        this.initializeTheForm(quiz); });
+        this.initializeTheForm(quiz);
+        this.imagePreview = quiz.image.length > 1 ? quiz.image : null; }, (error) => {this.retour(); });
   }
   initializeTheForm(quiz) {
     this.quiz = quiz;
@@ -46,6 +48,7 @@ export class QuizzeEditComponent implements OnInit {
       subTheme: [this.quiz.subTheme],
       difficulty: [this.quiz.difficulty],
       questions: this.quiz.questions,
+      image: [null]
     });
   }
   get questions() {
@@ -77,12 +80,12 @@ export class QuizzeEditComponent implements OnInit {
     const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
     // quizToCreate.questions = [];
     quizToModify.dateModification = new Date();
-    this.quizService.updateQuiz(quizToModify).subscribe((quiz) => {
+    this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value).subscribe((quiz) => {
       if (quiz !== undefined) {
         this.quiz = quiz;
         this.initializeTheForm(quiz);
+        this.retour();
       }
-      this.location.back();
     });
   }
 
@@ -100,5 +103,20 @@ export class QuizzeEditComponent implements OnInit {
   }
   retour() {
     this.location.back();
+  }
+
+  onImagePick(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.quizForm.get('image').patchValue(file);
+    this.quizForm.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (this.quizForm.get('image').valid) {
+        this.imagePreview = reader.result as string;
+      } else {
+        this.imagePreview = null;
+      }
+    };
+    reader.readAsDataURL(file);
   }
 }

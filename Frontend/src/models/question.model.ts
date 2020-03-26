@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 export class Question {
     id: number;
     label: string;
+    image?: string;
     answers: Answer[];
     quizId: number;
 
