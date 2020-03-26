@@ -41,6 +41,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatSelectModule} from '@angular/material/select';
 import { HomeComponent } from './home/home.component';
 import { QuizLessInfoComponent } from './quizzes/quiz-less-info/quiz-less-info.component';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -106,6 +107,8 @@ const routes: Routes = [
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
   ],
   bootstrap: [AppComponent]
 })
