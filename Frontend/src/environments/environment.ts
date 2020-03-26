@@ -37,22 +37,78 @@ export const environment = {
       label: '  réussi...',
     class: 'green-snackbar'
 },
-    snackInformation: {
-      update: {
-        duration: this.snackData.duration,
-        horizontalPosition:  this.snackData.horizontalPosition,
-        verticalPosition: this.snackData.verticalPosition,
-        panelClass: [this.snackData.succes.class]
-      },
-      delete: {
+  },
+  snackInformation: {
+    successForAll: {
+      duration: this.snackData.duration,
+      horizontalPosition:  this.snackData.horizontalPosition,
+      verticalPosition: this.snackData.verticalPosition,
+      panelClass: [this.snackData.succes.class]
+    },
+    errorForAll: {
+      duration: this.snackData.duration,
+      horizontalPosition:  this.snackData.horizontalPosition,
+      verticalPosition: this.snackData.verticalPosition,
+      panelClass: [this.snackData.error.class]
+    },
+    loadingUpdate: {
+      horizontalPosition:  this.snackData.horizontalPosition,
+      verticalPosition: this.snackData.verticalPosition,
+      panelClass: [this.snackData.update.class]
 
-      },
-      post: {
+    },
+    loadingPost: {
+      horizontalPosition:  this.snackData.horizontalPosition,
+      verticalPosition: this.snackData.verticalPosition,
+      panelClass: [this.snackData.succes.class]
+
+    },
+    loadingDelete: {
+      horizontalPosition:  this.snackData.horizontalPosition,
+      verticalPosition: this.snackData.verticalPosition,
+      panelClass: [this.snackData.delete.class]
+
+    },
+    operation: {
+      loading: {
+        update: {
+          quiz: 'Modification du quiz en cours...',
+          question: 'Modification de la question en cours...',
+          answer: 'Modification de la réponse en cours...'
+        },
+        delete:  {
+          quiz: 'Suppression du quiz en cours...',
+          question: 'Suppression de la question en cours...',
+          answer: 'Suppression de la réponse en cours...'
+        },
+        post: {
+          quiz: 'Enregistrement de la question en cours...',
+          question: 'Enregistrement de la question en cours...',
+          answer: 'Enregistrement de la réponse en cours...'
+        }},
+      succeeded: {
+        update: {
+          quiz: 'Modification du quiz éffectuée avec succès...',
+          question: 'Modification de la question éffectuée avec succès...',
+          answer: 'Modification de la réponse éffectuée avec succès...'
+        },
+        delete:  {
+          quiz: 'Suppression du quiz éffectuée avec succès...',
+          question: 'Suppression de la question éffectuée avec succès...',
+          answer: 'Suppression de la réponse éffectuée avec succès...'
+        },
+        post: {
+          quiz: 'Enregistrement du quiz éffectué avec succès...',
+          question: 'Enregistrement de la question éffectuée avec succès...',
+          answer: 'Enregistrement de la réponse éffectuée avec succès...'
+        }
 
       }
     }
+  },
 
-  }
+
+
 };
 
 /*

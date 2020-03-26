@@ -39,11 +39,9 @@ export class QuestionService {
   }
 
   addQuestion(question: Question): Observable<Question> {
-    this.snack.open('Enrégistrement de la question en cours...', 'close',
+    this.snack.open(environment.snackInformation.operation.loading.post.question, 'close',
       {
-        duration: environment.snackData.duration,
-        horizontalPosition:  environment.snackData.horizontalPosition,
-        verticalPosition:  environment.snackData.verticalPosition,
+        ...environment.snackInformation.loadingPost
       })
     ;
     const questions = question.answers;
@@ -53,12 +51,9 @@ export class QuestionService {
 
       tap((newQuestion: Question) => {
         this.snack.dismiss();
-        this.snack.open('Enrégistrement de la question éffectué avec succès...', 'close',
+        this.snack.open(environment.snackInformation.operation.succeeded.post.question, 'close',
           {
-            duration: environment.snackData.duration,
-            horizontalPosition:  environment.snackData.horizontalPosition,
-            verticalPosition:  environment.snackData.verticalPosition,
-            panelClass: ['green-snackbar']
+            ...environment.snackInformation.successForAll
           })
         ;
          }),
@@ -92,23 +87,18 @@ export class QuestionService {
   }
 
   deleteQuestion(question: Question): Observable<Question>  {
-    this.snack.open('Suppression de la question en cours...', 'close',
+    this.snack.open(environment.snackInformation.operation.loading.delete.question, 'close',
       {
-        duration: environment.snackData.duration,
-        horizontalPosition:  environment.snackData.horizontalPosition,
-        verticalPosition:  environment.snackData.verticalPosition,
-        panelClass: ['yellow-snackbar']
+        ...environment.snackInformation.loadingDelete
       })
     ;
     return this.http.delete<Question>(this.questionUrl(question.quizId) + '/' + question.id).pipe(
       tap((questionDeleted) => {
        console.log('Suppression reussie');
-       this.snack.open('Suppression de la question éffectuée avec succès...', 'close',
+       this.snack.open(environment.snackInformation.operation.succeeded.delete.question, 'close',
           {
-            duration: environment.snackData.duration,
-            horizontalPosition:  environment.snackData.horizontalPosition,
-            verticalPosition:  environment.snackData.verticalPosition,
-            panelClass: ['green-snackbar']
+            ...environment.snackInformation.successForAll
+
           })
         ;
       }),
@@ -152,24 +142,19 @@ export class QuestionService {
     // this.questions[+questionToModify.id - 1] = questionToModify;
     // @ts-ignore
     // @ts-ignore
-    this.snack.open('Modification de la question en cours...', 'close',
+    this.snack.open(  ...environment.snackInformation.operation.loading.update, 'close',
       {
-        duration: environment.snackData.duration,
-        horizontalPosition:  environment.snackData.horizontalPosition,
-        verticalPosition:  environment.snackData.verticalPosition,
-        panelClass: ['blue-snackbar']
+        ...environment.snackInformation.loadingUpdate
+
       })
     ;
     return this.http.put<Question>(this.questionUrl(questionToModify.quizId)  + '/' + questionToModify.id, questionToModify).pipe(
       tap((question) => {
         // this.questions[+questionToModify.id - 1] = questionToModify;
         console.log('Modification de la question éffectuée avec succès');
-        this.snack.open('Modification de la question éffectuée avec succès', 'close',
+        this.snack.open( environment.snackInformation.operation.succeeded.update.question, 'close',
           {
-            duration: environment.snackData.duration,
-            horizontalPosition:  environment.snackData.horizontalPosition,
-            verticalPosition:  environment.snackData.verticalPosition,
-            panelClass: ['green-snackbar']
+            ...environment.snackInformation.successForAll
           })
         ;
       }),
@@ -190,10 +175,7 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Echec de l\'enregistrement de la question...', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition:  environment.snackData.horizontalPosition,
-              verticalPosition:  environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
@@ -201,10 +183,7 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Echec de la suppression de la question...', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition:  environment.snackData.horizontalPosition,
-              verticalPosition:  environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
@@ -212,10 +191,7 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Echec de la modification de la question ...', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition:  environment.snackData.horizontalPosition,
-              verticalPosition:  environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
@@ -223,10 +199,7 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Impossible de charger les questions', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition:  environment.snackData.horizontalPosition,
-              verticalPosition:  environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
@@ -235,10 +208,7 @@ export class QuestionService {
           // this.bdcsState = false;
           this.snack.open('Impossible de charger la question', 'close',
             {
-              duration: environment.snackData.duration,
-              horizontalPosition:  environment.snackData.horizontalPosition,
-              verticalPosition:  environment.snackData.verticalPosition,
-              panelClass: ['red-snackbar']
+              ...environment.snackInformation.errorForAll
             })
           ;
           break;
