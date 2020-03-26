@@ -1,12 +1,16 @@
 const { Router } = require('express')
 
+const fs = require('fs')
+
 const { Quiz } = require('../../models')
 
 const router = new Router()
 
 const QuestionsRouter = require('./questions')
 
-const multer = require('../../../middleware/multer-config')
+
+const multer = require('../../../middleware/quiz-multer-config')
+
 
 function createQuiz(obj) {
   const { questions } = obj
@@ -47,7 +51,7 @@ router.post('/', multer, (req, res) => {
   try {
     res.status(201).json(createQuiz(req.file ? {
       ...JSON.parse(req.body.quiz),
-      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+      image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
     } : {
       ...JSON.parse(req.body.quiz),
       image: ' ',
@@ -65,7 +69,10 @@ router.post('/', multer, (req, res) => {
 router.delete('/:id', (req, res) => {
   try {
     const tmp = Quiz.getById(req.params.id)
-    Quiz.delete(req.params.id)
+    const filename = tmp.imageUrl.split('/images/')[1]
+    fs.unlink(`images/quiz/${filename}`, () => {
+      Quiz.delete(req.params.id)
+    })
     res.status(201).json(`${tmp.name}(id= ${tmp.id}) is deleted`)
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -87,7 +94,7 @@ router.put('/:id', multer, (req, res) => {
   try {
     res.status(201).json(updateQuiz(req.params.id, req.file ? {
       ...JSON.parse(req.body.quiz),
-      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+      image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
     } : {
       ...JSON.parse(req.body.quiz),
       image: ' ',
