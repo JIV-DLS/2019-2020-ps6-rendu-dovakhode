@@ -14,7 +14,7 @@
   <h6 *ngIf="quiz.dateModification==null && quiz.dateCreation!=null"> Créated at: {{quiz.dateModification | date}}</h6>
 </div>
 -->
-<mat-card style="width: 400px;">
+<mat-card style="width: 100%;">
 <mat-card-header>
 
 </mat-card-header>
@@ -39,7 +39,7 @@
       <mat-grid-tile colspan="2" rowspan="16">
         <mat-card style="border: black solid 3px; height: 90%;width: 90%;">
           <mat-card-content style=" height: 100%;width: 100%;">
-            <img src="../../../assets/Default/imageNotFound.png" style=" height: 100%;width: 100%;" alt="NotFound Image"/></mat-card-content>
+            <img [src]="quiz.image?quiz.image:'../../../assets/Default/imageNotFound.png'" style=" height: 100%;width: 100%;" alt="NotFound Image"/></mat-card-content>
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="4">
@@ -51,13 +51,13 @@
         <span style="text-decoration: underline #555555; text-align: left;">Sous theme: </span>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="4">
-        <span>Indisponible</span>
+        <span>{{quiz.subTheme}}</span>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="4">
         <span style="text-decoration: underline #555555; text-align: left;">Difficulté: </span>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="4">
-        <span>Indisponible</span>
+        <span>{{quiz.difficulty}}</span>
       </mat-grid-tile>
       <mat-grid-tile colspan="4" rowspan="1">
         <mat-divider></mat-divider>

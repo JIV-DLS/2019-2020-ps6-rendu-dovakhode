@@ -45,7 +45,8 @@ import { QuizLessInfoComponent } from './quizzes/quiz-less-info/quiz-less-info.c
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
-  {path: 'quiz-edit/:id' , component: QuizzeEditComponent}
+  {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
+  {path: 'quiz/:id' , component: QuizComponent}
 
 ];
 
