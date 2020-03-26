@@ -2,4 +2,8 @@
 .idea/
 node_modules/
 mocks/*
+images/questions/*
+images/quiz/*
+images/answer/*
+images
 !mocks/.gitkeep
