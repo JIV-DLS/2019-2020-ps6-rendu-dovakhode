@@ -37,16 +37,19 @@ export class QuizService {
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   index: number;
 
-  addQuiz(quiz: Quiz): Observable<Quiz> {
+  addQuiz(quiz: Quiz, image: File): Observable<Quiz> {
     console.log(quiz);
     this.snack.open('Enrégistrement du quizz en cours...', 'close',
       {
-        duration: environment.snackInformations.duration,
         horizontalPosition:  environment.snackInformations.horizontalPosition,
         verticalPosition:  environment.snackInformations.verticalPosition,
       })
     ;
-    return this.http.post<Quiz>(QuizService.quizUrl, quiz).pipe(
+
+    const quizData = new FormData();
+    quizData.append('quiz', JSON.stringify(quiz));
+    if (image !== null) { quizData.append('image', image, quiz.label); }
+    return this.http.post<Quiz>(QuizService.quizUrl, quizData).pipe(
       tap((newQuiz: Quiz) => {
         console.log('Ajout reussi');
         this.snack.open('Enrégistrement du quiz réussi...', 'close',
@@ -65,7 +68,6 @@ export class QuizService {
   deleteQuiz(quiz: Quiz): Observable<Quiz>  {
     this.snack.open('Suppression du quiz  en cours...', 'close',
       {
-        duration: environment.snackInformations.duration,
         horizontalPosition:  environment.snackInformations.horizontalPosition,
         verticalPosition:  environment.snackInformations.verticalPosition,
         panelClass: ['yellow-snackbar']
@@ -120,16 +122,18 @@ export class QuizService {
  /* getQuiz() {
     return this.quizzes;
   }*/
-  updateQuiz(quizToModify: Quiz): Observable<Quiz> {
+  updateQuiz(quizToModify: Quiz, image: File): Observable<Quiz> {
     this.snack.open('Modification du quiz en cours...', 'close',
       {
-        duration: environment.snackInformations.duration,
         horizontalPosition:  environment.snackInformations.horizontalPosition,
         verticalPosition:  environment.snackInformations.verticalPosition,
         panelClass: ['blue-snackbar']
       })
     ;
-    return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizToModify).pipe(
+    const quizData = new FormData();
+    quizData.append('quiz', JSON.stringify(quizToModify));
+    if (image !== null) { quizData.append('image', image, quizToModify.label); }
+    return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizData).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');
         this.snack.open('Modification du quiz reussi...', 'close',
