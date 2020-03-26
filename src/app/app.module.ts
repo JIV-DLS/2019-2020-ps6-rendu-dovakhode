@@ -47,7 +47,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
-  {path: 'quiz/:id' , component: QuizComponent}
+  {path: 'quiz/:idShowQuiz' , component: QuizComponent}
 
 ];
 

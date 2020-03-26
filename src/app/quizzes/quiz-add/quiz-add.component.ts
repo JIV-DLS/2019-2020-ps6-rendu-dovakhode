@@ -161,5 +161,10 @@ export class QuizAddComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+
+  deleteImage() {
+    this.quizForm.get('image').reset();
+    this.imagePreview = null;
+  }
 }
 

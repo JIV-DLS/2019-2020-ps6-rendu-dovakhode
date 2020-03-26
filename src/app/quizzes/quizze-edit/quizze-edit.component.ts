@@ -49,7 +49,7 @@ export class QuizzeEditComponent implements OnInit {
       subTheme: [this.quiz.subTheme],
       difficulty: [this.quiz.difficulty],
       questions: this.quiz.questions,
-      image: [null]
+      image: [this.quiz.image]
     });
   }
   get questions() {
@@ -118,5 +118,10 @@ export class QuizzeEditComponent implements OnInit {
       }
     };
     reader.readAsDataURL(file);
+  }
+
+  deleteImage() {
+    this.quizForm.get('image').reset();
+    this.imagePreview = null;
   }
 }
