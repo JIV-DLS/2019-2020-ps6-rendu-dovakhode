@@ -24,7 +24,8 @@ export class QuizzeEditComponent implements OnInit {
   private imagePreview: string;
   loading: boolean;
   constructor(private location: Location,
-              public quizService: QuizService, private route: ActivatedRoute,
+              public quizService: QuizService,
+              private route: ActivatedRoute,
               public dialog: MatDialog,
               public formBuilder: FormBuilder) { }
 
@@ -84,7 +85,6 @@ export class QuizzeEditComponent implements OnInit {
       if (quiz !== undefined) {
         this.quiz = quiz;
         this.initializeTheForm(quiz);
-        this.retour();
       }
     });
   }

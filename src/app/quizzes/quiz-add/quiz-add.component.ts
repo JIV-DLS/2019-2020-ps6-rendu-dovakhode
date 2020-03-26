@@ -11,6 +11,7 @@ import {SnackModificationComponent} from '../../snack/snack-modification/snack-m
 import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
 import { mimeType } from 'src/app/mime-type.validator';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-quiz-form',
@@ -34,7 +35,8 @@ export class QuizAddComponent implements OnInit {
   private questionDialogOpened = false;
   private imagePreview: string;
 
-  constructor(private location: Location, private snackBar: MatSnackBar,
+  constructor(private location: Location,
+              public dialogRef: MatDialogRef<QuizAddComponent>,
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
               public quizService: QuizService) {
@@ -88,7 +90,7 @@ export class QuizAddComponent implements OnInit {
     this.quizService.addQuiz(quizToCreate, this.quizForm.get('image').value).subscribe((quiz) => {
       if (quiz !== undefined) {
        this.quiz = quiz;
-       this.dialog.closeAll();
+       this.dialogRef.close(quiz);
        this.initializeTheForm();
       }
      }); // getQuiz().push(quizToCreate);
