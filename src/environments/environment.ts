@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-import {MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import {MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 
 export const environment = {
   production: false,
@@ -16,7 +16,7 @@ export const environment = {
   snackInformations: {
     loadingSuffix: ' en cour...',
     duration: 3000,
-    horizontalPosition: 'center' as CanvasTextAlign,
+    horizontalPosition: 'center' as MatSnackBarHorizontalPosition,
     verticalPosition: 'bottom' as MatSnackBarVerticalPosition,
     post: {
       label: 'Enregistrement de ',
