@@ -1,6 +1,9 @@
+
 const { Router } = require('express')
 
 const { Answer } = require('../../../../models')
+const { Question } = require('../../../../models')
+
 
 const router = new Router({ mergeParams: true })
 
@@ -8,8 +11,9 @@ const router = new Router({ mergeParams: true })
 function getAnswersByQuestionId(id) {
   id += ''
   const arr = Answer.get()
+  console.log(arr)
   const indexes = []; let i
-  for (i = 0; i < arr.length; i++) { if ((arr[i].questionId === id)) { indexes.push(arr[i]) } }
+  for (i = 0; i < arr.length; i++) { if ((arr[i].questionId == id)) { indexes.push(arr[i]) } }
   return indexes
 }
 
@@ -28,12 +32,15 @@ router.get('/', (req, res) => {
   }
 })
 function createAnswer(obj = {}) {
-  delete Answer.id
-  return Answer.create({ ...obj })
+  console.log(obj)
+  const answer = Answer.create({ ...obj })
+
+  return answer
 }
 router.post('/', (req, res) => {
   try {
-    res.status(201).json(createAnswer({ ...req.body, quizId: req.params.id }))
+
+    res.status(201).json(createAnswer({ ...req.body, questionId: parseInt(req.params.id) }))
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
@@ -45,8 +52,8 @@ router.post('/', (req, res) => {
 
 router.delete('/:idQ', (req, res) => {
   try {
-    const tmp = Answer.getById(req.params.id)
-    Answer.delete(req.params.id)
+    const tmp = Answer.getById(req.params.idQ)
+    Answer.delete(req.params.idQ)
     res.status(201).json(`${tmp.name}(id= )${tmp.id}is deleted`)
   } catch (err) {
     if (err.name === 'ValidationError') {
