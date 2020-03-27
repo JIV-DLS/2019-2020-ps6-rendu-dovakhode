@@ -5,6 +5,10 @@ import {catchError, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {Question} from '../models/question.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Injectable} from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
 export class AnswersService {
   constructor(private http: HttpClient, private snack: MatSnackBar ) {
   }
