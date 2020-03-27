@@ -37,7 +37,8 @@ export class QuizzeEditComponent implements OnInit {
       .subscribe((quiz) => {
         this.loading = false;
         this.initializeTheForm(quiz);
-        this.imagePreview = quiz.image.length > 1 ? quiz.image : null; }, (error) => {this.retour(); });
+        this.imagePreview = quiz.image.length > 1 ? quiz.image : null;
+}, (error) => {this.retour(); });
   }
   initializeTheForm(quiz) {
     this.imageChanged = false;
