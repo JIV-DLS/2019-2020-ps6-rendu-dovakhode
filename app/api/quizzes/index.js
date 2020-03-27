@@ -29,7 +29,7 @@ function createQuiz(obj) {
 router.get('/:id', (req, res) => {
   try {
     const quiz = Quiz.getById(req.params.id)
-    const questions = QuestionsRouter.getByQuizId(req.params.id)
+    const questions = QuestionsRouter.getQuestionsByQuizId(req.params.id)
     quiz.questions = questions != null ? questions : []
     res.status(200).json(quiz)
   } catch (err) {
@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
 router.get('/', (req, res) => {
   try {
     const quizzes = Quiz.get()
-    for (let i = 0; i < quizzes.length; i++) { quizzes[i].questions = QuestionsRouter.getByQuizId(quizzes[i].id) }
+    for (let i = 0; i < quizzes.length; i++) { quizzes[i].questions = QuestionsRouter.getQuestionsByQuizId(quizzes[i].id) }
     res.status(200).json(quizzes)
   } catch (err) {
     res.status(500).json(err)
