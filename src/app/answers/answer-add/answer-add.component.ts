@@ -10,6 +10,7 @@ import {AnswersService} from '../../../services/answers.service';
   templateUrl: './answer-add.component.html',
   styleUrls: ['./answer-add.component.scss']
 })
+
 export class AnswerAddComponent implements OnInit {
 constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<AnswerAddComponent>,
             @Inject(MAT_DIALOG_DATA) public question: Question, public answersService: AnswersService) {}
@@ -24,7 +25,7 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
     this.answerForm = this.formBuilder.group({
       type : [],
       value: [],
-      isCorrect: []
+      isCorrect: false
     });
   }
   addAnswer() {
