@@ -29,11 +29,11 @@
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="4">
-      <button routerLink="/quiz-list" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button [routerLink]="['/quiz-list',{do:false}]" mat-flat-button aria-label="Example icon-button with a heart icon">
         Modifier un quiz
       </button>    </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="4">
-      <button (click)="quiqQuiz()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button [routerLink]="['/quiz-list',{do:true}]" mat-flat-button aria-label="Example icon-button with a heart icon">
         Quiz rapide
       </button>    </mat-grid-tile>
     <!--<mat-grid-tile colspan="6" rowspan="4">

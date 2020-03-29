@@ -42,11 +42,14 @@ import {MatSelectModule} from '@angular/material/select';
 import { HomeComponent } from './home/home.component';
 import { QuizLessInfoComponent } from './quizzes/quiz-less-info/quiz-less-info.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { QuestionDoComponent } from './questions/question-do/question-do.component';
+import { QuizDoComponent } from './quizzes/quiz-do/quiz-do.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
+  {path: 'quiz-do/:id' , component: QuizDoComponent},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent}
 
 ];
@@ -75,7 +78,9 @@ const routes: Routes = [
     EditQuestionComponent,
     EditableQuestionComponent,
     HomeComponent,
-    QuizLessInfoComponent
+    QuizLessInfoComponent,
+    QuestionDoComponent,
+    QuizDoComponent
   ],
   entryComponents: [
     QuestionsComponent,
