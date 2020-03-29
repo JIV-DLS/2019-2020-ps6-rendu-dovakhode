@@ -11,9 +11,10 @@
   </mat-grid-tile>
   <mat-grid-tile class="leftBorder" (click)="select()" [class.jhover]="hover" colspan="2" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
     <h5>{{quiz.questions?.length}}</h5>
-  </mat-grid-tile>
-  <mat-grid-tile (click)="delete()" class="j" colspan="1" rowspan="1">
+  </mat-grid-tile >
+  <mat-grid-tile *ngIf="!do" (click)="delete()" class="j" colspan="1" rowspan="1">
     <mat-icon>delete</mat-icon>
   </mat-grid-tile>
+
 
 </mat-grid-list>

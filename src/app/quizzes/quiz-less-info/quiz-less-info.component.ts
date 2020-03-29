@@ -9,6 +9,7 @@ import {environment} from '../../../environments/environment';
 })
 export class QuizLessInfoComponent implements OnInit {
   @Input() quiz: Quiz;
+  @Input() do: boolean;
   @Output()
   selectEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
 import {difficulte, theme} from '../../../models/theme.models';
 import {Location} from '@angular/common';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: ' app-quiz-list',
@@ -15,13 +15,18 @@ export class QuizListComponent implements OnInit {
   public quizList: Quiz[] = [];
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
-  constructor(private router: Router,
+  public doQuiz;
+  constructor(private Activerouter: ActivatedRoute,
+              private router: Router,
               private location: Location,
               public quizService: QuizService) {
     this.getAllQuiz();
   }
 
   ngOnInit() {
+    this.doQuiz = (this.Activerouter.snapshot.params.do === 'true');
+
+
   }
   getAllQuiz() {
     this.quizService.getQuiz().subscribe((quiz) => this.quizList = quiz);
@@ -34,7 +39,13 @@ export class QuizListComponent implements OnInit {
     }); }
   }
 
+
   selectQuiz(quiz: Quiz) {
-    this.router.navigateByUrl('/quiz-edit/' + quiz.id);
+    if ( this.doQuiz) {
+      this.router.navigateByUrl('/quiz-do/' + quiz.id);
+
+    } else {
+      this.router.navigateByUrl('/quiz-edit/' + quiz.id);
+    }
   }
 }
