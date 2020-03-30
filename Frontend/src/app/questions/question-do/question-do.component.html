@@ -9,8 +9,7 @@
         *ngFor="let answer of question?.answers"
         colspan="1"
         rowspan="1">
-        <span [class.btn-primary]="answer.isCorrect" [class.btn-secondary]="answer.isCorrect">{{answer.value}}</span>
-
+        <app-answer [answer]="answer" (goodAnswerSelected)="nextQuestion($event)" ></app-answer>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
