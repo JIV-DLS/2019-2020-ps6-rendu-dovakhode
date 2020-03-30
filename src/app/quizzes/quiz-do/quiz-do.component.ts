@@ -65,6 +65,13 @@ export class QuizDoComponent implements OnInit {
   get label() {
     return this.quizForm.get('label') as FormArray;
   }
+  nextQuestion() {
+    if (this.index < this.quiz.questions.length - 1) {
+      this.index = this.index + 1;
+    } else {
+      alert('plus de question');
+    }
+  }
   retour() {
     this.location.back();
   }

@@ -44,6 +44,7 @@ import { QuizLessInfoComponent } from './quizzes/quiz-less-info/quiz-less-info.c
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { QuestionDoComponent } from './questions/question-do/question-do.component';
 import { QuizDoComponent } from './quizzes/quiz-do/quiz-do.component';
+import { NextQuestionComponent } from './questions/next-question/next-question.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -80,13 +81,15 @@ const routes: Routes = [
     HomeComponent,
     QuizLessInfoComponent,
     QuestionDoComponent,
-    QuizDoComponent
+    QuizDoComponent,
+    NextQuestionComponent
   ],
   entryComponents: [
     QuestionsComponent,
     QuizAddComponent,
     QuizzeEditComponent,
     AnswerAddComponent,
+    NextQuestionComponent,
     SnackModificationComponent
   ],
   imports: [
