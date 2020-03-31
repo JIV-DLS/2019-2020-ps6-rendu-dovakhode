@@ -23,6 +23,7 @@ export class QuizzeEditComponent implements OnInit {
   quiz: Quiz;
   private imageChanged: boolean;
   private savedImage: string;
+  private savedQuestions: Question[];
   private questionDialogOpened = false;
   public quizForm: FormGroup;
   public themesValues = Object.values(theme);
@@ -54,6 +55,7 @@ export class QuizzeEditComponent implements OnInit {
     this.others = false;
     this.imageChanged = false;
     this.quiz = quiz;
+    this.savedQuestions = quiz.questions;
     this.quizForm = this.quizzFormInitializer();
   }
   quizzFormInitializer() {
@@ -158,6 +160,7 @@ export class QuizzeEditComponent implements OnInit {
   resetQuiz() {
     this.others = false;
     this.imageChanged = false;
+    this.quiz.questions = this.savedQuestions;
     this.initializeTheForm(this.quiz);
     this.imagePreview = this.savedImage;
     this.quiz.image = this.savedImage;
