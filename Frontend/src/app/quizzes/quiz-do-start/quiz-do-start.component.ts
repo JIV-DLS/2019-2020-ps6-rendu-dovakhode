@@ -34,4 +34,5 @@ export class QuizDoStartComponent implements OnInit {
   start(quiz) {
     this.router.navigateByUrl('/quiz-do/' + quiz.id);
   }
+
 }
