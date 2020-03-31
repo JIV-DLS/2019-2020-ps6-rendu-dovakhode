@@ -19,6 +19,6 @@ id: string;
   }
 
   begining() {
-this.router.navigate(['quiz-list']);
+this.router.navigate(['quiz-list;do=true']);
   }
 }
