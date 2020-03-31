@@ -1,4 +1,5 @@
 <p>Bienvenue sur le quiz "{{quiz.label}}"
   qui comporte {{quiz.questions.length}} questions.
 </p>
-<button (click)="start(quiz)">C'est parti</button>
+<button (click)="start(quiz)" class="commencer">C'est parti</button>
+<button [routerLink]="['/quiz-list',{do:true}]" class="retour">Retour</button>
