@@ -1,4 +1,5 @@
 import { Question } from '../models/question.model';
+import {Answer} from '../models/answer.model';
 
 /*
 export const QUESTION_ACTOR: Question = {
@@ -47,6 +48,9 @@ export const QUIZ_LIST: Quiz[] = [
 
 */
 export const DEFAULT_QUESTION: Question = {
+  answersEqualsTo(answers: Answer[]): boolean {
+    return false;
+  },
 
   id: 2,
   label: 'Question',

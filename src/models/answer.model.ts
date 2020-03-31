@@ -9,6 +9,7 @@ export class Answer {
   quizId: number;
 
   constructor() {
+    this.id = 0;
   }
   static questionFormValues(answerForm: FormGroup) {
     return answerForm.getRawValue() as Answer;

@@ -236,4 +236,11 @@ export class QuestionService {
       return of(result as T);
     };
   }
+
+  deleteQuestions(deletedQuestions: Question[]) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < deletedQuestions.length; i++) {
+      this.deleteQuestion(deletedQuestions[i]);
+    }
+  }
 }
