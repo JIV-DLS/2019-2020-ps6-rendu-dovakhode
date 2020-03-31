@@ -46,13 +46,18 @@ import { QuestionDoComponent } from './questions/question-do/question-do.compone
 import { QuizDoComponent } from './quizzes/quiz-do/quiz-do.component';
 import { NextQuestionComponent } from './questions/next-question/next-question.component';
 import { QuizEndComponent } from './quizzes/quiz-end/quiz-end.component';
+import { Error404Component } from './error404/error404.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
   {path: 'quiz-do/:id' , component: QuizDoComponent},
-  {path: 'quiz/:idShowQuiz' , component: QuizComponent}
+  {path: 'quiz/:idShowQuiz' , component: QuizComponent},
+  {path: 'quiz-list', component: QuizListComponent},
+  {path: 'quiz-do/:id/end', component: QuizEndComponent},
+  { path: 'not-found', component: Error404Component },
+  { path: '**', redirectTo: 'not-found' }
 
 ];
 
@@ -84,7 +89,8 @@ const routes: Routes = [
     QuestionDoComponent,
     QuizDoComponent,
     NextQuestionComponent,
-    QuizEndComponent
+    QuizEndComponent,
+    Error404Component
   ],
   entryComponents: [
     QuestionsComponent,
