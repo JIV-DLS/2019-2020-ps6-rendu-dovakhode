@@ -45,7 +45,7 @@ function createQuestion(obj = {}) {
   const question = Question.create({ ...obj })
   for (let i = 0; i < answers.length; i++) {
     answers[i].questionId = question.id
-    AnswersRouter.createAnswer({ ...answers[i] })
+    answers[i] = AnswersRouter.createAnswer({ ...answers[i] })
   }
   question.answers = answers
   return question
