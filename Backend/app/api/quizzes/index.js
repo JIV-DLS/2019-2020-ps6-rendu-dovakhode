@@ -28,12 +28,15 @@ function createQuiz(obj) {
   quiz.questions = questions
   return quiz
 }
+function getAQuiz(id) {
+  const quiz = Quiz.getById(id)
+  const questions = QuestionsRouter.getQuestionsByQuizId(id)
+  quiz.questions = questions != null ? questions : []
+  return quiz
+}
 router.get('/:id', (req, res) => {
   try {
-    const quiz = Quiz.getById(req.params.id)
-    const questions = QuestionsRouter.getQuestionsByQuizId(req.params.id)
-    quiz.questions = questions != null ? questions : []
-    res.status(200).json(quiz)
+    res.status(200).json(getAQuiz(req.params.id))
   } catch (err) {
     res.status(500).json(err)
   }
@@ -119,12 +122,13 @@ function updateQuiz(id, obj) {
 }
 router.put('/:id', multer, (req, res) => {
   try {
-    res.status(201).json(updateQuiz(req.params.id, req.file ? {
+    updateQuiz(req.params.id, req.file ? {
       ...JSON.parse(req.body.quiz),
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
     } : {
       ...req.body.quiz,
-    }))
+    })
+    res.status(201).json(getAQuiz(req.params.id))
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
