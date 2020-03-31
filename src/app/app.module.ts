@@ -45,6 +45,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { QuestionDoComponent } from './questions/question-do/question-do.component';
 import { QuizDoComponent } from './quizzes/quiz-do/quiz-do.component';
 import { NextQuestionComponent } from './questions/next-question/next-question.component';
+import { QuizDoStartComponent } from './quizzes/quiz-do-start/quiz-do-start.component';
 import { QuizEndComponent } from './quizzes/quiz-end/quiz-end.component';
 import { Error404Component } from './error404/error404.component';
 
@@ -53,6 +54,7 @@ const routes: Routes = [
   {path: 'quiz-list', component: QuizListComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
   {path: 'quiz-do/:id' , component: QuizDoComponent},
+  {path: 'quiz-do/:id/start' , component: QuizDoStartComponent},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent},
   {path: 'quiz-list', component: QuizListComponent},
   {path: 'quiz-do/:id/end', component: QuizEndComponent},
@@ -66,6 +68,10 @@ const routes: Routes = [
     AppComponent,
     QuizListComponent,
     QuizComponent,
+    QuizDoComponent,
+    QuizDoStartComponent,
+    QuizEndComponent,
+    Error404Component,
     HeaderComponent,
     QuizAddComponent,
     QuestionComponent,
@@ -88,9 +94,7 @@ const routes: Routes = [
     QuizLessInfoComponent,
     QuestionDoComponent,
     QuizDoComponent,
-    NextQuestionComponent,
-    QuizEndComponent,
-    Error404Component
+    NextQuestionComponent
   ],
   entryComponents: [
     QuestionsComponent,
