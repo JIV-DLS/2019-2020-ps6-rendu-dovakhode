@@ -45,6 +45,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { QuestionDoComponent } from './questions/question-do/question-do.component';
 import { QuizDoComponent } from './quizzes/quiz-do/quiz-do.component';
 import { NextQuestionComponent } from './questions/next-question/next-question.component';
+import { QuizEndComponent } from './quizzes/quiz-end/quiz-end.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -82,7 +83,8 @@ const routes: Routes = [
     QuizLessInfoComponent,
     QuestionDoComponent,
     QuizDoComponent,
-    NextQuestionComponent
+    NextQuestionComponent,
+    QuizEndComponent
   ],
   entryComponents: [
     QuestionsComponent,
