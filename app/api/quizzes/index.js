@@ -11,7 +11,6 @@ const router = new Router()
 const QuestionsRouter = require('./questions')
 
 
-
 const multer = require('../../../middleware/quiz-multer-config')
 
 
@@ -53,28 +52,27 @@ router.get('/', (req, res) => {
 router.post('/', multer, (req, res) => {
   try {
     res.status(201).json(createQuiz(req.file ? {
-      ...JSON.parse(req.body.quiz),
+      ...req.body.quiz,
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
     } : {
-      ...JSON.parse(req.body.quiz),
+      ...req.body.quiz,
       image: ' ',
     }))
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
     } else {
-      console.log(err)
       res.status(500).json(err)
     }
   }
 })
 
-function deleteEntireQuiz(id){
+function deleteEntireQuiz(id) {
   Quiz.delete(id)
   const questions = QuestionsRouter.getQuestionsByQuizId(id)
-    for(let i = 0 ; i<questions.length;i++){
-      QuestionsRouter.deleteEntireQuestion(questions[i].id)
-    }
+  for (let i = 0; i < questions.length; i++) {
+    QuestionsRouter.deleteEntireQuestion(questions[i].id)
+  }
 }
 
 
@@ -103,6 +101,19 @@ function updateQuiz(id, obj) {
   delete obj.questions
   delete obj.id
   const quiz = Quiz.update(id, obj)
+
+  for (let i = 0; i < questions.length; i++) {
+    questions[i].quizId = quiz.id
+    // s'il la question n'existait pas(dans le frontend toute nouvelle question est crée avec l'id 0)
+    if (questions[i].id === 0) {
+      delete questions[i].id
+      questions[i] = QuestionsRouter.createQuestion({ ...questions[i] })
+    } else { // si la question existait déja
+      const { id } = questions[i]
+      questions[i] = QuestionsRouter.updateQuestion(id, { ...questions[i] })
+    }
+  }
+
   quiz.questions = questions
   return quiz
 }
@@ -112,7 +123,7 @@ router.put('/:id', multer, (req, res) => {
       ...JSON.parse(req.body.quiz),
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
     } : {
-      ...JSON.parse(req.body.quiz),
+      ...req.body.quiz,
     }))
   } catch (err) {
     if (err.name === 'ValidationError') {

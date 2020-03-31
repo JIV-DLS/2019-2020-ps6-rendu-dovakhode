@@ -4,8 +4,7 @@ const { Question } = require('../../../models')
 const { Answer } = require('../../../models')
 
 
-
-const  AnswersRouter = require('./answers')
+const AnswersRouter = require('./answers')
 
 
 const router = new Router({ mergeParams: true })
@@ -27,7 +26,6 @@ router.get('/:idQ', (req, res) => {
   try {
     const question = Question.getById(req.params.idQ)
     const answers = AnswersRouter.getAnswersByQuestionId(question.id)
-    console.log(answers)
     question.answers = answers != null ? answers : []
     res.status(200).json(question)
   } catch (err) {
@@ -36,7 +34,6 @@ router.get('/:idQ', (req, res) => {
 })
 router.get('/', (req, res) => {
   try {
-    console.log('here gonna')
     res.status(200).json(getQuestionsByQuizId(req.params.id))
   } catch (err) {
     res.status(500).json(err)
@@ -44,10 +41,8 @@ router.get('/', (req, res) => {
 })
 function createQuestion(obj = {}) {
   const { answers } = obj
-  console.log(answers)
   delete obj.answers
   const question = Question.create({ ...obj })
-  console.log(question)
   for (let i = 0; i < answers.length; i++) {
     answers[i].questionId = question.id
     AnswersRouter.createAnswer({ ...answers[i] })
@@ -57,7 +52,6 @@ function createQuestion(obj = {}) {
 }
 router.post('/', (req, res) => {
   try {
-
     res.status(201).json(createQuestion({ ...req.body, quizId: parseInt(req.params.id) }))
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -71,9 +65,8 @@ router.post('/', (req, res) => {
 function deleteEntireQuestion(id) {
   Question.delete(id)
   const answers = AnswersRouter.getAnswersByQuestionId(id)
-  console.log("hi")
   if (answers != null) {
-    for (let i = 0; i < answers.length;i++){
+    for (let i = 0; i < answers.length; i++) {
       Answer.delete(answers[i].id)
     }
   }
@@ -96,7 +89,16 @@ function updateQuestion(id, obj) {
   delete obj.answers
   const question = Question.update(id, { ...obj })
   for (let i = 0; i < answers.length; i++) {
-    AnswersRouter.updateAnswer(answers[i].id, { ...answers[i] })
+    answers[i].quizId = question.quizId
+    answers[i].questionId = question.id
+    // s'il la question n'existait pas(dans le frontend toute nouvelle question est crée avec l'id 0)
+    if (answers[i].id === 0) {
+      delete answers[i].id
+      answers[i] = AnswersRouter.createAnswer({ ...answers[i] })
+    } else { // si la question existait déja
+      const { id } = answers[i]
+      answers[i] = AnswersRouter.updateAnswer(id, { ...answers[i] })
+    }
   }
   question.answers = answers
   return question
@@ -117,5 +119,5 @@ router.put('/:idQ', (req, res) => {
 router.use('/:id/answers', require('./answers').router)
 
 module.exports = {
-  createQuestion, updateQuestion, getQuestionsByQuizId,deleteEntireQuestion, router,
+  createQuestion, updateQuestion, getQuestionsByQuizId, deleteEntireQuestion, router,
 }

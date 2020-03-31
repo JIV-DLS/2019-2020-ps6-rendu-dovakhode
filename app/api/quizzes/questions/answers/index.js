@@ -11,7 +11,6 @@ const router = new Router({ mergeParams: true })
 function getAnswersByQuestionId(id) {
   id += ''
   const arr = Answer.get()
-  console.log(arr)
   const indexes = []; let i
   for (i = 0; i < arr.length; i++) { if ((arr[i].questionId == id)) { indexes.push(arr[i]) } }
   return indexes
@@ -32,14 +31,12 @@ router.get('/', (req, res) => {
   }
 })
 function createAnswer(obj = {}) {
-  console.log(obj)
   const answer = Answer.create({ ...obj })
 
   return answer
 }
 router.post('/', (req, res) => {
   try {
-
     res.status(201).json(createAnswer({ ...req.body, questionId: parseInt(req.params.id) }))
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -64,7 +61,7 @@ router.delete('/:idQ', (req, res) => {
   }
 })
 function updateAnswer(id, obj) {
-  return Answer.update(id, ...obj)
+  return Answer.update(id, { ...obj })
 }
 router.put('/:idQ', (req, res) => {
   try {
