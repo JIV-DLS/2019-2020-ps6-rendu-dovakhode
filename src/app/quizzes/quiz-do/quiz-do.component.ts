@@ -70,7 +70,7 @@ export class QuizDoComponent implements OnInit {
     if (this.index < this.quiz.questions.length - 1) {
       this.index = this.index + 1;
     } else {
-      this.router.navigate(['/quiz-do/:id/end']);
+      this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
     }
   }
   retour() {

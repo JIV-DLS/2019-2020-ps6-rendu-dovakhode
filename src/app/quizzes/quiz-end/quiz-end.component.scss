@@ -1,0 +1,66 @@
+@keyframes mymove {
+  from {
+    transform: translateX(0px);
+  }
+
+  30% {
+    transform: translateX(150px);
+  }
+
+  60% {
+    transform: translateX(150px) rotate(30deg);
+  }
+
+  80% {
+    transform: translate(100px, 80px) rotate(30deg);
+  }
+
+  to {
+    transform: translate(100px, 80px) rotate(30deg);
+    border-radius: 30px;
+    background-color: red;
+  }
+}
+
+
+
+
+#text1{
+  border-radius: 25px;
+  margin-top: 20px;
+  margin-left: 30%;
+  margin-right: 25%;
+  padding-left: 47px;
+  padding-top: 15px;
+  width: 600px;
+ height: 60px;
+ background: #0cc10c;
+  box-shadow: 5px 10px #888888;
+  position: absolute;
+  animation: mymove 5s infinite;
+  animation-delay: 2s;
+  animation-direction:alternate;
+}
+#btn2{
+  margin-left: 80px;
+
+}
+#btn1
+{
+
+}
+div.bouton-aligne{
+  display:inline-block;
+  width:50%;
+  //margin:10px 2.5% 10px 2.5%;
+  text-align:center;
+}
+#b{
+  position:absolute;
+  left: 45%;
+  top: 50%;
+  width: 200px;
+  height: 200px;
+  margin-left: -100px; /* Cette valeur doit être la moitié négative de la valeur du width */
+  margin-top: -100px;
+}
