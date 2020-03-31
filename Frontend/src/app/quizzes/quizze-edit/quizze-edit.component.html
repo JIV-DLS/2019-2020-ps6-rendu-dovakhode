@@ -109,12 +109,12 @@
     <mat-card-footer style="padding-right: 12px;">
       <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
         <mat-grid-tile colspan="2" rowspan="4">
-          <button style="border-left: 10%;height: 70%;width: 90%;" mat-button type="button" class="btn btn-success" [disabled]="!quizForm.dirty&&!imageChanged" (click)="modifyQuiz()">Modifier</button>
+          <button style="border-left: 10%;height: 70%;width: 90%;" mat-button type="button" class="btn btn-success" [disabled]="!quizForm.dirty&&!imageChanged&&!others" (click)="modifyQuiz()">Modifier</button>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="4">
         </mat-grid-tile>
         <mat-grid-tile colspan="2" rowspan="4">
-          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-warning" [disabled]="!quizForm.dirty&&!imageChanged" (click)="resetQuiz()">Annuler les changements</button>
+          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-warning" [disabled]="!quizForm.dirty&&!imageChanged&&!others" (click)="resetQuiz()">Annuler les changements</button>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="4">
         </mat-grid-tile>

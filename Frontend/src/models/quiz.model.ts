@@ -18,6 +18,16 @@ export class Quiz {
     static quizFormValues(quizForm: FormGroup) {
       return quizForm.getRawValue() as Quiz;
     }
+    questionsEqualsTo(questions: Question[]): boolean {
+      if (this.questions.length !== questions.length) { return false; }
+      for (let i = 0; i < this.questions.length; i++) {
+        if (this.questions[i].id !== questions[i].id ||
+          this.questions[i].label !== questions[i].label ||
+          this.questions[i].image !== questions[i].image) { return false; }
+        if (!this.questions[i].answersEqualsTo(questions[i].answers)) {return false; }
+      }
+      return true;
+  }
 }
 
 

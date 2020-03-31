@@ -61,7 +61,7 @@ export class AnswersService {
     ;
     return this.http.delete<Answer>(this.answerUrl(answer.questionId, answer.quizId) + '/' + answer.id).pipe(
       tap((theanswer) => {
-        console.log('Récupération Reussie');
+        console.log('Suppression Reussie');
         this.snack.open( environment.snackInformation.operation.succeeded.delete.answer, 'close',
           {
             ...environment.snackInformation.successForAll
@@ -158,5 +158,12 @@ export class AnswersService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  deleteAnswers(deletedAnswers: Answer[]) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < deletedAnswers.length; i++) {
+      this.deleteAnswer(deletedAnswers[i]);
+    }
   }
 }

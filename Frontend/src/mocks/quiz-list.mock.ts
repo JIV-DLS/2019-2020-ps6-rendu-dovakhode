@@ -48,6 +48,9 @@ export const QUIZ_LIST: Quiz[] = [
 
 */
 export const DEFAULT_QUIZ: Quiz = {
+  questionsEqualsTo(questions: Question[]): boolean {
+    return false;
+  },
 
   id: null,
   label: null,

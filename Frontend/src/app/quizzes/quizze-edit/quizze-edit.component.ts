@@ -9,6 +9,10 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
+import {QuestionService} from '../../../services/question.service';
+import {Question} from '../../../models/question.model';
+import {Answer} from '../../../models/answer.model';
+import {AnswersService} from '../../../services/answers.service';
 
 @Component({
   selector: 'app-quizze-edit',
@@ -25,11 +29,17 @@ export class QuizzeEditComponent implements OnInit {
   public difficultiesValues = Object.values(difficulte);
   private imagePreview: string;
   loading: boolean;
+  others: boolean;
+  private deletedQuestions: Question[];
+  private deletedAnswers: Answer[];
   constructor(private location: Location,
               public quizService: QuizService,
               private route: ActivatedRoute,
               public dialog: MatDialog,
-              public formBuilder: FormBuilder) { }
+              public formBuilder: FormBuilder,
+              private questionService: QuestionService,
+              private answerService: AnswersService,
+  ) { }
 
   ngOnInit() {
     this.loading = true;
@@ -41,6 +51,7 @@ export class QuizzeEditComponent implements OnInit {
 }, (error) => {this.retour(); });
   }
   initializeTheForm(quiz) {
+    this.others = false;
     this.imageChanged = false;
     this.quiz = quiz;
     this.quizForm = this.quizzFormInitializer();
@@ -71,9 +82,14 @@ export class QuizzeEditComponent implements OnInit {
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
     });
-    dialogRef.afterClosed().subscribe(questions => {
+    dialogRef.afterClosed().subscribe(response => {
       this.questionDialogOpened = false;
-      this.questions.setValue( questions ? questions : this.questions );
+      if (response.questions && !this.quiz.questionsEqualsTo(response.questions)) {
+        this.others = true;
+        this.quiz.questions = response.questions;
+        this.questions.setValue( response.questions ? response.questions : this.questions ); }
+      if (response.deletedQuestions) { this.deletedQuestions = response.deletedQuestions; }
+      if (response.deletedAnswers) { this.deletedAnswers = response.deletedAnswers; }
     });
   }
   modifyQuiz() {
@@ -89,6 +105,10 @@ export class QuizzeEditComponent implements OnInit {
       if (quiz !== undefined) {
         this.quiz = quiz;
         this.savedImage = quiz.image;
+        if (this.deletedQuestions) {this.questionService.deleteQuestions(this.deletedQuestions); }
+        if (this.deletedAnswers) {this.answerService.deleteAnswers(this.deletedAnswers); }
+        this.deletedQuestions = [];
+        this.deletedAnswers = [];
         this.initializeTheForm(quiz);
       }
     });
@@ -136,6 +156,7 @@ export class QuizzeEditComponent implements OnInit {
   }
 
   resetQuiz() {
+    this.others = false;
     this.imageChanged = false;
     this.initializeTheForm(this.quiz);
     this.imagePreview = this.savedImage;
