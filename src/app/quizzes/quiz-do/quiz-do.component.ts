@@ -4,7 +4,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {difficulte, theme} from '../../../models/theme.models';
 import {Location} from '@angular/common';
 import {QuizService} from '../../../services/quiz.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 
@@ -27,6 +27,7 @@ export class QuizDoComponent implements OnInit {
   constructor(private location: Location,
               public quizService: QuizService,
               private route: ActivatedRoute,
+              private router: Router,
               public dialog: MatDialog,
               public formBuilder: FormBuilder) { }
 
@@ -69,7 +70,7 @@ export class QuizDoComponent implements OnInit {
     if (this.index < this.quiz.questions.length - 1) {
       this.index = this.index + 1;
     } else {
-      alert('plus de question');
+      this.router.navigate(['/quiz-do/:id/end']);
     }
   }
   retour() {
