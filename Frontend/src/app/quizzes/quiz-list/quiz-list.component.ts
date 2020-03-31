@@ -42,7 +42,7 @@ export class QuizListComponent implements OnInit {
 
   selectQuiz(quiz: Quiz) {
     if ( this.doQuiz) {
-      this.router.navigateByUrl('/quiz-do/' + quiz.id);
+      this.router.navigate(['/quiz-do/' + quiz.id + '/start']);
 
     } else {
       this.router.navigateByUrl('/quiz-edit/' + quiz.id);
