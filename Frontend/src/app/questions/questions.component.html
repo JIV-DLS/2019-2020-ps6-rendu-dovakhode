@@ -8,16 +8,16 @@
   </mat-card-title>
   <mat-card-content class="m-2" >
     <mat-grid-list cols="4" rowHeight="140px">
-      <mat-grid-tile colspan="{{addFull? 4:2}}"
+      <mat-grid-tile colspan="4"
                      rowspan="2">
-        <app-question-add fullScrenable="true" (fullState)="changeFull($event)" (questionCreated)="addQuestion($event)" style="width: 100%;"></app-question-add>
+        <app-question-add (questionCreated)="addQuestion($event)" style="width: 100%;"></app-question-add>
       </mat-grid-tile>
-      <mat-grid-tile
+      <!-- <mat-grid-tile
         *ngFor="let question of questions"
         colspan="2"
         rowspan="2">
         <app-editable-question [question]="question"></app-editable-question>
-      </mat-grid-tile>
+      </mat-grid-tile>-->
     </mat-grid-list>
 
   </mat-card-content>
