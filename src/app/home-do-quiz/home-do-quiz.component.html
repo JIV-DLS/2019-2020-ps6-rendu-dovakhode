@@ -1,0 +1,13 @@
+<p style="text-align: center;padding-top: 50px">Cliquez sur un des buttons pour lancer un quiz </p>
+<div style="text-align: center; padding-top: 150px">
+  <mat-grid-list cols="6" rowHeight="25px" style="width: 100%">
+    <mat-grid-tile colspan="3" rowspan="6">
+      <button [routerLink]="['/quiz-list',{do:true}]" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Lancer un quiz rapide sans profil
+      </button>    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="6">
+      <button (click)="profil()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Lancer un quiz avec un profil
+      </button>    </mat-grid-tile>
+  </mat-grid-list>
+</div>

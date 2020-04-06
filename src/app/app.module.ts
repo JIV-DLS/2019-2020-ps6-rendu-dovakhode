@@ -48,10 +48,16 @@ import { NextQuestionComponent } from './questions/next-question/next-question.c
 import { QuizDoStartComponent } from './quizzes/quiz-do-start/quiz-do-start.component';
 import { QuizEndComponent } from './quizzes/quiz-end/quiz-end.component';
 import { Error404Component } from './error404/error404.component';
+import { HomeQuizComponent } from './home-quiz/home-quiz.component';
+import { HomeUserComponent } from './home-user/home-user.component';
+import { HomeDoQuizComponent } from './home-do-quiz/home-do-quiz.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
+  {path: 'home-do-quiz', component: HomeDoQuizComponent},
+  {path: 'home-quiz-gestion', component: HomeQuizComponent},
+  {path: 'home-user', component: HomeUserComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
   {path: 'quiz-do/:id' , component: QuizDoComponent},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent},
@@ -94,7 +100,10 @@ const routes: Routes = [
     QuizLessInfoComponent,
     QuestionDoComponent,
     QuizDoComponent,
-    NextQuestionComponent
+    NextQuestionComponent,
+    HomeQuizComponent,
+    HomeUserComponent,
+    HomeDoQuizComponent
   ],
   entryComponents: [
     QuestionsComponent,

@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import {QuizAddComponent} from '../quizzes/quiz-add/quiz-add.component';
+import {MatDialog} from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-home-quiz',
+  templateUrl: './home-quiz.component.html',
+  styleUrls: ['./home-quiz.component.scss']
+})
+export class HomeQuizComponent implements OnInit {
+  dialogWidth = '950px';
+  dialogHeight = '500px';
+  constructor(private dialog: MatDialog) { }
+
+  ngOnInit() {
+  }
+  createAQuiz() {
+    this.openDialog(0);
+  }
+  openDialog(dialogNumber: number): void {
+    let dialogRef;
+    switch (dialogNumber) {
+      case 0:
+        dialogRef = this.dialog.open(QuizAddComponent, {
+          width: this.dialogWidth,
+          maxHeight: this.dialogHeight,
+          closeOnNavigation: true
+        });
+        /*dialogRef.afterClosed().subscribe(quiz => {
+        /*f (quiz != null) {
+          this.dialog.open(QuizComponent, {
+            width: this.dialogWidth,
+            maxHeight: this.dialogHeight,
+            data: quiz
+          });
+          };
+            })*/
+        /* this.questionDialogOpened = false;
+        this.questions.setValue( questions ? questions : this.questions ); */
+        break;
+      case 1:
+        break;
+    }
+
+  }
+}
