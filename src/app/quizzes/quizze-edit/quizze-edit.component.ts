@@ -54,7 +54,7 @@ export class QuizzeEditComponent implements OnInit {
   initializeTheForm(quiz) {
     this.others = false;
     this.imageChanged = false;
-    this.quiz = quiz;
+    this.quiz = new Quiz(quiz);
     this.savedQuestions = quiz.questions;
     this.quizForm = this.quizzFormInitializer();
   }
@@ -79,10 +79,12 @@ export class QuizzeEditComponent implements OnInit {
     return this.quizForm.get('label') as FormArray;
   }
   openDialog(): void {
+    const questionsDialog = [];
+    this.quiz.questions.forEach(question => questionsDialog.push(question));
     const dialogRef = this.dialog.open(QuestionsComponent, {
       width: '950px',
       maxHeight: '500px',
-      data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
+      data:  questionsDialog
     });
     dialogRef.afterClosed().subscribe(response => {
       this.questionDialogOpened = false;
@@ -90,6 +92,7 @@ export class QuizzeEditComponent implements OnInit {
         this.others = true;
         this.quiz.questions = response.questions;
         this.questions.setValue( response.questions ? response.questions : this.questions ); }
+      console.log(this.questions);
       if (response.deletedQuestions) { this.deletedQuestions = response.deletedQuestions; }
       if (response.deletedAnswers) { this.deletedAnswers = response.deletedAnswers; }
     });

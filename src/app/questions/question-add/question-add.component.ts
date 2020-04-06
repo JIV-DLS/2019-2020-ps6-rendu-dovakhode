@@ -44,6 +44,7 @@ export class QuestionAddComponent implements OnInit {
   }
   private initializeQuestionForm() {
     this.questionForm = this.formBuilder.group({
+      id: 0,
       label: [this.questionEdition ? (this.questionEdition as Question).label : ''],
       answers: this.formBuilder.array( [])
     });
@@ -64,7 +65,6 @@ export class QuestionAddComponent implements OnInit {
       data: this.question ? this.question : DEFAULT_QUESTION
     });
     dialogRef.afterClosed().subscribe(data => {
-      console.log(data.answer);
       this.answers.push(this.createAnswerByData(data.answer));
     });
   }

@@ -21,12 +21,13 @@ export class QuestionsComponent implements OnInit {
   }
   addQuestion(question: Question) {
     this.questions.push(question);
+    this.close();
   }
   changeFull(toFull: boolean) {
     this.addFull = toFull;
   }
   close() {
-    this.dialogRef.close(this.questions);
+    this.dialogRef.close({questions: this.questions});
   }
 }
 
