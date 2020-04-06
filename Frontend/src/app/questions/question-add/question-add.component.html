@@ -2,9 +2,6 @@
 <mat-card>
   <mat-card-header>
     <b layout-align="center">{{editable?'Modify the question':'Create a new question'}}</b>
-    <!--<button *ngIf="fullScrenable" (click)="changeFull()" mat-flat-button aria-label="Full Screen" style="position:absolute; right:10px;">
-      <mat-icon>{{full? 'fullscreen_exit':'fullscreen'}}</mat-icon>
-    </button>-->
     <button *ngIf="editable" (click)="edit()" mat-flat-button aria-label="Edit" style="position:absolute; right:10px;">
       <mat-icon>done</mat-icon>
     </button>
@@ -40,7 +37,8 @@
       <button class="mt-2 btn btn-sm" mat-button (click)="openDialog()">Add Answer <span class="badge">{{answers.length}}</span></button>
     </form>
   </mat-card-content>
-  <mat-card-footer>    <button *ngIf="questionEdition==null" mat-button (click)="createQuestion()" type="submit" class=" btn btn-lg btn-block btn-success" style="height: 50%">Create the question</button>
+  <mat-card-footer>
+    <button *ngIf="questionEdition==null" mat-button (click)="createQuestion() "  [mat-dialog-close]="true" type="submit" class=" btn btn-lg btn-block btn-success" style="height: 50%">Create the question</button>
   </mat-card-footer>
 </mat-card>
 
