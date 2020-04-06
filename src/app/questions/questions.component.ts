@@ -8,8 +8,6 @@ import {Question} from '../../models/question.model';
   styleUrls: ['./questions.component.scss']
 })
 export class QuestionsComponent implements OnInit {
-
-  addFull = false;
   @Input() questionEdition = null;
   constructor(
     public dialogRef: MatDialogRef<QuestionsComponent>,
@@ -21,12 +19,11 @@ export class QuestionsComponent implements OnInit {
   }
   addQuestion(question: Question) {
     this.questions.push(question);
+    this.close();
   }
-  changeFull(toFull: boolean) {
-    this.addFull = toFull;
-  }
+
   close() {
-    this.dialogRef.close(this.questions);
+    this.dialogRef.close({questions: this.questions});
   }
 }
 
