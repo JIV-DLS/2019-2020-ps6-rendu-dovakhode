@@ -96,11 +96,9 @@
           <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="openDialog()">Gérer</button>
         </mat-grid-tile>
         <mat-grid-tile colspan="8" rowspan="16">
-          <div  style="border: black solid 3px; height: 90%;width: 100%; overflow-x: scroll">
-            <div style="display: flex;">
+            <div style="display: flex; border: black solid 3px; height: 100%;width: 100%; overflow-x: scroll">
               <app-question *ngFor="let question of quiz.questions" [question]="question" ></app-question>
             </div>
-          </div>
         </mat-grid-tile>
 
       </mat-grid-list>

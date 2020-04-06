@@ -18,6 +18,8 @@ function createQuiz(obj) {
   const { questions } = obj
   delete obj.questions
   delete obj.id
+  obj.dateCreation = new Date()
+  obj.dateModification = obj.dateCreation
   const quiz = Quiz.create({ ...obj })
 
   for (let i = 0; i < questions.length; i++) {
@@ -44,8 +46,9 @@ router.get('/:id', (req, res) => {
 
 router.get('/', (req, res) => {
   try {
-    const quizzes = Quiz.get()
+    const quizzes = Quiz.get().sort((a, b) => new Date(b.dateModification) - new Date(a.dateModification))
     for (let i = 0; i < quizzes.length; i++) { quizzes[i].questions = QuestionsRouter.getQuestionsByQuizId(quizzes[i].id) }
+
     res.status(200).json(quizzes)
   } catch (err) {
     res.status(500).json(err)
@@ -103,6 +106,8 @@ function updateQuiz(id, obj) {
   const { questions } = obj
   delete obj.questions
   delete obj.id
+  delete obj.dateCreation
+  obj.dateModification = new Date()
   const quiz = Quiz.update(id, obj)
 
   for (let i = 0; i < questions.length; i++) {
