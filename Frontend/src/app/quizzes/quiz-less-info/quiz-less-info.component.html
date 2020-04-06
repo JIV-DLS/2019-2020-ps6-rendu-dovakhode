@@ -1,4 +1,4 @@
-<mat-grid-list cols="10" rowHeight="30px" style="width: 100%;">
+<mat-grid-list cols="{{col()}}" rowHeight="30px" style="width: 100%;">
 
   <mat-grid-tile class="leftBorder" (click)="select()" [class.jhover]="hover" colspan="3" rowspan="1" (mouseover)="hover=true" (mouseleave)="hover=false">
     <h5>{{quiz.label}}</h5>
