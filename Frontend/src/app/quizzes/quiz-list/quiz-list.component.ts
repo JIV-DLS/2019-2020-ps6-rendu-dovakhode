@@ -48,4 +48,12 @@ export class QuizListComponent implements OnInit {
       this.router.navigateByUrl('/quiz-edit/' + quiz.id);
     }
   }
+
+  col() {
+    if (this.doQuiz) {
+      return 9;
+    } else {
+      return 10;
+    }
+  }
 }

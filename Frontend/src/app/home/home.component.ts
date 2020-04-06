@@ -10,45 +10,11 @@ import {QuizComponent} from '../quizzes/quiz/quiz.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  dialogWidth = '950px';
-  dialogHeight = '500px';
-  constructor(private dialog: MatDialog) { }
+
+  constructor() { }
 
   ngOnInit() {
   }
 
-  createAQuiz() {
-    this.openDialog(0);
-  }
-  openDialog(dialogNumber: number): void {
-    let dialogRef;
-    switch (dialogNumber) {
-      case 0:
-        dialogRef = this.dialog.open(QuizAddComponent, {
-          width: this.dialogWidth,
-          maxHeight: this.dialogHeight
-        });
-      /*dialogRef.afterClosed().subscribe(quiz => {
-      /*f (quiz != null) {
-        this.dialog.open(QuizComponent, {
-          width: this.dialogWidth,
-          maxHeight: this.dialogHeight,
-          data: quiz
-        });
-        };
-          })*/
-        /* this.questionDialogOpened = false;
-        this.questions.setValue( questions ? questions : this.questions ); */
-        break;
-      case 1:
-    break;
-    }
 
-  }
-  quiqQuiz() {
-    alert(environment.maintenanceMessage);
-  }
-  addProfile() {
-    alert(environment.maintenanceMessage);
-  }
 }

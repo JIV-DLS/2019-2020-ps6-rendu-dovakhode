@@ -25,4 +25,12 @@ export class QuizLessInfoComponent implements OnInit {
   delete() {
     this.deleteEmitter.emit(confirm(environment.deleteWarning + this.quiz.label + ') ?'));
   }
+
+  col() {
+    if (this.do) {
+      return 9;
+    } else {
+      return 10;
+    }
+  }
 }

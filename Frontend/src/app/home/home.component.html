@@ -1,43 +1,18 @@
-<div style="text-align: center; padding-top: 20px;">
+<div style="text-align: center; padding-top: 250px;">
   <mat-grid-list cols="6" rowHeight="25px" style="width: 100%">
-    <mat-grid-tile colspan="1" rowspan="3">
-      <mat-form-field appearance="legacy">
-        <mat-label>Rechercher par Nom du patient</mat-label>
-        <input matInput placeholder="nom et/ou prénom">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="4" rowspan="3">
-      <h3>Profil par patients</h3>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1" rowspan="3">
-      <button (click)="addProfile()" mat-flat-button aria-label="Example icon-button with a heart icon">
-        <mat-icon>add</mat-icon>
-        Ajouter un profil
+    <mat-grid-tile colspan="2" rowspan="6">
+      <button [routerLink]="['/home-quiz-gestion']" mat-flat-button aria-label="Example icon-button with a heart icon">
+      Gestion des quiz
       </button>
     </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="12">
-      <div class="cdk-virtual-scroll-data-source-example" style="border: black solid 3px; height: 90%;width: 100%; overflow-x: scroll">
-        <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
-          <!--<app-question *cdkVirtualFor="let question of [2,3]"  ></app-question>-->
-        </cdk-virtual-scroll-viewport>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="4">
-      <button (click)="createAQuiz()" mat-flat-button aria-label="Example icon-button with a heart icon">
-        Créer un quiz
+    <mat-grid-tile colspan="2" rowspan="6">
+      <button [routerLink]="['/home-do-quiz']" mat-flat-button aria-label="Example icon-button with a heart icon">
+       Lancer un quiz
       </button>
     </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="4">
-      <button [routerLink]="['/quiz-list',{do:false}]" mat-flat-button aria-label="Example icon-button with a heart icon">
-        Modifier un quiz
+    <mat-grid-tile colspan="2" rowspan="6">
+      <button [routerLink]="['/home-user']" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Gestion des profils
       </button>    </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="4">
-      <button [routerLink]="['/quiz-list',{do:true}]" mat-flat-button aria-label="Example icon-button with a heart icon">
-        Quiz rapide
-      </button>    </mat-grid-tile>
-    <!--<mat-grid-tile colspan="6" rowspan="4">
-      <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-danger" (click)="openDialog()">Annuler</button>
-    </mat-grid-tile>-->
   </mat-grid-list>
 </div>
