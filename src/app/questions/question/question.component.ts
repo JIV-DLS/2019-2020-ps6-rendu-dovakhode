@@ -12,6 +12,7 @@ export class QuestionComponent implements OnInit {
   @Input() editable: boolean;
   @Output() edit: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input()number = 0;
   ngOnInit(): void {
   }
 

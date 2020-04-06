@@ -31,8 +31,8 @@ export class QuizzeEditComponent implements OnInit {
   private imagePreview: string;
   loading: boolean;
   others: boolean;
-  private deletedQuestions: Question[];
-  private deletedAnswers: Answer[];
+  private deletedQuestions = [];
+  private deletedAnswers = [];
   constructor(private location: Location,
               public quizService: QuizService,
               private route: ActivatedRoute,
@@ -49,6 +49,7 @@ export class QuizzeEditComponent implements OnInit {
         this.loading = false;
         this.initializeTheForm(quiz);
         this.imagePreview = quiz.image.length > 1 ? quiz.image : null;
+        this.savedImage = this.imagePreview;
 }, (error) => {this.retour(); });
   }
   initializeTheForm(quiz) {
@@ -167,5 +168,15 @@ export class QuizzeEditComponent implements OnInit {
     this.initializeTheForm(this.quiz);
     this.imagePreview = this.savedImage;
     this.quiz.image = this.savedImage;
+    this.deletedQuestions = [];
+    this.deletedAnswers = [];
+  }
+
+  deletedQuestion($event: boolean, index: number) {
+    if ($event) {
+      if (!this.others) {this.others = true; }
+      this.deletedQuestions.push(this.quiz.questions[index]);
+      this.quiz.questions.splice(index, 1);
+    }
   }
 }
