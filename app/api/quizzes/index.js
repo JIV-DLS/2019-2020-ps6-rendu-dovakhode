@@ -58,10 +58,10 @@ router.get('/', (req, res) => {
 router.post('/', multer, (req, res) => {
   try {
     res.status(201).json(createQuiz(req.file ? {
-      ...req.body.quiz,
+      ...JSON.parse(req.body.quiz),
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
     } : {
-      ...req.body.quiz,
+      ...JSON.parse(req.body.quiz),
       image: ' ',
     }))
   } catch (err) {
@@ -131,7 +131,7 @@ router.put('/:id', multer, (req, res) => {
       ...JSON.parse(req.body.quiz),
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
     } : {
-      ...req.body.quiz,
+      ...JSON.parse(req.body.quiz),
     })
     res.status(201).json(getAQuiz(req.params.id))
   } catch (err) {
