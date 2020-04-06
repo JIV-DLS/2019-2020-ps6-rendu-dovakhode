@@ -35,7 +35,6 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
       answerConst.quizId = this.question.quizId;
       answerConst.questionId = this.question.id;
       this.answersService.addAnswer(answerConst).subscribe((ans) => {
-        console.log('ok');
         this.dialogRef.close( {answer : ans});
       });
     } else {
