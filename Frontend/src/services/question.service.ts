@@ -35,7 +35,7 @@ export class QuestionService {
   index: number;
   // url = 'https://api.myjson.com/bins/13ajhy';
   questionUrl(quizId) {
-    return environment.url + '/' + quizId + '/questions';
+    return environment.url + '/quizzes/' + quizId + '/questions';
   }
 
   addQuestion(question: Question): Observable<Question> {
@@ -240,7 +240,14 @@ export class QuestionService {
   deleteQuestions(deletedQuestions: Question[]) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < deletedQuestions.length; i++) {
-      this.deleteQuestion(deletedQuestions[i]);
+      console.log('suppression de ' + deletedQuestions[i].label);
+      console.log(this.questionUrl(deletedQuestions[i].quizId) + '/' + deletedQuestions[i].id);
+      this.http.delete<Question>(this.questionUrl(deletedQuestions[i].quizId) + '/' + deletedQuestions[i].id).pipe(
+        tap((questionDeleted) => {
+          console.log('Suppression reussie');
+        }),
+        catchError(this.handleError<Question>('deleteQuestion', undefined))
+      ).subscribe();
     }
   }
 }

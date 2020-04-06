@@ -68,7 +68,7 @@ export class QuestionAddComponent implements OnInit {
   }
   createQuestion() {
     this.questionCreated.emit(this.questionFormValue());
-    this.dialogRef.close();
+    this.dialogRef.close(this.questionFormValue());
     // console.log(this.questionFormValue());
   }
 

@@ -18,12 +18,13 @@ export class QuestionsComponent implements OnInit {
     if (this.questionEdition != null) {this.questions = this.questionEdition; }
   }
   addQuestion(question: Question) {
-    this.questions.push(question);
-    this.close();
+    this.close(question);
   }
 
-  close() {
-    this.dialogRef.close({questions: this.questions});
+  close(question: Question) {
+    console.log(question);
+    const questionSaved = question;
+    this.dialogRef.close({...questionSaved});
   }
 }
 
