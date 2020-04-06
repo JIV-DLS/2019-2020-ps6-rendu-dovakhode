@@ -89,8 +89,7 @@ export class QuizzeEditComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(question => {
       this.questionDialogOpened = false;
-      console.log(question);
-      if (question) {
+      if (question && question.label) {
         this.others = true;
         this.quiz.questions.push(question);
         this.questions.setValue( this.quiz.questions); }
