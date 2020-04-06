@@ -3,7 +3,7 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Question} from '../../../models/question.model';
 import {Answer} from '../../../models/answer.model';
 import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {AnswersComponent} from '../../answers/answers.component';
 import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component';
 
@@ -15,8 +15,7 @@ import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component'
   styleUrls: ['./question-add.component.scss']
 })
 export class QuestionAddComponent implements OnInit {
-  constructor(public formBuilder: FormBuilder, public dialog: MatDialog
-  ) { }
+  constructor(public formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<QuestionAddComponent >  ) { }
   get answers() {
     return this.questionForm.get('answers') as FormArray;
   }
@@ -33,10 +32,6 @@ export class QuestionAddComponent implements OnInit {
   editQuestion: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
-  changeFull() {
-    this.full = !this.full;
-    this.fullState.emit(this.full);
-  }
 
   ngOnInit() {
     this.question = new Question();
@@ -73,6 +68,7 @@ export class QuestionAddComponent implements OnInit {
   }
   createQuestion() {
     this.questionCreated.emit(this.questionFormValue());
+    this.dialogRef.close();
     // console.log(this.questionFormValue());
   }
 
