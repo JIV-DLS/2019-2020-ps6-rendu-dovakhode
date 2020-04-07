@@ -37,8 +37,9 @@ export class QuizDoStartComponent implements OnInit {
   start(quiz) {
  this.evolservice.addEvolution('' + quiz.id).subscribe((evol ) => {
    if (evol !== undefined) {
-   this.evolservice.evol = evol as Evolution;
-   console.log('+++++++++ ' + this.evolservice.evol.quizId);
+    // console.log('voici l evol créée ' + evol.id + '' +evol.quizId);
+     this.evolservice.changeEvol(evol);
+     this.evolservice.emitEvolution();
    }
  });
  this.router.navigateByUrl('/quiz-do/' + quiz.id );

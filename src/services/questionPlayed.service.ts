@@ -14,7 +14,7 @@ export class QuestionPlayedService {
   }
 
   questionplayedUrl(evolutionId) {
-    return environment.url + '/' + evolutionId + '/questionPlayed';
+    return environment.url + '/evolution/' + evolutionId + '/questionPlayed';
   }
 
   addQuestionPlayed(idQuestion: number, evolutionId: number): Observable<QuestionPlayed> {
@@ -24,10 +24,9 @@ export class QuestionPlayedService {
       })
     ;
     const question = new QuestionPlayed();
-    question.EvolutionId = evolutionId;
     question.idQuestion = idQuestion;
     console.log(question);
-    return this.http.post<QuestionPlayed>(this.questionplayedUrl(question.EvolutionId), question).pipe(
+    return this.http.post<QuestionPlayed>(this.questionplayedUrl(evolutionId), question).pipe(
 
       tap((newQuestion: QuestionPlayed) => {
 
@@ -62,14 +61,7 @@ export class QuestionPlayedService {
     );
   }
 
-  setQuestionsFromUrl( quizId: string) {
-    this.http.get<QuestionPlayed[]>(this.questionplayedUrl(quizId)).subscribe(
-      (question) => {
-        // this.questions = question;
-        // this.questions$.next(this.questions);
-      }
-    );
-  }
+
   getQuestionPlayed( evolutionId: string): Observable<QuestionPlayed[]>  {
     return this.http.get<QuestionPlayed[]>(this.questionplayedUrl(evolutionId)).pipe(
       tap((question) => {

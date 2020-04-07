@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {Evolution} from '../models/evolution.model';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Answer} from '../models/answer.model';
 import {catchError, tap} from 'rxjs/operators';
@@ -12,32 +12,31 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class EvolutionService {
-  evol: Evolution;
+ evolutionSubject = new Subject<Evolution>();
+ evolution = new Evolution();
 
   constructor(private http: HttpClient, private snack: MatSnackBar) {
-    let evol;
-    evol = new Evolution();
   }
   public evolutionUrl = environment.url + '/evolution';
  // evol: Evolution;
 
 
+  emitEvolution() {
+    this.evolutionSubject.next(this.evolution);
+  }
+
+  changeEvol(evolution: Evolution) {
+   this.evolution = new Evolution();
+   this.evolution = evolution;
+   this.emitEvolution();
+   console.log('evol du service ' + this.evolution.id);
+  }
   addEvolution(idQuiz: string) {
-    this.snack.open(environment.snackInformation.operation.loading.post.question, 'close',
-      {
-        ...environment.snackInformation.loadingPost
-      })
-    ;
     const evolution = new Evolution();
     evolution.quizId = parseInt(idQuiz, 10);
     return this.http.post<Evolution>(this.evolutionUrl, evolution).pipe(
       tap((newAnswer) => {
         console.log('Ajout Reussi');
-        this.snack.open(environment.snackInformation.operation.succeeded.post.answer, 'close',
-          {
-            ...environment.snackInformation.successForAll
-
-          });
       }),
       catchError(this.handleError<Evolution>('addEvolution', undefined))
     );
