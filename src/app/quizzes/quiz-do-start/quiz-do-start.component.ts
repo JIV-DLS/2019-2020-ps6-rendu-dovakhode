@@ -14,18 +14,22 @@ import {Evolution} from '../../../models/evolution.model';
 })
 export class QuizDoStartComponent implements OnInit {
   quiz: Quiz = DEFAULT_QUIZ;
+  Evolution: Evolution;
 
   constructor(public quizService: QuizService,
               private location: Location,
               private route: ActivatedRoute,
               private router: Router,
-              private evolservice: EvolutionService) { }
+              private evolservice: EvolutionService) {
+
+  }
 
   ngOnInit() {
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
         this.initialize(quiz);
       }, (error) => {this.retour(); });
+
   }
 
   retour() {
@@ -35,14 +39,16 @@ export class QuizDoStartComponent implements OnInit {
     this.quiz = quiz;
   }
   start(quiz) {
- this.evolservice.addEvolution('' + quiz.id).subscribe((evol ) => {
-   if (evol !== undefined) {
-    // console.log('voici l evol créée ' + evol.id + '' +evol.quizId);
-     this.evolservice.changeEvol(evol);
-     this.evolservice.emitEvolution();
-   }
- });
- this.router.navigateByUrl('/quiz-do/' + quiz.id );
+    this.evolservice.addEvolution('' + this.quiz.id).subscribe((evol ) => {
+      if (evol !== undefined) {
+        console.log('voici l evol créée ' + evol.id + '' + evol.quizId);
+        this.Evolution = evol;
+        console.log('ok' + this.Evolution.id);
+        this.router.navigateByUrl('/quiz-do/' + quiz.id  + '/' + this.Evolution.id + '/');
+
+      }
+    });
+
 
   }
 
