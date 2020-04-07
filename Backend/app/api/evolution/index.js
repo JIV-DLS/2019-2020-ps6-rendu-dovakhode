@@ -1,13 +1,13 @@
 const { Router } = require('express')
-const { Evolution } = require('../utils/base-model')
+const { Evolution } = require('../../models')
 const questionPlayedRouter = require('./questionPlayed')
 
 const router = new Router()
 
 router.post('/', (req, res) => {
   try {
-    const quiz = Evolution.create({ ...req.body })
-    res.status(201).json(quiz)
+    const evol = Evolution.create({ ...req.body })
+    res.status(201).json(evol)
   } catch (err) {
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
@@ -52,6 +52,6 @@ router.put('/:evolutionId', (req, res) => {
 })
 
 
-router.use('/:evolutionId/questions', questionPlayedRouter)
+router.use('/:evolutionId/questionPlayed', questionPlayedRouter)
 
 module.exports = router

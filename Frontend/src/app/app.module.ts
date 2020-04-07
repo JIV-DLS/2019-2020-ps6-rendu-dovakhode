@@ -51,6 +51,8 @@ import { Error404Component } from './error404/error404.component';
 import { HomeQuizComponent } from './home-quiz/home-quiz.component';
 import { HomeUserComponent } from './home-user/home-user.component';
 import { HomeDoQuizComponent } from './home-do-quiz/home-do-quiz.component';
+import {EvolutionService} from '../services/evolution.service';
+import {QuestionPlayedService} from '../services/questionPlayed.service';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -138,6 +140,8 @@ const routes: Routes = [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },
+    EvolutionService,
+    QuestionPlayedService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 const { Router } = require('express')
 
-const { QuestionPlayed } = require('../../models')
+const { QuestionPlayed } = require('../../../models')
 
 const router = new Router({ mergeParams: true })
 function getById(idQuiz, idQues) {

@@ -5,7 +5,10 @@ import {Question} from '../models/question.model';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {QuestionPlayed} from '../models/questionPlayed.model';
-
+import {Injectable} from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
 export class QuestionPlayedService {
   constructor(private http: HttpClient, private snack: MatSnackBar) {
   }
@@ -14,12 +17,15 @@ export class QuestionPlayedService {
     return environment.url + '/' + evolutionId + '/questionPlayed';
   }
 
-  addQuestionPlayed(question: QuestionPlayed): Observable<QuestionPlayed> {
+  addQuestionPlayed(idQuestion: number, evolutionId: number): Observable<QuestionPlayed> {
     this.snack.open(environment.snackInformation.operation.loading.post.question, 'close',
       {
         ...environment.snackInformation.loadingPost
       })
     ;
+    const question = new QuestionPlayed();
+    question.EvolutionId = evolutionId;
+    question.idQuestion = idQuestion;
     console.log(question);
     return this.http.post<QuestionPlayed>(this.questionplayedUrl(question.EvolutionId), question).pipe(
 
