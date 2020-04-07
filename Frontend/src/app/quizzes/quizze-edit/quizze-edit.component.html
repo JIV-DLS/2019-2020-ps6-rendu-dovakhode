@@ -93,11 +93,11 @@
           <span style="text-decoration: underline #555555; text-align: left;">Listes des questions(<span class="badge">{{quiz.questions?.length}}</span>):</span>
         </mat-grid-tile>
         <mat-grid-tile colspan="4" rowspan="3">
-          <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="openDialog()">Gérer</button>
+          <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="openDialog()">Créer une question</button>
         </mat-grid-tile>
         <mat-grid-tile colspan="8" rowspan="16">
             <div style="display: flex; border: black solid 3px; height: 100%;width: 100%; overflow-x: scroll">
-              <app-question *ngFor="let question of quiz.questions; let i=index;" (delete)="deletedQuestion($event,i)" [number]="i+1" [question]="question" ></app-question>
+              <app-question *ngFor="let question of quiz.questions; let i=index;" deletable="true" (delete)="deletedQuestion($event,i)" [number]="i+1" [question]="question" ></app-question>
             </div>
         </mat-grid-tile>
 

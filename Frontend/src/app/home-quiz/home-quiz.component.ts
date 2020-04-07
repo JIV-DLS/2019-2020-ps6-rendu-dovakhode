@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {QuizAddComponent} from '../quizzes/quiz-add/quiz-add.component';
 import {MatDialog} from '@angular/material/dialog';
-
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-home-quiz',
   templateUrl: './home-quiz.component.html',
@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class HomeQuizComponent implements OnInit {
   dialogWidth = '950px';
   dialogHeight = '500px';
-  constructor(private dialog: MatDialog) { }
+  constructor(private location: Location, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
