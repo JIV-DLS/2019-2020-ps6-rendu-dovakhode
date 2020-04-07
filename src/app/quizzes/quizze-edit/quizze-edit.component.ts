@@ -31,8 +31,8 @@ export class QuizzeEditComponent implements OnInit {
   private imagePreview: string;
   loading: boolean;
   others: boolean;
-  private deletedQuestions: Question[];
-  private deletedAnswers: Answer[];
+  private deletedQuestions = [];
+  private deletedAnswers = [];
   constructor(private location: Location,
               public quizService: QuizService,
               private route: ActivatedRoute,
@@ -49,12 +49,13 @@ export class QuizzeEditComponent implements OnInit {
         this.loading = false;
         this.initializeTheForm(quiz);
         this.imagePreview = quiz.image.length > 1 ? quiz.image : null;
+        this.savedImage = this.imagePreview;
 }, (error) => {this.retour(); });
   }
   initializeTheForm(quiz) {
     this.others = false;
     this.imageChanged = false;
-    this.quiz = quiz;
+    this.quiz = new Quiz(quiz);
     this.savedQuestions = quiz.questions;
     this.quizForm = this.quizzFormInitializer();
   }
@@ -79,19 +80,19 @@ export class QuizzeEditComponent implements OnInit {
     return this.quizForm.get('label') as FormArray;
   }
   openDialog(): void {
+    const questionsDialog = [];
+    this.quiz.questions.forEach(question => questionsDialog.push(question));
     const dialogRef = this.dialog.open(QuestionsComponent, {
       width: '950px',
       maxHeight: '500px',
-      data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
+      data:  questionsDialog
     });
-    dialogRef.afterClosed().subscribe(response => {
+    dialogRef.afterClosed().subscribe(question => {
       this.questionDialogOpened = false;
-      if (response.questions && !this.quiz.questionsEqualsTo(response.questions)) {
+      if (question && question.label) {
         this.others = true;
-        this.quiz.questions = response.questions;
-        this.questions.setValue( response.questions ? response.questions : this.questions ); }
-      if (response.deletedQuestions) { this.deletedQuestions = response.deletedQuestions; }
-      if (response.deletedAnswers) { this.deletedAnswers = response.deletedAnswers; }
+        this.quiz.questions.push(question);
+        this.questions.setValue( this.quiz.questions); }
     });
   }
   modifyQuiz() {
@@ -103,12 +104,12 @@ export class QuizzeEditComponent implements OnInit {
     const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
     quizToModify.dateModification = new Date();
     quizToModify.image = this.quiz.image;
+    if (this.deletedQuestions) {this.questionService.deleteQuestions(this.deletedQuestions); }
+    if (this.deletedAnswers) {this.answerService.deleteAnswers(this.deletedAnswers); }
     this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value).subscribe((quiz) => {
       if (quiz !== undefined) {
         this.quiz = quiz;
         this.savedImage = quiz.image;
-        if (this.deletedQuestions) {this.questionService.deleteQuestions(this.deletedQuestions); }
-        if (this.deletedAnswers) {this.answerService.deleteAnswers(this.deletedAnswers); }
         this.deletedQuestions = [];
         this.deletedAnswers = [];
         this.initializeTheForm(quiz);
@@ -164,5 +165,15 @@ export class QuizzeEditComponent implements OnInit {
     this.initializeTheForm(this.quiz);
     this.imagePreview = this.savedImage;
     this.quiz.image = this.savedImage;
+    this.deletedQuestions = [];
+    this.deletedAnswers = [];
+  }
+
+  deletedQuestion($event: boolean, index: number) {
+    if ($event) {
+      if (!this.others) {this.others = true; }
+      this.deletedQuestions.push(this.quiz.questions[index]);
+      this.quiz.questions.splice(index, 1);
+    }
   }
 }

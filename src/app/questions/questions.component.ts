@@ -19,19 +19,15 @@ export class QuestionsComponent implements OnInit {
   ngOnInit(): void {
     if (this.questionEdition != null) {this.questions = this.questionEdition; }
   }
-  addQuestion(questionToCreate: Question) {
-    /*this.questionService.addQuestion(questionToCreate).subscribe((question) => {
-      if (question !== undefined) {
-        this.questions.push(question);
-        this.close();
-      }
-    });*/
-    this.questions.push(questionToCreate);
-    this.close();
+
+  addQuestion(question: Question) {
+    this.close(question);
   }
 
-  close() {
-    this.dialogRef.close(this.questions);
+  close(question: Question) {
+    console.log(question);
+    const questionSaved = question;
+    this.dialogRef.close({...questionSaved});
   }
 }
 

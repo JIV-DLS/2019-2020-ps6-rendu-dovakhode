@@ -8,9 +8,17 @@ export class Question {
     answers: Answer[];
     quizId: number;
 
-  constructor() {
-    this.id = 0;
-    this.answers = [];
+  constructor(question?: Question) {
+    if (question) {
+      this.id = question.id;
+      this.label = question.label;
+      this.image = question.image;
+      this.answers = question.answers;
+      this.quizId = question.quizId;
+    } else {
+      this.id = 0;
+      this.answers = [];
+    }
   }
   static quizFormValues(questionForm: FormGroup) {
     return questionForm.getRawValue() as Question;
