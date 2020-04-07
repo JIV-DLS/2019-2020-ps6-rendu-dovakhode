@@ -25,8 +25,6 @@ export class QuizListComponent implements OnInit {
 
   ngOnInit() {
     this.doQuiz = (this.Activerouter.snapshot.params.do === 'true');
-
-
   }
   getAllQuiz() {
     this.quizService.getQuiz().subscribe((quiz) => this.quizList = quiz);
@@ -43,7 +41,6 @@ export class QuizListComponent implements OnInit {
   selectQuiz(quiz: Quiz) {
     if ( this.doQuiz) {
       this.router.navigate(['/quiz-do/' + quiz.id + '/start']);
-
     } else {
       this.router.navigateByUrl('/quiz-edit/' + quiz.id);
     }
@@ -55,5 +52,9 @@ export class QuizListComponent implements OnInit {
     } else {
       return 10;
     }
+  }
+
+  back() {
+    if (this.doQuiz) {this.router.navigateByUrl('/home-do-quiz'); } else { this.location.back(); }
   }
 }
