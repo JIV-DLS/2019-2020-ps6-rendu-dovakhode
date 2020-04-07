@@ -61,7 +61,7 @@ const routes: Routes = [
   {path: 'home-quiz-gestion', component: HomeQuizComponent},
   {path: 'home-user', component: HomeUserComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
-  {path: 'quiz-do/:id' , component: QuizDoComponent},
+  {path: 'quiz-do/:id/:evol/' , component: QuizDoComponent},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent},
   {path: 'quiz-list', component: QuizListComponent},

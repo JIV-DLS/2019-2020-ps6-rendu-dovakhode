@@ -56,7 +56,10 @@ export class QuizDoComponent implements OnInit {
       .subscribe((quiz) => {
         this.initializeTheForm(quiz);
       }, (error) => {this.retour(); });
-
+    const idEvol = +(this.route.snapshot.params.evol);
+   // console.log(idEvol);
+    this.evolService.getEvolutionById(idEvol).subscribe((evol) =>
+    this.evolution = evol),
    // console.log('evol de quiz do  second' + this.evolution.id);
     this.getQuestiontoshow();
 
