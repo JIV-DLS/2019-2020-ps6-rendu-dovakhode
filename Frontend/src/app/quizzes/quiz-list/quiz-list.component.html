@@ -68,6 +68,12 @@
   </mat-grid-list>
   <div style="max-height: 430px;overflow-y: scroll;">
     <app-quiz-less-info class="quiz" (deleteEmitter)="deleteQuiz($event,quiz)" (selectEmitter)="selectQuiz(quiz)" [do]="this.doQuiz" *ngFor="let quiz of quizList" [quiz]="quiz"></app-quiz-less-info>
+    <div style="display: flex" *ngIf="inviteToCreateQuiz">
+      <span class="h4" style="width: 40%; text-align: center">Votre liste est vide veuillez  </span>
+      <button id="btnCreateQuiz" routerLink="/home-quiz-gestion" style="width: 60%" mat-flat-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>add</mat-icon>
+        Créer un nouveau quiz
+      </button></div>
   </div>
 
 </div>

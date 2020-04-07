@@ -102,7 +102,6 @@ export class QuizDoComponent implements OnInit {
     if (this.index < this.quiz.questions.length - 1) {
     //  console.log('evoooooooooooooooooooooooooo' + this.evolution.quizId);
       this.index = this.index + 1;
-
     } else {
       this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
     }

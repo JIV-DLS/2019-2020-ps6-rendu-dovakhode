@@ -16,6 +16,7 @@ export class QuizListComponent implements OnInit {
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
   public doQuiz;
+  private inviteToCreateQuiz = null;
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,
@@ -27,7 +28,16 @@ export class QuizListComponent implements OnInit {
     this.doQuiz = (this.Activerouter.snapshot.params.do === 'true');
   }
   getAllQuiz() {
-    this.quizService.getQuiz().subscribe((quiz) => this.quizList = quiz);
+    this.quizService.getQuiz().subscribe((quiz) => {
+      if (!quiz) {
+        // tslint:disable-next-line:max-line-length
+        if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) { this.getAllQuiz(); } else {alert('Veuillez conctater l\'administrateur'); return; }
+      }
+
+      this.quizList = quiz;
+      this.inviteToCreateQuiz = this.quizList.length === 0 ;
+
+      });
   }
   quizSelected(selected: boolean) {
   }
