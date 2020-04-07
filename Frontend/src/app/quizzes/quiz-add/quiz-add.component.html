@@ -96,10 +96,8 @@
         <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="addQuestion()">Gérer</button>
       </mat-grid-tile>
       <mat-grid-tile colspan="8" rowspan="16">
-        <div  style="border: black solid 3px; height: 90%;width: 100%; overflow-x: scroll">
-          <!-- <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport"> -->
-            <app-question *ngFor="let question of quiz.questions" [question]="question" ></app-question>
-          <!-- </cdk-virtual-scroll-viewport> -->
+        <div style="display: flex; border: black solid 3px; height: 100%;width: 100%; overflow-x: scroll">
+          <app-question *ngFor="let question of quiz.questions; let i=index;" (delete)="deletedQuestion($event,i)" deletable="true" [number]="i+1" [question]="question" ></app-question>
         </div>
       </mat-grid-tile>
 
@@ -108,8 +106,8 @@
   </mat-card-content>
   <mat-card-footer style="padding-right: 12px;">
     <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
-      <mat-grid-tile colspan="3" rowspan="4">
-        <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="addQuiz()">Ajouter</button>
+      <mat-grid-tile colspan="8" rowspan="4">
+        <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="addQuiz()">Créer une question</button>
       </mat-grid-tile>
       <!--<mat-grid-tile colspan="3" rowspan="4">
         <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-danger" (click)="openDialog()">Annuler</button>

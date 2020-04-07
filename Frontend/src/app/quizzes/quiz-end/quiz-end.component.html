@@ -1,10 +1,24 @@
 
-  <div id="text1">
-    <h5 id="f"> Félicitation! Vous avez réussi le quiz bravo. </h5>
-  </div>
-<br>
-  <div id="b">
-  <div class="bouton-aligne"> <button class="btn btn-primary" (click)="restart()"  id="btn1"> Recommencer le quiz</button> </div>
-    <div class="bouton-aligne"> <button  id="btn2" class="btn btn-warning" [routerLink]="['/quiz-list',{do:true}]"> Changer de quiz</button> </div>
-  </div>
 
+
+  <div style="background-color: white">
+    <mat-grid-list cols="3" rowHeight="20px" style="width: 100%; margin-top: 100px; padding-top: 50px;" >
+      <mat-grid-tile colspan="3" rowspan="5">
+        <div id="text1">
+          <h5 id="f"> Félicitation! Vous avez réussi le quiz bravo. </h5>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="6">
+         <button class="btn btn-primary" (click)="restart()"  id="btn1"> Recommencer le quiz</button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="4">
+        <button  id="btn2" class="btn btn-warning" [routerLink]="['/quiz-list',{do:true}]"> Changer de quiz</button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+  </div>

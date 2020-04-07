@@ -17,4 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
 
+  profil() {
+      alert(environment.maintenanceMessage);
+  }
 }
