@@ -123,9 +123,11 @@ export class QuizAddComponent implements OnInit {
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
     });
-    dialogRef.afterClosed().subscribe(questions => {
+    dialogRef.afterClosed().subscribe(question => {
       this.questionDialogOpened = false;
-      this.questions.setValue( questions ? questions : this.questions );
+      if (question && question.label) {
+        this.quiz.questions.push(question);
+        this.questions.setValue( this.quiz.questions); }
     });
   }
   deleteQuestion(deleteState: boolean) {
@@ -165,6 +167,12 @@ export class QuizAddComponent implements OnInit {
   deleteImage() {
     this.quizForm.get('image').reset();
     this.imagePreview = null;
+  }
+
+  deletedQuestion($event: boolean, index: number) {
+    if ($event) {
+      this.quiz.questions.splice(index, 1);
+    }
   }
 }
 

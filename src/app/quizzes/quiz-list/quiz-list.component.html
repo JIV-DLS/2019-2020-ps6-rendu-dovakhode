@@ -38,9 +38,9 @@
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1">
-      <button routerLink="/" mat-flat-button aria-label="Example icon-button with a heart icon">
-        <mat-icon>home</mat-icon>
-        Retour à l'acceuil
+      <button (click)="location.back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>reply</mat-icon>
+        Retour
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="5" rowspan="1">

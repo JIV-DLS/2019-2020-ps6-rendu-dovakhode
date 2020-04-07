@@ -1,18 +1,25 @@
-<div style="text-align: center; padding-top: 250px;">
+<div style="text-align: center; padding-top: 170px;">
   <mat-grid-list cols="6" rowHeight="25px" style="width: 100%">
     <mat-grid-tile colspan="2" rowspan="6">
       <button [routerLink]="['/home-quiz-gestion']" mat-flat-button aria-label="Example icon-button with a heart icon">
-      Gestion des quiz
+        <mat-icon style="font-size: 130px; width: 90%;height: 75%;">category</mat-icon>
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="6">
       <button [routerLink]="['/home-do-quiz']" mat-flat-button aria-label="Example icon-button with a heart icon">
-       Lancer un quiz
+       <mat-icon style="font-size: 130px; width: 90%;height: 75%;">slideshow</mat-icon>
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="6">
-      <button [routerLink]="['/home-user']" mat-flat-button aria-label="Example icon-button with a heart icon">
-        Gestion des profils
+      <button (click)="profil()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        <mat-icon style="font-size: 130px; width: 90%;height: 75%;">people</mat-icon>
       </button>    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="2">
+      <h2>Gestion des quiz</h2>    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="2">
+      <h2>Lancer un quiz</h2>   </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="2">
+      <h2>Gestion des profils</h2>   </mat-grid-tile>
+
   </mat-grid-list>
 </div>
