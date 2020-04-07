@@ -9,6 +9,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class QuestionComponent implements OnInit {
   @Input() question: Question;
+  @Input() deletable = false;
   @Input() editable: boolean;
   @Output() edit: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() delete: EventEmitter<boolean> = new EventEmitter<boolean>();

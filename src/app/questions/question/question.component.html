@@ -15,13 +15,14 @@
       </mat-grid-tile>
       <mat-grid-tile
         colspan="6"
-        rowspan="1">
-        <h4>{{question.label}}</h4>
+        rowspan="1"
+      style="overflow-y: paged-y; overflow-x: paged-x">
+        <h6>{{question.label}}</h6>
       </mat-grid-tile>
       <mat-grid-tile
         colspan="6"
         rowspan="1">
-        <h5 >{{question?.answers?.length}} réponse(s)</h5>
+        <h5 >{{question?.answers?.length}} réponse{{question?.answers?.length>1?'s':' '}}</h5>
       </mat-grid-tile>
       <mat-grid-tile *ngIf="!question.image"
                      colspan="6"
@@ -30,11 +31,12 @@
       </mat-grid-tile>
       <mat-grid-tile
         colspan="5"
-        rowspan="1">
+        rowspan="1" *ngIf="deletable">
       </mat-grid-tile>
       <mat-grid-tile
         colspan="1"
         rowspan="1"
+        *ngIf="deletable"
         (click)="deleteEvent()" class="j">
         <mat-icon>delete</mat-icon>
       </mat-grid-tile>
