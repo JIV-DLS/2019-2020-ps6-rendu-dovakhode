@@ -36,12 +36,10 @@ export class QuizDoComponent implements OnInit {
               public formBuilder: FormBuilder,
               private evolService: EvolutionService,
               private questionplayed: QuestionPlayedService) {
-    this.evolution = this.evolService.evol as Evolution;
-
-
   }
 
   ngOnInit() {
+    this.evolution = this.evolService.evol as Evolution;
     this.loading = true;
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
@@ -81,10 +79,7 @@ export class QuizDoComponent implements OnInit {
       console.log(this.evolution);
       this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, 455885526655);
       this.index = this.index + 1;
-
-
     } else {
-
       this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
     }
   }
