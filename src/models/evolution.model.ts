@@ -1,11 +1,13 @@
+import {QuestionPlayed} from './questionPlayed.model';
+
 export class Evolution {
   id: number;
-  questionPlayed: any[];
+  questionPlayed: QuestionPlayed[];
   quizId: number;
   dateCreation: Date;
 
   constructor() {
-    this.id = 0 ;
+    this.id = 452 ;
     this.questionPlayed = [];
     this.dateCreation = new Date();
   }

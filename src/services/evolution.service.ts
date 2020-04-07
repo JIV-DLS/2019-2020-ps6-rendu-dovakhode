@@ -7,20 +7,29 @@ import {Answer} from '../models/answer.model';
 import {catchError, tap} from 'rxjs/operators';
 import {Question} from '../models/question.model';
 import {Quiz} from '../models/quiz.model';
-
+import {Injectable} from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
 export class EvolutionService {
+  evol: Evolution;
 
   constructor(private http: HttpClient, private snack: MatSnackBar) {
+    let evol;
+    evol = new Evolution();
   }
   public evolutionUrl = environment.url + '/evolution';
+ // evol: Evolution;
 
 
-  addEvolution(evolution: Evolution) {
+  addEvolution(idQuiz: string) {
     this.snack.open(environment.snackInformation.operation.loading.post.question, 'close',
       {
         ...environment.snackInformation.loadingPost
       })
     ;
+    const evolution = new Evolution();
+    evolution.quizId = parseInt(idQuiz, 10);
     return this.http.post<Evolution>(this.evolutionUrl, evolution).pipe(
       tap((newAnswer) => {
         console.log('Ajout Reussi');

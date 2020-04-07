@@ -7,6 +7,9 @@ import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
+import {Evolution} from '../../../models/evolution.model';
+import {EvolutionService} from '../../../services/evolution.service';
+import {QuestionPlayedService} from '../../../services/questionPlayed.service';
 
 @Component({
   selector: 'app-quiz-do',
@@ -14,6 +17,7 @@ import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
   styleUrls: ['./quiz-do.component.scss']
 })
 export class QuizDoComponent implements OnInit {
+  evolution: Evolution;
   index = 0;
   quiz: Quiz = DEFAULT_QUIZ;
   private imageChanged: boolean;
@@ -29,7 +33,13 @@ export class QuizDoComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               public dialog: MatDialog,
-              public formBuilder: FormBuilder) { }
+              public formBuilder: FormBuilder,
+              private evolService: EvolutionService,
+              private questionplayed: QuestionPlayedService) {
+    this.evolution = this.evolService.evol as Evolution;
+
+
+  }
 
   ngOnInit() {
     this.loading = true;
@@ -68,8 +78,13 @@ export class QuizDoComponent implements OnInit {
   }
   nextQuestion() {
     if (this.index < this.quiz.questions.length - 1) {
+      console.log(this.evolution);
+      this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, 455885526655);
       this.index = this.index + 1;
+
+
     } else {
+
       this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
     }
   }

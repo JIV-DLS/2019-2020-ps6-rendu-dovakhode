@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../../../models/quiz.model';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {Location} from '@angular/common';
+import {EvolutionService} from '../../../services/evolution.service';
+import {Evolution} from '../../../models/evolution.model';
 
 @Component({
   selector: 'app-quiz-do-start',
@@ -16,7 +18,8 @@ export class QuizDoStartComponent implements OnInit {
   constructor(public quizService: QuizService,
               private location: Location,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private evolservice: EvolutionService) { }
 
   ngOnInit() {
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
@@ -32,7 +35,14 @@ export class QuizDoStartComponent implements OnInit {
     this.quiz = quiz;
   }
   start(quiz) {
-    this.router.navigateByUrl('/quiz-do/' + quiz.id);
+ this.evolservice.addEvolution('' + quiz.id).subscribe((evol ) => {
+   if (evol !== undefined) {
+   this.evolservice.evol = evol as Evolution;
+   console.log('+++++++++ ' + this.evolservice.evol.quizId);
+   }
+ });
+ this.router.navigateByUrl('/quiz-do/' + quiz.id );
+
   }
 
 }

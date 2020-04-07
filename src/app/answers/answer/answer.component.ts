@@ -27,6 +27,7 @@ export class AnswerComponent implements OnInit {
     , 1000);
     } else {
       document.getElementById(answer).style.visibility = 'hidden';
+
     }
   }
 }
