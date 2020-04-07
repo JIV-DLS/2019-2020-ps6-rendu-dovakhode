@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {environment} from '../../environments/environment';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-home-do-quiz',
@@ -8,7 +9,7 @@ import {environment} from '../../environments/environment';
 })
 export class HomeDoQuizComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
   }

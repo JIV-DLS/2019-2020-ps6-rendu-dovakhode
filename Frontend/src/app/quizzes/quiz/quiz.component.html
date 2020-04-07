@@ -62,17 +62,12 @@
       <mat-grid-tile colspan="4" rowspan="1">
         <mat-divider></mat-divider>
       </mat-grid-tile>
-      <mat-grid-tile colspan="2" rowspan="3" >
+      <mat-grid-tile colspan="4" rowspan="3" >
         <span style="text-decoration: underline #555555; text-align: left;">Listes des questions(<span class="badge">{{quiz.questions?.length}}</span>):</span>
       </mat-grid-tile>
-      <mat-grid-tile colspan="2" rowspan="3">
-        <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="openDialog()">Ajouter</button>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="4" rowspan="16">
-        <div  style="border: black solid 3px; height: 90%;width: 100%; overflow-x: scroll">
-          <div style="display: flex;">
-            <app-question *ngFor="let question of quiz.questions" [question]="question" ></app-question>
-          </div>
+      <mat-grid-tile colspan="4" rowspan="20">
+        <div style="display: flex; border: black solid 3px; height: 100%;width: 100%; overflow-x: scroll">
+          <app-question *ngFor="let question of quiz.questions; let i=index;"  [number]="i+1" [question]="question" ></app-question>
         </div>
       </mat-grid-tile>
 
