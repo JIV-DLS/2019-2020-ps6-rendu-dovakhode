@@ -1,1 +1,2 @@
-<app-question-do [question]="quiz.questions[index]" (next)="nextQuestion()" ></app-question-do>
+
+<app-question-do [evolution]="this.evolution" [question]="this.quiz.questions[this.index]" (next)="nextQuestion()" ></app-question-do>
