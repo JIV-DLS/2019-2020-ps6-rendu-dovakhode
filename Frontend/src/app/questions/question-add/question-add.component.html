@@ -21,7 +21,7 @@
             *ngFor="let answer of answers.controls; let i=index"
             colspan="1"
             rowspan="1">
-            <div [formGroupName]="i">
+            <div [formGroupName]="i" style="width: 98%;height: 98%">
               <mat-form-field style="width: 55%;">
                 <mat-label>Answer</mat-label>
                 <input [formControlName]="'value'" matInput placeholder="answer" >
