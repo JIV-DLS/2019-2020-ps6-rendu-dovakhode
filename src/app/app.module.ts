@@ -109,6 +109,7 @@ const routes: Routes = [
     QuestionsComponent,
     QuizAddComponent,
     QuizzeEditComponent,
+    EditQuestionComponent,
     AnswerAddComponent,
     NextQuestionComponent,
     SnackModificationComponent

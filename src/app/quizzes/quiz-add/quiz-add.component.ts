@@ -11,6 +11,7 @@ import {SnackModificationComponent} from '../../snack/snack-modification/snack-m
 import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
 import {MatDialogRef} from '@angular/material/dialog';
+import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 
 @Component({
   selector: 'app-quiz-form',
@@ -173,6 +174,21 @@ export class QuizAddComponent implements OnInit {
     if ($event) {
       this.quiz.questions.splice(index, 1);
     }
+  }
+
+  editQuestion($event: boolean, i: number) {
+      const dialogRef = this.dialog.open(EditQuestionComponent, {
+        width: '950px',
+        maxHeight: '500px',
+        data: this.quiz.questions[i]
+      });
+      dialogRef.afterClosed().subscribe(question => {
+        this.questionDialogOpened = false;
+        if (question && question.label) {
+          this.quiz.questions[i] = question;
+          this.questions.setValue(this.quiz.questions);
+        }
+      });
   }
 }
 
