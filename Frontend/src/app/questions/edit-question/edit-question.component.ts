@@ -86,6 +86,7 @@ export class EditQuestionComponent implements OnInit {
     }); }
   }
   getAllAnswers() {
-    // this.answersService.getAnswer(this.question.quizId.toString(), this.question.id.toString()).subscribe((answer) => this.answers = answer);
+    // this.answersService.getAnswer(this.question.quizId.toString(),
+    // this.question.id.toString()).subscribe((answer) => this.answers = answer);
   }
 }
