@@ -93,7 +93,7 @@
         <span style="text-decoration: underline #555555; text-align: left;">Listes des questions(<span class="badge">{{quiz.questions?.length}}</span>):</span>
       </mat-grid-tile>
       <mat-grid-tile colspan="4" rowspan="3">
-        <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="addQuestion()">Gérer</button>
+        <button style="height: 100%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="addQuestion()">Créer une question</button>
       </mat-grid-tile>
       <mat-grid-tile colspan="8" rowspan="16">
         <div style="display: flex; border: black solid 3px; height: 100%;width: 100%; overflow-x: scroll">
@@ -107,7 +107,7 @@
   <mat-card-footer style="padding-right: 12px;">
     <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
       <mat-grid-tile colspan="8" rowspan="4">
-        <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="addQuiz()">Créer une question</button>
+        <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="addQuiz()">Créer le quiz</button>
       </mat-grid-tile>
       <!--<mat-grid-tile colspan="3" rowspan="4">
         <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-danger" (click)="openDialog()">Annuler</button>

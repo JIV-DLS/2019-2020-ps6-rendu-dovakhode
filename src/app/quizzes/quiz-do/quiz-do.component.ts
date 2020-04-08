@@ -7,6 +7,11 @@ import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
+import {Evolution} from '../../../models/evolution.model';
+import {EvolutionService} from '../../../services/evolution.service';
+import {QuestionPlayedService} from '../../../services/questionPlayed.service';
+import {Subscription} from 'rxjs';
+import {QuestionPlayed} from '../../../models/questionPlayed.model';
 
 @Component({
   selector: 'app-quiz-do',
@@ -14,6 +19,8 @@ import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
   styleUrls: ['./quiz-do.component.scss']
 })
 export class QuizDoComponent implements OnInit {
+  evolution: Evolution;
+  questionList: QuestionPlayed[] = [];
   index = 0;
   quiz: Quiz = DEFAULT_QUIZ;
   private imageChanged: boolean;
@@ -24,12 +31,17 @@ export class QuizDoComponent implements OnInit {
   public difficultiesValues = Object.values(difficulte);
   private imagePreview: string;
   loading: boolean;
+  evolutionSubscription: Subscription;
   constructor(private location: Location,
               public quizService: QuizService,
               private route: ActivatedRoute,
               private router: Router,
               public dialog: MatDialog,
-              public formBuilder: FormBuilder) { }
+              public formBuilder: FormBuilder,
+              private evolService: EvolutionService,
+              private questionplayed: QuestionPlayedService) {
+
+  }
 
   ngOnInit() {
     this.loading = true;
@@ -37,12 +49,31 @@ export class QuizDoComponent implements OnInit {
       .subscribe((quiz) => {
         this.initializeTheForm(quiz);
       }, (error) => {this.retour(); });
+    const idEvol = +(this.route.snapshot.params.evol);
+    this.evolService.getEvolutionById(idEvol).subscribe((evol) => {
+        this.evolution = evol;
+        this.getQuestionPlayedList();
+    }
+    );
+
 
   }
   initializeTheForm(quiz) {
     this.quiz = quiz;
     this.quizForm = this.quizzFormInitializer();
 
+  }
+  getQuestionPlayedList() {
+    this.questionplayed.getQuestionPlayed('' + this.evolution.id).subscribe((questions) => {
+      this.questionList = [];
+      this.questionList = questions;
+      this.index = this.questionList.length;
+      this.loading = false;
+      if (this.questionList.length >= this.quiz.questions.length ) {
+        this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
+      }
+      console.log('nombre de question de evolution: ' + this.questionList.length);
+    });
   }
 
   quizzFormInitializer() {
@@ -68,6 +99,7 @@ export class QuizDoComponent implements OnInit {
   }
   nextQuestion() {
     if (this.index < this.quiz.questions.length - 1) {
+    //  console.log('evoooooooooooooooooooooooooo' + this.evolution.quizId);
       this.index = this.index + 1;
     } else {
       this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
