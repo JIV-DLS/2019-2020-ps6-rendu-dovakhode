@@ -33,7 +33,7 @@ export class QuizAddComponent implements OnInit {
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
   private questionDialogOpened = false;
-  private imagePreview: string;
+  public imagePreview: string;
 
   constructor(private location: Location,
               public dialogRef: MatDialogRef<QuizAddComponent>,
