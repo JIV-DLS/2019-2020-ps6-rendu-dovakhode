@@ -22,14 +22,14 @@ import {EditQuestionComponent} from '../../questions/edit-question/edit-question
 })
 export class QuizzeEditComponent implements OnInit {
   quiz: Quiz;
-  private imageChanged: boolean;
+  public imageChanged: boolean;
   private savedImage: string;
   private savedQuestions: Question[];
   private questionDialogOpened = false;
   public quizForm: FormGroup;
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
-  private imagePreview: string;
+  public imagePreview: string;
   loading: boolean;
   others: boolean;
   private deletedQuestions = [];
