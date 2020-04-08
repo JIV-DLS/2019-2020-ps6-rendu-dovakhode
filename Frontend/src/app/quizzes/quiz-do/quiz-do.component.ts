@@ -41,42 +41,38 @@ export class QuizDoComponent implements OnInit {
               private evolService: EvolutionService,
               private questionplayed: QuestionPlayedService) {
 
-
   }
 
   ngOnInit() {
-
-    this.evolutionSubscription = this.evolService.evolutionSubject.subscribe((evolution) => {
-      this.evolution = evolution;
-    //  console.log('evol de quiz do  first' + this.evolution.id);
-    });
-    this.evolService.emitEvolution();
     this.loading = true;
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
         this.initializeTheForm(quiz);
       }, (error) => {this.retour(); });
     const idEvol = +(this.route.snapshot.params.evol);
-   // console.log(idEvol);
-    this.evolService.getEvolutionById(idEvol).subscribe((evol) =>
-    this.evolution = evol),
-   // console.log('evol de quiz do  second' + this.evolution.id);
-    this.getQuestiontoshow();
-
-    if (this.questionList.length !== 0) {
-      this.index = this.questionList.length;
+    this.evolService.getEvolutionById(idEvol).subscribe((evol) => {
+        this.evolution = evol;
+        this.getQuestionPlayedList();
     }
+    );
+
+
   }
   initializeTheForm(quiz) {
     this.quiz = quiz;
     this.quizForm = this.quizzFormInitializer();
 
   }
-  getQuestiontoshow() {
+  getQuestionPlayedList() {
     this.questionplayed.getQuestionPlayed('' + this.evolution.id).subscribe((questions) => {
       this.questionList = [];
       this.questionList = questions;
-      console.log('nombre de question de cette nouvelle evolution: ' + this.questionList.length);
+      this.index = this.questionList.length;
+      this.loading = false;
+      if (this.questionList.length >= this.quiz.questions.length ) {
+        this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
+      }
+      console.log('nombre de question de evolution: ' + this.questionList.length);
     });
   }
 

@@ -53,6 +53,7 @@ import { HomeUserComponent } from './home-user/home-user.component';
 import { HomeDoQuizComponent } from './home-do-quiz/home-do-quiz.component';
 import {EvolutionService} from '../services/evolution.service';
 import {QuestionPlayedService} from '../services/questionPlayed.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -61,7 +62,7 @@ const routes: Routes = [
   {path: 'home-quiz-gestion', component: HomeQuizComponent},
   {path: 'home-user', component: HomeUserComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
-  {path: 'quiz-do/:id/:evol/' , component: QuizDoComponent},
+  {path: 'quiz-do/:id/running/:evol' , component: QuizDoComponent},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent},
   {path: 'quiz-list', component: QuizListComponent},
@@ -135,6 +136,7 @@ const routes: Routes = [
     MatDividerModule,
     ScrollingModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
