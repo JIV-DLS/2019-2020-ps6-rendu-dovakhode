@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Answer} from '../../../models/answer.model';
 
 @Component({
-  selector: 'app-answer',
+  selector: ' app-answer',
   templateUrl: './answer.component.html',
   styleUrls: ['./answer.component.scss']
 })
@@ -11,10 +11,16 @@ export class AnswerComponent implements OnInit {
   answer: Answer;
   @Output()
   goodAnswerSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  delete: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit() {
 
+  }
+
+  deleteEvent() {
+    this.delete.emit(confirm('Êtes vous sûr de vouloir supprimer la réponse ' + this.answer.value + '?'));
   }
 
   isTrue(answer) {

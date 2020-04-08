@@ -13,6 +13,7 @@ import {QuestionService} from '../../../services/question.service';
 import {Question} from '../../../models/question.model';
 import {Answer} from '../../../models/answer.model';
 import {AnswersService} from '../../../services/answers.service';
+import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 
 @Component({
   selector: 'app-quizze-edit',
@@ -175,5 +176,21 @@ export class QuizzeEditComponent implements OnInit {
       this.deletedQuestions.push(this.quiz.questions[index]);
       this.quiz.questions.splice(index, 1);
     }
+  }
+
+  editQuestion($event: boolean, i: number) {
+    const dialogRef = this.dialog.open(EditQuestionComponent, {
+      width: '950px',
+      maxHeight: '500px',
+      data: this.quiz.questions[i]
+    });
+    dialogRef.afterClosed().subscribe(question => {
+      this.questionDialogOpened = false;
+      if (question && question.label) {
+        if (!this.others) {this.others = true; }
+        this.quiz.questions[i] = question;
+        this.questions.setValue(this.quiz.questions);
+      }
+    });
   }
 }

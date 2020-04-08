@@ -97,7 +97,7 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="8" rowspan="16">
         <div style="display: flex; border: black solid 3px; height: 100%;width: 100%; overflow-x: scroll">
-          <app-question *ngFor="let question of quiz.questions; let i=index;" (delete)="deletedQuestion($event,i)" deletable="true" [number]="i+1" [question]="question" ></app-question>
+          <app-question *ngFor="let question of quiz.questions; let i=index;" (delete)="deletedQuestion($event,i)" (edit)="editQuestion($event,i) " editable="true" deletable="true" [number]="i+1" [question]="question" ></app-question>
         </div>
       </mat-grid-tile>
 

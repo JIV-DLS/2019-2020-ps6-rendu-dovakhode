@@ -30,8 +30,15 @@
         <!-- *ngFor="let answer of question?.answers"<span style="width: 100%;height: 100%;" [class.btn-primary]="answer.isCorrect" [class.btn-secondary]="!answer.isCorrect">{{answer.value}}</span>-->
       </mat-grid-tile>
       <mat-grid-tile
-        colspan="5"
+        colspan="4"
         rowspan="1" *ngIf="deletable">
+      </mat-grid-tile>
+      <mat-grid-tile
+        colspan="1"
+        rowspan="1"
+        *ngIf="editable"
+        (click)="editEvent()" class="j">
+        <mat-icon>edit</mat-icon>
       </mat-grid-tile>
       <mat-grid-tile
         colspan="1"
