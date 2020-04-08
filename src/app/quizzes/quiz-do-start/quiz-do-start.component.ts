@@ -44,7 +44,7 @@ export class QuizDoStartComponent implements OnInit {
         console.log('voici l evol créée ' + evol.id + '' + evol.quizId);
         this.Evolution = evol;
         console.log('ok' + this.Evolution.id);
-        this.router.navigateByUrl('/quiz-do/' + quiz.id  + '/' + this.Evolution.id + '/');
+        this.router.navigateByUrl('/quiz-do/' + quiz.id  + '/running/' + this.Evolution.id);
 
       }
     });
