@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Question} from '../../../models/question.model';
 import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
 import {MatDialog} from '@angular/material/dialog';
@@ -10,15 +10,17 @@ import {Evolution} from '../../../models/evolution.model';
   templateUrl: './question-do.component.html',
   styleUrls: ['./question-do.component.scss']
 })
-export class QuestionDoComponent implements OnInit {
+export class QuestionDoComponent implements OnInit, OnChanges  {
   @Input() question: Question = DEFAULT_QUESTION;
   @Input() evolution: Evolution ;
+  trials: number;
   @Output()
-  next: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(  public dialog: MatDialog
+  next: EventEmitter<number> = new EventEmitter<number>();
+  constructor( public dialog: MatDialog
   ) { }
 
   ngOnInit() {
+    this.trials = 0;
   }
 
   nextQuestion(next: boolean) {
@@ -29,8 +31,17 @@ export class QuestionDoComponent implements OnInit {
         disableClose: true,
       });
       dialogRef.afterClosed().subscribe(result => {
-        this.next.emit(true);
+        this.next.emit(this.trials);
       });
     }
+  }
+
+  cliked() {
+    this.trials++;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.trials = 0;
+    console.log(changes);
   }
 }
