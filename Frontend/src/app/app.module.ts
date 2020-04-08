@@ -54,6 +54,8 @@ import { HomeDoQuizComponent } from './home-do-quiz/home-do-quiz.component';
 import {EvolutionService} from '../services/evolution.service';
 import {QuestionPlayedService} from '../services/questionPlayed.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -138,6 +140,7 @@ const routes: Routes = [
     ScrollingModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},

@@ -16,7 +16,7 @@ export class QuizListComponent implements OnInit {
   public themesValues = Object.values(theme);
   public difficultiesValues = Object.values(difficulte);
   public doQuiz;
-  private inviteToCreateQuiz = null;
+  public inviteToCreateQuiz = null;
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,
