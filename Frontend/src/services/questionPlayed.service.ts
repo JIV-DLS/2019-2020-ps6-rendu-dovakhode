@@ -5,23 +5,28 @@ import {Question} from '../models/question.model';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {QuestionPlayed} from '../models/questionPlayed.model';
-
+import {Injectable} from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
 export class QuestionPlayedService {
   constructor(private http: HttpClient, private snack: MatSnackBar) {
   }
 
   questionplayedUrl(evolutionId) {
-    return environment.url + '/' + evolutionId + '/questionPlayed';
+    return environment.url + '/evolution/' + evolutionId + '/questionPlayed';
   }
 
-  addQuestionPlayed(question: QuestionPlayed): Observable<QuestionPlayed> {
+  addQuestionPlayed(idQuestion: number, evolutionId: number): Observable<QuestionPlayed> {
     this.snack.open(environment.snackInformation.operation.loading.post.question, 'close',
       {
         ...environment.snackInformation.loadingPost
       })
     ;
+    const question = new QuestionPlayed();
+    question.idQuestion = idQuestion;
     console.log(question);
-    return this.http.post<QuestionPlayed>(this.questionplayedUrl(question.EvolutionId), question).pipe(
+    return this.http.post<QuestionPlayed>(this.questionplayedUrl(evolutionId), question).pipe(
 
       tap((newQuestion: QuestionPlayed) => {
 
@@ -56,14 +61,7 @@ export class QuestionPlayedService {
     );
   }
 
-  setQuestionsFromUrl( quizId: string) {
-    this.http.get<QuestionPlayed[]>(this.questionplayedUrl(quizId)).subscribe(
-      (question) => {
-        // this.questions = question;
-        // this.questions$.next(this.questions);
-      }
-    );
-  }
+
   getQuestionPlayed( evolutionId: string): Observable<QuestionPlayed[]>  {
     return this.http.get<QuestionPlayed[]>(this.questionplayedUrl(evolutionId)).pipe(
       tap((question) => {

@@ -9,7 +9,7 @@
         *ngFor="let answer of question?.answers"
         colspan="1"
         rowspan="1">
-        <app-answer [answer]="answer" (goodAnswerSelected)="nextQuestion($event)" ></app-answer>
+        <app-answer [question]="question" [evolution]="evolution" [answer]="answer" (goodAnswerSelected)="nextQuestion($event)" ></app-answer>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>

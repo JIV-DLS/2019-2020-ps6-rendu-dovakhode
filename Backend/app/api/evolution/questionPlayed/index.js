@@ -1,6 +1,6 @@
 const { Router } = require('express')
 
-const { QuestionPlayed } = require('../../models')
+const { QuestionPlayed } = require('../../../models')
 
 const router = new Router({ mergeParams: true })
 function getById(idQuiz, idQues) {
@@ -22,7 +22,7 @@ function get(id) {
 
 router.post('/', (req, res) => {
   try {
-    const question = QuestionPlayed.create({ ...req.body, evolutionId: parseInt(req.params.evolutionId, 10) })
+    const question = QuestionPlayed.create({ ...req.body, EvolutionId: parseInt(req.params.evolutionId, 10) })
     res.status(201).json(question)
   } catch (err) {
     if (err.name === 'ValidationError') {
