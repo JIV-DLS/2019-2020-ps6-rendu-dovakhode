@@ -12,6 +12,7 @@ import {EvolutionService} from '../../../services/evolution.service';
 import {QuestionPlayedService} from '../../../services/questionPlayed.service';
 import {Subscription} from 'rxjs';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
+import {Question} from '../../../models/question.model';
 
 @Component({
   selector: 'app-quiz-do',
@@ -57,12 +58,19 @@ export class QuizDoComponent implements OnInit {
                 this.shuffle(this.quiz.questions[i].answers);
               }
               this.getQuestionPlayedList();
+
+              this.shuffle(this.quiz.questions);
             }
           }, (error) => {this.retour(); });
     }
     );
 
 
+  }
+
+  deleteQuestion(question: Question) {
+    this.index = this.quiz.questions.indexOf(question);
+    this.quiz.questions.splice(this.index, 1);
   }
   shuffle(array) {
     // tslint:disable-next-line:one-variable-per-declaration
@@ -87,13 +95,27 @@ export class QuizDoComponent implements OnInit {
     this.quizForm = this.quizzFormInitializer();
 
   }
+  getQuestionById(id: number) {
+    const question = this.quiz.questions.find(
+      (s) => {
+        return s.id === id;
+      }
+    );
+    return question;
+  }
   getQuestionPlayedList() {
     this.questionplayed.getQuestionPlayed('' + this.evolution.id).subscribe((questions) => {
       this.questionList = [];
       this.questionList = questions;
-      this.index = this.questionList.length;
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.questionList.length; i++) {
+       const id = this.questionList[i].idQuestion;
+       this.deleteQuestion(this.getQuestionById(id));
+
+      }
       this.loading = false;
-      if (this.questionList.length >= this.quiz.questions.length ) {
+      if (this.index >= this.quiz.questions.length ) {
         this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
       }
       console.log('nombre de question de evolution: ' + this.questionList.length);
@@ -121,7 +143,10 @@ export class QuizDoComponent implements OnInit {
   get label() {
     return this.quizForm.get('label') as FormArray;
   }
-  nextQuestion() {
+  nextQuestion(trials: number) {
+    console.log('hey');
+    this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, this.evolution.id, trials).subscribe();
+
     if (this.index < this.quiz.questions.length - 1) {
     //  console.log('evoooooooooooooooooooooooooo' + this.evolution.quizId);
       this.index = this.index + 1;

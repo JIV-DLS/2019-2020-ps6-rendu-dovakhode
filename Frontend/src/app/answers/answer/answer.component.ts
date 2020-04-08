@@ -10,8 +10,10 @@ import {QuestionPlayedService} from '../../../services/questionPlayed.service';
   styleUrls: ['./answer.component.scss']
 })
 export class AnswerComponent implements OnInit {
+  trials = 0;
   @Input()
   answer: Answer;
+
   @Input() question: Question;
   @Input() evolution: Evolution;
   @Output()
@@ -32,15 +34,18 @@ export class AnswerComponent implements OnInit {
   isTrue(answer) {
     console.log(answer);
     const styleButton = document.getElementById(answer).style;
+    console.log('premier trial' + this.trials);
     if (this.answer.isCorrect) {
-      this.questionplayed.addQuestionPlayed(this.question.id, this.evolution.id).subscribe();
-
+      console.log('trials' + this.trials);
       styleButton.backgroundColor = 'green';
       styleButton.fontWeight = 'bold';
       setTimeout(() =>    this.goodAnswerSelected.emit(true)
     , 1000);
     } else {
+      this.trials++;
+      console.log('trials' + this.trials);
       document.getElementById(answer).style.visibility = 'hidden';
+
 
     }
   }

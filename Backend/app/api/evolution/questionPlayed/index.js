@@ -14,7 +14,6 @@ function getById(idQuiz, idQues) {
 function get(id) {
   const ques = []
   for (let i = 0; i < QuestionPlayed.items.length; i++) {
-    console.log('afi')
     if (QuestionPlayed.items[i].EvolutionId === parseInt(id, 10)) { ques.push(QuestionPlayed.items[i]) }
   }
   return ques

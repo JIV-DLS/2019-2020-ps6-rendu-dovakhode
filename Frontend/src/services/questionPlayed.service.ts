@@ -17,24 +17,16 @@ export class QuestionPlayedService {
     return environment.url + '/evolution/' + evolutionId + '/questionPlayed';
   }
 
-  addQuestionPlayed(idQuestion: number, evolutionId: number): Observable<QuestionPlayed> {
-    this.snack.open(environment.snackInformation.operation.loading.post.question, 'close',
-      {
-        ...environment.snackInformation.loadingPost
-      })
-    ;
+  addQuestionPlayed(idQuestion: number, evolutionId: number, trial: number): Observable<QuestionPlayed> {
+
     const question = new QuestionPlayed();
     question.idQuestion = idQuestion;
+    question.trials = trial;
     console.log(question);
     return this.http.post<QuestionPlayed>(this.questionplayedUrl(evolutionId), question).pipe(
 
       tap((newQuestion: QuestionPlayed) => {
 
-        this.snack.open(environment.snackInformation.operation.succeeded.post.question, 'close',
-          {
-            ...environment.snackInformation.successForAll
-          })
-        ;
       }),
       catchError(this.handleError<QuestionPlayed>('addQuestionPlayed', undefined))
     );
@@ -42,20 +34,11 @@ export class QuestionPlayedService {
 
 
   deleteQuestionPlayed(question: QuestionPlayed): Observable<QuestionPlayed>  {
-    this.snack.open(environment.snackInformation.operation.loading.delete.question, 'close',
-      {
-        ...environment.snackInformation.loadingDelete
-      })
-    ;
+
     return this.http.delete<QuestionPlayed>(this.questionplayedUrl(question.EvolutionId) + '/' + question.id).pipe(
       tap((questionDeleted) => {
         console.log('Suppression reussie');
-        this.snack.open(environment.snackInformation.operation.succeeded.delete.question, 'close',
-          {
-            ...environment.snackInformation.successForAll
 
-          })
-        ;
       }),
       catchError(this.handleError<QuestionPlayed>('deleteQuestionPlayed', undefined))
     );
