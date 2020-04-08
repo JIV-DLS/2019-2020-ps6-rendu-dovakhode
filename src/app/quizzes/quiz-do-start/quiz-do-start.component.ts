@@ -6,6 +6,8 @@ import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {Location} from '@angular/common';
 import {EvolutionService} from '../../../services/evolution.service';
 import {Evolution} from '../../../models/evolution.model';
+import {CookieService} from 'ngx-cookie-service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-quiz-do-start',
@@ -20,7 +22,8 @@ export class QuizDoStartComponent implements OnInit {
               private location: Location,
               private route: ActivatedRoute,
               private router: Router,
-              private evolservice: EvolutionService) {
+              private evolservice: EvolutionService,
+              private cookiesService: CookieService) {
 
   }
 
@@ -44,8 +47,8 @@ export class QuizDoStartComponent implements OnInit {
         console.log('voici l evol créée ' + evol.id + '' + evol.quizId);
         this.Evolution = evol;
         console.log('ok' + this.Evolution.id);
-        this.router.navigateByUrl('/quiz-do/' + quiz.id  + '/running/' + this.Evolution.id);
-
+        this.cookiesService.set(environment.runningQuiz, this.Evolution.id + '');
+        this.router.navigateByUrl('/quiz-do/' + this.Evolution.id);
       }
     });
 

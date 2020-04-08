@@ -108,8 +108,8 @@ export const environment = {
 
       }
     }
-  }
-
+  },
+  runningQuiz: 'DovaQuiz'
 
 
 };

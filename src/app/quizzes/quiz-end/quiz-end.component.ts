@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-quiz-end',
@@ -8,10 +10,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class QuizEndComponent implements OnInit {
 id: string;
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+              private cookiesService: CookieService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
+    if (this.cookiesService.check(environment.runningQuiz)) {
+    this.cookiesService.delete(environment.runningQuiz, '/');
+    }
   }
 
   restart() {

@@ -45,21 +45,45 @@ export class QuizDoComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
-      .subscribe((quiz) => {
-        this.initializeTheForm(quiz);
-      }, (error) => {this.retour(); });
     const idEvol = +(this.route.snapshot.params.evol);
     this.evolService.getEvolutionById(idEvol).subscribe((evol) => {
         this.evolution = evol;
-        this.getQuestionPlayedList();
+        this.quizService.getQuizById(+evol.quizId)
+          .subscribe((quiz) => {
+            if (quiz) {
+              this.quiz = quiz;
+              // tslint:disable-next-line:prefer-for-of
+              for (let i = 0; i < this.quiz.questions.length; i++) {
+                this.shuffle(this.quiz.questions[i].answers);
+              }
+              this.getQuestionPlayedList();
+            }
+          }, (error) => {this.retour(); });
     }
     );
 
 
   }
-  initializeTheForm(quiz) {
-    this.quiz = quiz;
+  shuffle(array) {
+    // tslint:disable-next-line:one-variable-per-declaration
+    let currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+  initializeTheForm() {
     this.quizForm = this.quizzFormInitializer();
 
   }
