@@ -16,7 +16,8 @@ export class AnswerComponent implements OnInit {
   @Input() evolution: Evolution;
   @Output()
   goodAnswerSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+  @Output()
+  delete: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private questionplayed: QuestionPlayedService) { }
 
 
