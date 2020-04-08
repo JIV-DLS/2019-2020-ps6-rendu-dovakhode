@@ -10,7 +10,7 @@ import {Location} from '@angular/common';
 export class HomeQuizComponent implements OnInit {
   dialogWidth = '950px';
   dialogHeight = '500px';
-  constructor(private location: Location, private dialog: MatDialog) { }
+  constructor(public location: Location, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
