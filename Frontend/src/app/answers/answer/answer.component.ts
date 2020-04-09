@@ -20,6 +20,7 @@ export class AnswerComponent implements OnInit {
   goodAnswerSelected: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   delete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  checked = null;
   constructor(private questionplayed: QuestionPlayedService) { }
 
 
@@ -31,22 +32,13 @@ export class AnswerComponent implements OnInit {
     this.delete.emit(confirm('Êtes vous sûr de vouloir supprimer la réponse ' + this.answer.value + '?'));
   }
 
-  isTrue(answer) {
-    console.log(answer);
-    const styleButton = document.getElementById(answer).style;
-    console.log('premier trial' + this.trials);
+  checkAnswer() {
     if (this.answer.isCorrect) {
-      console.log('trials' + this.trials);
-      styleButton.backgroundColor = 'green';
-      styleButton.fontWeight = 'bold';
+      this.checked = true;
       setTimeout(() =>    this.goodAnswerSelected.emit(true)
-    , 1000);
+    , 200);
     } else {
-      this.trials++;
-      console.log('trials' + this.trials);
-      document.getElementById(answer).style.visibility = 'hidden';
-
-
+      this.checked = false;
     }
   }
 }
