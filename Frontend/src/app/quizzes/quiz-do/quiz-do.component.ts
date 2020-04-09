@@ -49,6 +49,7 @@ export class QuizDoComponent implements OnInit {
     this.startWithEvolution();
   }
   startWithEvolution() {
+    this.index = 0;
     const idEvol = +(this.route.snapshot.params.evol);
     this.evolService.getEvolutionById(idEvol).subscribe((evol) => {
         this.evolution = evol;
@@ -107,7 +108,6 @@ export class QuizDoComponent implements OnInit {
     this.questionplayed.getQuestionPlayed('' + this.evolution.id).subscribe((questions) => {
       this.questionList = [];
       this.questionList = questions;
-
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.questionList.length; i++) {
         if (this.questionList[i].trials < 2) {
@@ -119,7 +119,6 @@ export class QuizDoComponent implements OnInit {
       if (this.index >= this.quiz.questions.length ) {
         this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
       }
-      console.log('nombre de question de evolution: ' + this.questionList.length);
     });
   }
 
