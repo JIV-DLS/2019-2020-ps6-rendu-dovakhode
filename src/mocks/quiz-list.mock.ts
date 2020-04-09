@@ -53,8 +53,10 @@ export const DEFAULT_QUIZ: Quiz = {
   },
 
   id: null,
-  label: null,
-  theme: null,
+  label: '',
+  theme: '',
+  subTheme: '',
+  difficulty: '',
   questions: []
 
 };
