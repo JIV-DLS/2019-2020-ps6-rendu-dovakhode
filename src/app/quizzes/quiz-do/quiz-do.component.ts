@@ -46,6 +46,9 @@ export class QuizDoComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.startWithEvolution();
+  }
+  startWithEvolution() {
     const idEvol = +(this.route.snapshot.params.evol);
     this.evolService.getEvolutionById(idEvol).subscribe((evol) => {
         this.evolution = evol;
@@ -62,12 +65,9 @@ export class QuizDoComponent implements OnInit {
               this.shuffle(this.quiz.questions);
             }
           }, (error) => {this.retour(); });
-    }
+      }
     );
-
-
   }
-
   deleteQuestion(question: Question) {
     this.index = this.quiz.questions.indexOf(question);
     this.quiz.questions.splice(this.index, 1);
@@ -110,9 +110,10 @@ export class QuizDoComponent implements OnInit {
 
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.questionList.length; i++) {
-       const id = this.questionList[i].idQuestion;
-       this.deleteQuestion(this.getQuestionById(id));
-
+        if (this.questionList[i].trials < 2) {
+          const id = this.questionList[i].idQuestion;
+          this.deleteQuestion(this.getQuestionById(id));
+        }
       }
       this.loading = false;
       if (this.index >= this.quiz.questions.length ) {
@@ -144,14 +145,12 @@ export class QuizDoComponent implements OnInit {
     return this.quizForm.get('label') as FormArray;
   }
   nextQuestion(trials: number) {
-    console.log('hey');
     this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, this.evolution.id, trials).subscribe();
 
     if (this.index < this.quiz.questions.length - 1) {
-    //  console.log('evoooooooooooooooooooooooooo' + this.evolution.quizId);
       this.index = this.index + 1;
     } else {
-      this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
+      this.startWithEvolution();
     }
   }
   retour() {
