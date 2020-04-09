@@ -36,7 +36,7 @@ export class AnswerComponent implements OnInit {
     if (this.answer.isCorrect) {
       this.checked = true;
       setTimeout(() =>    this.goodAnswerSelected.emit(true)
-    , 200);
+    , 1000);
     } else {
       this.checked = false;
     }
