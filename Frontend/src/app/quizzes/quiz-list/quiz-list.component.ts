@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
-import {difficulte, theme} from '../../../models/theme.models';
+import { difficulteSearch, themeSearch} from '../../../models/theme.models';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 
 @Component({
   selector: ' app-quiz-list',
@@ -13,10 +14,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class QuizListComponent implements OnInit {
 
   public quizList: Quiz[] = [];
-  public themesValues = Object.values(theme);
-  public difficultiesValues = Object.values(difficulte);
+  public themesValues = Object.values(themeSearch);
+  public difficultiesValues = Object.values(difficulteSearch);
   public doQuiz;
   public inviteToCreateQuiz = null;
+  public searchedQuiz: Quiz = DEFAULT_QUIZ;
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { QuizListComponent } from './quizzes/quiz-list/quiz-list.component';
@@ -56,6 +56,7 @@ import {QuestionPlayedService} from '../services/questionPlayed.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { QuizSearchPipe } from './quizzes/_pipes/quiz-search.pipe';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -108,7 +109,8 @@ const routes: Routes = [
     NextQuestionComponent,
     HomeQuizComponent,
     HomeUserComponent,
-    HomeDoQuizComponent
+    HomeDoQuizComponent,
+    QuizSearchPipe
   ],
   entryComponents: [
     QuestionsComponent,
@@ -140,7 +142,8 @@ const routes: Routes = [
     ScrollingModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    FormsModule,
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
