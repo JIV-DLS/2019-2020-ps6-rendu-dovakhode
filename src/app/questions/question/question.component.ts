@@ -16,10 +16,6 @@ export class QuestionComponent implements OnInit {
   @Input()number = 0;
   ngOnInit(): void {
   }
-
-  makeEditable() {
-    this.edit.emit(true);
-  }
   deleteEvent() {
     this.delete.emit(confirm('Êtes vous sûr de vouloir supprimer la question ' + this.question.label + '?'));
   }

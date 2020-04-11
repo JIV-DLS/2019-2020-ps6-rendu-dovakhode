@@ -24,7 +24,8 @@ export class EditQuestionComponent implements OnInit {
   }
 
   @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<EditQuestionComponent>,
+  constructor(public formBuilder: FormBuilder,
+              public dialogRef: MatDialogRef<EditQuestionComponent>,
               public dialog: MatDialog,
               public answersService: AnswersService,
               @Inject(MAT_DIALOG_DATA) public questionDialog: Question) { }

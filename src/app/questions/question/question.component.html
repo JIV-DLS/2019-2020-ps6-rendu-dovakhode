@@ -1,9 +1,6 @@
 <mat-card style="width: 300px; height: 100%">
   <mat-card-title>
     <b>Question N°{{number}}</b>
-    <button *ngIf="editable" (click)="makeEditable()" mat-flat-button aria-label="Cancel" style="position:absolute; right:20px;">
-    <mat-icon>edit</mat-icon>
-  </button>
   </mat-card-title>
   <mat-card-content>
     <mat-grid-list cols="6" rowHeight="30px">
@@ -11,6 +8,8 @@
       <mat-grid-tile *ngIf="question.image"
         colspan="6"
         rowspan="2">
+        <img [src]="question.image" style=" height: 100%;width: 100%;" [alt]="question.label"/>
+
         <!-- *ngFor="let answer of question?.answers"<span style="width: 100%;height: 100%;" [class.btn-primary]="answer.isCorrect" [class.btn-secondary]="!answer.isCorrect">{{answer.value}}</span>-->
       </mat-grid-tile>
       <mat-grid-tile

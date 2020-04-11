@@ -12,6 +12,7 @@ import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
 import {MatDialogRef} from '@angular/material/dialog';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
+import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
 
 @Component({
   selector: 'app-quiz-form',
@@ -35,8 +36,7 @@ export class QuizAddComponent implements OnInit {
   private questionDialogOpened = false;
   public imagePreview: string;
 
-  constructor(private location: Location,
-              public dialogRef: MatDialogRef<QuizAddComponent>,
+  constructor(public dialogRef: MatDialogRef<QuizAddComponent>,
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
               public quizService: QuizService) {
@@ -177,7 +177,7 @@ export class QuizAddComponent implements OnInit {
   }
 
   editQuestion($event: boolean, i: number) {
-      const dialogRef = this.dialog.open(EditQuestionComponent, {
+      const dialogRef = this.dialog.open(QuestionsComponent, {
         width: '950px',
         maxHeight: '500px',
         data: this.quiz.questions[i]
