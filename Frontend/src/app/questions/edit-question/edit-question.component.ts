@@ -8,6 +8,7 @@ import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component'
 import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
 import {Location} from '@angular/common';
 import {AnswersService} from '../../../services/answers.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-edit-question',
@@ -64,12 +65,28 @@ export class EditQuestionComponent implements OnInit {
   edit() {
 
   }
+  /*selectAnswer(answer: Answer) {
+      this.router.navigateByUrl('/quiz-edit/' + answer.questionId + '/' + answer.id);
+  }*/
+  col() {
+    if (this.question.image) {
+      return 6;
+    } else {
+      return 5;
+    }
+  }
 
   retour() {
     this.dialogRef.close();
   }
-
-  openDialog() {
+  addAnswer() {
+    if (this.answers.length < 4) {
+      this.openDialog();
+    } else {
+      alert('Vous ne pouvez pas ajouter plus de 4 réponses à une question');
+    }
+  }
+  openDialog(): void {
     const dialogRef = this.dialog.open(AnswerAddComponent, {
       width: '950px',
       maxHeight: '500px',
