@@ -10,6 +10,7 @@ import {QuestionService} from '../../services/question.service';
 })
 export class QuestionsComponent implements OnInit {
   @Input() questionEdition = null;
+  public imagePreview: string;
   constructor(
     public dialogRef: MatDialogRef<QuestionsComponent>,
     // public questionService: QuestionService,

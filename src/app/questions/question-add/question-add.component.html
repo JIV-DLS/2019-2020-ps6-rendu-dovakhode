@@ -11,34 +11,52 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="questionForm">
-      <mat-form-field style="width: 100%">
+      <mat-form-field style="width: 50%">
         <mat-label>Title</mat-label>
         <input matInput placeholder="title" [formControlName]="'label'" >
       </mat-form-field>
-      <div  formArrayName="answers" [class.small]="!full" style="width: 100%;">
-        <mat-grid-list cols="2" rowHeight="40px">
-          <mat-grid-tile
-            *ngFor="let answer of answers.controls; let i=index"
-            colspan="1"
-            rowspan="1">
-            <div [formGroupName]="i" style="width: 98%;height: 98%">
-              <mat-form-field style="width: 55%;">
-                <mat-label>Answer</mat-label>
-                <input [formControlName]="'value'" matInput placeholder="answer" >
-              </mat-form-field>
-              <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
-              <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon">
-                <mat-icon>close</mat-icon>
-              </button>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-      <button class="mt-2 btn btn-sm" mat-button (click)="openDialog()">Add Answer <span class="badge">{{answers.length}}</span></button>
+      <mat-grid-list cols="4" rowHeight="60px">
+        <mat-grid-tile colspan="2" rowspan="2">
+          <div  formArrayName="answers" style="width: 100%;">
+            <mat-grid-list cols="2" rowHeight="40px">
+              <mat-grid-tile
+                *ngFor="let answer of answers.controls; let i=index"
+                colspan="1"
+                rowspan="1">
+                <div [formGroupName]="i" style="width: 98%;height: 98%">
+                  <mat-form-field style="width: 55%;">
+                    <mat-label>Answer</mat-label>
+                    <input [formControlName]="'value'" matInput placeholder="answer" >
+                  </mat-form-field>
+                  <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
+                  <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="2">
+          <mat-card style="border: black solid 3px; height: 100%;width: 60%; padding: 2px;">
+            <mat-card-content style=" height: 100%;width: 100%;">
+              <img [src]="imagePreview?imagePreview:'../../../assets/Default/imageNotFound.png'" style=" height: 100%;width: 100%;" [alt]="imagePreview?question.label:'NotFound Image'"/>
+              <input style="display: none" type="file" #imagePost id="imageUrl" (click)="onImagePick($event)">
+              <span class="Jbtn-edit" (click)="imagePost.click()" mat-flat-button aria-label="Example icon-button with a heart icon">
+              <mat-icon>add_a_photo</mat-icon>
+            </span>
+              <span class="Jbtn-delete" *ngIf="imagePreview" (click)="deleteImage();" mat-flat-button aria-label="Example icon-button with a heart icon">
+                  <mat-icon>delete</mat-icon>
+                </span>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <button class="mt-2 btn btn-sm" mat-button (click)="addAnswer()">Add Answer <span class="badge">{{answers.length}}</span></button>
     </form>
   </mat-card-content>
   <mat-card-footer>
-    <button *ngIf="questionEdition==null" mat-button (click)="createQuestion() "  [mat-dialog-close]="true" type="submit" class=" btn btn-lg btn-block btn-success" style="height: 50%">Create the question</button>
+    <button *ngIf="questionEdition==null" mat-button (click)="createQuestion() "  [mat-dialog-close]="true" type="submit" class=" btn btn-primary" style="height: 60%; width:100% ">Create the question</button>
   </mat-card-footer>
 </mat-card>
 

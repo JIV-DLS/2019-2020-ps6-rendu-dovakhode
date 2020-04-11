@@ -17,35 +17,57 @@
         <mat-grid-tile colspan="3" rowspan="1" *ngIf="question.image">
           <img [src]="question.image" [alt]="question.label">
         </mat-grid-tile>
-        <mat-grid-tile colspan="2" rowspan="1">
+        <mat-grid-tile colspan="2" rowspan="1" *ngIf="question.image">
 
         </mat-grid-tile>
-        <mat-grid-tile colspan="6" rowspan="1">
-          {{question.label}}
+        <mat-grid-tile colspan="{{col()}}" rowspan="2">
+          <mat-form-field style="width: 100%">
+            <input matInput placeholder="title" [formControlName]="'label'" >
+            <!-- <mat-error *ngIf="label.invalid">{{getLabelErrorMessage()}}</mat-error> -->
+          </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
-      <mat-grid-list cols="3" rowHeight="40px" style="width: 100%; border-bottom: #1b1e21 1px solid;">
-        <mat-grid-tile colspan="1" rowspan="1" >
-          <h1>Numéro</h1>
+      <mat-grid-list cols="9" rowHeight="40px" style="width: 100%; border-bottom: #1b1e21 1px solid" *ngIf="question.answers.length != 0">
+        <mat-grid-tile colspan="3" rowspan="1" >
+          <h3>Numéro</h3>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1" >
-          <h1>Libellé</h1>
+        <mat-grid-tile colspan="3" rowspan="1" >
+          <h3>Libellé</h3>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-          <h1>Correct</h1>
+        <mat-grid-tile colspan="3" rowspan="1">
+          <h3>Correct</h3>
         </mat-grid-tile>
       </mat-grid-list>
-      <div *ngFor="let answer of answers.controls; let i=index"  formArrayName="answers" style="max-height: 430px;overflow-y: scroll;">
+      <div style="max-height: 430px;overflow-x: scroll;">
+        <mat-grid-list cols="2" rowHeight="40px">
+          <mat-grid-tile
+            *ngFor="let answer of answers.controls; let i=index"
+            colspan="1"
+            rowspan="1">
+            <div [formGroupName]="i" style="width: 98%;height: 98%">
+              <mat-form-field style="width: 55%;">
+                <mat-label>Answer</mat-label>
+                <input [formControlName]="'value'" matInput placeholder="answer" >
+              </mat-form-field>
+              <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
+              <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+      <!-- <div *ngFor="let answer of question.answers; let i=index"  formArrayName="answers" style="max-height: 430px;overflow-y: scroll;">
         <mat-grid-tile colspan="1" rowspan="1">
-          <!--Réponse {{i}} :-->
+          Réponse {{i}} :
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="1">
-          <app-answer [formGroupName]="i" (delete)="deleteAnswer($event,answer.value)" ></app-answer>
+          <app-answer [formGroupName]="i" (delete)="deleteAnswer($event,answer)" ></app-answer>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="1">
         </mat-grid-tile>
       </div>
-      <!-- <mat-form-field style="width: 100%">
+      <mat-form-field style="width: 100%">
         <mat-label>Title</mat-label>
         <input matInput placeholder="title" [formControlName]="'label'" >
       </mat-form-field>
@@ -68,7 +90,7 @@
           </mat-grid-tile>
         </mat-grid-list>
       </div>-->
-      <button class="mt-2 btn btn-sm" mat-button (click)="openDialog()">Add Answer <span class="badge">{{answers.length}}</span></button>
+      <button class="mt-2 btn btn-sm" mat-button (click)="addAnswer()">Add Answer <span class="badge">{{answers.length}}</span></button>
     </form>
   </mat-card-content>
   <mat-card-footer>

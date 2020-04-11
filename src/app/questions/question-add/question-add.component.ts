@@ -24,7 +24,6 @@ export class QuestionAddComponent implements OnInit {
   answerDialogOpened = false;
   @Input() questionEdition = null;
   @Input() question: Question = null;
-  @Input() fullScrenable = false;
   @Input() editable = false;
   @Output()
   fullState: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -32,6 +31,7 @@ export class QuestionAddComponent implements OnInit {
   editQuestion: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
+  public imagePreview: string;
 
   ngOnInit() {
     this.question = new Question();
@@ -41,7 +41,8 @@ export class QuestionAddComponent implements OnInit {
     this.questionForm = this.formBuilder.group({
       id: 0,
       label: [this.questionEdition ? (this.questionEdition as Question).label : ''],
-      answers: this.formBuilder.array( [])
+      answers: this.formBuilder.array( []),
+      image: []
     });
     if (this.questionEdition) {
       (this.questionEdition as Question).answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
@@ -52,6 +53,13 @@ export class QuestionAddComponent implements OnInit {
       value: answer.value,
       isCorrect: answer.isCorrect,
     });
+  }
+  addAnswer() {
+    if (this.answers.length < 4) {
+      this.openDialog();
+    } else {
+      alert('Vous ne pouvez pas ajouter plus de 4 réponses à une question');
+    }
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AnswerAddComponent, {
@@ -71,17 +79,32 @@ export class QuestionAddComponent implements OnInit {
     this.dialogRef.close(this.questionFormValue());
     // console.log(this.questionFormValue());
   }
-
+  onImagePick(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.questionForm.get('image').patchValue(file);
+    this.questionForm.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (this.questionForm.get('image').valid) {
+        this.imagePreview = reader.result as string;
+      } else {
+        this.imagePreview = null;
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+  deleteImage() {
+    this.questionForm.get('image').reset();
+    this.imagePreview = null;
+  }
   clean(i: number) {
     this.answers.removeAt(i);
     // this.answers.setValue(this.questionFormValue().answers.splice(i, 0));
     // (this.answers as unknown as Answer[]).splice(i,0);
   }
-
   edit() {
     this.editQuestion.emit(true);
   }
-
   cancel() {
     this.editQuestion.emit(false);
   }
