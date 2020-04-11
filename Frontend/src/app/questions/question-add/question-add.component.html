@@ -11,7 +11,7 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="questionForm">
-      <mat-grid-list cols="4" rowHeight="50px">
+      <mat-grid-list cols="4" rowHeight="53px">
         <mat-grid-tile colspan="2" rowspan="1">
           <mat-form-field style="width: 100%">
             <mat-label>Title</mat-label>
@@ -40,12 +40,12 @@
                 colspan="1"
                 rowspan="1">
                 <div [formGroupName]="i" style="width: 98%;height: 98%">
-                  <mat-form-field style="width: 55%;">
+                  <mat-form-field style="width: 50%;">
                     <mat-label>Answer</mat-label>
                     <input [formControlName]="'value'" matInput placeholder="answer" >
                   </mat-form-field>
-                  <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
-                  <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon">
+                  <mat-checkbox  [formControlName]="'isCorrect'" style="width: 34%">V</mat-checkbox>
+                  <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon" style="width: 14%">
                     <mat-icon>close</mat-icon>
                   </button>
                 </div>
@@ -59,7 +59,8 @@
           <button class="mt-2 btn btn-sm" mat-button (click)="addAnswer()" style="width: 50%">Add Answer <span class="badge">{{answers.length}}</span></button>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="1">
-          <button *ngIf="questionEdition==null" mat-button (click)="createQuestion() "  [mat-dialog-close]="true" type="submit" class=" btn btn-success" style="width:100% ">Create the question</button>
+          <button *ngIf="questionEdition.answers != null" mat-button (click)="edit() " type="submit" class=" btn btn-success btn-block btn-primary" style="width:100% ">Modifier la question</button>
+          <button *ngIf="questionEdition.answers == null" mat-button (click)="createQuestion() "  type="submit" class=" btn btn-success btn-block btn-primary" style="width:100% ">Ajouter la question</button>
         </mat-grid-tile>
       </mat-grid-list>
     </form>

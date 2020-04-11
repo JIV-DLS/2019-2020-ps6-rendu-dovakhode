@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Question} from '../../../models/question.model';
 import {Answer} from '../../../models/answer.model';
 import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
-import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {AnswersComponent} from '../../answers/answers.component';
 import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component';
 
@@ -15,14 +15,16 @@ import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component'
   styleUrls: ['./question-add.component.scss']
 })
 export class QuestionAddComponent implements OnInit {
-  constructor(public formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<QuestionAddComponent >  ) { }
+  constructor(public formBuilder: FormBuilder,
+              public dialog: MatDialog,
+              private dialogRef: MatDialogRef<QuestionAddComponent>,
+              @Inject(MAT_DIALOG_DATA) public questionEdition: Question) { }
   get answers() {
     return this.questionForm.get('answers') as FormArray;
   }
   full = false;
   questionForm: FormGroup;
   answerDialogOpened = false;
-  @Input() questionEdition = null;
   @Input() question: Question = null;
   @Input() editable = false;
   @Output()
@@ -38,13 +40,16 @@ export class QuestionAddComponent implements OnInit {
     this.initializeQuestionForm();
   }
   private initializeQuestionForm() {
+    console.log('Here are the answers' + this.questionEdition.answers);
     this.questionForm = this.formBuilder.group({
       id: 0,
-      label: [this.questionEdition ? (this.questionEdition as Question).label : ''],
+      label: [this.questionEdition.answers != null ? (this.questionEdition as Question).label : ''],
       answers: this.formBuilder.array( []),
-      image: []
+      image: [this.questionEdition.answers != null ? (this.questionEdition as Question).image : ''],
     });
-    if (this.questionEdition) {
+    console.log('Image lors de l\'édition: ' + this.questionEdition.image);
+    if (this.questionEdition.answers != null) {
+      // this.imagePreview = this.questionEdition.image;
       (this.questionEdition as Question).answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
     }
   }
@@ -74,11 +79,7 @@ export class QuestionAddComponent implements OnInit {
   questionFormValue() {
     return Question.quizFormValues(this.questionForm) as Question;
   }
-  createQuestion() {
-    this.questionCreated.emit(this.questionFormValue());
-    this.dialogRef.close(this.questionFormValue());
-    // console.log(this.questionFormValue());
-  }
+
   onImagePick(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.questionForm.get('image').patchValue(file);
@@ -102,10 +103,31 @@ export class QuestionAddComponent implements OnInit {
     // this.answers.setValue(this.questionFormValue().answers.splice(i, 0));
     // (this.answers as unknown as Answer[]).splice(i,0);
   }
+  createQuestion() {
+    if (this.conform()) {
+      this.questionCreated.emit(this.questionFormValue());
+      this.dialogRef.close(this.questionFormValue());
+    }
+    // console.log(this.questionFormValue());
+  }
   edit() {
-    this.editQuestion.emit(true);
+    if (this.conform()) {
+      this.editQuestion.emit(true);
+      this.dialogRef.close(this.questionFormValue());
+    }
   }
   cancel() {
     this.editQuestion.emit(false);
+  }
+  conform() {
+    if (this.answers.length === 0) {
+      alert('Ajoutez au moins une réponse à votre question');
+      return false;
+    }
+    if (this.questionFormValue().label === '') {
+      alert('Ajoutez un titre à votre question');
+      return false;
+    }
+    return true;
   }
 }

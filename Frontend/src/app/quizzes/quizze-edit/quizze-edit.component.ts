@@ -14,6 +14,7 @@ import {Question} from '../../../models/question.model';
 import {Answer} from '../../../models/answer.model';
 import {AnswersService} from '../../../services/answers.service';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
+import {QuestionComponent} from '../../questions/question/question.component';
 
 @Component({
   selector: 'app-quizze-edit',
@@ -179,7 +180,7 @@ export class QuizzeEditComponent implements OnInit {
   }
 
   editQuestion($event: boolean, i: number) {
-    const dialogRef = this.dialog.open(EditQuestionComponent, {
+    const dialogRef = this.dialog.open(QuestionsComponent, {
       width: '950px',
       maxHeight: '500px',
       data: this.quiz.questions[i]
