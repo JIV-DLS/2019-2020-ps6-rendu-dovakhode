@@ -45,7 +45,7 @@ export class QuestionAddComponent implements OnInit {
       id: 0,
       label: [this.questionEdition.answers != null ? (this.questionEdition as Question).label : ''],
       answers: this.formBuilder.array( []),
-      image: [this.questionEdition.answers != null ? (this.questionEdition as Question).image : ''],
+      image: [this.questionEdition.answers != null ? (this.questionEdition as Question).image : null],
     });
     console.log('Image lors de l\'édition: ' + this.questionEdition.image);
     if (this.questionEdition.answers != null) {

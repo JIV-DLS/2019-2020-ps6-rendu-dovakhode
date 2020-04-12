@@ -6,8 +6,8 @@
       <i *ngIf="quiz.theme==='Basket-Ball'" class="fas fa-basketball-ball"></i>
       {{quiz.name}}
     </h2>
-  <h4>{{quiz.questions?.length}} <span *ngIf="quiz.questions?.length>1">  questions</span>
-    <span *ngIf="quiz.questions?.length===1 || quiz.questions?.length===0 ">  questions</span> </h4>
+  <h4>{{quiz.question?.length}} <span *ngIf="quiz.question?.length>1">  question</span>
+    <span *ngIf="quiz.question?.length===1 || quiz.question?.length===0 ">  question</span> </h4>
     <button class="btn button-card" routerLink="/quizz-edit/{{quiz.id}}" (click)="selectQuiz()">Select</button>
   <button class="btn button-card" (click)="deleteQuiz()">Delete</button>
   <h6 *ngIf="quiz.dateModification!=null;"> Modified at: {{quiz.dateModification | date}}</h6>

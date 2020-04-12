@@ -36,7 +36,7 @@ export class HomeQuizComponent implements OnInit {
           };
             })*/
         /* this.questionDialogOpened = false;
-        this.questions.setValue( questions ? questions : this.questions ); */
+        this.question.setValue( question ? question : this.question ); */
         break;
       case 1:
         break;

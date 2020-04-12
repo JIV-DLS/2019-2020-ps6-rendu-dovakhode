@@ -72,7 +72,7 @@ export class QuizAddComponent implements OnInit {
       return;
     }
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
-     // quizToCreate.questions = [];
+     // quizToCreate.question = [];
     if (quizToCreate.subTheme == null) {
       quizToCreate.subTheme = quizToCreate.theme;
     }

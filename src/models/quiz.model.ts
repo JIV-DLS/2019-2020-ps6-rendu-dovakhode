@@ -36,7 +36,7 @@ export class Quiz {
         if (this.questions[i].id !== questions[i].id ||
           this.questions[i].label !== questions[i].label ||
           this.questions[i].image !== questions[i].image) { return false; }
-        // if (!this.questions[i].answersEqualsTo(questions[i].answers)) {return false; }
+        // if (!this.question[i].answersEqualsTo(question[i].answers)) {return false; }
       }
       return true;
   }

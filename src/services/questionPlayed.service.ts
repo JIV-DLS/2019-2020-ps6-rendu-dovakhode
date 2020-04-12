@@ -55,7 +55,7 @@ export class QuestionPlayedService {
   }
 
   /*getQuestionByIndex(index: number) {
-    return index >= 0 && index < this.questions.length ? this.questions[index] : null;
+    return index >= 0 && index < this.question.length ? this.question[index] : null;
   }*/
   getQuestionById(id: number, evolutionId: string): Observable<QuestionPlayed> {
     return this.http.get<QuestionPlayed>(this.questionplayedUrl(evolutionId) + '/' + id.toString()).pipe(
@@ -67,10 +67,10 @@ export class QuestionPlayedService {
   }
 
   /* getQuestion() {
-     return this.questions;
+     return this.question;
    }*/
   updateQuestion(questionToModify: QuestionPlayed): Observable<QuestionPlayed> {
-    // this.questions[+questionToModify.id - 1] = questionToModify;
+    // this.question[+questionToModify.id - 1] = questionToModify;
     // @ts-ignore
     // @ts-ignore
     this.snack.open(  ...environment.snackInformation.operation.loading.update, 'close',
@@ -82,7 +82,7 @@ export class QuestionPlayedService {
     return this.http.put<QuestionPlayed>
     (this.questionplayedUrl(questionToModify.EvolutionId)  + '/' + questionToModify.id, questionToModify).pipe(
       tap((question) => {
-        // this.questions[+questionToModify.id - 1] = questionToModify;
+        // this.question[+questionToModify.id - 1] = questionToModify;
         console.log('Modification de la question éffectuée avec succès');
         this.snack.open( environment.snackInformation.operation.succeeded.update.question, 'close',
           {
@@ -129,7 +129,7 @@ export class QuestionPlayedService {
           break;
         case 'getQuestion':
           // this.bdcsState = false;
-          this.snack.open('❌ Impossible de charger les questions', 'close',
+          this.snack.open('❌ Impossible de charger les question', 'close',
             {
               ...environment.snackInformation.errorForAll
             })

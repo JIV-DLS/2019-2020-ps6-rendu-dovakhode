@@ -14,7 +14,7 @@ export class AnswersService {
   }
 
   answerUrl(questionId, quizId) {
-    return environment.url + '/' + quizId.toString() + '/questions' + '/' + questionId.toString() + '/answers';
+    return environment.url + '/' + quizId.toString() + '/question' + '/' + questionId.toString() + '/answers';
   }
 
   addAnswer(answer: Answer) {
