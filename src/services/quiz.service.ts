@@ -51,10 +51,10 @@ export class QuizService {
     const quizData = new FormData();
     quizData.append('quiz', JSON.stringify(quiz));
     if (image !== null) {
-      quizData.append('image', image, 'question/' + quiz.label + '1');
-      quizData.append('image', image, quiz.label + '2');
-      quizData.append('image', image, quiz.label + '3');
-      quizData.append('image', image, quiz.label + '4');
+      quizData.append('image', image,  quiz.label + '1');
+      quizData.append('image', image, 'question/' + quiz.label + '2');
+      quizData.append('image', image, 'question/' + quiz.label + '3');
+      quizData.append('image', image, 'question/' + quiz.label + '4');
     }
     return this.http.post<Quiz>(QuizService.quizUrl, quizData).pipe(
       tap((newQuiz: Quiz) => {
