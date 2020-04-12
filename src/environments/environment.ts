@@ -75,7 +75,7 @@ export const environment = {
           answer: '⏳ Suppression de la réponse en cours...'
         },
         post: {
-          quiz: '⏳ Enregistrement de la question en cours...',
+          quiz: '⏳ Enregistrement du quiz en cours...',
           question: '⏳ Enregistrement de la question en cours...',
           answer: '⏳ Enregistrement de la réponse en cours...'
         }},
