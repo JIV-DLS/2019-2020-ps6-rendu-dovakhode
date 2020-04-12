@@ -11,7 +11,9 @@ const router = new Router()
 const QuestionsRouter = require('./questions')
 
 
-const multer = require('../../../middleware/quiz-multer-config')
+const quizMulter = require('../../../middleware/quiz-multer-config')
+const questionMulter = require('../../../middleware/question-multer-config')
+const answerMulter = require('../../../middleware/answer-multer-config')
 
 
 function createQuiz(obj) {
@@ -55,17 +57,17 @@ router.get('/', (req, res) => {
   }
 })
 
-router.post('/', multer, (req, res) => {
+router.post('/', quizMulter, (req, res) => {
   try {
-    console.log(req.files);
-    res.status(201).json(createQuiz(req.file ? {
+    res.status(201).json(createQuiz(req.files && req.files[0] !== undefined ? {
       ...JSON.parse(req.body.quiz),
-      image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
+      image: `${req.protocol}://${req.get('host')}/images/quiz/${req.files[0].filename}`,
     } : {
       ...JSON.parse(req.body.quiz),
       image: ' ',
     }))
   } catch (err) {
+    console.log(err)
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
     } else {
@@ -126,7 +128,7 @@ function updateQuiz(id, obj) {
   quiz.questions = questions
   return quiz
 }
-router.put('/:id', multer, (req, res) => {
+router.put('/:id', quizMulter, questionMulter, answerMulter, (req, res) => {
   try {
     updateQuiz(req.params.id, req.file ? {
       ...JSON.parse(req.body.quiz),
@@ -144,5 +146,5 @@ router.put('/:id', multer, (req, res) => {
   }
 })
 
-router.use('/:id/questions', QuestionsRouter.router)
+router.use('/:id/question', QuestionsRouter.router)
 module.exports = router

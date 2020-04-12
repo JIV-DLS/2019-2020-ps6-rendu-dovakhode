@@ -24,18 +24,18 @@ export class QuestionService {
    * The list of question.
    * The list is retrieved from the mock.
    */
- // private questions: Question[] = [];
+ // private question: Question[] = [];
 
 
   /**
    * Observable which contains the list of the question.
    * Naming convention: Add '$' at the end of the variable name to highlight it as an Observable.
    */
-  // public questions$: BehaviorSubject<Question[]> = new BehaviorSubject(this.questions);
+  // public question$: BehaviorSubject<Question[]> = new BehaviorSubject(this.question);
   index: number;
   // url = 'https://api.myjson.com/bins/13ajhy';
   questionUrl(quizId) {
-    return environment.url + '/quizzes/' + quizId + '/questions';
+    return environment.url + '/quizzes/' + quizId + '/question';
   }
 
   addQuestion(question: Question): Observable<Question> {
@@ -60,12 +60,12 @@ export class QuestionService {
       catchError(this.handleError<Question>('addQuestion', undefined))
     );
   }
-  /*addQuestions(questions: Question[], quizId: string): BehaviorSubject<Question[]> {
+  /*addQuestions(question: Question[], quizId: string): BehaviorSubject<Question[]> {
     const newQuestions = [];
-    const newQuestions$ = new BehaviorSubject(questions);
+    const newQuestions$ = new BehaviorSubject(question);
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < questions.length; i++) {
-      this.addQuestion( questions[i], quizId).subscribe((question) => {
+    for (let i = 0; i < question.length; i++) {
+      this.addQuestion( question[i], quizId).subscribe((question) => {
          newQuestions.push(question);
          newQuestions$.next(newQuestions);
       });
@@ -109,8 +109,8 @@ export class QuestionService {
   setQuestionsFromUrl( quizId: string) {
     this.http.get<Question[]>(this.questionUrl(quizId)).subscribe(
       (question) => {
-       // this.questions = question;
-        // this.questions$.next(this.questions);
+       // this.question = question;
+        // this.question$.next(this.question);
       }
     );
   }
@@ -124,7 +124,7 @@ export class QuestionService {
   }
 
   /*getQuestionByIndex(index: number) {
-    return index >= 0 && index < this.questions.length ? this.questions[index] : null;
+    return index >= 0 && index < this.question.length ? this.question[index] : null;
   }*/
   getQuestionById(id: number, quizId: string): Observable<Question> {
     return this.http.get<Question>(this.questionUrl(quizId) + '/' + id.toString()).pipe(
@@ -136,10 +136,10 @@ export class QuestionService {
   }
 
  /* getQuestion() {
-    return this.questions;
+    return this.question;
   }*/
   updateQuestion(questionToModify: Question): Observable<Question> {
-    // this.questions[+questionToModify.id - 1] = questionToModify;
+    // this.question[+questionToModify.id - 1] = questionToModify;
     // @ts-ignore
     // @ts-ignore
     this.snack.open(  ...environment.snackInformation.operation.loading.update, 'close',
@@ -150,7 +150,7 @@ export class QuestionService {
     ;
     return this.http.put<Question>(this.questionUrl(questionToModify.quizId)  + '/' + questionToModify.id, questionToModify).pipe(
       tap((question) => {
-        // this.questions[+questionToModify.id - 1] = questionToModify;
+        // this.question[+questionToModify.id - 1] = questionToModify;
         console.log('Modification de la question éffectuée avec succès');
         this.snack.open( environment.snackInformation.operation.succeeded.update.question, 'close',
           {
@@ -197,7 +197,7 @@ export class QuestionService {
           break;
         case 'getQuestion':
           // this.bdcsState = false;
-          this.snack.open('❌ Impossible de charger les questions', 'close',
+          this.snack.open('❌ Impossible de charger les question', 'close',
             {
               ...environment.snackInformation.errorForAll
             })

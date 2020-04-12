@@ -55,7 +55,7 @@ export class QuizComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(questions => {
       /* this.questionDialogOpened = false;
-      this.questions.setValue( questions ? questions : this.questions ); */
+      this.question.setValue( question ? question : this.question ); */
     });
   }
 

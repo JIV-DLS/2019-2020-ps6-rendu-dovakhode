@@ -50,7 +50,7 @@ export const environment = {
       loading: {
         getAll: {
           quiz: 'Récupération de tous les quizs en cours...',
-          question: 'Récupération de les questions en cours...',
+          question: 'Récupération de les question en cours...',
           answer: 'Récupération de toutes les réponses en cours...'
         },
         get: {
@@ -76,7 +76,7 @@ export const environment = {
       succeeded: {
         getAll: {
           quiz: 'Récupération des quizs terminé!',
-          question: 'Récupération des questions terminé!',
+          question: 'Récupération des question terminé!',
           answer: 'Récupération des réponses terminé!'
         },
         get: {

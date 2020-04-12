@@ -8,15 +8,28 @@ const MIME_TYPES = {
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, 'images/quiz')
+    callback(null, (file.originalname.indexOf('quiz') === 0) ? 'images/quiz'
+      : (file.originalname.indexOf('question') === 0) ? 'images/question' : 'images/question')
   },
   filename: (req, file, callback) => {
-    console.log(file.originalname)
-    const name = file.originalname.split(' ').join('_')
+    console.log(req.body);
+    let name
+    if (file.originalname.indexOf('quiz') === 0
+        || file.originalname.indexOf('question') === 0
+        || file.originalname.indexOf('answer') === 0) {
+      /* console.log(file.originalname.split('/')[0])
+      console.log(file.originalname.split('/')[1]) */
+      console.log(file.originalname)
+      name = file.originalname.split(' ')
+      name.splice(0, 1)
+      name = name.join('_')
+    } else {
+      name = file.originalname.split(' ').join('_')
+    }
     const extension = MIME_TYPES[file.mimetype]
     callback(null, `${name + Date.now()}.${extension}`)
   },
 })
 
 // module.exports = multer({ storage }).single('image')
-module.exports = multer({ storage }).array('image', 5)
+module.exports = multer({ storage }).array('quiz_image', 5)

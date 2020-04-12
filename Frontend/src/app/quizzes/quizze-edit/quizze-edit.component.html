@@ -6,8 +6,8 @@
       <i *ngIf="quiz.theme==='Basket-Ball'" class="fas fa-basketball-ball"></i>
       {{quiz.name}}
     </h2>
-  <h4>{{quiz.questions?.length}} <span *ngIf="quiz.questions?.length>1">  questions</span>
-    <span *ngIf="quiz.questions?.length===1 || quiz.questions?.length===0 ">  questions</span> </h4>
+  <h4>{{quiz.question?.length}} <span *ngIf="quiz.question?.length>1">  question</span>
+    <span *ngIf="quiz.question?.length===1 || quiz.question?.length===0 ">  question</span> </h4>
     <button class="btn button-card" routerLink="/quizz-edit/{{quiz.id}}" (click)="selectQuiz()">Select</button>
   <button class="btn button-card" (click)="deleteQuiz()">Delete</button>
   <h6 *ngIf="quiz.dateModification!=null;"> Modified at: {{quiz.dateModification | date}}</h6>
@@ -144,7 +144,7 @@
     </label>
     <br>
     <label>
-      <button [disabled]="this.questionDialogOpened" type="button" class="btn btn-sm btn-primary" (click)="addQuestion()">Manage question <span class="badge">{{quizFormValue().questions.length}}</span></button>
+      <button [disabled]="this.questionDialogOpened" type="button" class="btn btn-sm btn-primary" (click)="addQuestion()">Manage question <span class="badge">{{quizFormValue().question.length}}</span></button>
     </label>
     <br/>
     <button *ngIf="quiz==null; else modifySection" mat-button type="submit" class=" btn btn-lg btn-block m-1 btn-success" (click)="addQuiz()">Create the quiz</button>
