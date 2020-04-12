@@ -85,7 +85,7 @@ function deleteEntireQuiz(id) {
 router.delete('/:id', (req, res) => {
   try {
     const tmp = Quiz.getById(req.params.id)
-    const filename = tmp.image.split('/images/')[1]
+    const filename = tmp.image.split('/images/quiz/')[1]
     if (filename != null && filename.length > 1) {
       fs.unlink(`images/quiz/${filename}`, () => {
         deleteEntireQuiz(req.params.id)
