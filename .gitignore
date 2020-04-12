@@ -2,7 +2,7 @@
 .idea/
 node_modules/
 mocks/*
-images/questions/*
+images/question/*
 images/quiz/*
 images/answer/*
 images/
