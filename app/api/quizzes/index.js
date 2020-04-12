@@ -57,6 +57,7 @@ router.get('/', (req, res) => {
 
 router.post('/', multer, (req, res) => {
   try {
+    console.log(req.files);
     res.status(201).json(createQuiz(req.file ? {
       ...JSON.parse(req.body.quiz),
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
