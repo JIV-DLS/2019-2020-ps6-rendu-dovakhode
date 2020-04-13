@@ -15,19 +15,43 @@ const quizMulter = require('../../../middleware/quiz-multer-config')
 const questionMulter = require('../../../middleware/question-multer-config')
 const answerMulter = require('../../../middleware/answer-multer-config')
 
+function getQuestionsImage(req) {
+  const questionsImage = []
+  for (let i = 0; i < req.files.length; i++) {
+    console.log(req.files[i].originalname.indexOf('question'))
+    console.log(req.files[i])
+    if (req.files[i].originalname.indexOf('question') === 0)questionsImage.push(req.files[i])
+  }
+  return questionsImage
+}
 
-function createQuiz(obj) {
+
+function createQuiz(obj, req) {
   const { questions } = obj
   delete obj.questions
   delete obj.id
   obj.dateCreation = new Date()
   obj.dateModification = obj.dateCreation
   const quiz = Quiz.create({ ...obj })
-
+  const questionsImage = getQuestionsImage(req)
   for (let i = 0; i < questions.length; i++) {
+    let questionImage
+    for (let j = 0; j < questionsImage.length; j++) {
+      let coord = questionsImage[j].originalname.split(' ')[0]
+      coord = coord.split('_')
+      if (+coord[1] === j) {
+        questionImage = questionsImage[j]
+        break
+      }
+    }
     delete questions[i].id
     questions[i].quizId = quiz.id
-    questions[i] = QuestionsRouter.createQuestion({ ...questions[i] })
+    questions[i] = QuestionsRouter.createQuestion(questionImage
+      ? {
+        ...questions[i],
+        image: `${req.protocol}://${req.get('host')}/images/question/${questionImage.filename}`,
+      }
+      : { ...questions[i] }, req, i)
   }
   quiz.questions = questions
   return quiz
@@ -56,16 +80,19 @@ router.get('/', (req, res) => {
     res.status(500).json(err)
   }
 })
-
+function hasQuizImage(req) {
+  return req.files[0].originalname.indexOf('quiz') === 0
+}
 router.post('/', quizMulter, (req, res) => {
   try {
-    res.status(201).json(createQuiz(req.files && req.files[0] !== undefined ? {
+    console.log(req.files)
+    res.status(201).json(createQuiz(hasQuizImage(req) ? {
       ...JSON.parse(req.body.quiz),
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.files[0].filename}`,
     } : {
       ...JSON.parse(req.body.quiz),
       image: ' ',
-    }))
+    }, req))
   } catch (err) {
     console.log(err)
     if (err.name === 'ValidationError') {

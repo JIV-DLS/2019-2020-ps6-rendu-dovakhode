@@ -8,4 +8,5 @@ module.exports = new BaseModel('Answer', {
   type: Joi.string(),
   questionId: Joi.number(),
   quizId: Joi.number(),
+  image: Joi.string(),
 })
