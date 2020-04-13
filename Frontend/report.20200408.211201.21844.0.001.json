@@ -1,0 +1,381 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200408.211201.21844.0.001.json",
+    "dumpEventTime": "2020-04-08T21:12:01Z",
+    "dumpEventTimeStamp": "1586373121441",
+    "processId": 21844,
+    "cwd": "C:\\Users\\user\\TksBuntsu\\2019-2020-ps6-rendu-dovakhode\\Frontend",
+    "commandLine": [
+      "node",
+      "C:\\Users\\user\\AppData\\Roaming\\npm\\\\node_modules\\@angular\\cli\\bin\\ng",
+      "lint"
+    ],
+    "nodejsVersion": "v13.5.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "13.5.0",
+      "v8": "7.9.317.25-node.23",
+      "uv": "1.34.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "79",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.1",
+      "openssl": "1.1.1d",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v13.5.0/node-v13.5.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v13.5.0/node-v13.5.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v13.5.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18363",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 10677531,
+        "nice": 0,
+        "sys": 14498953,
+        "idle": 110768656,
+        "irq": 4334296
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 5729375,
+        "nice": 0,
+        "sys": 5466328,
+        "idle": 124749046,
+        "irq": 388343
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 12823359,
+        "nice": 0,
+        "sys": 9359343,
+        "idle": 113762046,
+        "irq": 158750
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 8103718,
+        "nice": 0,
+        "sys": 5495468,
+        "idle": 122345562,
+        "irq": 95359
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 12080703,
+        "nice": 0,
+        "sys": 12428515,
+        "idle": 111435531,
+        "irq": 131421
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 6352109,
+        "nice": 0,
+        "sys": 6805281,
+        "idle": 122787359,
+        "irq": 87421
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 10125171,
+        "nice": 0,
+        "sys": 9838609,
+        "idle": 115980968,
+        "irq": 120796
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz",
+        "speed": 1896,
+        "user": 11221812,
+        "nice": 0,
+        "sys": 6384437,
+        "idle": 118338468,
+        "irq": 68734
+      }
+    ],
+    "host": "DESKTOP-QSCERTG"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff7c9d219f9",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7c9d25d6c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7c9d24d28",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7c9e1ddfb",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca645c2e",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca62d381",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca4f46dc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca4d00f3",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca4ce54b",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca4f9f2d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca4fbcbc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca4f1c53",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca4f03e4",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca5123d4",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7ca26c85f",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7caa8ebcd",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000002970d683ea8",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 157986816,
+    "totalCommittedMemory": 157986816,
+    "usedMemory": 118076032,
+    "availableMemory": 2075420568,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 33040,
+        "used": 33040,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33554432,
+        "capacity": 16758784,
+        "used": 418320,
+        "available": 16340464
+      },
+      "old_space": {
+        "memorySize": 96608256,
+        "committedMemory": 96608256,
+        "capacity": 92305504,
+        "used": 92171960,
+        "available": 133544
+      },
+      "code_space": {
+        "memorySize": 2527232,
+        "committedMemory": 2527232,
+        "capacity": 1051744,
+        "used": 1051744,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 1576960,
+        "committedMemory": 1576960,
+        "capacity": 1081760,
+        "used": 1081760,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 22835200,
+        "committedMemory": 22835200,
+        "capacity": 22774920,
+        "used": 22774920,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 622592,
+        "committedMemory": 622592,
+        "capacity": 544288,
+        "used": 544288,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16758784,
+        "used": 0,
+        "available": 16758784
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 13.812,
+    "kernelCpuSeconds": 2.953,
+    "cpuConsumptionPercent": 128.962,
+    "maxRss": 185798656,
+    "pageFaults": {
+      "IORequired": 177392,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 4118,
+      "writes": 5
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\Users\\user\\TksBuntsu\\2019-2020-ps6-rendu-dovakhode\\Frontend",
+    "BROWSERSLIST_IGNORE_OLD_DATA": "1",
+    "dp0": "C:\\Users\\user\\AppData\\Roaming\\npm\\",
+    "M2_HOME": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.6.3",
+    "ProgramFiles": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "TEMP": "C:\\Users\\user\\AppData\\Local\\Temp",
+    "USERNAME": "user",
+    "IDEA_INITIAL_DIRECTORY": "C:\\Program Files\\JetBrains\\WebStorm 2019.2.3\\bin",
+    "ANDROID_HOME": "C:\\Android\\android-sdk",
+    "OS": "Windows_NT",
+    "NUMBER_OF_PROCESSORS": "8",
+    "_prog": "node",
+    "__INTELLIJ_COMMAND_HISTFILE__": "C:\\Users\\user\\.WebStorm2019.3\\config\\terminal\\history\\history-37",
+    "SystemDrive": "C:",
+    "IntelliJ IDEA": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2019.2.2\\bin;",
+    "LOCALAPPDATA": "C:\\Users\\user\\AppData\\Local",
+    "OJDKBUILD_JAVA_HOME": "C:\\Program Files\\ojdkbuild\\java-13-openjdk-13.0.1-1\\",
+    "PUBLIC": "C:\\Users\\Public",
+    "ProgramData": "C:\\ProgramData",
+    "USERPROFILE": "C:\\Users\\user",
+    "PROCESSOR_REVISION": "8e0a",
+    "WebStorm": "C:\\Program Files\\JetBrains\\WebStorm 2019.2.3\\bin;",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "USERDOMAIN": "DESKTOP-QSCERTG",
+    "PROCESSOR_LEVEL": "6",
+    "PhpStorm": "C:\\Program Files\\JetBrains\\PhpStorm 2019.2.3\\bin;",
+    "=::": "::\\",
+    "ProgramW6432": "C:\\Program Files",
+    "APPDATA": "C:\\Users\\user\\AppData\\Roaming",
+    "LOGONSERVER": "\\\\DESKTOP-QSCERTG",
+    "CLASSPATH": ".;",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC",
+    "TERMINAL_EMULATOR": "JetBrains-JediTerm",
+    "ChocolateyToolsLocation": "C:\\tools",
+    "JAVA_HOME": "C:\\Program Files\\AdoptOpenJDK\\jdk8u192-b12",
+    "ChocolateyLastPathUpdate": "132246236074920509",
+    "asl.log": "Destination=file",
+    "COMPUTERNAME": "DESKTOP-QSCERTG",
+    "SESSIONNAME": "Console",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "HOMEPATH": "\\Users\\user",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "windir": "C:\\Windows",
+    "TMP": "C:\\Users\\user\\AppData\\Local\\Temp",
+    "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+    "SystemRoot": "C:\\Windows",
+    "PATH": "C:\\Users\\user\\TksBuntsu\\2019-2020-ps6-rendu-dovakhode\\node_modules\\.bin;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\xampp\\php;C:\\composer;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\ProgramData\\chocolatey\\bin;;C:\\Program Files\\Microsoft VS Code\\bin;C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.6.3\\bin;C:\\Program Files\\ojdkbuild\\java-13-openjdk-13.0.1-1\\missioncontrol\\;C:\\Program Files\\ojdkbuild\\java-13-openjdk-13.0.1-1\\bin;C:\\Program Files\\nodejs\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\AdoptOpenJDK\\jdk8u192-b12\\bin;C:\\Program Files\\Java\\jdk1.8.0_211\\bin;C:\\Android\\android-sdk\\tools;C:\\Android\\android-sdk\\platform-tools;C:\\Android\\android-sdk\\tools\\bin;C:\\Program Files\\dotnet\\;C:\\Users\\user\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\user\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Users\\user\\AppData\\Local\\GitHubDesktop\\bin;C:\\Program Files\\JetBrains\\PhpStorm 2019.2.3\\bin;;C:\\ProgramData\\user\\GitHubDesktop\\bin;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2019.2.2\\bin;;C:\\Program Files\\JetBrains\\WebStorm 2019.2.3\\bin;;C:\\Program Files\\Android\\jdk\\microsoft_dist_openjdk_1.8.0.25\\bin;C:\\Users\\user\\.dotnet\\tools;C:\\Users\\user\\AppData\\Roaming\\npm;C:\\tools\\mysql\\current\\bin;",
+    "OneDriveConsumer": "C:\\Users\\user\\OneDrive",
+    "VBOX_MSI_INSTALL_PATH": "C:\\Program Files\\Oracle\\VirtualBox\\",
+    "HOMEDRIVE": "C:",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "OneDrive": "C:\\Users\\user\\OneDrive",
+    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-QSCERTG",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\winmmbase.dll",
+    "C:\\Windows\\System32\\cfgmgr32.dll",
+    "C:\\Windows\\System32\\bcryptPrimitives.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\System32\\powrprof.dll",
+    "C:\\Windows\\System32\\UMPDC.dll",
+    "C:\\Windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\kernel.appcore.dll",
+    "C:\\Windows\\System32\\NSI.dll"
+  ]
+}

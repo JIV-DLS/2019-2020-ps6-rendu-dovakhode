@@ -41,13 +41,38 @@ router.get('/', (req, res) => {
     res.status(500).json(err)
   }
 })
-function createQuestion(obj = {}) {
+
+function getAnswersImage(req) {
+  const answersImage = []
+  for (let i = 0; i < req.files.length; i++) {
+    if (req.files[i].originalname.indexOf('answer') === 0)answersImage.push(req.files[i])
+  }
+  return answersImage
+}
+function createQuestion(obj = {}, req, index) {
   const { answers } = obj
   delete obj.answers
   const question = Question.create({ ...obj })
+  const answersImage = getAnswersImage(req)
   for (let i = 0; i < answers.length; i++) {
+    let answerImage
+    for (let j = 0; j < answersImage.length; j++) {
+      let coord = answersImage[j].originalname.split(' ')[0]
+      coord = coord.split('_')
+      console.log(`***${coord[1]}__${coord[2]}`)
+      console.log(`***${index}__${j}`)
+      if (+coord[1] === index && +coord[2] === j) {
+        answerImage = answersImage[j]
+        break
+      }
+    }
     answers[i].questionId = question.id
-    answers[i] = AnswersRouter.createAnswer({ ...answers[i] })
+    answers[i] = AnswersRouter.createAnswer(answerImage
+      ? {
+        ...answers[i],
+        image: `${req.protocol}://${req.get('host')}/images/answer/${answerImage.filename}`,
+      }
+      : { ...answers[i] })
   }
   question.answers = answers
   return question
