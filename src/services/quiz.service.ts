@@ -9,6 +9,7 @@ import {QuestionService} from './question.service';
 import {SnackSuccessComponent} from '../app/snack/snack-success/snack-success.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {FormArray} from '@angular/forms';
 
 
 @Injectable({
@@ -41,23 +42,34 @@ export class QuizService {
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   index: number;
 
-  addQuiz(quiz: Quiz, image: File): Observable<Quiz> {
-    console.log(quiz);
+  addQuiz(quiz: Quiz, image: File, questions: FormArray): Observable<Quiz> {
     this.snack.open(environment.snackInformation.operation.loading.post.quiz, 'close',
       {
         ...environment.snackInformation.loadingPost
       })
     ;
     const quizData = new FormData();
-    quizData.append('quiz', JSON.stringify(quiz));
-
     if (image !== null) {
       quizData.append('quiz_image', image,  'quiz ' + quiz.label);
-      /* quizData.append('quiz_image', image, 'question_1 ' + quiz.label + '1');
-      quizData.append('quiz_image', image, 'question_2 ' + quiz.label + '2');
-      quizData.append('quiz_image', image, 'question_3 ' + quiz.label + '3');
-      quizData.append('quiz_image', image, 'question_4 ' + quiz.label + '4'); */
     }
+    if (questions !== null) {
+      console.log(questions);
+      for (let i = 0; i < questions.length; i++) {
+        quiz.questions[i].image = ' ';
+        if (questions[i].image) {
+        quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
+        }
+        for (let j = 0; j < questions[i].answers.length; j++) {
+          // quiz.questions[i].answers[i].image = ' ';
+          if (questions[i].answers[j].image) {
+          quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
+          }
+        }
+      }
+    }
+    quizData.append('quiz', JSON.stringify(quiz));
+
+
     return this.http.post<Quiz>(QuizService.quizUrl, quizData).pipe(
       tap((newQuiz: Quiz) => {
         console.log('Ajout reussi');
