@@ -1,7 +1,17 @@
+mat-grid-list{
+  height: 575px;
+}
+
 mat-card-title{
   text-align: center;
 }
 
-app-answer{
-  display: block;
+mat-grid-tile{
+  justify-content: center;
+  align-content: center;
+
 }
+
+app-answer{
+margin: 10px;}
+
