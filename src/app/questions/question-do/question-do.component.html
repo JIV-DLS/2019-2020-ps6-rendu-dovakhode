@@ -1,14 +1,14 @@
-<mat-card style="margin: 30px;margin-top: 50px;">
+<mat-card style="margin-top: 25px; margin-bottom: 25px">
   <mat-card-title>
     <b>{{question?.label}}</b>
   </mat-card-title>
   <mat-card-content>
-    <mat-grid-list cols="2" rowHeight="140px">
+    <mat-grid-list cols="2" rowHeight="fit" >
 
       <mat-grid-tile
         *ngFor="let answer of question?.answers"
         colspan="1"
-        rowspan="1">
+ >
         <app-answer (click)="cliked()" [question]="question" [evolution]="evolution" [answer]="answer" (goodAnswerSelected)="nextQuestion($event)" ></app-answer>
       </mat-grid-tile>
     </mat-grid-list>
