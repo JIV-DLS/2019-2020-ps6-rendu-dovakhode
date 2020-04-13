@@ -18,8 +18,6 @@ const answerMulter = require('../../../middleware/answer-multer-config')
 function getQuestionsImage(req) {
   const questionsImage = []
   for (let i = 0; i < req.files.length; i++) {
-    console.log(req.files[i].originalname.indexOf('question'))
-    console.log(req.files[i])
     if (req.files[i].originalname.indexOf('question') === 0)questionsImage.push(req.files[i])
   }
   return questionsImage
@@ -39,7 +37,7 @@ function createQuiz(obj, req) {
     for (let j = 0; j < questionsImage.length; j++) {
       let coord = questionsImage[j].originalname.split(' ')[0]
       coord = coord.split('_')
-      if (+coord[1] === j) {
+      if (+coord[1] === i) {
         questionImage = questionsImage[j]
         break
       }
