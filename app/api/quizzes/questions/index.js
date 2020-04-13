@@ -59,9 +59,7 @@ function createQuestion(obj = {}, req, index) {
     for (let j = 0; j < answersImage.length; j++) {
       let coord = answersImage[j].originalname.split(' ')[0]
       coord = coord.split('_')
-      console.log(`***${coord[1]}__${coord[2]}`)
-      console.log(`***${index}__${j}`)
-      if (+coord[1] === index && +coord[2] === j) {
+      if (+coord[1] === index && +coord[2] === i) {
         answerImage = answersImage[j]
         break
       }
