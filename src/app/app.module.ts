@@ -57,7 +57,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { QuizSearchPipe } from './quizzes/_pipes/quiz-search.pipe';
+
 import { ProfilsAddComponent } from './Profils/profils-add/profils-add.component';
+
+import { DragNDropPhotoDirective } from './drag-ndrop-photo.directive';
+import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -113,7 +117,12 @@ const routes: Routes = [
     HomeUserComponent,
     HomeDoQuizComponent,
     QuizSearchPipe,
+
     ProfilsAddComponent
+
+    DragNDropPhotoDirective,
+    ImageUploaderComponent
+
   ],
   entryComponents: [
     QuestionsComponent,

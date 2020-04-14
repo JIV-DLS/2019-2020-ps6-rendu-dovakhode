@@ -113,7 +113,7 @@ export class QuestionAddComponent implements OnInit {
   edit() {
     if (this.conform()) {
       this.editQuestion.emit(true);
-      this.dialogRef.close(this.questionFormValue());
+      this.dialogRef.close(this.questionForm);
     }
   }
   cancel() {

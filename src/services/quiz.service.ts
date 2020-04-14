@@ -9,6 +9,7 @@ import {QuestionService} from './question.service';
 import {SnackSuccessComponent} from '../app/snack/snack-success/snack-success.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {FormArray} from '@angular/forms';
 
 
 @Injectable({
@@ -41,23 +42,34 @@ export class QuizService {
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   index: number;
 
-  addQuiz(quiz: Quiz, image: File): Observable<Quiz> {
-    console.log(quiz);
+  addQuiz(quiz: Quiz, image: File, questions: FormArray): Observable<Quiz> {
     this.snack.open(environment.snackInformation.operation.loading.post.quiz, 'close',
       {
         ...environment.snackInformation.loadingPost
       })
     ;
     const quizData = new FormData();
-    quizData.append('quiz', JSON.stringify(quiz));
-
     if (image !== null) {
       quizData.append('quiz_image', image,  'quiz ' + quiz.label);
-      /* quizData.append('quiz_image', image, 'question_1 ' + quiz.label + '1');
-      quizData.append('quiz_image', image, 'question_2 ' + quiz.label + '2');
-      quizData.append('quiz_image', image, 'question_3 ' + quiz.label + '3');
-      quizData.append('quiz_image', image, 'question_4 ' + quiz.label + '4'); */
     }
+    if (questions !== null) {
+      console.log(questions);
+      for (let i = 0; i < questions.length; i++) {
+        quiz.questions[i].image = ' ';
+        if (typeof questions[i].image === 'object'  && questions[i].image !== null) {
+        quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
+        }
+        for (let j = 0; j < questions[i].answers.length; j++) {
+          // quiz.questions[i].answers[i].image = ' ';
+          if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
+          quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
+          }
+        }
+      }
+    }
+    quizData.append('quiz', JSON.stringify(quiz));
+
+
     return this.http.post<Quiz>(QuizService.quizUrl, quizData).pipe(
       tap((newQuiz: Quiz) => {
         console.log('Ajout reussi');
@@ -124,15 +136,35 @@ export class QuizService {
  /* getQuiz() {
     return this.quizzes;
   }*/
-  updateQuiz(quizToModify: Quiz, image: File): Observable<Quiz> {
+  updateQuiz(quizToModify: Quiz, image: File, questions: FormArray): Observable<Quiz> {
     this.snack.open( environment.snackInformation.operation.loading.update.quiz, 'close',
       {
         ...environment.snackInformation.loadingUpdate
       })
     ;
     const quizData = new FormData();
+    if (image !== null) {
+      quizData.append('quiz_image', image,  'quiz ' + quizToModify.label);
+    }
+    if (questions !== null) {
+      console.log(questions);
+      for (let i = 0; i < questions.length; i++) {
+        quizToModify.questions[i].image = ' ';
+        console.log('bad_form: ' + typeof questions[i].image );
+        if (typeof questions[i].image === 'object' && questions[i].image !== null) {
+          console.log('(in)bad_form: ' + typeof questions[i].image );
+          console.log('____: ' + questions[i].image );
+          quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
+        }
+        for (let j = 0; j < questions[i].answers.length; j++) {
+          // quiz.questions[i].answers[i].image = ' ';
+          if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
+            quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
+          }
+        }
+      }
+    }
     quizData.append('quiz', JSON.stringify(quizToModify));
-    if (image !== null) {quizData.append('image', image, quizToModify.label); }
     return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizData).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');
