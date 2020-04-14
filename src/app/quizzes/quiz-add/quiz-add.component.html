@@ -42,7 +42,8 @@
       <mat-grid-tile colspan="4" rowspan="16">
         <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
           <mat-card-content style=" height: 100%;width: 100%;">
-            <img [src]="imagePreview?imagePreview:'../../../assets/Default/imageNotFound.png'" style=" height: 100%;width: 100%;" [alt]="imagePreview?label.value:'NotFound Image'"/>
+            <img [src]="imagePreview?imagePreview:'../../../assets/Default/imageNotFound.png'" appDragNDropPhoto
+                 (fileDropped)="uploadFile($event)" style=" height: 100%;width: 100%;" [alt]="imagePreview?label.value:'NotFound Image'"/>
             <input style="display: none" type="file" #imagePost id="imageUrl" (change)="onImagePick($event)">
             <span class="Jbtn-edit" (click)="imagePost.click()" mat-flat-button aria-label="Example icon-button with a heart icon">
               <mat-icon>add_a_photo</mat-icon>
