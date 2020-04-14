@@ -79,7 +79,7 @@ router.get('/', (req, res) => {
   }
 })
 function hasQuizImage(req) {
-  return req.files[0].originalname.indexOf('quiz') === 0
+  return req.files[0] && req.files[0].originalname.indexOf('quiz') === 0
 }
 router.post('/', quizMulter, (req, res) => {
   try {
@@ -105,7 +105,15 @@ function deleteEntireQuiz(id) {
   Quiz.delete(id)
   const questions = QuestionsRouter.getQuestionsByQuizId(id)
   for (let i = 0; i < questions.length; i++) {
-    QuestionsRouter.deleteEntireQuestion(questions[i].id)
+    const tmp = questions[i]
+    const filename = tmp.image.split('/images/question/')[1]
+    if (filename != null && filename.length > 1) {
+      fs.unlink(`images/question/${filename}`, () => {
+        QuestionsRouter.deleteEntireQuestion(questions[i].id)
+      })
+    } else {
+      QuestionsRouter.deleteEntireQuestion(questions[i].id)
+    }
   }
 }
 
@@ -130,39 +138,59 @@ router.delete('/:id', (req, res) => {
     }
   }
 })
-function updateQuiz(id, obj) {
+function updateQuiz(id, obj, req) {
   const { questions } = obj
   delete obj.questions
   delete obj.id
   delete obj.dateCreation
   obj.dateModification = new Date()
   const quiz = Quiz.update(id, obj)
-
+  const questionsImage = getQuestionsImage(req)
   for (let i = 0; i < questions.length; i++) {
+    let questionImage
+    for (let j = 0; j < questionsImage.length; j++) {
+      let coord = questionsImage[j].originalname.split(' ')[0]
+      coord = coord.split('_')
+      if (+coord[1] === i) {
+        questionImage = questionsImage[j]
+        break
+      }
+    }
     questions[i].quizId = quiz.id
     // s'il la question n'existait pas(dans le frontend toute nouvelle question est crée avec l'id 0)
     if (questions[i].id === 0) {
       delete questions[i].id
-      questions[i] = QuestionsRouter.createQuestion({ ...questions[i] })
+      questions[i] = QuestionsRouter.createQuestion(questionImage
+        ? {
+          ...questions[i],
+          image: `${req.protocol}://${req.get('host')}/images/question/${questionImage.filename}`,
+        }
+        : { ...questions[i] }, req, i)
     } else { // si la question existait déja
       const { id } = questions[i]
-      questions[i] = QuestionsRouter.updateQuestion(id, { ...questions[i] })
+      questions[i] = QuestionsRouter.updateQuestion(id, questionImage
+        ? {
+          ...questions[i],
+          image: `${req.protocol}://${req.get('host')}/images/question/${questionImage.filename}`,
+        }
+        : { ...questions[i] }, req, i)
     }
   }
 
   quiz.questions = questions
   return quiz
 }
-router.put('/:id', quizMulter, questionMulter, answerMulter, (req, res) => {
+router.put('/:id', quizMulter, (req, res) => {
   try {
-    updateQuiz(req.params.id, req.file ? {
+    updateQuiz(req.params.id, hasQuizImage(req) ? {
       ...JSON.parse(req.body.quiz),
-      image: `${req.protocol}://${req.get('host')}/images/quiz/${req.file.filename}`,
+      image: `${req.protocol}://${req.get('host')}/images/quiz/${req.files[0].filename}`,
     } : {
       ...JSON.parse(req.body.quiz),
-    })
+    }, req)
     res.status(201).json(getAQuiz(req.params.id))
   } catch (err) {
+    console.log(err)
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
     } else {
