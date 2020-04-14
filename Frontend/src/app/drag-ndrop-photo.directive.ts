@@ -39,6 +39,7 @@ export class DragNDropPhotoDirective {
     this.background = '#f5fcff';
     this.opacity = '1';
     this.border = 'none';
+    // console.log(evt);
     const files = evt.dataTransfer.files;
     if (files.length > 0) {
       this.fileDropped.emit(files);

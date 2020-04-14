@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute} from '@angular/router';
 import {difficulte, theme} from '../../../models/theme.models';
 import {QuestionsComponent} from '../../questions/questions.component';
-import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
 import {QuestionService} from '../../../services/question.service';
 import {Question} from '../../../models/question.model';
-import {Answer} from '../../../models/answer.model';
 import {AnswersService} from '../../../services/answers.service';
-import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
-import {QuestionComponent} from '../../questions/question/question.component';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-quizze-edit',
@@ -52,8 +49,7 @@ export class QuizzeEditComponent implements OnInit {
   others: boolean;
   private deletedQuestions = [];
   private deletedAnswers = [];
-    else;
-
+  imageReestablisher: Subject<null> = new Subject();
   ngOnInit() {
     this.loading = true;
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
@@ -169,12 +165,7 @@ onImagePick(event: Event) {
   }
 
 deleteImage() {
-    this.savedImage = this.imagePreview;
-    this.imageChanged = true;
-    this.quizForm.markAsDirty();
-    this.quizForm.get('image').reset();
     this.quiz.image = '';
-    this.imagePreview = null;
   }
 
 resetQuiz() {
@@ -182,8 +173,8 @@ resetQuiz() {
     this.imageChanged = false;
     this.quiz.questions = this.savedQuestions;
     this.initializeTheForm(this.quiz);
-    this.imagePreview = this.savedImage;
-    this.quiz.image = this.savedImage;
+    this.imageReestablisher.next(null);
+    this.quiz.image = this.imagePreview;
     this.deletedQuestions = [];
     this.deletedAnswers = [];
   }
