@@ -56,12 +56,12 @@ export class QuizService {
       console.log(questions);
       for (let i = 0; i < questions.length; i++) {
         quiz.questions[i].image = ' ';
-        if (questions[i].image) {
+        if (typeof questions[i].image === 'object'  && questions[i].image !== null) {
         quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
         }
         for (let j = 0; j < questions[i].answers.length; j++) {
           // quiz.questions[i].answers[i].image = ' ';
-          if (questions[i].answers[j].image) {
+          if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
           quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
           }
         }
@@ -136,15 +136,35 @@ export class QuizService {
  /* getQuiz() {
     return this.quizzes;
   }*/
-  updateQuiz(quizToModify: Quiz, image: File): Observable<Quiz> {
+  updateQuiz(quizToModify: Quiz, image: File, questions: FormArray): Observable<Quiz> {
     this.snack.open( environment.snackInformation.operation.loading.update.quiz, 'close',
       {
         ...environment.snackInformation.loadingUpdate
       })
     ;
     const quizData = new FormData();
+    if (image !== null) {
+      quizData.append('quiz_image', image,  'quiz ' + quizToModify.label);
+    }
+    if (questions !== null) {
+      console.log(questions);
+      for (let i = 0; i < questions.length; i++) {
+        quizToModify.questions[i].image = ' ';
+        console.log('bad_form: ' + typeof questions[i].image );
+        if (typeof questions[i].image === 'object' && questions[i].image !== null) {
+          console.log('(in)bad_form: ' + typeof questions[i].image );
+          console.log('____: ' + questions[i].image );
+          quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
+        }
+        for (let j = 0; j < questions[i].answers.length; j++) {
+          // quiz.questions[i].answers[i].image = ' ';
+          if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
+            quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
+          }
+        }
+      }
+    }
     quizData.append('quiz', JSON.stringify(quizToModify));
-    if (image !== null) {quizData.append('image', image, quizToModify.label); }
     return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizData).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');

@@ -19,6 +19,7 @@ export class QuizListComponent implements OnInit {
   public doQuiz;
   public inviteToCreateQuiz = null;
   public searchedQuiz: Quiz = DEFAULT_QUIZ;
+  loading: boolean;
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,
@@ -30,7 +31,10 @@ export class QuizListComponent implements OnInit {
     this.doQuiz = (this.Activerouter.snapshot.params.do === 'true');
   }
   getAllQuiz() {
+    this.loading = true;
     this.quizService.getQuiz().subscribe((quiz) => {
+
+      this.loading = false;
       if (!quiz) {
         // tslint:disable-next-line:max-line-length
         if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) { this.getAllQuiz(); } else {alert('Veuillez conctater l\'administrateur'); return; }
