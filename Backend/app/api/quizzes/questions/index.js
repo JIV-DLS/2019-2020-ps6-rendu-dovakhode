@@ -1,5 +1,6 @@
 
 const { Router } = require('express')
+const fs = require('fs')
 const { Question } = require('../../../models')
 const { Answer } = require('../../../models')
 
@@ -41,13 +42,36 @@ router.get('/', (req, res) => {
     res.status(500).json(err)
   }
 })
-function createQuestion(obj = {}) {
+
+function getAnswersImage(req) {
+  const answersImage = []
+  for (let i = 0; i < req.files.length; i++) {
+    if (req.files[i].originalname.indexOf('answer') === 0)answersImage.push(req.files[i])
+  }
+  return answersImage
+}
+function createQuestion(obj = {}, req, index) {
   const { answers } = obj
   delete obj.answers
   const question = Question.create({ ...obj })
+  const answersImage = getAnswersImage(req)
   for (let i = 0; i < answers.length; i++) {
+    let answerImage
+    for (let j = 0; j < answersImage.length; j++) {
+      let coord = answersImage[j].originalname.split(' ')[0]
+      coord = coord.split('_')
+      if (+coord[1] === index && +coord[2] === i) {
+        answerImage = answersImage[j]
+        break
+      }
+    }
     answers[i].questionId = question.id
-    answers[i] = AnswersRouter.createAnswer({ ...answers[i] })
+    answers[i] = AnswersRouter.createAnswer(answerImage
+      ? {
+        ...answers[i],
+        image: `${req.protocol}://${req.get('host')}/images/answer/${answerImage.filename}`,
+      }
+      : { ...answers[i] })
   }
   question.answers = answers
   return question
@@ -75,7 +99,16 @@ function deleteEntireQuestion(id) {
   const answers = AnswersRouter.getAnswersByQuestionId(id)
   if (answers != null) {
     for (let i = 0; i < answers.length; i++) {
-      Answer.delete(answers[i].id)
+      const tmp = answers[i]
+      if (!tmp.image) tmp.image = ''
+      const filename = tmp.image.split('/images/answer/')[1]
+      if (filename != null && filename.length > 1) {
+        fs.unlink(`images/answer/${filename}`, () => {
+          Answer.delete(tmp.id)
+        })
+      } else {
+        Answer.delete(tmp.id)
+      }
     }
   }
 }
@@ -92,20 +125,40 @@ router.delete('/:idQ', (req, res) => {
     }
   }
 })
-function updateQuestion(id, obj) {
+function updateQuestion(id, obj, req) {
   const { answers } = obj
   delete obj.answers
   const question = Question.update(id, { ...obj })
+  const answersImage = getAnswersImage(req)
   for (let i = 0; i < answers.length; i++) {
+    let answerImage
+    for (let j = 0; j < answersImage.length; j++) {
+      let coord = answersImage[j].originalname.split(' ')[0]
+      coord = coord.split('_')
+      if (+coord[1] === index && +coord[2] === i) {
+        answerImage = answersImage[j]
+        break
+      }
+    }
     answers[i].quizId = question.quizId
     answers[i].questionId = question.id
     // s'il la question n'existait pas(dans le frontend toute nouvelle question est crée avec l'id 0)
     if (answers[i].id === 0) {
       delete answers[i].id
-      answers[i] = AnswersRouter.createAnswer({ ...answers[i] })
+      answers[i] = AnswersRouter.createAnswer(answerImage
+        ? {
+          ...answers[i],
+          image: `${req.protocol}://${req.get('host')}/images/answer/${answerImage.filename}`,
+        }
+        : { ...answers[i] })
     } else { // si la question existait déja
       const { id } = answers[i]
-      answers[i] = AnswersRouter.updateAnswer(id, { ...answers[i] })
+      answers[i] = AnswersRouter.updateAnswer(id, answerImage
+        ? {
+          ...answers[i],
+          image: `${req.protocol}://${req.get('host')}/images/answer/${answerImage.filename}`,
+        }
+        : { ...answers[i] })
     }
   }
   question.answers = answers

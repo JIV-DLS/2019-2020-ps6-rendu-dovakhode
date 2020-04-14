@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute} from '@angular/router';
 import {difficulte, theme} from '../../../models/theme.models';
 import {QuestionsComponent} from '../../questions/questions.component';
-import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
 import {QuestionService} from '../../../services/question.service';
 import {Question} from '../../../models/question.model';
-import {Answer} from '../../../models/answer.model';
 import {AnswersService} from '../../../services/answers.service';
-import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
-import {QuestionComponent} from '../../questions/question/question.component';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-quizze-edit',
@@ -22,6 +19,23 @@ import {QuestionComponent} from '../../questions/question/question.component';
   styleUrls: ['./quizze-edit.component.scss']
 })
 export class QuizzeEditComponent implements OnInit {
+  constructor(private location: Location,
+              public quizService: QuizService,
+              private route: ActivatedRoute,
+              public dialog: MatDialog,
+              public formBuilder: FormBuilder,
+              private questionService: QuestionService,
+              private answerService: AnswersService,
+  ) { }
+  get questions() {
+    return this.quizForm.get('questions') as FormArray;
+  }
+  get theme() {
+    return this.quizForm.get('theme') as FormArray;
+  }
+  get label() {
+    return this.quizForm.get('label') as FormArray;
+  }
   quiz: Quiz;
   public imageChanged: boolean;
   private savedImage: string;
@@ -35,15 +49,7 @@ export class QuizzeEditComponent implements OnInit {
   others: boolean;
   private deletedQuestions = [];
   private deletedAnswers = [];
-  constructor(private location: Location,
-              public quizService: QuizService,
-              private route: ActivatedRoute,
-              public dialog: MatDialog,
-              public formBuilder: FormBuilder,
-              private questionService: QuestionService,
-              private answerService: AnswersService,
-  ) { }
-
+  imageReestablisher: Subject<null> = new Subject();
   ngOnInit() {
     this.loading = true;
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
@@ -68,18 +74,17 @@ export class QuizzeEditComponent implements OnInit {
       theme: [this.quiz.theme, [ Validators.required, Validators.minLength(3)]],
       subTheme: [this.quiz.subTheme],
       difficulty: [this.quiz.difficulty],
-      questions: [this.quiz.questions != null ? this.quiz.questions : []],
+      questions: this.formBuilder.array(this.quiz.questions != null ? this.quiz.questions : []),
       image: [null]
     });
   }
-  get questions() {
-    return this.quizForm.get('questions') as FormArray;
-  }
-  get theme() {
-    return this.quizForm.get('theme') as FormArray;
-  }
-  get label() {
-    return this.quizForm.get('label') as FormArray;
+  private createQuestionByData(question) {
+    return this.formBuilder.group({
+      id: question.id,
+      label: question.label,
+      answers: this.formBuilder.array(question.answers),
+      image: question.image,
+    });
   }
   openDialog(): void {
     const questionsDialog = [];
@@ -89,12 +94,15 @@ export class QuizzeEditComponent implements OnInit {
       maxHeight: '500px',
       data:  questionsDialog
     });
-    dialogRef.afterClosed().subscribe(question => {
+    dialogRef.afterClosed().subscribe(questionForm => {
       this.questionDialogOpened = false;
-      if (question && question.label) {
+      if (questionForm) {
+        // this.quiz.questions.push(questionImage.question);
         this.others = true;
-        this.quiz.questions.push(question);
-        this.questions.setValue( this.quiz.questions); }
+        const obj = this.createQuestionByData(questionForm);
+        console.log(obj);
+        this.questions.push(obj);
+        console.log(this.questions.value); }
     });
   }
   modifyQuiz() {
@@ -108,7 +116,7 @@ export class QuizzeEditComponent implements OnInit {
     quizToModify.image = this.quiz.image;
     if (this.deletedQuestions) {this.questionService.deleteQuestions(this.deletedQuestions); }
     if (this.deletedAnswers) {this.answerService.deleteAnswers(this.deletedAnswers); }
-    this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value).subscribe((quiz) => {
+    this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value, this.questions.value).subscribe((quiz) => {
       if (quiz !== undefined) {
         this.quiz = quiz;
         this.savedImage = quiz.image;
@@ -131,11 +139,16 @@ export class QuizzeEditComponent implements OnInit {
     }
     return this.theme.hasError('minLenght') ? 'Veuillez entrer 3 caractère au minimum' : '';
   }
+  anyChangement() {
+    return this.quizForm.dirty || this.imageChanged || this.others;
+  }
   retour() {
-    this.location.back();
+    if (this.anyChangement()) {
+      alert('Une modification est en cour. Veuillez la valider(modifier) ou l\'annuler(annuler) avant de continuer!');
+    } else { this.location.back(); }
   }
 
-  onImagePick(event: Event) {
+onImagePick(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.quizForm.get('image').patchValue(file);
     this.quizForm.get('image').updateValueAndValidity();
@@ -151,35 +164,30 @@ export class QuizzeEditComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  deleteImage() {
-    this.savedImage = this.imagePreview;
-    this.imageChanged = true;
-    this.quizForm.markAsDirty();
-    this.quizForm.get('image').reset();
+deleteImage() {
     this.quiz.image = '';
-    this.imagePreview = null;
   }
 
-  resetQuiz() {
+resetQuiz() {
     this.others = false;
     this.imageChanged = false;
     this.quiz.questions = this.savedQuestions;
     this.initializeTheForm(this.quiz);
-    this.imagePreview = this.savedImage;
-    this.quiz.image = this.savedImage;
+    this.imageReestablisher.next(null);
+    this.quiz.image = this.imagePreview;
     this.deletedQuestions = [];
     this.deletedAnswers = [];
   }
 
-  deletedQuestion($event: boolean, index: number) {
+deletedQuestion($event: boolean, index: number) {
     if ($event) {
       if (!this.others) {this.others = true; }
       this.deletedQuestions.push(this.quiz.questions[index]);
-      this.quiz.questions.splice(index, 1);
+      this.questions.removeAt(index);
     }
   }
 
-  editQuestion($event: boolean, i: number) {
+editQuestion($event: boolean, i: number) {
     const dialogRef = this.dialog.open(QuestionsComponent, {
       width: '950px',
       maxHeight: '500px',
@@ -189,8 +197,9 @@ export class QuizzeEditComponent implements OnInit {
       this.questionDialogOpened = false;
       if (question && question.label) {
         if (!this.others) {this.others = true; }
-        this.quiz.questions[i] = question;
-        this.questions.setValue(this.quiz.questions);
+        if (question && question.label) {
+          this.questions.at(i).setValue(question);
+        }
       }
     });
   }

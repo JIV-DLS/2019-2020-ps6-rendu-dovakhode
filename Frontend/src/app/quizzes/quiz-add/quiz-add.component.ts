@@ -5,14 +5,10 @@ import { QuizService } from '../../../services/quiz.service';
 import { Quiz } from '../../../models/quiz.model';
 import {difficulte, theme} from '../../../models/theme.models';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {QuestionsComponent} from '../../questions/questions.component';
-import {SnackModificationComponent} from '../../snack/snack-modification/snack-modification.component';
-import {Location} from '@angular/common';
 import {environment} from '../../../environments/environment';
 import {MatDialogRef} from '@angular/material/dialog';
-import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
-import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
 
 @Component({
   selector: 'app-quiz-form',
@@ -21,6 +17,25 @@ import {QuestionAddComponent} from '../../questions/question-add/question-add.co
 })
 
 export class QuizAddComponent implements OnInit {
+
+  constructor(public dialogRef: MatDialogRef<QuizAddComponent>,
+              public dialog: MatDialog,
+              public formBuilder: FormBuilder,
+              public quizService: QuizService) {
+    // Form creation
+    // You can also question-add validators to your inputs such as required, maxlength or even create your own validator!
+    // More information: https://angular.io/guide/reactive-forms#simple-form-validation
+    // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
+  }
+  get questions() {
+    return this.quizForm.get('questions') as FormArray;
+  }
+  get theme() {
+    return this.quizForm.get('theme') as FormArray;
+  }
+  get label() {
+    return this.quizForm.get('label') as FormArray;
+  }
 
   // Note: We are using here ReactiveForms to create our form. Be careful when you look for some documentation to
   // avoid TemplateDrivenForm (another type of form)
@@ -35,16 +50,7 @@ export class QuizAddComponent implements OnInit {
   public difficultiesValues = Object.values(difficulte);
   private questionDialogOpened = false;
   public imagePreview: string;
-
-  constructor(public dialogRef: MatDialogRef<QuizAddComponent>,
-              public dialog: MatDialog,
-              public formBuilder: FormBuilder,
-              public quizService: QuizService) {
-    // Form creation
-    // You can also question-add validators to your inputs such as required, maxlength or even create your own validator!
-    // More information: https://angular.io/guide/reactive-forms#simple-form-validation
-    // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
-  }
+  files: any = [];
 
   ngOnInit() {
     this.quiz = new Quiz();
@@ -60,8 +66,16 @@ export class QuizAddComponent implements OnInit {
       theme: [ DEFAULT_QUIZ.theme, [ Validators.required, Validators.minLength(3)]],
       subTheme: [null],
       difficulty: [null],
-      questions: [DEFAULT_QUIZ.questions],
+      questions: this.formBuilder.array([]),
       image: [null]
+    });
+  }
+  private createQuestionByData(question) {
+    return this.formBuilder.group({
+      id: question.id,
+      label: question.label,
+      answers: this.formBuilder.array(question.answers),
+      image: question.image,
     });
   }
   addQuiz() {
@@ -87,7 +101,7 @@ export class QuizAddComponent implements OnInit {
      // console.log('Add quiz: ', quizToCreate);
 
     // Now, question-add your quiz in the list!
-    this.quizService.addQuiz(quizToCreate, this.quizForm.get('image').value).subscribe((quiz) => {
+    this.quizService.addQuiz(quizToCreate, this.quizForm.get('image').value, this.questions.value).subscribe((quiz) => {
       if (quiz !== undefined) {
        this.quiz = quiz;
        this.dialogRef.close(quiz);
@@ -109,26 +123,21 @@ export class QuizAddComponent implements OnInit {
     this.questionDialogOpened = true;
     this.openDialog();
   }
-  get questions() {
-    return this.quizForm.get('questions') as FormArray;
-  }
-  get theme() {
-    return this.quizForm.get('theme') as FormArray;
-  }
-  get label() {
-    return this.quizForm.get('label') as FormArray;
-  }
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionsComponent, {
       width: '950px',
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
     });
-    dialogRef.afterClosed().subscribe(question => {
+    dialogRef.afterClosed().subscribe(questionForm => {
       this.questionDialogOpened = false;
-      if (question && question.label) {
-        this.quiz.questions.push(question);
-        this.questions.setValue( this.quiz.questions); }
+      // if (questionImage.question && questionImage.question.label) {
+      if (questionForm) {
+        // this.quiz.questions.push(questionImage.question);
+        const obj = this.createQuestionByData(questionForm);
+        console.log(obj);
+        this.questions.push(obj);
+        console.log(this.questions.value); }
     });
   }
   deleteQuestion(deleteState: boolean) {
@@ -151,7 +160,9 @@ export class QuizAddComponent implements OnInit {
   }
 
   onImagePick(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
+   this.loadImageFile((event.target as HTMLInputElement).files[0]);
+  }
+  loadImageFile(file) {
     this.quizForm.get('image').patchValue(file);
     this.quizForm.get('image').updateValueAndValidity();
     const reader = new FileReader();
@@ -185,10 +196,21 @@ export class QuizAddComponent implements OnInit {
       dialogRef.afterClosed().subscribe(question => {
         this.questionDialogOpened = false;
         if (question && question.label) {
-          this.quiz.questions[i] = question;
-          this.questions.setValue(this.quiz.questions);
+          this.questions.at(i).setValue(question);
         }
       });
+  }
+
+  uploadFile(event) {
+    this.loadImageFile(event[0]);
+    /* for (let index = 0; index < event.length; index++) {
+      const element = event[index];
+      this.files.push(element.name);
+      console.log('entire element_ ' + element);
+    } */
+  }
+  deleteAttachment(index) {
+    this.files.splice(index, 1);
   }
 }
 
