@@ -44,7 +44,9 @@
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="5" rowspan="1">
-      <p style="text-align: center;">Cliquez sur l'un des quizzes sous dessous pour le <b>{{(doQuiz?'lancer':'modifier')}}!</b> <br/>NB: La liste peut être vide si aucun quiz quiz ne suit les critères entrés!</p>
+      <p style="text-align: center;">Cliquez sur l'un des quizzes sous dessous pour le <b>
+        {{(doQuiz?'lancer':'modifier')}}!</b> <br/>
+        NB: La liste peut être vide si aucun quiz quiz ne suit les critères entrés!</p>
     </mat-grid-tile>
   </mat-grid-list>
   <mat-grid-list cols="{{col()}}" rowHeight="40px" style="width: 100%; border-bottom: #1b1e21 1px solid;">
@@ -67,6 +69,7 @@
 
   </mat-grid-list>
   <div style="max-height: 430px;overflow-y: scroll;">
+    <mat-spinner *ngIf="loading"></mat-spinner>
     <app-quiz-less-info class="quiz" (deleteEmitter)="deleteQuiz($event,quiz)" (selectEmitter)="selectQuiz(quiz)" [do]="this.doQuiz" *ngFor="let quiz of quizList | quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}" [quiz]="quiz"></app-quiz-less-info>
     <div style="display: flex" *ngIf="inviteToCreateQuiz">
       <span class="h4" style="width: 40%; text-align: center">Votre liste est vide veuillez</span>

@@ -68,8 +68,16 @@ export class QuizzeEditComponent implements OnInit {
       theme: [this.quiz.theme, [ Validators.required, Validators.minLength(3)]],
       subTheme: [this.quiz.subTheme],
       difficulty: [this.quiz.difficulty],
-      questions: [this.quiz.questions != null ? this.quiz.questions : []],
+      questions: this.formBuilder.array(this.quiz.questions != null ? this.quiz.questions : []),
       image: [null]
+    });
+  }
+  private createQuestionByData(question) {
+    return this.formBuilder.group({
+      id: question.id,
+      label: question.label,
+      answers: this.formBuilder.array(question.answers),
+      image: question.image,
     });
   }
   get questions() {
@@ -89,12 +97,15 @@ export class QuizzeEditComponent implements OnInit {
       maxHeight: '500px',
       data:  questionsDialog
     });
-    dialogRef.afterClosed().subscribe(question => {
+    dialogRef.afterClosed().subscribe(questionForm => {
       this.questionDialogOpened = false;
-      if (question && question.label) {
+      if (questionForm) {
+        // this.quiz.questions.push(questionImage.question);
         this.others = true;
-        this.quiz.questions.push(question);
-        this.questions.setValue( this.quiz.questions); }
+        const obj = this.createQuestionByData(questionForm);
+        console.log(obj);
+        this.questions.push(obj);
+        console.log(this.questions.value); }
     });
   }
   modifyQuiz() {
@@ -108,7 +119,7 @@ export class QuizzeEditComponent implements OnInit {
     quizToModify.image = this.quiz.image;
     if (this.deletedQuestions) {this.questionService.deleteQuestions(this.deletedQuestions); }
     if (this.deletedAnswers) {this.answerService.deleteAnswers(this.deletedAnswers); }
-    this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value).subscribe((quiz) => {
+    this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value, this.questions.value).subscribe((quiz) => {
       if (quiz !== undefined) {
         this.quiz = quiz;
         this.savedImage = quiz.image;
@@ -175,7 +186,7 @@ export class QuizzeEditComponent implements OnInit {
     if ($event) {
       if (!this.others) {this.others = true; }
       this.deletedQuestions.push(this.quiz.questions[index]);
-      this.quiz.questions.splice(index, 1);
+      this.questions.removeAt(index);
     }
   }
 
@@ -189,8 +200,9 @@ export class QuizzeEditComponent implements OnInit {
       this.questionDialogOpened = false;
       if (question && question.label) {
         if (!this.others) {this.others = true; }
-        this.quiz.questions[i] = question;
-        this.questions.setValue(this.quiz.questions);
+        if (question && question.label) {
+          this.questions.at(i).setValue(question);
+        }
       }
     });
   }
