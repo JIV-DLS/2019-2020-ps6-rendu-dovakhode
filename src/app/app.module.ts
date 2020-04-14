@@ -58,6 +58,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { QuizSearchPipe } from './quizzes/_pipes/quiz-search.pipe';
 import { DragNDropPhotoDirective } from './drag-ndrop-photo.directive';
+import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -112,7 +113,8 @@ const routes: Routes = [
     HomeUserComponent,
     HomeDoQuizComponent,
     QuizSearchPipe,
-    DragNDropPhotoDirective
+    DragNDropPhotoDirective,
+    ImageUploaderComponent
   ],
   entryComponents: [
     QuestionsComponent,
