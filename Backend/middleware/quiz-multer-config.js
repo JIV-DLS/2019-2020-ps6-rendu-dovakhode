@@ -19,12 +19,11 @@ const storage = multer.diskStorage({
         || file.originalname.indexOf('answer') === 0) {
       /* console.log(file.originalname.split('/')[0])
       console.log(file.originalname.split('/')[1]) */
-      console.log('original name: ' + file.originalname)
       name = file.originalname.split(' ')
       name.splice(0, 1)
-      name = name.join('_')
+      name = name.join('_').replace(/[^a-z0-9]/gi, '_').toLowerCase()
     } else {
-      name = file.originalname.split(' ').join('_')
+      name = file.originalname.split(' ').join('_').replace(/[^a-z0-9]/gi, '_').toLowerCase()
     }
     const extension = MIME_TYPES[file.mimetype]
     callback(null, `${name + Date.now()}.${extension}`)
