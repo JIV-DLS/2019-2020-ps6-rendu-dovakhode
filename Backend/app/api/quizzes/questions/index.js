@@ -125,7 +125,7 @@ router.delete('/:idQ', (req, res) => {
     }
   }
 })
-function updateQuestion(id, obj, req) {
+function updateQuestion(id, obj, req, index) {
   const { answers } = obj
   delete obj.answers
   const question = Question.update(id, { ...obj })

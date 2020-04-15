@@ -31,8 +31,8 @@ router.get('/', (req, res) => {
   }
 })
 function createAnswer(obj = {}) {
+  delete obj.tmpUrl
   const answer = Answer.create({ ...obj })
-
   return answer
 }
 router.post('/', (req, res) => {
@@ -61,6 +61,7 @@ router.delete('/:idQ', (req, res) => {
   }
 })
 function updateAnswer(id, obj) {
+  delete obj.tmpUrl
   return Answer.update(id, { ...obj })
 }
 router.put('/:idQ', (req, res) => {

@@ -78,7 +78,7 @@ export class QuestionAddComponent implements OnInit {
     });
   }
   answerHaveImage(i: number) {
-    return (this.answers.at(i).value as Answer).tmpUrl != null;
+    return (this.answers.at(i).value as Answer).tmpUrl.length > 0;
   }
   questionFormValue() {
     return Question.quizFormValues(this.questionForm) as Question;
