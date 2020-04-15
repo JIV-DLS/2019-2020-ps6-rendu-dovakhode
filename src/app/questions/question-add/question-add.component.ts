@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Question} from '../../../models/question.model';
-import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component';
 import {Answer} from '../../../models/answer.model';
+import {MatSlideToggle} from '@angular/material/slide-toggle';
 
 
 // @ts-ignore
@@ -33,6 +33,7 @@ export class QuestionAddComponent implements OnInit {
   @Output()
   questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
   public imagePreview: string;
+  @ViewChild('answerWithImage') answerWithImage: MatSlideToggle;
 
   ngOnInit() {
     this.question = new Question();
@@ -70,7 +71,7 @@ export class QuestionAddComponent implements OnInit {
     const dialogRef = this.dialog.open(AnswerAddComponent, {
       width: '950px',
       maxHeight: '500px',
-      data: this.question ? this.question : DEFAULT_QUESTION
+      data: this.answerWithImage.checked
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
