@@ -1,6 +1,7 @@
 import {MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 // @ts-ignore
 export const snackData: {
+  info: any;
   update: any;
   succes: any;
   error: any;
@@ -14,6 +15,10 @@ export const snackData: {
   duration: 3000,
   horizontalPosition: 'center' as MatSnackBarHorizontalPosition,
   verticalPosition: 'bottom' as MatSnackBarVerticalPosition,
+  info: {
+    label: 'Info: ',
+    class: 'blue-snackbar'
+  },
   get: {
     label: 'Récupération de ',
     class: 'gray-snackbar'

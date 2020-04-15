@@ -16,6 +16,12 @@ export const environment = {
   formFieldRequired: 'Veuiller remplir ce champs',
   formSelectRequired: 'Veuillez choisir une valeur',
   snackInformation: {
+    informationForAll: {
+      duration: snackData.duration,
+      horizontalPosition:  snackData.horizontalPosition,
+      verticalPosition: snackData.verticalPosition,
+      panelClass: [snackData.info.class]
+    },
     successForAll: {
       duration: snackData.duration,
       horizontalPosition:  snackData.horizontalPosition,
@@ -61,6 +67,7 @@ export const environment = {
           profil: 'Récupération de tous les profils en cours'
         },
         get: {
+          image: 'Téléchargement de l\'image en cours...',
           quiz: 'Récupération d\'un quiz en cours...',
           question: 'Récupération d\'une question en cours...',
           answer: 'Récupération d\'une réponse en cours...',
@@ -94,7 +101,8 @@ export const environment = {
           quiz: 'Récupération du quiz éffectuée avec succès!',
           question: 'Récupération de la question éffectuée avec succès!',
           answer: 'Récupération de la réponse éffectuée avec succès!',
-          profil: 'Récupération du profil éffectuée avec succès!'
+          profil: 'Récupération du profil éffectuée avec succès!',
+          image: '✅ Image téléchargée avec succès!'
         },
         update: {
           quiz: '✅ Modification du quiz éffectuée avec succès!',

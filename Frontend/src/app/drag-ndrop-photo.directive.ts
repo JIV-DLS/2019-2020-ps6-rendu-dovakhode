@@ -1,11 +1,13 @@
 import {Directive, EventEmitter, HostBinding, HostListener, Output} from '@angular/core';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {environment} from '../environments/environment';
 
 @Directive({
   selector: '[appDragNDropPhoto]'
 })
 export class DragNDropPhotoDirective {
 
-  constructor() { }
+  constructor(private snack: MatSnackBar) { }
 
 
   @Output() fileDropped = new EventEmitter<any>();
@@ -39,11 +41,61 @@ export class DragNDropPhotoDirective {
     this.background = '#f5fcff';
     this.opacity = '1';
     this.border = 'none';
-    // console.log(evt);
-    const files = evt.dataTransfer.files;
-    if (files.length > 0) {
-      this.fileDropped.emit(files);
+    switch (evt.dataTransfer.items[0].kind) {
+      case 'file':
+        const files = evt.dataTransfer.files;
+        if (files.length > 0) {
+          this.fileDropped.emit(files);
+        }
+        break;
+      case 'string':
+            evt.dataTransfer.items[0].getAsString(async _ => {
+              const imgUrl = decodeURIComponent(_.split(' ')[0].split('imgurl=')[1].split('&imgref')[0]);
+              if (imgUrl) {
+                /*this.snack.open(environment.snackInformation.operation.loading.get.image, 'close',
+                  {
+                    ...environment.snackInformation.successForAll
+                  });*/
+                try {
+                  await fetch(imgUrl)
+                    .then(res => res.blob()) // Gets the response and returns it as a blob
+                    .then(blob => {
+                      this.snack.dismiss();
+                      blob.lastModifiedDate = new Date();
+                      const anArray = [];
+                      anArray.push(blob as File);
+                      this.fileDropped.emit(anArray);
+                    });
+                } catch (err) {
+                  alert('❌ Impossible de telecharger l\'image,' +
+                    ' les droits sont insuffisants, Veuillez importer une autre image!');
+                  /*this.snack.open('❌ Impossible de telecharger l\'image,' +
+                    ' les droits sont insuffisants, Veuillez importer une autre image!', 'close',
+                    {
+                      ...environment.snackInformation.errorForAll
+                    })
+                  ;*/
+                }
+
+            // console.log(_)
+            // console.log(new File(decodeURIComponent(_.split(' ')[0].split('imgurl=')[1].split('&imgref')[0]),'mon fichier'));
+          } else {
+          this.snack.open('Pour l\'import depuis un site web, Veuillez par préférence choisir Google!', 'close',
+            {
+              ...environment.snackInformation.informationForAll
+            }); }
+});
+            break;
+      default:
+        this.snack.open('Oups une erreur s\'est produite lors de l\'importation de photos,' +
+          'Veuillez réssayer avec une autre image!', 'close',
+          {
+            ...environment.snackInformation.errorForAll
+          })
+        ;
+        break;
     }
+
   }
 
 }
