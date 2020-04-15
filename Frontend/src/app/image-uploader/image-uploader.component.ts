@@ -36,7 +36,8 @@ export class ImageUploaderComponent implements OnInit {
       if (this.form.get('image').valid) {
         this.imageChanged.emit();
         this.imagePreview = reader.result as string;
-        document.getElementById('imgShower').src = this.imagePreview;
+        // document.getElementById('imgShower').src = this.imagePreview;
+        if (this.form.get('imagePreview')) {this.form.get('imagePreview').setValue(this.imagePreview); }
         this.form.markAsDirty();
       } else {
         this.imagePreview = null;
