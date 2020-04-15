@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Question} from '../../../models/question.model';
-import {Answer} from '../../../models/answer.model';
 import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
-import {AnswersComponent} from '../../answers/answers.component';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component';
 
 
@@ -40,7 +38,6 @@ export class QuestionAddComponent implements OnInit {
     this.initializeQuestionForm();
   }
   private initializeQuestionForm() {
-    console.log('Here are the answers' + this.questionEdition.answers);
     this.questionForm = this.formBuilder.group({
       id: 0,
       label: [this.questionEdition.answers != null ? (this.questionEdition as Question).label : ''],
@@ -53,10 +50,11 @@ export class QuestionAddComponent implements OnInit {
       (this.questionEdition as Question).answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
     }
   }
-  private createAnswerByData(answer: Answer) {
+  private createAnswerByData(answer) {
     return this.formBuilder.group({
       value: answer.value,
       isCorrect: answer.isCorrect,
+      image: answer.image
     });
   }
   addAnswer() {
@@ -73,42 +71,26 @@ export class QuestionAddComponent implements OnInit {
       data: this.question ? this.question : DEFAULT_QUESTION
     });
     dialogRef.afterClosed().subscribe(data => {
-      this.answers.push(this.createAnswerByData(data.answer));
+      if (data) {
+        this.answers.push(this.createAnswerByData(data.answer)); }
     });
   }
   questionFormValue() {
     return Question.quizFormValues(this.questionForm) as Question;
   }
 
-  onImagePick(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.questionForm.get('image').patchValue(file);
-    this.questionForm.get('image').updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (this.questionForm.get('image').valid) {
-        this.imagePreview = reader.result as string;
-      } else {
-        this.imagePreview = null;
-      }
-    };
-    reader.readAsDataURL(file);
-  }
   deleteImage() {
     this.questionForm.get('image').reset();
     this.imagePreview = null;
   }
   clean(i: number) {
     this.answers.removeAt(i);
-    // this.answers.setValue(this.questionFormValue().answers.splice(i, 0));
-    // (this.answers as unknown as Answer[]).splice(i,0);
   }
   createQuestion() {
     if (this.conform()) {
       this.questionCreated.emit(this.questionFormValue());
       this.dialogRef.close(this.questionFormValue());
     }
-    // console.log(this.questionFormValue());
   }
   edit() {
     if (this.conform()) {

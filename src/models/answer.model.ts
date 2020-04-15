@@ -1,6 +1,7 @@
 import {FormGroup} from '@angular/forms';
 
 export class Answer {
+  image: string;
   type?: string;
   value: string;
   isCorrect: boolean;
