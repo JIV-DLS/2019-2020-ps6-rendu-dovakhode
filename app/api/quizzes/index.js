@@ -12,8 +12,6 @@ const QuestionsRouter = require('./questions')
 
 
 const quizMulter = require('../../../middleware/quiz-multer-config')
-const questionMulter = require('../../../middleware/question-multer-config')
-const answerMulter = require('../../../middleware/answer-multer-config')
 
 function getQuestionsImage(req) {
   const questionsImage = []
