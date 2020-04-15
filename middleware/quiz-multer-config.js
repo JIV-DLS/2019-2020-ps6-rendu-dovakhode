@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
         || file.originalname.indexOf('answer') === 0) {
       /* console.log(file.originalname.split('/')[0])
       console.log(file.originalname.split('/')[1]) */
-      console.log(file.originalname)
+      console.log('original name: ' + file.originalname)
       name = file.originalname.split(' ')
       name.splice(0, 1)
       name = name.join('_')
