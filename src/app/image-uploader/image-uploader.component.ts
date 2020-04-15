@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
 
@@ -8,12 +8,12 @@ import {Subject} from 'rxjs';
   styleUrls: ['./image-uploader.component.scss']
 })
 export class ImageUploaderComponent implements OnInit {
-
+  @ViewChildren('add') addElement: ElementRef;
   @Input()  imageReestablisher: Subject<any>;
   @Input() imagePreview: string;
   @Input() savedImage: string;
   @Input() label: string;
-  @Input() quizForm: FormGroup;
+  @Input() form: FormGroup;
   @Input() editable: boolean;
   @Output() imageChanged: EventEmitter<null> = new EventEmitter<null>();
   @Output() imageDeleted: EventEmitter<null> = new EventEmitter<null>();
@@ -28,18 +28,20 @@ export class ImageUploaderComponent implements OnInit {
   }
 
   loadImageFile(file) {
-    this.quizForm.get('image').patchValue(file);
-    this.quizForm.get('image').updateValueAndValidity();
+    this.form.get('image').patchValue(file);
+    this.form.get('image').updateValueAndValidity();
     const reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onload = () => {
-      if (this.quizForm.get('image').valid) {
+      if (this.form.get('image').valid) {
         this.imageChanged.emit();
         this.imagePreview = reader.result as string;
+        document.getElementById('imgShower').src = this.imagePreview;
+        this.form.markAsDirty();
       } else {
         this.imagePreview = null;
       }
     };
-    reader.readAsDataURL(file);
   }
 
   onImagePick(event: Event) {
@@ -47,19 +49,15 @@ export class ImageUploaderComponent implements OnInit {
   }
   uploadFile(event) {
     this.loadImageFile(event[0]);
-    /* for (let index = 0; index < event.length; index++) {
-      const element = event[index];
-      this.files.push(element.name);
-      console.log('entire element_ ' + element);
-    } */
   }
   deleteImage() {
     this.savedImage = this.imagePreview;
     this.imageChanged.emit();
-    this.quizForm.markAsDirty();
-    this.quizForm.get('image').reset();
+    this.form.markAsDirty();
+    this.form.get('image').reset();
     // this.quiz.image = '';
     this.imagePreview = null;
     this.imageDeleted.emit();
   }
+
 }

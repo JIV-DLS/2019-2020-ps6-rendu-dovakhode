@@ -43,7 +43,8 @@
         <mat-grid-tile colspan="4" rowspan="16">
           <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
             <mat-card-content style=" height: 100%;width: 100%;">
-              <app-image-uploader editable="true" [imageReestablisher]="imageReestablisher" [label]="label.value"  [imagePreview]="imagePreview" [quizForm]="quizForm" (imageChanged)="imageChanged=true;" (imageDeleted)="deleteImage()" [savedImage]="savedImage"></app-image-uploader>
+              <app-image-uploader editable="true" [imageReestablisher]="imageReestablisher" [label]="label.value" [imagePreview]="imagePreview"
+                                  [form]="quizForm" (imageChanged)="imageChanged=true;" (imageDeleted)="deleteImage()" [savedImage]="savedImage"></app-image-uploader>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
