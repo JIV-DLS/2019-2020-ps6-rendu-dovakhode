@@ -8,7 +8,7 @@ export class Answer {
   id: number;
   questionId: number;
   quizId: number;
-
+  tmpUrl: string;
   constructor() {
     this.id = 0;
   }

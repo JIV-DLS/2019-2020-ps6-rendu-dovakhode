@@ -17,6 +17,7 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
 
 
   answerForm: FormGroup;
+  public imagePreview: string;
 
   ngOnInit() {
     this.initializeAnswerForm();
@@ -26,12 +27,13 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
       type : [],
       value: [],
       isCorrect: false,
-      image: null
+      image: null,
+      imagePreview: ''
     });
   }
   addAnswer() {
-    console.log((this.answerForm.getRawValue() as Answer));
-    const answerConst =  (Answer.questionFormValues(this.answerForm)) as Answer;
+    const answerConst: Answer =  (Answer.questionFormValues(this.answerForm)) as Answer;
+    answerConst.tmpUrl = this.answerForm.get('imagePreview');
     if (this.question.id && this.question.quizId) {
       answerConst.quizId = this.question.quizId;
       answerConst.questionId = this.question.id;

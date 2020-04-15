@@ -63,6 +63,7 @@ import { ProfilsAddComponent } from './Profils/profils-add/profils-add.component
 import { DragNDropPhotoDirective } from './drag-ndrop-photo.directive';
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 import {ProfilServices} from '../services/profil.services';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -134,30 +135,31 @@ const routes: Routes = [
     NextQuestionComponent,
     SnackModificationComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatCardModule,
-    MatGridListModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatSnackBarModule,
-    _MatMenuDirectivesModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatDividerModule,
-    ScrollingModule,
-    MatSelectModule,
-    MatProgressSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    FormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(routes),
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatCardModule,
+        MatGridListModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatSnackBarModule,
+        _MatMenuDirectivesModule,
+        MatMenuModule,
+        MatSidenavModule,
+        MatDividerModule,
+        ScrollingModule,
+        MatSelectModule,
+        MatProgressSpinnerModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        FormsModule,
+        MatSlideToggleModule,
+    ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     { provide: MatDialogRef, useValue: {} },

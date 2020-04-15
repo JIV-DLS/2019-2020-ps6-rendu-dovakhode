@@ -1,7 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Question} from '../../models/question.model';
-import {QuestionService} from '../../services/question.service';
 
 @Component({
   selector: 'app-questions',

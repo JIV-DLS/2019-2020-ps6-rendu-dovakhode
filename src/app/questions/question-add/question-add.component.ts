@@ -4,6 +4,7 @@ import {Question} from '../../../models/question.model';
 import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component';
+import {Answer} from '../../../models/answer.model';
 
 
 // @ts-ignore
@@ -54,7 +55,8 @@ export class QuestionAddComponent implements OnInit {
     return this.formBuilder.group({
       value: answer.value,
       isCorrect: answer.isCorrect,
-      image: answer.image
+      image: answer.image,
+      tmpUrl: answer.tmpUrl
     });
   }
   addAnswer() {
@@ -74,6 +76,9 @@ export class QuestionAddComponent implements OnInit {
       if (data) {
         this.answers.push(this.createAnswerByData(data.answer)); }
     });
+  }
+  answerHaveImage(i: number) {
+    return (this.answers.at(i).value as Answer).tmpUrl != null;
   }
   questionFormValue() {
     return Question.quizFormValues(this.questionForm) as Question;

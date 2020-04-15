@@ -7,18 +7,6 @@
     </button>
   </mat-card-title>
   <mat-card-content class="m-2" >
-    <mat-grid-list cols="4" rowHeight="150px">
-      <mat-grid-tile colspan="4"
-                     rowspan="2">
         <app-question-add (questionCreated)="addQuestion($event)" style="width: 100%;"></app-question-add>
-      </mat-grid-tile>
-      <!-- <mat-grid-tile
-        *ngFor="let question of question"
-        colspan="2"
-        rowspan="2">
-        <app-editable-question [question]="question"></app-editable-question>
-      </mat-grid-tile>-->
-    </mat-grid-list>
-
   </mat-card-content>
 </mat-card>
