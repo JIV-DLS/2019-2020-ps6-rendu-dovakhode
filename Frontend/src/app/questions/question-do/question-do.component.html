@@ -3,7 +3,7 @@
     <b>{{question?.label}}</b>
   </mat-card-title>
   <mat-card-content>
-    <mat-grid-list cols="2" rowHeight="{{question?.answers[0].image.length>5? 280:250}}" >
+    <mat-grid-list cols="2" rowHeight="{{question?.answers[0].image != null? 280:250}}" >
       <mat-grid-tile
         *ngFor="let answer of question?.answers"
         colspan="1">

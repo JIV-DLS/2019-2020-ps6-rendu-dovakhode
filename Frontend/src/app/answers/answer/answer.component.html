@@ -1,2 +1,5 @@
-<button  *ngIf="checked==null||checked!=null&&checked==true"  mat-raised-button type="button" [class.btn-success]="checked"   id = "{{answer.id}}" (click)="checkAnswer()"><app-image-uploader imagePreview="{{answer.image}}"></app-image-uploader></button>
+<button  *ngIf="checked==null||checked!=null&&checked==true"  mat-raised-button type="button" [class.btn-success]="checked"   id = "{{answer.id}}" (click)="checkAnswer()">
+  <app-image-uploader *ngIf="answer.image!=null" imagePreview="{{answer.image}}"></app-image-uploader>
+  <span style="height: 100%;width: 100%;" *ngIf="answer.image==null">{{answer.value}}</span>
+</button>
 

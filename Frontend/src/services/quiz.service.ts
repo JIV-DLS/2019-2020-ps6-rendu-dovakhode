@@ -55,7 +55,6 @@ export class QuizService {
     if (questions !== null) {
       console.log(questions);
       for (let i = 0; i < questions.length; i++) {
-        quiz.questions[i].image = ' ';
         if (typeof questions[i].image === 'object'  && questions[i].image !== null) {
         quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
         }
@@ -151,7 +150,6 @@ export class QuizService {
     if (questions !== null) {
       console.log(questions);
       for (let i = 0; i < questions.length; i++) {
-        quizToModify.questions[i].image = ' ';
         console.log('bad_form: ' + typeof questions[i].image );
         if (typeof questions[i].image === 'object' && questions[i].image !== null) {
           console.log('(in)bad_form: ' + typeof questions[i].image );

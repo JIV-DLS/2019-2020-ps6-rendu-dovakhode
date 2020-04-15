@@ -13,7 +13,7 @@ import {AnswersService} from '../../../services/answers.service';
 
 export class AnswerAddComponent implements OnInit {
 constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<AnswerAddComponent>,
-            @Inject(MAT_DIALOG_DATA) public question: Question, public answersService: AnswersService) {}
+            @Inject(MAT_DIALOG_DATA) public answerWithImage) {}
 
 
   answerForm: FormGroup;
@@ -34,15 +34,15 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
   addAnswer() {
     const answerConst: Answer =  (Answer.questionFormValues(this.answerForm)) as Answer;
     answerConst.tmpUrl = this.answerForm.get('imagePreview');
-    if (this.question.id && this.question.quizId) {
+    this.dialogRef.close({answer:  answerConst});
+    /*if (this.question.id && this.question.quizId) {
       answerConst.quizId = this.question.quizId;
       answerConst.questionId = this.question.id;
       this.answersService.addAnswer(answerConst).subscribe((ans) => {
         this.dialogRef.close( {answer : ans});
       });
     } else {
-      this.dialogRef.close({answer:  answerConst});
-    }
+     }*/
   }
   createAnswer() {
    // this.answerCreated.emit(this.answerFormValue());
