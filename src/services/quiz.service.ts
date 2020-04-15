@@ -60,9 +60,11 @@ export class QuizService {
         quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
         }
         for (let j = 0; j < questions[i].answers.length; j++) {
+          quiz.questions[i].answers[j].tmpUrl = ' ';
           // quiz.questions[i].answers[i].image = ' ';
           if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
-          quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
+            quiz.questions[i].answers[j].value = quiz.questions[i].label + '_' + j + '_';
+            quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
           }
         }
       }
@@ -158,7 +160,9 @@ export class QuizService {
         }
         for (let j = 0; j < questions[i].answers.length; j++) {
           // quiz.questions[i].answers[i].image = ' ';
+          quizToModify.questions[i].answers[j].tmpUrl = ' ';
           if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
+            quizToModify.questions[i].answers[j].value = quizToModify.questions[i].label + '_' + j + '_';
             quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
           }
         }

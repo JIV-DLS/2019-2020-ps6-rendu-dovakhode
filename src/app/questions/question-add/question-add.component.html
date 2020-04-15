@@ -45,8 +45,8 @@
                       <mat-icon>close</mat-icon>
                     </button>
                   </div>
-                  <div *ngIf="!answerHaveImage(i)" style="width: 60%;">
-                    <mat-form-field >
+                  <div *ngIf="!answerHaveImage(i)" >
+                    <mat-form-field style="width: 60%;">
                       <mat-label>Answer</mat-label>
                       <input [formControlName]="'value'" matInput placeholder="answer" >
                     </mat-form-field>
