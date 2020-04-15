@@ -133,11 +133,7 @@ export class QuizAddComponent implements OnInit {
       this.questionDialogOpened = false;
       // if (questionImage.question && questionImage.question.label) {
       if (questionForm) {
-        // this.quiz.questions.push(questionImage.question);
-        const obj = this.createQuestionByData(questionForm);
-        console.log(obj);
-        this.questions.push(obj);
-        console.log(this.questions.value); }
+        this.questions.push(this.createQuestionByData(questionForm)); }
     });
   }
   deleteQuestion(deleteState: boolean) {

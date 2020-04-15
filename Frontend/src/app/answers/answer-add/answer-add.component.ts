@@ -25,7 +25,8 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
     this.answerForm = this.formBuilder.group({
       type : [],
       value: [],
-      isCorrect: false
+      isCorrect: false,
+      image: null
     });
   }
   addAnswer() {
