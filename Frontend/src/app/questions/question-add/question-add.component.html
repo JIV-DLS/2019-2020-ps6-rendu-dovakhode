@@ -41,9 +41,9 @@
                 colspan="2"
                 rowspan="1">
                 <div [formGroupName]="i" style="width: 98%;height: 98%">
-                  <div *ngIf="answerHaveImage(i)" style="width: 80%; height: 70%;">
-                    <app-image-uploader [imagePreview]="answers.at(i).value.tmpUrl"></app-image-uploader>
-                    <mat-checkbox [formControlName]="'isCorrect'" style="width: 34%">V</mat-checkbox>
+                  <div *ngIf="answerHaveImage(i)" style="width: 95%; height: 70%; display: flex;">
+                    <div style="width: 70%; "><app-image-uploader [imagePreview]="answers.at(i).value.tmpUrl"></app-image-uploader></div>
+                    <div style="width: 16%"><mat-checkbox [formControlName]="'isCorrect'" style="width: 100%"></mat-checkbox></div>
                     <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon" style="width: 14%">
                       <mat-icon>close</mat-icon>
                     </button>
