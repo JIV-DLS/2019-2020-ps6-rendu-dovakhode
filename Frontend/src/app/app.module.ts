@@ -62,6 +62,7 @@ import { ProfilsAddComponent } from './Profils/profils-add/profils-add.component
 
 import { DragNDropPhotoDirective } from './drag-ndrop-photo.directive';
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
+import {ProfilServices} from '../services/profil.services';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -118,7 +119,7 @@ const routes: Routes = [
     HomeDoQuizComponent,
     QuizSearchPipe,
 
-    ProfilsAddComponent
+    ProfilsAddComponent,
 
     DragNDropPhotoDirective,
     ImageUploaderComponent
@@ -162,7 +163,9 @@ const routes: Routes = [
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },
     EvolutionService,
-    QuestionPlayedService
+    QuestionPlayedService,
+    ProfilServices,
+
   ],
   bootstrap: [AppComponent]
 })
