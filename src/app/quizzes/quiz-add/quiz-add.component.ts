@@ -125,7 +125,7 @@ export class QuizAddComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionsComponent, {
-      width: '950px',
+      width: '850px',
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
     });
@@ -155,23 +155,6 @@ export class QuizAddComponent implements OnInit {
       return this.theme.hasError('minLenght') ? 'Veuillez entrer 3 caractère au minimum' : '';
   }
 
-  onImagePick(event: Event) {
-   this.loadImageFile((event.target as HTMLInputElement).files[0]);
-  }
-  loadImageFile(file) {
-    this.quizForm.get('image').patchValue(file);
-    this.quizForm.get('image').updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (this.quizForm.get('image').valid) {
-        this.imagePreview = reader.result as string;
-      } else {
-        this.imagePreview = null;
-      }
-    };
-    reader.readAsDataURL(file);
-  }
-
   deleteImage() {
     this.quizForm.get('image').reset();
     this.imagePreview = null;
@@ -197,14 +180,6 @@ export class QuizAddComponent implements OnInit {
       });
   }
 
-  uploadFile(event) {
-    this.loadImageFile(event[0]);
-    /* for (let index = 0; index < event.length; index++) {
-      const element = event[index];
-      this.files.push(element.name);
-      console.log('entire element_ ' + element);
-    } */
-  }
   deleteAttachment(index) {
     this.files.splice(index, 1);
   }

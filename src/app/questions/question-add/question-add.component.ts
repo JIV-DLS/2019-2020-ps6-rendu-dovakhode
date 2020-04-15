@@ -69,8 +69,8 @@ export class QuestionAddComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AnswerAddComponent, {
-      width: '950px',
-      maxHeight: '500px',
+      width: '800px',
+      height: this.answerWithImage.checked ? '380px' : '300px',
       data: this.answerWithImage.checked
     });
     dialogRef.afterClosed().subscribe(data => {
