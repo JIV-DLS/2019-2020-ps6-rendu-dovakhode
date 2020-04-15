@@ -3,12 +3,10 @@
     <b>{{question?.label}}</b>
   </mat-card-title>
   <mat-card-content>
-    <mat-grid-list cols="2" rowHeight="fit" >
-
+    <mat-grid-list cols="2" rowHeight="{{question?.answers[0].image.length>5? 280:250}}" >
       <mat-grid-tile
         *ngFor="let answer of question?.answers"
-        colspan="1"
- >
+        colspan="1">
         <app-answer (click)="cliked()" [question]="question" [evolution]="evolution" [answer]="answer" (goodAnswerSelected)="nextQuestion($event)" ></app-answer>
       </mat-grid-tile>
     </mat-grid-list>

@@ -81,7 +81,6 @@ function hasQuizImage(req) {
 }
 router.post('/', quizMulter, (req, res) => {
   try {
-    console.log(req.files)
     res.status(201).json(createQuiz(hasQuizImage(req) ? {
       ...JSON.parse(req.body.quiz),
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.files[0].filename}`,
