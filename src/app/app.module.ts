@@ -57,14 +57,19 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { QuizSearchPipe } from './quizzes/_pipes/quiz-search.pipe';
+
+import { ProfilsAddComponent } from './Profils/profils-add/profils-add.component';
+
 import { DragNDropPhotoDirective } from './drag-ndrop-photo.directive';
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
+import {ProfilServices} from '../services/profil.services';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
   {path: 'home-do-quiz', component: HomeDoQuizComponent},
   {path: 'home-quiz-gestion', component: HomeQuizComponent},
+  {path: 'home-profil-gestion', component: ProfilsAddComponent},
   {path: 'home-user', component: HomeUserComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
   {path: 'quiz-do/:evol' , component: QuizDoComponent},
@@ -113,8 +118,12 @@ const routes: Routes = [
     HomeUserComponent,
     HomeDoQuizComponent,
     QuizSearchPipe,
+
+    ProfilsAddComponent,
+
     DragNDropPhotoDirective,
     ImageUploaderComponent
+
   ],
   entryComponents: [
     QuestionsComponent,
@@ -154,7 +163,9 @@ const routes: Routes = [
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },
     EvolutionService,
-    QuestionPlayedService
+    QuestionPlayedService,
+    ProfilServices,
+
   ],
   bootstrap: [AppComponent]
 })

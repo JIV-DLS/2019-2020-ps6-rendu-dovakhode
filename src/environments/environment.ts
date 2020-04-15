@@ -57,27 +57,32 @@ export const environment = {
         getAll: {
           quiz: 'Récupération de tous les quizs en cours...',
           question: 'Récupération de les question en cours...',
-          answer: 'Récupération de toutes les réponses en cours...'
+          answer: 'Récupération de toutes les réponses en cours...',
+          profil: 'Récupération de tous les profils en cours'
         },
         get: {
           quiz: 'Récupération d\'un quiz en cours...',
           question: 'Récupération d\'une question en cours...',
-          answer: 'Récupération d\'une réponse en cours...'
+          answer: 'Récupération d\'une réponse en cours...',
+          profil: 'Récupération du profil en cours...'
         },
         update: {
           quiz: '⏳ Modification du quiz en cours...',
           question: '⏳ Modification de la question en cours...',
-          answer: '⏳Modification de la réponse en cours...'
+          answer: '⏳Modification de la réponse en cours...',
+          profil: 'Modification du profil en cours'
         },
         delete:  {
           quiz: '⏳ Suppression du quiz en cours...',
           question: '⏳ Suppression de la question en cours...',
-          answer: '⏳ Suppression de la réponse en cours...'
+          answer: '⏳ Suppression de la réponse en cours...',
+          profil: '⏳ Suppression du profil en cours...'
         },
         post: {
           quiz: '⏳ Enregistrement du quiz en cours...',
           question: '⏳ Enregistrement de la question en cours...',
-          answer: '⏳ Enregistrement de la réponse en cours...'
+          answer: '⏳ Enregistrement de la réponse en cours...',
+          profil: '⏳ Enregistrement du profil en cours...'
         }},
       succeeded: {
         getAll: {
@@ -88,22 +93,26 @@ export const environment = {
         get: {
           quiz: 'Récupération du quiz éffectuée avec succès!',
           question: 'Récupération de la question éffectuée avec succès!',
-          answer: 'Récupération de la réponse éffectuée avec succès!'
+          answer: 'Récupération de la réponse éffectuée avec succès!',
+          profil: 'Récupération du profil éffectuée avec succès!'
         },
         update: {
           quiz: '✅ Modification du quiz éffectuée avec succès!',
           question: '✅ Modification de la question éffectuée avec succès!',
-          answer: '✅ Modification de la réponse éffectuée avec succès!'
+          answer: '✅ Modification de la réponse éffectuée avec succès!',
+          profil: '✅ Modification du profil éffectuée avec succès!'
         },
         delete:  {
           quiz: '✅ Suppression du quiz éffectuée avec succès!',
           question: '✅ Suppression de la question éffectuée avec succès!',
-          answer: '✅ Suppression de la réponse éffectuée avec succès!'
+          answer: '✅ Suppression de la réponse éffectuée avec succès!',
+          profil: '✅ Suppression du profil éffectuée avec succès!'
         },
         post: {
           quiz: '✅ Enregistrement du quiz éffectué avec succès!',
           question: '✅ Enregistrement de la question éffectuée avec succès!',
-          answer: '✅ Enregistrement de la réponse éffectuée avec succès!'
+          answer: '✅ Enregistrement de la réponse éffectuée avec succès!',
+          profil: '✅ Enregistrement du profil éffectué avec succès!'
         }
 
       }
