@@ -2,7 +2,7 @@
   <mat-grid-list cols="6" rowHeight="25px" style="width: 100%">
     <mat-grid-tile colspan="2" rowspan="6">
       <button [routerLink]="['/home-quiz-gestion']" mat-flat-button aria-label="Example icon-button with a heart icon">
-        <mat-icon style="font-size: 130px; width: 90%;height: 75%;">category</mat-icon>
+        <mat-icon style="font-size: 130px; background-color: #0b2e13; width: 90%;height: 75%;">category</mat-icon>
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="6">
@@ -11,7 +11,7 @@
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="6">
-      <button (click)="profil()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button [routerLink]="['/home-profil-gestion']" mat-flat-button aria-label="Example icon-button with a heart icon">
         <mat-icon style="font-size: 130px; width: 90%;height: 75%;">people</mat-icon>
       </button>    </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="2">
