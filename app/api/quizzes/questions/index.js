@@ -107,7 +107,11 @@ function deleteEntireQuestion(id) {
           Answer.delete(tmp.id)
         })
       } else {
-        Answer.delete(tmp.id)
+        try {
+          Answer.delete(tmp.id)
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
   }
