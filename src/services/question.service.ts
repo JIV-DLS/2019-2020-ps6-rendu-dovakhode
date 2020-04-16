@@ -6,6 +6,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {environment} from '../environments/environment';
 import deleteProperty = Reflect.deleteProperty;
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Quiz} from '../models/quiz.model';
 
 
 @Injectable({
@@ -84,6 +85,19 @@ export class QuestionService {
       });
     }
     return updatedQuestions$;
+  }
+
+  getQuestionByIdFromQuiz(id: number, quiz: Quiz) {
+    const question = quiz.questions.find(
+      (s) => {
+        return s.id === id;
+      }
+    );
+    return question;
+  }
+  deleteQuestionFromQuiz(question: Question, quiz: Quiz) {
+    this.index = quiz.questions.indexOf(question);
+    quiz.questions.splice(this.index, 1);
   }
 
   deleteQuestion(question: Question): Observable<Question>  {

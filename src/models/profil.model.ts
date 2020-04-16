@@ -9,6 +9,7 @@ export  class Profil {
   stade: string;
   recommandations: string;
   evolId: number;
+  image?: string;
 
 
 }

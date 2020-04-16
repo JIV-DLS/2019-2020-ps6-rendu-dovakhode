@@ -64,7 +64,7 @@ export const environment = {
           quiz: 'Récupération de tous les quizs en cours...',
           question: 'Récupération de les question en cours...',
           answer: 'Récupération de toutes les réponses en cours...',
-          profil: 'Récupération de tous les profils en cours'
+          profil: 'Récupération de tous les profil en cours'
         },
         get: {
           image: 'Téléchargement de l\'image en cours...',
