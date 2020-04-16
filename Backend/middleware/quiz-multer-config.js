@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
       : (file.originalname.indexOf('question') === 0) ? 'images/question' : 'images/answer')
   },
   filename: (req, file, callback) => {
-    console.log(req.body);
+    console.log(req.body)
     let name
     if (file.originalname.indexOf('quiz') === 0
         || file.originalname.indexOf('question') === 0

@@ -6,7 +6,9 @@ const router = new Router()
 
 router.post('/', (req, res) => {
   try {
+    console.log(req.body)
     const profil = Profiles.create({ ...req.body })
+    console.log(profil)
     res.status(201).json(profil)
   } catch (err) {
     if (err.name === 'ValidationError') {
