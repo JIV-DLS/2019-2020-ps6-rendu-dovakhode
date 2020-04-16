@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ProfilServices} from '../../../services/profil.services';
@@ -8,17 +8,17 @@ import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 @Component({
   selector: 'app-profil-list',
   templateUrl: './profil-list.component.html',
-  styleUrls: ['./profil-list.component.scss']
+  styleUrls: ['./profil-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProfilListComponent implements OnInit {
   public profilsList: Profil[] = [];
   public searchedProfil: Profil = DEFAULT_PROFIL;
   public inviteToCreateProfil = null;
   public doQuizWithProfil;
-  loading: boolean;
   itemsPerSlide = 3;
   singleSlideOffset = true;
-  noWrap = true;
+  public loading;
 
   slides = [
     {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
@@ -31,6 +31,22 @@ export class ProfilListComponent implements OnInit {
     {image: 'http://localhost:9428/images/quiz/les_pièrres...1585240035409.jpg' },
     {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
     {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
+
   ];
 
   constructor(private Activerouter: ActivatedRoute,
