@@ -5,10 +5,17 @@
   <mat-card-content>
     <mat-grid-list cols="6" rowHeight="30px">
 
-      <mat-grid-tile *ngIf="question.image!==null"
+      <mat-grid-tile *ngIf="question.image!==null && question.image.length>2"
         colspan="6"
         rowspan="2">
         <img [src]="question.image" style=" height: 100%;width: 100%;" [alt]="question.label"/>
+
+        <!-- *ngFor="let answer of question?.answers"<span style="width: 100%;height: 100%;" [class.btn-primary]="answer.isCorrect" [class.btn-secondary]="!answer.isCorrect">{{answer.value}}</span>-->
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="question?.tmpUrl!==null && question?.tmpUrl?.length>2"
+        colspan="6"
+        rowspan="2">
+        <img [src]="question.tmpUrl" style=" height: 100%;width: 100%;" [alt]="question.label"/>
 
         <!-- *ngFor="let answer of question?.answers"<span style="width: 100%;height: 100%;" [class.btn-primary]="answer.isCorrect" [class.btn-secondary]="!answer.isCorrect">{{answer.value}}</span>-->
       </mat-grid-tile>

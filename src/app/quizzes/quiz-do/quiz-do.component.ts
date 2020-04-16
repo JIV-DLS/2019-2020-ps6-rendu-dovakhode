@@ -13,6 +13,7 @@ import {QuestionPlayedService} from '../../../services/questionPlayed.service';
 import {Subscription} from 'rxjs';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
 import {Question} from '../../../models/question.model';
+import {QuestionService} from '../../../services/question.service';
 
 @Component({
   selector: 'app-quiz-do',
@@ -40,7 +41,8 @@ export class QuizDoComponent implements OnInit {
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
               private evolService: EvolutionService,
-              private questionplayed: QuestionPlayedService) {
+              private questionplayed: QuestionPlayedService,
+              private questionService: QuestionService) {
 
   }
 
@@ -69,10 +71,7 @@ export class QuizDoComponent implements OnInit {
       }
     );
   }
-  deleteQuestion(question: Question) {
-    this.index = this.quiz.questions.indexOf(question);
-    this.quiz.questions.splice(this.index, 1);
-  }
+
   shuffle(array) {
     // tslint:disable-next-line:one-variable-per-declaration
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -96,14 +95,7 @@ export class QuizDoComponent implements OnInit {
     this.quizForm = this.quizzFormInitializer();
 
   }
-  getQuestionById(id: number) {
-    const question = this.quiz.questions.find(
-      (s) => {
-        return s.id === id;
-      }
-    );
-    return question;
-  }
+
   getQuestionPlayedList() {
     this.questionplayed.getQuestionPlayed('' + this.evolution.id).subscribe((questions) => {
       this.questionList = [];
@@ -112,7 +104,7 @@ export class QuizDoComponent implements OnInit {
       for (let i = 0; i < this.questionList.length; i++) {
         if (this.questionList[i].trials < 2) {
           const id = this.questionList[i].idQuestion;
-          this.deleteQuestion(this.getQuestionById(id));
+          this.questionService.deleteQuestionFromQuiz(this.questionService.getQuestionByIdFromQuiz(id, this.quiz), this.quiz);
         }
       }
       this.loading = false;
