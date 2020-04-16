@@ -29,7 +29,7 @@ export class EvolutionService {
    this.evolution = new Evolution();
    this.evolution = evolution;
    this.emitEvolution();
-   console.log('evol du service ' + this.evolution.id);
+
   }
   addEvolution(idQuiz: string) {
     const evolution = new Evolution();

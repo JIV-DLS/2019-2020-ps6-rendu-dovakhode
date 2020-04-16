@@ -68,6 +68,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatRadioModule} from '@angular/material/radio';
 import { ProfilListComponent } from './Profils/profil-list/profil-list.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { HomePlayWithProfilesComponent } from './home-play-with-profiles/home-play-with-profiles.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -129,8 +131,8 @@ const routes: Routes = [
 
     DragNDropPhotoDirective,
     ImageUploaderComponent,
-    ProfilListComponent
-
+    ProfilListComponent,
+    HomePlayWithProfilesComponent,
   ],
   entryComponents: [
     QuestionsComponent,

@@ -1,14 +1,19 @@
 const { Router } = require('express')
 const { Profiles } = require('../../models')
+const profilMulter = require('../../../middleware/profil-multer-config')
 
 
 const router = new Router()
 
-router.post('/', (req, res) => {
+router.post('/', profilMulter, (req, res) => {
   try {
-    console.log(req.body)
-    const profil = Profiles.create({ ...req.body })
-    console.log(profil)
+    const profil = Profiles.create(req.file ? {
+      ...JSON.parse(req.body.profil),
+      image: `${req.protocol}://${req.get('host')}/images/profil/${req.file.filename}`,
+    } : {
+      ...JSON.parse(req.body.profil),
+      image: '',
+    })
     res.status(201).json(profil)
   } catch (err) {
     if (err.name === 'ValidationError') {

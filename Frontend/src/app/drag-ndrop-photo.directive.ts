@@ -63,7 +63,7 @@ export class DragNDropPhotoDirective {
                       this.snack.dismiss();
 
                  //     blob.lastModifiedDate = new Date();
-                
+
                       const anArray = [];
                       anArray.push(blob as File);
                       this.fileDropped.emit(anArray);
