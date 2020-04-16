@@ -31,7 +31,7 @@ export class ProfilServices {
     ;
     const profilData = new FormData();
     if (image !== null) {
-      profilData.append('profil_image', image,  'profil ' + profil.nom);
+      profilData.append('profil_image', image, profil.nom);
     }
 
     profilData.append('profil', JSON.stringify(profil));

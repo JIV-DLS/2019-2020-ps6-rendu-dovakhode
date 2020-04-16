@@ -23,7 +23,7 @@ export class ProfilsAddComponent implements OnInit {
   initiForm() {
     this.profilForm = this.formbuilder.group({
       nom: '',
-      age: '',
+      age: 70,
       prenom: '',
       stade: '',
       sexe: '',
