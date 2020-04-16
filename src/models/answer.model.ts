@@ -9,10 +9,22 @@ export class Answer {
   questionId: number;
   quizId: number;
   tmpUrl: string;
-  constructor() {
-    this.id = 0;
+
+  constructor(answer?: Answer) {
+    if (answer) {
+      this.id = answer.id;
+      this.type = answer.type;
+      this.value = answer.value;
+      this.isCorrect = answer.isCorrect;
+      this.quizId = answer.quizId;
+      this.tmpUrl = answer.tmpUrl;
+    } else {
+      this.id = 0;
+    }
   }
+
   static answerFormValues(answerForm: FormGroup) {
+
     return answerForm.getRawValue() as Answer;
   }
 }

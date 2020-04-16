@@ -1,0 +1,28 @@
+<mat-grid-list cols=4 rowHeight="100px" style="width: 100%; margin-top: 10px; padding-top: 50px;" >
+  <mat-grid-tile colspan="1" rowspan="2">
+    <mat-form-field appearance="legacy">
+      <mat-label>Rechercher par Nom et Prenom</mat-label>
+      <input [(ngModel)]="searchedProfil.nom + searchedProfil.prenom" matInput placeholder="libéllé du profil">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">      </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">      </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="2">
+    <button id="btnCreateProfil" routerLink="/profil-add" style="width: 60%" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <mat-icon>add</mat-icon>
+      Créer un profil
+    </button>
+  </mat-grid-tile>
+  <div  *ngIf="0!= 0; else elseBlock1">
+    <mat-grid-tile colspan="4" rowspan="3">
+      <span class="h4" style="width: 40%; text-align: center">Votre liste de profil est vide veuillez</span>
+    </mat-grid-tile>
+
+  </div>
+  <ng-template #elseBlock1>
+    <mat-grid-tile colspan="4" rowspan="3">
+     <app-profil-list></app-profil-list>
+    </mat-grid-tile>
+  </ng-template>
+</mat-grid-list>
