@@ -5,7 +5,7 @@
   <mat-card-content>
     <mat-grid-list cols="6" rowHeight="30px">
 
-      <mat-grid-tile *ngIf="question.image"
+      <mat-grid-tile *ngIf="question.image!==null"
         colspan="6"
         rowspan="2">
         <img [src]="question.image" style=" height: 100%;width: 100%;" [alt]="question.label"/>
@@ -14,8 +14,7 @@
       </mat-grid-tile>
       <mat-grid-tile
         colspan="6"
-        rowspan="1"
-      style="overflow-y: paged-y; overflow-x: paged-x">
+        rowspan="1">
         <h6>{{question.label}}</h6>
       </mat-grid-tile>
       <mat-grid-tile
