@@ -24,7 +24,6 @@ export class QuestionsComponent implements OnInit {
   }
 
   close(question: Question) {
-    console.log(question);
     const questionSaved = question;
     this.dialogRef.close({...questionSaved});
   }
