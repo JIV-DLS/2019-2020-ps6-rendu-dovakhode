@@ -30,7 +30,7 @@
         <mat-grid-tile colspan="4" rowspan="4">
           <mat-form-field >
             <mat-label>Age*</mat-label>
-            <input matInput placeholder="Age" [formControlName]="'age'" >
+            <input matInput type="number" min=0 max=150 placeholder="Age" [formControlName]="'age'" >
           </mat-form-field>
         </mat-grid-tile>
 
