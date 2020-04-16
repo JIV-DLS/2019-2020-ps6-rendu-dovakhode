@@ -38,7 +38,7 @@ export class QuizzeEditComponent implements OnInit {
   }
   quiz: Quiz;
   public imageChanged: boolean;
-  private savedImage: string;
+  public savedImage: string;
   private savedQuestions: Question[];
   private questionDialogOpened = false;
   public quizForm: FormGroup;

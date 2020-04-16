@@ -27,14 +27,23 @@ export class ProfilServices {
     this.evolutionSubject.next(this.evolution);
   }
 
-  addProfil(profil: Profil) {
+  addProfil(profil: Profil, image?: File) {
 
     this.snack.open(environment.snackInformation.operation.loading.post.profil, 'close',
       {
         ...environment.snackInformation.loadingPost
       })
     ;
-    return this.http.post<Profil>(this.profilUrl, profil).pipe(
+
+
+    const profilData = new FormData();
+    if (image !== null) {
+      profilData.append('profil_image', image,  'profil ' + profil.nom);
+    }
+
+    profilData.append('profil', JSON.stringify(profil));
+    console.log(profilData);
+    return this.http.post<Profil>(this.profilUrl, profilData).pipe(
       tap((newAnswer) => {
         console.log('Ajout Reussi');
         this.snack.open(environment.snackInformation.operation.succeeded.post.profil, 'close',
