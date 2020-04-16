@@ -31,4 +31,4 @@ const storage = multer.diskStorage({
 })
 
 // module.exports = multer({ storage }).single('image')
-module.exports = multer({ storage }).array('quiz_image', 5)
+module.exports = multer({ storage }).array('quiz_image', 100)
