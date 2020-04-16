@@ -1,9 +1,12 @@
 <mat-card style="margin-top: 25px; margin-bottom: 25px">
   <mat-card-title>
+    <div *ngIf="question.image!=null" style="height: 190px">
+      <app-image-uploader imagePreview="{{question.image}}"></app-image-uploader>
+    </div>
     <b>{{question?.label}}</b>
   </mat-card-title>
   <mat-card-content>
-    <mat-grid-list cols="2" rowHeight="{{question?.answers[0].image != null? 280:250}}" >
+    <mat-grid-list cols="2" rowHeight="{{question?.answers[0].image != null? 180:120}}" >
       <mat-grid-tile
         *ngFor="let answer of question?.answers"
         colspan="1">
