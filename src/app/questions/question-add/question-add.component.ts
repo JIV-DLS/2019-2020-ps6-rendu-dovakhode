@@ -45,8 +45,8 @@ export class QuestionAddComponent implements OnInit {
       label: [this.questionEdition.answers != null ? (this.questionEdition as Question).label : ''],
       answers: this.formBuilder.array( []),
       image: [this.questionEdition.answers != null ? (this.questionEdition as Question).image : null],
+      imagePreview: ''
     });
-    console.log('Image lors de l\'édition: ' + this.questionEdition.image);
     if (this.questionEdition.answers != null) {
       // this.imagePreview = this.questionEdition.image;
       (this.questionEdition as Question).answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
@@ -59,6 +59,10 @@ export class QuestionAddComponent implements OnInit {
       image: answer.image,
       tmpUrl: answer.tmpUrl
     });
+  }
+  dragAddAnswer() {
+    this.answerWithImage.checked = true;
+    this.addAnswer();
   }
   addAnswer() {
     if (this.answers.length < 4) {
@@ -82,7 +86,7 @@ export class QuestionAddComponent implements OnInit {
     return (this.answers.at(i).value as Answer).tmpUrl.length > 0;
   }
   questionFormValue() {
-    return Question.quizFormValues(this.questionForm) as Question;
+    return Question.questionFormValues(this.questionForm) as Question;
   }
 
   deleteImage() {
@@ -94,8 +98,10 @@ export class QuestionAddComponent implements OnInit {
   }
   createQuestion() {
     if (this.conform()) {
-      this.questionCreated.emit(this.questionFormValue());
-      this.dialogRef.close(this.questionFormValue());
+      const question: Question =  (Question.questionFormValues(this.questionForm)) as Question;
+      question.tmpUrl = this.questionForm.get('imagePreview').value;
+      this.questionCreated.emit(question);
+      this.dialogRef.close(question);
     }
   }
   edit() {

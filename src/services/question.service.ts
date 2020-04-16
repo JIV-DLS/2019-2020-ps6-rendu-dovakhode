@@ -47,7 +47,6 @@ export class QuestionService {
     ;
     const questions = question.answers;
     deleteProperty(question, 'answers');
-    console.log(question);
     return this.http.post<Question>(this.questionUrl(question.quizId), question).pipe(
 
       tap((newQuestion: Question) => {
