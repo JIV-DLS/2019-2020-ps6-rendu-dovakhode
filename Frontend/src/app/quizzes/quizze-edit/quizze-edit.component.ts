@@ -84,6 +84,7 @@ export class QuizzeEditComponent implements OnInit {
       label: question.label,
       answers: this.formBuilder.array(question.answers),
       image: question.image,
+      tmpUrl: question.tmpUrl
     });
   }
   openDialog(): void {
@@ -99,10 +100,8 @@ export class QuizzeEditComponent implements OnInit {
       if (questionForm) {
         // this.quiz.questions.push(questionImage.question);
         this.others = true;
-        const obj = this.createQuestionByData(questionForm);
-        console.log(obj);
-        this.questions.push(obj);
-        console.log(this.questions.value); }
+        this.questions.push(this.createQuestionByData(questionForm));
+      }
     });
   }
   modifyQuiz() {
