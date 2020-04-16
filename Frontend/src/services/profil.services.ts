@@ -14,18 +14,13 @@ import {FormArray} from '@angular/forms';
   providedIn: 'root'
 })
 export class ProfilServices {
-  evolutionSubject = new Subject<Evolution>();
-  evolution = new Evolution();
+
 
   constructor(private http: HttpClient, private snack: MatSnackBar) {
   }
   public profilUrl = environment.url + '/profil';
   // evol: Evolution;
 
-
-  emitEvolution() {
-    this.evolutionSubject.next(this.evolution);
-  }
 
   addProfil(profil: Profil, image?: File) {
 
@@ -34,11 +29,9 @@ export class ProfilServices {
         ...environment.snackInformation.loadingPost
       })
     ;
-
-
     const profilData = new FormData();
     if (image !== null) {
-      profilData.append('profil_image', image,  'profil ' + profil.nom);
+      profilData.append('profil_image', image, profil.nom);
     }
 
     profilData.append('profil', JSON.stringify(profil));
@@ -145,7 +138,7 @@ export class ProfilServices {
           break;
         case 'getProfil':
           // this.bdcsState = false;
-          this.snack.open('❌ Impossible de charger les profils', 'close',
+          this.snack.open('❌ Impossible de charger les profil', 'close',
             {
               ...environment.snackInformation.errorForAll
             })

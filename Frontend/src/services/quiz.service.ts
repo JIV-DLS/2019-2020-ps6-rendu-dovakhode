@@ -48,30 +48,8 @@ export class QuizService {
         ...environment.snackInformation.loadingPost
       })
     ;
-    const quizData = new FormData();
-    if (image !== null) {
-      quizData.append('quiz_image', image,  'quiz ' + quiz.label);
-    }
-    if (questions !== null) {
-      console.log(questions);
-      for (let i = 0; i < questions.length; i++) {
-        if (typeof questions[i].image === 'object'  && questions[i].image !== null) {
-        quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
-        }
-        for (let j = 0; j < questions[i].answers.length; j++) {
-          quiz.questions[i].answers[j].tmpUrl = ' ';
-          // quiz.questions[i].answers[i].image = ' ';
-          if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
-            quiz.questions[i].answers[j].value = quiz.questions[i].label + '_' + j + '_';
-            quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
-          }
-        }
-      }
-    }
-    quizData.append('quiz', JSON.stringify(quiz));
-
-
-    return this.http.post<Quiz>(QuizService.quizUrl, quizData).pipe(
+    return this.http.post<Quiz>(QuizService.quizUrl,
+      this.createQuizData(image, quiz, questions)).pipe(
       tap((newQuiz: Quiz) => {
         console.log('Ajout reussi');
         this.snack.open( environment.snackInformation.operation.succeeded.post.quiz, 'Afficher',
@@ -83,6 +61,31 @@ export class QuizService {
       }),
       catchError(this.handleError<Quiz>('addQuiz', undefined))
     );
+  }
+
+  private createQuizData(image: File, quiz: Quiz, questions: FormArray) {
+    const quizData = new FormData();
+    if (image !== null) {
+      quizData.append('quiz_image', image, 'quiz ' + quiz.label);
+    }
+    if (questions !== null) {
+      for (let i = 0; i < questions.length; i++) {
+        quiz.questions[i].tmpUrl = ' ';
+        if (typeof questions[i].image === 'object' && questions[i].image !== null) {
+          quizData.append('quiz_image', questions[i].image, 'question_' + i + ' ' + questions[i].label);
+        }
+        for (let j = 0; j < questions[i].answers.length; j++) {
+          quiz.questions[i].answers[j].tmpUrl = ' ';
+          // quiz.questions[i].answers[i].image = ' ';
+          if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
+            quiz.questions[i].answers[j].value = quiz.questions[i].label + '_' + j + '_';
+            quizData.append('quiz_image', questions[i].answers[j].image, 'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
+          }
+        }
+      }
+    }
+    quizData.append('quiz', JSON.stringify(quiz));
+    return quizData;
   }
 
   deleteQuiz(quiz: Quiz): Observable<Quiz>  {
@@ -143,31 +146,8 @@ export class QuizService {
         ...environment.snackInformation.loadingUpdate
       })
     ;
-    const quizData = new FormData();
-    if (image !== null) {
-      quizData.append('quiz_image', image,  'quiz ' + quizToModify.label);
-    }
-    if (questions !== null) {
-      console.log(questions);
-      for (let i = 0; i < questions.length; i++) {
-        console.log('bad_form: ' + typeof questions[i].image );
-        if (typeof questions[i].image === 'object' && questions[i].image !== null) {
-          console.log('(in)bad_form: ' + typeof questions[i].image );
-          console.log('____: ' + questions[i].image );
-          quizData.append('quiz_image', questions[i].image,  'question_' + i + ' ' + questions[i].label);
-        }
-        for (let j = 0; j < questions[i].answers.length; j++) {
-          // quiz.questions[i].answers[i].image = ' ';
-          quizToModify.questions[i].answers[j].tmpUrl = ' ';
-          if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
-            quizToModify.questions[i].answers[j].value = quizToModify.questions[i].label + '_' + j + '_';
-            quizData.append('quiz_image', questions[i].answers[j].image,  'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
-          }
-        }
-      }
-    }
-    quizData.append('quiz', JSON.stringify(quizToModify));
-    return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id, quizData).pipe(
+    return this.http.put<Quiz>(QuizService.quizUrl  + '/' + quizToModify.id,
+      this.createQuizData(image, quizToModify, questions)).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');
         this.snack.open( environment.snackInformation.operation.succeeded.update.quiz, 'close',
