@@ -33,7 +33,7 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
   }
   addAnswer() {
     const answerConst: Answer =  (Answer.answerFormValues(this.answerForm)) as Answer;
-    answerConst.tmpUrl = this.answerForm.get('imagePreview');
+    answerConst.tmpUrl = this.answerForm.get('imagePreview').value;
     this.dialogRef.close({answer:  answerConst});
     /*if (this.question.id && this.question.quizId) {
       answerConst.quizId = this.question.quizId;
