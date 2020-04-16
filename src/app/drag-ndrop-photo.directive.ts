@@ -61,7 +61,7 @@ export class DragNDropPhotoDirective {
                     .then(res => res.blob()) // Gets the response and returns it as a blob
                     .then(blob => {
                       this.snack.dismiss();
-                      blob.lastModifiedDate = new Date();
+                 //     blob.lastModifiedDate = new Date();
                       const anArray = [];
                       anArray.push(blob as File);
                       this.fileDropped.emit(anArray);
