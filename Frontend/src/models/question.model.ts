@@ -5,6 +5,7 @@ export class Question {
     id: number;
     label: string;
     image?: string;
+    tmpUrl?: string;
     answers: Answer[];
     quizId: number;
 
@@ -20,7 +21,7 @@ export class Question {
       this.answers = [];
     }
   }
-  static quizFormValues(questionForm: FormGroup) {
+  static questionFormValues(questionForm: FormGroup) {
     return questionForm.getRawValue() as Question;
   }
     deleteAnswer?(pos: number) {
