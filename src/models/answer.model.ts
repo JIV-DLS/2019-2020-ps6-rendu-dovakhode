@@ -12,7 +12,7 @@ export class Answer {
   constructor() {
     this.id = 0;
   }
-  static questionFormValues(answerForm: FormGroup) {
+  static answerFormValues(answerForm: FormGroup) {
     return answerForm.getRawValue() as Answer;
   }
 }
