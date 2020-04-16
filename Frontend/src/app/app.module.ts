@@ -64,14 +64,18 @@ import { DragNDropPhotoDirective } from './drag-ndrop-photo.directive';
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 import {ProfilServices} from '../services/profil.services';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 import {MatRadioModule} from '@angular/material/radio';
+import { ProfilListComponent } from './Profils/profil-list/profil-list.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'quiz-list', component: QuizListComponent},
   {path: 'home-do-quiz', component: HomeDoQuizComponent},
   {path: 'home-quiz-gestion', component: HomeQuizComponent},
-  {path: 'home-profil-gestion', component: ProfilsAddComponent},
+  {path: 'home-profil-gestion', component: ProfilListComponent},
+  {path: 'profil-add', component: ProfilsAddComponent},
   {path: 'home-user', component: HomeUserComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
   {path: 'quiz-do/:evol' , component: QuizDoComponent},
@@ -124,7 +128,8 @@ const routes: Routes = [
     ProfilsAddComponent,
 
     DragNDropPhotoDirective,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    ProfilListComponent
 
   ],
   entryComponents: [
@@ -136,6 +141,7 @@ const routes: Routes = [
     NextQuestionComponent,
     SnackModificationComponent
   ],
+
   imports: [
     BrowserModule,
     ReactiveFormsModule,
@@ -161,6 +167,7 @@ const routes: Routes = [
     FormsModule,
     MatSlideToggleModule,
     MatRadioModule,
+    CarouselModule.forRoot(),
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
