@@ -52,6 +52,7 @@ function getAnswersImage(req) {
 }
 function createQuestion(obj = {}, req, index) {
   const { answers } = obj
+  delete obj.tmpUrl
   delete obj.answers
   const question = Question.create({ ...obj })
   const answersImage = getAnswersImage(req)
@@ -107,7 +108,11 @@ function deleteEntireQuestion(id) {
           Answer.delete(tmp.id)
         })
       } else {
-        Answer.delete(tmp.id)
+        try {
+          Answer.delete(tmp.id)
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
   }
@@ -127,6 +132,7 @@ router.delete('/:idQ', (req, res) => {
 })
 function updateQuestion(id, obj, req, index) {
   const { answers } = obj
+  delete obj.tmpUrl
   delete obj.answers
   const question = Question.update(id, { ...obj })
   const answersImage = getAnswersImage(req)
