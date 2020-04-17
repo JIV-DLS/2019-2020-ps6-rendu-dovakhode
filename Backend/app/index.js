@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 const buildServer = require('./build-server.js')
 const logger = require('./utils/logger.js')
+const mkdirp = require('mkdirp');
 
 /*
 mongoose.connect('mongodb+srv://JIVDLS:jjjjjjjj@cluster0-zvo0t.mongodb.net/test?retryWrites=true&w=majority',
@@ -19,4 +20,9 @@ app.use((req, res, next) => {
   next()
 })
 */
+mkdirp('./images/answer');
+mkdirp('./images/profil');
+mkdirp('./images/question');
+mkdirp('./images/quiz');
+
 buildServer((server) => logger.info(`Server is listening on port ${server.address().port}`))
