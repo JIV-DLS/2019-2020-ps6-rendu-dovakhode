@@ -14,7 +14,7 @@ export class AnswersService {
   }
 
   answerUrl(questionId, quizId) {
-    return environment.url + '/' + quizId.toString() + '/question' + '/' + questionId.toString() + '/answers';
+    return environment.url + '/quizzes/' + quizId.toString() + '/question' + '/' + questionId.toString() + '/answers';
   }
 
   addAnswer(answer: Answer) {
@@ -164,6 +164,17 @@ export class AnswersService {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < deletedAnswers.length; i++) {
       this.deleteAnswer(deletedAnswers[i]);
+    }
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < deletedAnswers.length; i++) {
+      console.log('suppression de la réponse \'' + deletedAnswers[i].value + '\'');
+      this.http.delete<Answer>(
+        this.answerUrl(deletedAnswers[i].questionId, deletedAnswers[i].quizId) + '/' + deletedAnswers[i].id).pipe(
+        tap((questionDeleted) => {
+          console.log('suppression de la réponse \'' + deletedAnswers[i].value + '\' réussie!');
+        }),
+        catchError(this.handleError<Question>('deleteAnswer', undefined))
+      ).subscribe();
     }
   }
 }

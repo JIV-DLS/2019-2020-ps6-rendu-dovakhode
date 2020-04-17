@@ -12,6 +12,7 @@ import {MatSlideToggle} from '@angular/material/slide-toggle';
   styleUrls: ['./edit-question.component.scss']
 })
 export class EditQuestionComponent implements OnInit {
+  private deletedAnswers: Answer[] = [];
   constructor(public formBuilder: FormBuilder,
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<EditQuestionComponent>,
@@ -55,7 +56,9 @@ export class EditQuestionComponent implements OnInit {
       value: answer.value,
       isCorrect: answer.isCorrect,
       image: answer.image,
-      tmpUrl: answer.tmpUrl
+      tmpUrl: answer.tmpUrl,
+      questionId: this.questionEdition.id,
+      quizId: this.questionEdition.quizId
     });
   }
   dragAddAnswer() {
@@ -92,14 +95,20 @@ export class EditQuestionComponent implements OnInit {
     this.imagePreview = null;
   }
   clean(i: number) {
+    if (this.answers.at(i).value.id !== 0) {
+      this.deletedAnswers.push(this.answers.at(i).value as Answer);
+    }
     this.answers.removeAt(i);
   }
-  createQuestion() {
+  editTheQuestion() {
     if (this.conform()) {
       const question: Question =  (Question.questionFormValues(this.questionForm)) as Question;
       question.tmpUrl = this.questionForm.get('imagePreview').value;
       this.questionCreated.emit(question);
-      this.dialogRef.close(question);
+      /* tslint:disable */
+      this.dialogRef.close({
+        question : question ,
+        deletedAnswers : this.deletedAnswers});
     }
   }
   edit() {
