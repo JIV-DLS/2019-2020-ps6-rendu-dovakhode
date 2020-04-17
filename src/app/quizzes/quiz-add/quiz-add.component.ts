@@ -6,9 +6,11 @@ import { Quiz } from '../../../models/quiz.model';
 import {difficulte, theme} from '../../../models/theme.models';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {MatDialog} from '@angular/material';
-import {QuestionsComponent} from '../../questions/questions.component';
 import {environment} from '../../../environments/environment';
 import {MatDialogRef} from '@angular/material/dialog';
+import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
+import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
+import {Question} from '../../../models/question.model';
 
 @Component({
   selector: 'app-quiz-form',
@@ -76,6 +78,8 @@ export class QuizAddComponent implements OnInit {
       label: question.label,
       answers: this.formBuilder.array(question.answers),
       image: question.image,
+      tmpUrl: question.tmpUrl,
+      quizId: 0
     });
   }
   addQuiz() {
@@ -124,7 +128,7 @@ export class QuizAddComponent implements OnInit {
     this.openDialog();
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(QuestionsComponent, {
+    const dialogRef = this.dialog.open(QuestionAddComponent, {
       width: '850px',
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
@@ -162,22 +166,27 @@ export class QuizAddComponent implements OnInit {
 
   deletedQuestion($event: boolean, index: number) {
     if ($event) {
-      this.quiz.questions.splice(index, 1);
+      this.questions.removeAt(index);
     }
   }
 
   editQuestion($event: boolean, i: number) {
-      const dialogRef = this.dialog.open(QuestionsComponent, {
-        width: '950px',
-        maxHeight: '500px',
-        data: this.quiz.questions[i]
-      });
-      dialogRef.afterClosed().subscribe(question => {
-        this.questionDialogOpened = false;
-        if (question && question.label) {
-          this.questions.at(i).setValue(question);
+    const dialogRef = this.dialog.open(EditQuestionComponent, {
+      width: '950px',
+      maxHeight: '500px',
+      data: this.questions.at(i).value
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      this.questionDialogOpened = false;
+      if (response != null) {
+        if (response.question && response.question.label) {
+          if (response.question && response.question.label) {
+            this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( response.question))});
+          }
         }
-      });
+      }
+
+    });
   }
 
   deleteAttachment(index) {

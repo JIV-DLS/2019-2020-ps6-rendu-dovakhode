@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ProfilServices} from '../../../services/profil.services';
@@ -15,10 +15,13 @@ export class ProfilListComponent implements OnInit {
   public profilsList: Profil[] = [];
   public searchedProfil: Profil = DEFAULT_PROFIL;
   public inviteToCreateProfil = null;
-  public doQuizWithProfil;
+  public doQuizWithProfil = false;
   itemsPerSlide = 3;
   singleSlideOffset = true;
   public loading;
+  @Output()
+  profilSelected: EventEmitter<Profil> = new EventEmitter<Profil>();
+
 
   slides = [
     {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
@@ -76,11 +79,11 @@ export class ProfilListComponent implements OnInit {
 
     });
   }
-  selectQuiz(profil: Profil) {
+  selectProfil(profil: Profil) {
     if ( this.doQuizWithProfil) {
       // TODO route pour faire un quiz avec un profil
     } else {
-      // TODO ouvri une boite de dialigue pour voir un profil
+      this.profilSelected.emit(profil);
     }
   }
 

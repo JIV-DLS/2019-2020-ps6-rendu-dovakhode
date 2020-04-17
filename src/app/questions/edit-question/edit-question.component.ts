@@ -1,14 +1,10 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {Quiz} from '../../../models/quiz.model';
+import {Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Question} from '../../../models/question.model';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Answer} from '../../../models/answer.model';
 import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component';
-import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
-import {Location} from '@angular/common';
-import {AnswersService} from '../../../services/answers.service';
-import {environment} from '../../../environments/environment';
+import {MatSlideToggle} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-edit-question',
@@ -16,69 +12,58 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./edit-question.component.scss']
 })
 export class EditQuestionComponent implements OnInit {
-  @Input() question: Question;
-  questionEdit: Question;
-  questionForm: FormGroup;
+  private deletedAnswers: Answer[] = [];
+  constructor(public formBuilder: FormBuilder,
+              public dialog: MatDialog,
+              private dialogRef: MatDialogRef<EditQuestionComponent>,
+              @Inject(MAT_DIALOG_DATA) public questionEdition: Question) { }
   get answers() {
     return this.questionForm.get('answers') as FormArray;
   }
-
-  @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(public formBuilder: FormBuilder,
-              public dialogRef: MatDialogRef<EditQuestionComponent>,
-              public dialog: MatDialog,
-              public answersService: AnswersService,
-              @Inject(MAT_DIALOG_DATA) public questionDialog: Question) { }
+  full = false;
+  questionForm: FormGroup;
+  answerDialogOpened = false;
+  @Input() question: Question = null;
+  @Input() editable = false;
+  @Output()
+  fullState: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  editQuestion: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
+  public imagePreview: string;
+  @ViewChild('answerWithImage') answerWithImage: MatSlideToggle;
 
   ngOnInit() {
-    this.question = new Question(this.questionDialog);
+    this.question = new Question(this.questionEdition);
+    this.question.answers = [];
+    this.imagePreview = this.questionEdition.tmpUrl != null ? this.questionEdition.tmpUrl : this.questionEdition.image;
     this.initializeQuestionForm();
   }
   private initializeQuestionForm() {
     this.questionForm = this.formBuilder.group({
-      id: 0,
+      id: this.question.id,
       label: [this.question.label],
-      answers: this.formBuilder.array( [])
+      answers: this.formBuilder.array([]),
+      image: [this.question.image],
+      imagePreview: this.question.tmpUrl
     });
-    if (this.question) {
-      this.question.answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
-    }
+    this.questionEdition.answers.forEach(answer => this.answers.push(this.createAnswerByData(answer)));
   }
-  private createAnswerByData(answer: Answer) {
+  private createAnswerByData(answer) {
     return this.formBuilder.group({
+      id: answer.id,
       value: answer.value,
       isCorrect: answer.isCorrect,
+      image: answer.image,
+      tmpUrl: answer.tmpUrl,
+      questionId: this.questionEdition.id,
+      quizId: this.questionEdition.quizId
     });
   }
-  editQuestion() {
-    this.question = Object.assign({}, this.questionEdit);
-  }
-  editionState($state: boolean) {
-    if ($state) {this.editQuestion(); }
-    this.save.emit(true);
-  }
-  clean(i: number) {
-    this.answers.removeAt(i);
-    // this.answers.setValue(this.questionFormValue().answers.splice(i, 0));
-    // (this.answers as unknown as Answer[]).splice(i,0);
-  }
-
-  edit() {
-
-  }
-  /*selectAnswer(answer: Answer) {
-      this.router.navigateByUrl('/quiz-edit/' + answer.questionId + '/' + answer.id);
-  }*/
-  col() {
-    if (this.question.image) {
-      return 6;
-    } else {
-      return 5;
-    }
-  }
-
-  retour() {
-    this.dialogRef.close();
+  dragAddAnswer() {
+    this.answerWithImage.checked = true;
+    this.addAnswer();
   }
   addAnswer() {
     if (this.answers.length < 4) {
@@ -89,22 +74,65 @@ export class EditQuestionComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AnswerAddComponent, {
-      width: '950px',
-      maxHeight: '500px',
-      data: this.question ? this.question : DEFAULT_QUESTION
+      width: '800px',
+      height: this.answerWithImage.checked ? '380px' : '300px',
+      data: this.answerWithImage.checked
     });
     dialogRef.afterClosed().subscribe(data => {
-      this.answers.push(this.createAnswerByData(data.answer));
+      if (data) {
+        this.answers.push(this.createAnswerByData(data.answer)); }
     });
   }
-
-  deleteAnswer(confirm: boolean, answer: Answer ) {
-    if (confirm) {this.answersService.deleteAnswer(answer).subscribe(() => {
-      this.getAllAnswers();
-    }); }
+  answerHaveImage(i: number) {
+    return (this.answers.at(i).value as Answer)?.tmpUrl?.length > 0;
   }
-  getAllAnswers() {
-    // this.answersService.getAnswer(this.question.quizId.toString(),
-    // this.question.id.toString()).subscribe((answer) => this.answers = answer);
+  questionFormValue() {
+    return Question.questionFormValues(this.questionForm) as Question;
+  }
+
+  deleteImage() {
+    this.questionForm.get('image').reset();
+    this.imagePreview = null;
+  }
+  clean(i: number) {
+    if (this.answers.at(i).value.id !== 0) {
+      this.deletedAnswers.push(this.answers.at(i).value as Answer);
+    }
+    this.answers.removeAt(i);
+  }
+  editTheQuestion() {
+    if (this.conform()) {
+      const question: Question =  (Question.questionFormValues(this.questionForm)) as Question;
+      question.tmpUrl = this.questionForm.get('imagePreview').value;
+      this.questionCreated.emit(question);
+      /* tslint:disable */
+      this.dialogRef.close({
+        question : question ,
+        deletedAnswers : this.deletedAnswers});
+    }
+  }
+  edit() {
+    if (this.conform()) {
+      this.editQuestion.emit(true);
+      this.dialogRef.close(this.questionForm);
+    }
+  }
+  cancel() {
+    this.editQuestion.emit(false);
+  }
+  conform() {
+    if (this.answers.length === 0) {
+      alert('Ajoutez au moins une réponse à votre question');
+      return false;
+    }
+    if (this.questionFormValue().label === '') {
+      alert('Ajoutez un titre à votre question');
+      return false;
+    }
+    return true;
+  }
+
+  close() {
+    this.dialogRef.close(null);
   }
 }

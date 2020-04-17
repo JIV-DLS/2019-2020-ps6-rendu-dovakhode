@@ -42,9 +42,9 @@ export class QuestionAddComponent implements OnInit {
   private initializeQuestionForm() {
     this.questionForm = this.formBuilder.group({
       id: 0,
-      label: [this.questionEdition.answers != null ? (this.questionEdition as Question).label : ''],
+      label: [''],
       answers: this.formBuilder.array( []),
-      image: [this.questionEdition.answers != null ? (this.questionEdition as Question).image : null],
+      image: [null],
       imagePreview: ''
     });
     if (this.questionEdition.answers != null) {
@@ -98,7 +98,7 @@ export class QuestionAddComponent implements OnInit {
   }
   createQuestion() {
     if (this.conform()) {
-      const question: Question =  (Question.questionFormValues(this.questionForm)) as Question;
+      const question: Question = (Question.questionFormValues(this.questionForm)) as Question;
       question.tmpUrl = this.questionForm.get('imagePreview').value;
       this.questionCreated.emit(question);
       this.dialogRef.close(question);
@@ -123,5 +123,9 @@ export class QuestionAddComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  close() {
+    this.dialogRef.close(null);
   }
 }

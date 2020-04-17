@@ -16,6 +16,7 @@ export class Question {
       this.image = question.image;
       this.answers = question.answers;
       this.quizId = question.quizId;
+      this.tmpUrl = question.tmpUrl;
     } else {
       this.id = 0;
       this.answers = [];

@@ -12,6 +12,8 @@ import {QuestionService} from '../../../services/question.service';
 import {Question} from '../../../models/question.model';
 import {AnswersService} from '../../../services/answers.service';
 import {Subject} from 'rxjs';
+import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
+import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 
 @Component({
   selector: 'app-quizze-edit',
@@ -90,7 +92,7 @@ export class QuizzeEditComponent implements OnInit {
   openDialog(): void {
     const questionsDialog = [];
     this.quiz.questions.forEach(question => questionsDialog.push(question));
-    const dialogRef = this.dialog.open(QuestionsComponent, {
+    const dialogRef = this.dialog.open(QuestionAddComponent, {
       width: '950px',
       maxHeight: '500px',
       data:  questionsDialog
@@ -147,22 +149,6 @@ export class QuizzeEditComponent implements OnInit {
     } else { this.location.back(); }
   }
 
-onImagePick(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.quizForm.get('image').patchValue(file);
-    this.quizForm.get('image').updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (this.quizForm.get('image').valid) {
-        this.imageChanged = true;
-        this.imagePreview = reader.result as string;
-      } else {
-        this.imagePreview = null;
-      }
-    };
-    reader.readAsDataURL(file);
-  }
-
 deleteImage() {
     this.quiz.image = '';
   }
@@ -181,23 +167,30 @@ resetQuiz() {
 deletedQuestion($event: boolean, index: number) {
     if ($event) {
       if (!this.others) {this.others = true; }
-      this.deletedQuestions.push(this.quiz.questions[index]);
+      if (this.quiz.questions[index].id !== 0) {
+        this.deletedQuestions.push(this.quiz.questions[index]);
+      }
       this.questions.removeAt(index);
     }
   }
 
 editQuestion($event: boolean, i: number) {
-    const dialogRef = this.dialog.open(QuestionsComponent, {
+    const dialogRef = this.dialog.open(EditQuestionComponent, {
       width: '950px',
       maxHeight: '500px',
-      data: this.quiz.questions[i]
+      data: this.questions.at(i).value
     });
-    dialogRef.afterClosed().subscribe(question => {
+    dialogRef.afterClosed().subscribe(response => {
       this.questionDialogOpened = false;
-      if (question && question.label) {
-        if (!this.others) {this.others = true; }
-        if (question && question.label) {
-          this.questions.at(i).setValue(question);
+      if (response != null) {
+        if (response.deletedAnswers) {
+          response.deletedAnswers.forEach(answerDeleted => this.deletedAnswers.push(answerDeleted));
+        }
+        if (response.question && response.question.label) {
+          if (!this.others) {this.others = true; }
+          if (response.question && response.question.label) {
+            this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( response.question ))});
+          }
         }
       }
     });
