@@ -46,7 +46,6 @@ router.post('/', (req, res) => {
     }
   }
 })
-
 router.delete('/:idQ', (req, res) => {
   try {
     const tmp = Answer.getById(req.params.idQ)
