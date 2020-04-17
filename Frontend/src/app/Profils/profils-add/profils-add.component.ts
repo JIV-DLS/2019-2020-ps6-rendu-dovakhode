@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {ProfilServices} from '../../../services/profil.services';
 import {Profil} from '../../../models/profil.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-profils-add',
@@ -11,7 +12,8 @@ import {Profil} from '../../../models/profil.model';
 export class ProfilsAddComponent implements OnInit {
   public profilForm: FormGroup;
   imagePreview: string;
-  constructor(private formbuilder: FormBuilder, private profilService: ProfilServices) { }
+  constructor(private formbuilder: FormBuilder, private profilService: ProfilServices, private Activerouter: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.initiForm();
@@ -42,7 +44,11 @@ export class ProfilsAddComponent implements OnInit {
     profil.recommandations = form.recommandations;
     profil.sexe = this.profilForm.get('sexe').value;
 
-    this.profilService.addProfil(profil, this.profilForm.get('image').value).subscribe();
+    this.profilService.addProfil(profil, this.profilForm.get('image').value).subscribe((prof) => {
+      if (prof !== undefined) {
+        this.router.navigate(['/home-profil-gestion']);
+      }
+    });
     this.initiForm();
 
   }
