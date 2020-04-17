@@ -1,0 +1,101 @@
+<div style="background-color: white">
+  <mat-grid-list cols="5" rowHeight="80px" style="width: 100%; margin-top: 10px; padding-top: 50px;" >
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field appearance="legacy">
+        <mat-label>Rechercher par nom du profil</mat-label>
+        <input matInput placeholder="Nom du patient" [(ngModel)]="profilSearched.nom">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Prénom</mat-label>
+        <input matInput placeholder="Prénom du patient" [(ngModel)]="profilSearched.prenom">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Sexe</mat-label>
+        <mat-select  [(value)]="profilSearched.sexe" >
+          <mat-option value="Homme">
+            Homme
+          </mat-option>
+          <mat-option value="Femme">
+            Femme
+          </mat-option>
+          <mat-option value="">
+
+          </mat-option>
+
+        </mat-select>
+
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Stade</mat-label>
+        <mat-select  [(value)]="profilSearched.stade" >
+          <mat-option value="Stade 1">
+            Stade 1
+          </mat-option>
+          <mat-option value="Stade 2">
+            Stade 2
+          </mat-option>
+          <mat-option value="Stade 3">
+            Stade 3
+          </mat-option>
+          <mat-option value="">
+
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+      <button (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>reply</mat-icon>
+        Retour
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="5" rowspan="1">
+      <p style="text-align: center;">Veuillez sélectionner le profil de votre choix
+        <br/>
+        NB: La liste peut être vide si aucun profil  ne suit les critères entrés!</p>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="{{col()}}" rowHeight="40px" style="width: 100%; border-bottom: #1b1e21 1px solid;">
+
+    <mat-grid-tile colspan="3" rowspan="1" >
+      <h3>Nom</h3>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1" >
+      <h3>Prénom</h3>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
+      <h3>Age</h3>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
+      <h3>Sexe</h3>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="!doQuiz" colspan="1" rowspan="1">
+      <h3>Actions</h3>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  <div style="max-height: 430px;overflow-y: scroll;">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <app-profil-less-info class="quiz" (deleteEmitter)="deleteProfil($event,profil)"
+                          (selectEmitter)="SelectProfil(profil)" [do]="this.doQuiz" *ngFor="let profil of profilList |filter:{age: 0,evolId: 0,prenom: profilSearched.prenom,recommandations:profilSearched.recommandations,sexe:profilSearched.sexe,stade:profilSearched.stade,id:0,nom:profilSearched.nom}" [profil]="profil"></app-profil-less-info>
+    <div style="display: flex" *ngIf="inviteToCreateProfil">
+      <span class="h4" style="width: 40%; text-align: center">Votre liste est vide veuillez</span>
+      <button id="btnCreateQuiz" routerLink="/home-quiz-gestion" style="width: 60%" mat-flat-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>add</mat-icon>
+        Créer un nouveau quiz
+      </button></div>
+  </div>
+
+</div>

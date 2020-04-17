@@ -71,6 +71,9 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { HomePlayWithProfilesComponent } from './home-play-with-profiles/home-play-with-profiles.component';
 
 import { HomeProfilComponent } from './home-profil/home-profil.component';
+import { ProfilLessInfoComponent } from './Profils/profil-less-info/profil-less-info.component';
+import { ProfilList2Component } from './Profils/profil-list2/profil-list2.component';
+import { FilterPipe } from './Profils/_pipes/filter.pipe';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -84,7 +87,7 @@ const routes: Routes = [
   {path: 'quiz-do/:evol' , component: QuizDoComponent},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent},
-  {path: 'quiz-list', component: QuizListComponent},
+  {path: 'profil-list', component: ProfilList2Component},
   {path: 'quiz-do/:id/end', component: QuizEndComponent},
   { path: 'not-found', component: Error404Component },
   { path: '**', redirectTo: 'not-found' }
@@ -135,6 +138,9 @@ const routes: Routes = [
     ImageUploaderComponent,
     ProfilListComponent,
     HomePlayWithProfilesComponent,
+    ProfilLessInfoComponent,
+    ProfilList2Component,
+    FilterPipe,
   ],
   entryComponents: [
     QuestionsComponent,

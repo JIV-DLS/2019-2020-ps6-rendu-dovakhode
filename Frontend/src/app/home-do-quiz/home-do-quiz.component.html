@@ -17,7 +17,7 @@
         Lancer un quiz rapide sans profil
       </button>    </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="6">
-      <button (click)="profil()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button [routerLink]="['/profil-list',{do:true}]" mat-flat-button aria-label="Example icon-button with a heart icon">
         Lancer un quiz avec un patient
       </button>    </mat-grid-tile>
   </mat-grid-list>
