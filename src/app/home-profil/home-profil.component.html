@@ -14,15 +14,8 @@
       Créer un profil
     </button>
   </mat-grid-tile>
-  <div  *ngIf="0!= 0; else elseBlock1">
-    <mat-grid-tile colspan="4" rowspan="3">
-      <span class="h4" style="width: 40%; text-align: center">Votre liste de profil est vide veuillez</span>
-    </mat-grid-tile>
-
-  </div>
-  <ng-template #elseBlock1>
     <mat-grid-tile colspan="4" rowspan="3">
      <app-profil-list></app-profil-list>
     </mat-grid-tile>
-  </ng-template>
+
 </mat-grid-list>

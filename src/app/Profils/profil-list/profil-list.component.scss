@@ -8,7 +8,9 @@
 .carousel-control-next,.carousel-control-prev{
   width: 15px;
   opacity: 0.6;
-  }
+  margin:0px;
+}
+
  .carousel-indicators {
   position: absolute;
   bottom: -5px;
@@ -23,4 +25,15 @@
   background-color: #1d2124;
 }
 
+.h4{
+position: fixed;
+  top:50%;
+  right: 0;
+}
+p{
+  text-align: center;
+}
+.carousel-item.active{
+  margin: auto;
+}
 
