@@ -103,7 +103,7 @@ function deleteEntireQuiz(id) {
   const questions = QuestionsRouter.getQuestionsByQuizId(id)
   for (let i = 0; i < questions.length; i++) {
     const tmp = questions[i]
-    const filename = tmp.image.split('/images/question/')[1]
+    const filename = (tmp.image!=null)? tmp.image.split('/images/question/')[1]:''
     if (filename != null && filename.length > 1) {
       fs.unlink(`images/question/${filename}`, () => {
         QuestionsRouter.deleteEntireQuestion(questions[i].id)
@@ -128,6 +128,7 @@ router.delete('/:id', (req, res) => {
     }
     res.status(201).json(`${tmp.name}(id= ${tmp.id}) is deleted`)
   } catch (err) {
+    console.log(err);
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
     } else {

@@ -78,7 +78,8 @@ export class QuizAddComponent implements OnInit {
       label: question.label,
       answers: this.formBuilder.array(question.answers),
       image: question.image,
-      tmpUrl: question.tmpUrl
+      tmpUrl: question.tmpUrl,
+      quizId: 0
     });
   }
   addQuiz() {
@@ -165,7 +166,7 @@ export class QuizAddComponent implements OnInit {
 
   deletedQuestion($event: boolean, index: number) {
     if ($event) {
-      this.quiz.questions.splice(index, 1);
+      this.questions.removeAt(index);
     }
   }
 
@@ -175,13 +176,16 @@ export class QuizAddComponent implements OnInit {
       maxHeight: '500px',
       data: this.questions.at(i).value
     });
-    dialogRef.afterClosed().subscribe(question => {
+    dialogRef.afterClosed().subscribe(response => {
       this.questionDialogOpened = false;
-      if (question && question.label) {
-        if (question && question.label) {
-          this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( question))});
+      if (response != null) {
+        if (response.question && response.question.label) {
+          if (response.question && response.question.label) {
+            this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( response.question))});
+          }
         }
       }
+
     });
   }
 
