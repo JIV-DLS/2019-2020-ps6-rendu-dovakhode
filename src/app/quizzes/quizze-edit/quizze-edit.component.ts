@@ -182,13 +182,15 @@ editQuestion($event: boolean, i: number) {
     });
     dialogRef.afterClosed().subscribe(response => {
       this.questionDialogOpened = false;
-      if (response.deletedAnswers) {
-        response.deletedAnswers.forEach(answerDeleted => this.deletedAnswers.push(answerDeleted));
-      }
-      if (response.question && response.question.label) {
-        if (!this.others) {this.others = true; }
+      if (response != null) {
+        if (response.deletedAnswers) {
+          response.deletedAnswers.forEach(answerDeleted => this.deletedAnswers.push(answerDeleted));
+        }
         if (response.question && response.question.label) {
-          this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( response.question ))});
+          if (!this.others) {this.others = true; }
+          if (response.question && response.question.label) {
+            this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( response.question ))});
+          }
         }
       }
     });
