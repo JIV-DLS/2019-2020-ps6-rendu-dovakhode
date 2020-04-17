@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Profil} from '../../models/profil.model';
 import {DEFAULT_PROFIL} from '../../mocks/profil-list.mock';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {ProfilComponent} from '../Profils/profil/profil.component';
 
 @Component({
   selector: 'app-home-profil',
@@ -10,9 +12,19 @@ import {DEFAULT_PROFIL} from '../../mocks/profil-list.mock';
 export class HomeProfilComponent implements OnInit {
   public searchedProfil: Profil = DEFAULT_PROFIL;
 
-  constructor() { }
+  constructor( public dialog: MatDialog,
+               private dialogRef: MatDialogRef<ProfilComponent>) { }
 
   ngOnInit(): void {
   }
 
+  viewProfil(profil: Profil) {
+    console.log(profil.nom);
+    const dialogRef = this.dialog.open(ProfilComponent, {
+      width: '90%',
+      height: '80%',
+      data: profil,
+    });
+
+  }
 }

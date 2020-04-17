@@ -71,6 +71,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { HomePlayWithProfilesComponent } from './home-play-with-profiles/home-play-with-profiles.component';
 
 import { HomeProfilComponent } from './home-profil/home-profil.component';
+import {ProfilComponent} from './Profils/profil/profil.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -131,7 +132,7 @@ const routes: Routes = [
     QuizSearchPipe,
 
     ProfilsAddComponent,
-
+    ProfilComponent,
     DragNDropPhotoDirective,
     ImageUploaderComponent,
     ProfilListComponent,
