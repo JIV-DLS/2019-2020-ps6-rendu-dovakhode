@@ -34,7 +34,6 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   try {
     const question = get(req.params.evolutionId)
-    console.log(question.length)
     res.status(200).json(question)
   } catch (err) {
     res.status(500).json(err)
