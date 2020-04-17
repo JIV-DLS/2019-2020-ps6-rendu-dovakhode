@@ -36,7 +36,7 @@ export class EditQuestionComponent implements OnInit {
   ngOnInit() {
     this.question = new Question(this.questionEdition);
     this.question.answers = [];
-    this.imagePreview = this.questionEdition.tmpUrl;
+    this.imagePreview = this.questionEdition.tmpUrl != null ? this.questionEdition.tmpUrl : this.questionEdition.image;
     this.initializeQuestionForm();
   }
   private initializeQuestionForm() {
@@ -51,6 +51,7 @@ export class EditQuestionComponent implements OnInit {
   }
   private createAnswerByData(answer) {
     return this.formBuilder.group({
+      id: answer.id,
       value: answer.value,
       isCorrect: answer.isCorrect,
       image: answer.image,
