@@ -1,11 +1,21 @@
+<div  *ngIf="profilsList.length == 0; else elseBlock ">
+    <span class="h4" style="width: 100%; text-align: center">Votre liste de profil est vide, veuillez  créer un profil</span>
+</div>
+<ng-template #elseBlock>
 <carousel [itemsPerSlide]="itemsPerSlide"
           [singleSlideOffset]="singleSlideOffset"
           [interval]="false"
          >
-  <slide *ngFor="let slide of slides; let index=index"  class="mx-auto">
-   <mat-card style="background-color: lightgray">
-    <img  mat-card-image [src]="slide.image"  alt="image slide" style="display: inline; width: 100%;margin: 0 ">
+  <slide *ngFor="let profil of profilsList; let index=index"  class="mx-auto" >
+   <mat-card style="background-color: lightgray" >
+    <img *ngIf="profil.image!=''; else elseBlock2"  mat-card-image [src]="profil.image"  alt="image non trouvé" style="display: inline;width:100%;margin: 0; ">
+     <ng-template #elseBlock2  >
+       <p>
+         {{profil.prenom}}
+         <br>
+         {{profil.nom}}</p>
+     </ng-template>
    </mat-card>
   </slide>
 </carousel>
-
+</ng-template>
