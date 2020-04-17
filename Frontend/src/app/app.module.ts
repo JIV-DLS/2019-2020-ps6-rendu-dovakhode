@@ -79,6 +79,7 @@ const routes: Routes = [
   {path: 'home-quiz-gestion', component: HomeQuizComponent},
   {path: 'home-profil-gestion', component: HomeProfilComponent},
   {path: 'profil-add', component: ProfilsAddComponent},
+  {path: 'profil-list', component: ProfilListComponent},
   {path: 'home-user', component: HomeUserComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
   {path: 'quiz-do/:evol' , component: QuizDoComponent},

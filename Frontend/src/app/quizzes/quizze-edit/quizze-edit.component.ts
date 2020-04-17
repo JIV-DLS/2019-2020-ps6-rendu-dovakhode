@@ -185,9 +185,7 @@ editQuestion($event: boolean, i: number) {
       if (question && question.label) {
         if (!this.others) {this.others = true; }
         if (question && question.label) {
-          console.log('___');
-          console.log(question);
-          this.questions.at(i).patchValue(this.createQuestionByData(question));
+          this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( question))});
         }
       }
     });

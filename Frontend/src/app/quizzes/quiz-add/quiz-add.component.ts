@@ -10,6 +10,7 @@ import {environment} from '../../../environments/environment';
 import {MatDialogRef} from '@angular/material/dialog';
 import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
+import {Question} from '../../../models/question.model';
 
 @Component({
   selector: 'app-quiz-form',
@@ -169,17 +170,19 @@ export class QuizAddComponent implements OnInit {
   }
 
   editQuestion($event: boolean, i: number) {
-      const dialogRef = this.dialog.open(EditQuestionComponent, {
-        width: '950px',
-        maxHeight: '500px',
-        data: this.questions.at(i).value
-      });
-      dialogRef.afterClosed().subscribe(question => {
-        this.questionDialogOpened = false;
+    const dialogRef = this.dialog.open(EditQuestionComponent, {
+      width: '950px',
+      maxHeight: '500px',
+      data: this.questions.at(i).value
+    });
+    dialogRef.afterClosed().subscribe(question => {
+      this.questionDialogOpened = false;
+      if (question && question.label) {
         if (question && question.label) {
-          this.questions.at(i).setValue(question);
+          this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( question))});
         }
-      });
+      }
+    });
   }
 
   deleteAttachment(index) {
