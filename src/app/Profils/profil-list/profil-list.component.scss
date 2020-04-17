@@ -30,4 +30,10 @@ position: fixed;
   top:50%;
   right: 0;
 }
+p{
+  text-align: center;
+}
+.carousel-item.active{
+  margin: auto;
+}
 
