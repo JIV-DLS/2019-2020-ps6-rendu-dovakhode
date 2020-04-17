@@ -11,6 +11,7 @@ import {Evolution} from '../../../models/evolution.model';
   styleUrls: ['./question-do.component.scss']
 })
 export class QuestionDoComponent implements OnInit, OnChanges  {
+  breakpoint;
   @Input() question: Question = DEFAULT_QUESTION;
   @Input() evolution: Evolution ;
   trials: number;
@@ -22,6 +23,7 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
   ngOnInit() {
     this.trials = 0;
   }
+
 
   nextQuestion(next: boolean) {
     if (next) {
