@@ -253,10 +253,10 @@ export class QuestionService {
   deleteQuestions(deletedQuestions: Question[]) {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < deletedQuestions.length; i++) {
-      console.log('suppression de ' + deletedQuestions[i].label);
+      console.log('suppression de la question \'' + deletedQuestions[i].label + '\'');
       this.http.delete<Question>(this.questionUrl(deletedQuestions[i].quizId) + '/' + deletedQuestions[i].id).pipe(
         tap((questionDeleted) => {
-          console.log('Suppression reussie');
+          console.log('suppression de la question \'' + deletedQuestions[i].label + '\' réussie!');
         }),
         catchError(this.handleError<Question>('deleteQuestion', undefined))
       ).subscribe();

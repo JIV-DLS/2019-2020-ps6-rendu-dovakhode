@@ -74,6 +74,7 @@ import { HomeProfilComponent } from './home-profil/home-profil.component';
 import { ProfilLessInfoComponent } from './Profils/profil-less-info/profil-less-info.component';
 import { ProfilList2Component } from './Profils/profil-list2/profil-list2.component';
 import { FilterPipe } from './Profils/_pipes/filter.pipe';
+import {ProfilComponent} from './Profils/profil/profil.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -82,6 +83,7 @@ const routes: Routes = [
   {path: 'home-quiz-gestion', component: HomeQuizComponent},
   {path: 'home-profil-gestion', component: HomeProfilComponent},
   {path: 'profil-add', component: ProfilsAddComponent},
+  {path: 'profil-list', component: ProfilListComponent},
   {path: 'home-user', component: HomeUserComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
   {path: 'quiz-do/:evol' , component: QuizDoComponent},
@@ -133,7 +135,7 @@ const routes: Routes = [
     QuizSearchPipe,
 
     ProfilsAddComponent,
-
+    ProfilComponent,
     DragNDropPhotoDirective,
     ImageUploaderComponent,
     ProfilListComponent,

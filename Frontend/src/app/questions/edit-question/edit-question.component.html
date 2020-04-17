@@ -1,101 +1,85 @@
-<!--<app-question-add style="height: 100%;width: 100%;" (editQuestion)="editionState($event)" [editable]="true" [questionEdition]="questionEdit"></app-question-add>
--->
 
 <mat-card>
   <mat-card-header>
-    <b layout-align="center">Modifier une question</b>
-    <button (click)="edit()" mat-flat-button aria-label="Edit" style="position:absolute; right:10px;">
+    <h3 layout-align="center">Modification d'une question</h3>
+    <button *ngIf="editable" (click)="edit()" mat-flat-button aria-label="Edit" style="position:absolute; right:10px;">
       <mat-icon>done</mat-icon>
     </button>
+    <button *ngIf="editable" (click)="cancel()" mat-flat-button aria-label="Cancel" style="position:absolute; right:20px;">
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <mat-card-title>
+      <!--<h6>Nombre totale de quesitons({{questions.length}})</h6>-->
+      <button  (click)="close()" color="warn" mat-flat-button aria-label="Close" style="position:absolute; right:10px;">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="questionForm">
-      <mat-grid-list cols="6" rowHeight="100px">
-        <mat-grid-tile colspan="1" rowspan="2">
-          Question
-        </mat-grid-tile>
-        <mat-grid-tile colspan="3" rowspan="1" *ngIf="question.image">
-          <img [src]="question.image" [alt]="question.label">
-        </mat-grid-tile>
-        <mat-grid-tile colspan="2" rowspan="1" *ngIf="question.image">
-
-        </mat-grid-tile>
-        <mat-grid-tile colspan="{{col()}}" rowspan="2">
+      <mat-grid-list cols="4" rowHeight="53px">
+        <mat-grid-tile colspan="2" rowspan="1">
           <mat-form-field style="width: 100%">
+            <mat-label>Title</mat-label>
             <input matInput placeholder="title" [formControlName]="'label'" >
-            <!-- <mat-error *ngIf="label.invalid">{{getLabelErrorMessage()}}</mat-error> -->
           </mat-form-field>
+          <br/>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="5">
+          <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
+            <mat-card-content style=" height: 100%;width: 100%;">
+              <app-image-uploader editable="true" [label]="question.label" [imagePreview]="imagePreview"
+                                  [form]="questionForm"></app-image-uploader>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <h6>les réponses</h6>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-slide-toggle #answerWithImage>Réponses à image</mat-slide-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="3">
+          <div   formArrayName="answers" style="width: 100%; height: 100%;overflow-y: scroll;">
+            <mat-grid-list cols="2" rowHeight="70px">
+              <mat-grid-tile
+                *ngFor="let answer of answers.controls; let i=index"
+                colspan="2"
+                rowspan="1">
+                <div [formGroupName]="i" style="width: 98%;height: 98%">
+                  <div *ngIf="answerHaveImage(i)" style="width: 95%; height: 70%; display: flex;">
+                    <div style="width: 70%; "><app-image-uploader [imagePreview]="answers.at(i).value.tmpUrl"></app-image-uploader></div>
+                    <div style="width: 16%"><mat-checkbox [formControlName]="'isCorrect'" style="width: 100%"></mat-checkbox></div>
+                    <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon" style="width: 14%">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                  <div *ngIf="!answerHaveImage(i)" >
+                    <mat-form-field style="width: 60%;">
+                      <mat-label>Réponse</mat-label>
+                      <input [formControlName]="'value'" matInput placeholder="answer" >
+                    </mat-form-field>
+                    <mat-checkbox [formControlName]="'isCorrect'" style="width: 34%">V</mat-checkbox>
+                    <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon" style="width: 14%">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
         </mat-grid-tile>
       </mat-grid-list>
-      <mat-grid-list cols="9" rowHeight="40px" style="width: 100%; border-bottom: #1b1e21 1px solid" *ngIf="question.answers.length != 0">
-        <mat-grid-tile colspan="3" rowspan="1" >
-          <h3>Numéro</h3>
+      <mat-grid-list cols="2" rowHeight="50px">
+        <mat-grid-tile colspan="1" rowspan="1" >
+          <button class="mt-2 btn btn-sm" mat-button (dragover)="dragAddAnswer();" #ansButton (click)="addAnswer()" style="width: 50%">Ajouter une réponse <span class="badge">{{answers.length}}</span></button>
         </mat-grid-tile>
-        <mat-grid-tile colspan="3" rowspan="1" >
-          <h3>Libellé</h3>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="3" rowspan="1">
-          <h3>Correct</h3>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <button mat-button (click)="editTheQuestion() " type="submit" class=" btn btn-success btn-block btn-primary" style="width:100% ">Modifier la question</button>
         </mat-grid-tile>
       </mat-grid-list>
-      <div style="max-height: 430px;overflow-x: scroll;">
-        <mat-grid-list cols="2" rowHeight="40px">
-          <mat-grid-tile
-            *ngFor="let answer of answers.controls; let i=index"
-            colspan="1"
-            rowspan="1">
-            <div [formGroupName]="i" style="width: 98%;height: 98%">
-              <mat-form-field style="width: 55%;">
-                <mat-label>Answer</mat-label>
-                <input [formControlName]="'value'" matInput placeholder="answer" >
-              </mat-form-field>
-              <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
-              <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon">
-                <mat-icon>close</mat-icon>
-              </button>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-      <!-- <div *ngFor="let answer of question.answers; let i=index"  formArrayName="answers" style="max-height: 430px;overflow-y: scroll;">
-        <mat-grid-tile colspan="1" rowspan="1">
-          Réponse {{i}} :
-        </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-          <app-answer [formGroupName]="i" (delete)="deleteAnswer($event,answer)" ></app-answer>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="1">
-        </mat-grid-tile>
-      </div>
-      <mat-form-field style="width: 100%">
-        <mat-label>Title</mat-label>
-        <input matInput placeholder="title" [formControlName]="'label'" >
-      </mat-form-field>
-      <div  formArrayName="answers" style="width: 100%;">
-        <mat-grid-list cols="2" rowHeight="40px">
-          <mat-grid-tile
-            *ngFor="let answer of answers.controls; let i=index"
-            colspan="1"
-            rowspan="1">
-            <div [formGroupName]="i" style="width: 98%;height: 98%">
-              <mat-form-field style="width: 55%;">
-                <mat-label>Answer</mat-label>
-                <input [formControlName]="'value'" matInput placeholder="answer" >
-              </mat-form-field>
-              <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
-              <button  (click)="clean(i)" mat-flat-button aria-label="Example icon-button with a heart icon">
-                <mat-icon>close</mat-icon>
-              </button>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>-->
-      <button class="mt-2 btn btn-sm" mat-button (click)="addAnswer()">Add Answer <span class="badge">{{answers.length}}</span></button>
     </form>
   </mat-card-content>
-  <mat-card-footer>
-    <button  mat-button (click)="retour() "  [mat-dialog-close]="true" class=" btn btn-lg btn-block btn-secondary" style="height: 50%">Retour</button>
-    <button  mat-button (click)="editQuestion() " [mat-dialog-close]="true" class=" btn btn-lg btn-block btn-success" style="height: 50%" >Modifier</button>
-  </mat-card-footer>
 </mat-card>
 

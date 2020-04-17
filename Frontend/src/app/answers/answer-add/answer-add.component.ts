@@ -2,8 +2,6 @@ import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/c
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Answer} from '../../../models/answer.model';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Question} from '../../../models/question.model';
-import {AnswersService} from '../../../services/answers.service';
 
 @Component({
   selector: 'app-answer-add',
@@ -24,6 +22,7 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
   }
   private initializeAnswerForm() {
     this.answerForm = this.formBuilder.group({
+      id: 0,
       type : [],
       value: [],
       isCorrect: false,
