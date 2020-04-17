@@ -10,18 +10,20 @@ import {environment} from '../../../environments/environment';
 })
 export class QuizEndComponent implements OnInit {
 id: string;
+idPatient: number;
   constructor(private route: ActivatedRoute, private router: Router,
               private cookiesService: CookieService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
+    this.idPatient = +(this.route.snapshot.params.idPatient);
     if (this.cookiesService.check(environment.runningQuiz)) {
     this.cookiesService.delete(environment.runningQuiz, '/');
     }
   }
 
   restart() {
-    this.router.navigate(['quiz-do/' + this.id + '/start']);
+    this.router.navigate(['quiz-do/' + this.id + '/start/' + this.idPatient]);
   }
 
   begining() {

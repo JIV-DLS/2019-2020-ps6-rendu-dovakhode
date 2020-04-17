@@ -56,8 +56,10 @@ export class ProfilList2Component implements OnInit {
 
 
   SelectProfil(profil: Profil) {
-    if ( this.doQuiz) {
-      this.router.navigate ([ '/quiz-list', { do: true } ] );
+    if ( confirm ( 'Voulez vous vraiment lancer une partie de quiz avec le patient: ' + profil.nom + ' ?' ) ) {
+      if (this.doQuiz) {
+        this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
+      }
     }
   }
 
