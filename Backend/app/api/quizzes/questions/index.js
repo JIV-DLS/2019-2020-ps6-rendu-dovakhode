@@ -120,7 +120,19 @@ function deleteEntireQuestion(id) {
 router.delete('/:idQ', (req, res) => {
   try {
     const tmp = Question.getById(req.params.idQ)
-    deleteEntireQuestion(req.params.idQ)
+    if (!tmp.image) tmp.image = ''
+    const filename = tmp.image.split('/images/question/')[1]
+    if (filename != null && filename.length > 1) {
+      fs.unlink(`images/question/${filename}`, () => {
+        deleteEntireQuestion(req.params.idQ)
+      })
+    } else {
+      try {
+        deleteEntireQuestion(req.params.idQ)
+      } catch (e) {
+        console.log(e)
+      }
+    }
     res.status(201).json(`${tmp.name}(id= )${tmp.id}is deleted`)
   } catch (err) {
     if (err.name === 'ValidationError') {

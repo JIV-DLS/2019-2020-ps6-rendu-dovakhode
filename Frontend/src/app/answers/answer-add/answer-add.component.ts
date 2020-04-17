@@ -24,6 +24,7 @@ constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<Answ
   }
   private initializeAnswerForm() {
     this.answerForm = this.formBuilder.group({
+      id: 0,
       type : [],
       value: [],
       isCorrect: false,

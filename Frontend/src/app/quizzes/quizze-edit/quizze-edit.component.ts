@@ -180,12 +180,15 @@ editQuestion($event: boolean, i: number) {
       maxHeight: '500px',
       data: this.questions.at(i).value
     });
-    dialogRef.afterClosed().subscribe(question => {
+    dialogRef.afterClosed().subscribe(response => {
       this.questionDialogOpened = false;
-      if (question && question.label) {
+      if (response.deletedAnswers) {
+        response.deletedAnswers.forEach(answerDeleted => this.deletedAnswers.push(answerDeleted));
+      }
+      if (response.question && response.question.label) {
         if (!this.others) {this.others = true; }
-        if (question && question.label) {
-          this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( question))});
+        if (response.question && response.question.label) {
+          this.questions.at(i).patchValue({...Question.questionFormValues(this.createQuestionByData( response.question ))});
         }
       }
     });
