@@ -6,9 +6,10 @@ import { Quiz } from '../../../models/quiz.model';
 import {difficulte, theme} from '../../../models/theme.models';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {MatDialog} from '@angular/material';
-import {QuestionsComponent} from '../../questions/questions.component';
 import {environment} from '../../../environments/environment';
 import {MatDialogRef} from '@angular/material/dialog';
+import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
+import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 
 @Component({
   selector: 'app-quiz-form',
@@ -76,6 +77,7 @@ export class QuizAddComponent implements OnInit {
       label: question.label,
       answers: this.formBuilder.array(question.answers),
       image: question.image,
+      tmpUrl: question.tmpUrl
     });
   }
   addQuiz() {
@@ -124,7 +126,7 @@ export class QuizAddComponent implements OnInit {
     this.openDialog();
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(QuestionsComponent, {
+    const dialogRef = this.dialog.open(QuestionAddComponent, {
       width: '850px',
       maxHeight: '500px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
@@ -167,10 +169,10 @@ export class QuizAddComponent implements OnInit {
   }
 
   editQuestion($event: boolean, i: number) {
-      const dialogRef = this.dialog.open(QuestionsComponent, {
+      const dialogRef = this.dialog.open(EditQuestionComponent, {
         width: '950px',
         maxHeight: '500px',
-        data: this.quiz.questions[i]
+        data: this.questions.at(i).value
       });
       dialogRef.afterClosed().subscribe(question => {
         this.questionDialogOpened = false;
