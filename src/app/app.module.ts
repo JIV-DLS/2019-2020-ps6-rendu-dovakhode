@@ -75,6 +75,8 @@ import { ProfilLessInfoComponent } from './Profils/profil-less-info/profil-less-
 import { ProfilList2Component } from './Profils/profil-list2/profil-list2.component';
 import { FilterPipe } from './Profils/_pipes/filter.pipe';
 import {ProfilComponent} from './Profils/profil/profil.component';
+import { ProfilListDisplayComponent } from './profil-list-display/profil-list-display.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -88,7 +90,7 @@ const routes: Routes = [
   {path: 'quiz-do/:evol' , component: QuizDoComponent},
   {path: 'quiz-do/:id/start/:idPatient' , component: QuizDoStartComponent},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent},
-  {path: 'profil-list', component: ProfilList2Component},
+  {path: 'profil-list', component: ProfilListDisplayComponent},
   {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent},
   { path: 'not-found', component: Error404Component },
   { path: '**', redirectTo: 'not-found' }
@@ -142,6 +144,7 @@ const routes: Routes = [
     ProfilLessInfoComponent,
     ProfilList2Component,
     FilterPipe,
+    ProfilListDisplayComponent,
   ],
   entryComponents: [
     QuestionsComponent,
@@ -152,33 +155,34 @@ const routes: Routes = [
     NextQuestionComponent,
     SnackModificationComponent
   ],
-    imports: [
-        BrowserModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        RouterModule.forRoot(routes),
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatCardModule,
-        MatGridListModule,
-        MatInputModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatSnackBarModule,
-        _MatMenuDirectivesModule,
-        MatMenuModule,
-        MatSidenavModule,
-        MatDividerModule,
-        ScrollingModule,
-        MatSelectModule,
-        MatProgressSpinnerModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-        FormsModule,
-        MatSlideToggleModule,
-        MatRadioModule,
-        CarouselModule.forRoot(),
-    ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatCardModule,
+    MatGridListModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatSnackBarModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatDividerModule,
+    ScrollingModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    FormsModule,
+    MatSlideToggleModule,
+    MatRadioModule,
+    CarouselModule.forRoot(),
+    MatTabsModule,
+  ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     { provide: MatDialogRef, useValue: {} },
