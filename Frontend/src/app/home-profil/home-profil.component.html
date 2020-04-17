@@ -15,7 +15,12 @@
     </button>
   </mat-grid-tile>
     <mat-grid-tile colspan="4" rowspan="3">
-     <app-profil-list></app-profil-list>
+     <app-profil-list (profilSelected)="viewProfil($event)"></app-profil-list>
     </mat-grid-tile>
-
+  <mat-grid-tile  colspan="1" rowspan="2" >
+    <button class="backButton" [routerLink]="['/']" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <mat-icon>reply</mat-icon>
+      Retour
+    </button>
+  </mat-grid-tile>
 </mat-grid-list>

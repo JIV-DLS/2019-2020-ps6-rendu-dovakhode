@@ -6,15 +6,13 @@
           [singleSlideOffset]="singleSlideOffset"
           [interval]="false"
          >
-  <slide *ngFor="let profil of profilsList; let index=index"  class="mx-auto" >
-   <mat-card style="background-color: lightgray" >
-    <img *ngIf="profil.image!=''; else elseBlock2"  mat-card-image [src]="profil.image"  alt="image non trouvé" style="display: inline;width:100%;margin: 0; ">
-     <ng-template #elseBlock2  >
+  <slide (click)="selectProfil(profil)" *ngFor="let profil of profilsList; let index=index"  class="mx-auto" >
+   <mat-card style="background-color: lightgray;" >
+    <img *ngIf="profil.image!=''; "  mat-card-image [src]="profil.image"  alt="image non trouvé" style="display: inline;width:100%;margin: 0; ">
        <p>
          {{profil.prenom}}
          <br>
          {{profil.nom}}</p>
-     </ng-template>
    </mat-card>
   </slide>
 </carousel>
