@@ -17,6 +17,7 @@ import {environment} from '../../../environments/environment';
 export class QuizDoStartComponent implements OnInit {
   quiz: Quiz = DEFAULT_QUIZ;
   Evolution: Evolution;
+  idPatient: number;
 
   constructor(public quizService: QuizService,
               private location: Location,
@@ -28,7 +29,8 @@ export class QuizDoStartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
+    this.idPatient = + (this.route.snapshot.params.idPatient);
+    this.quizService.getQuizById ( + this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
         this.initialize(quiz);
       }, (error) => {this.retour(); });
@@ -42,7 +44,7 @@ export class QuizDoStartComponent implements OnInit {
     this.quiz = quiz;
   }
   start(quiz) {
-    this.evolservice.addEvolution('' + this.quiz.id).subscribe((evol ) => {
+    this.evolservice.addEvolution('' + this.quiz.id, +this.idPatient).subscribe((evol ) => {
       if (evol !== undefined) {
         console.log('voici l evol créée ' + evol.id + '' + evol.quizId);
         this.Evolution = evol;

@@ -83,14 +83,13 @@ const routes: Routes = [
   {path: 'home-quiz-gestion', component: HomeQuizComponent},
   {path: 'home-profil-gestion', component: HomeProfilComponent},
   {path: 'profil-add', component: ProfilsAddComponent},
-  {path: 'profil-list', component: ProfilListComponent},
   {path: 'home-user', component: HomeUserComponent},
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
   {path: 'quiz-do/:evol' , component: QuizDoComponent},
-  {path: 'quiz-do/:id/start' , component: QuizDoStartComponent},
+  {path: 'quiz-do/:id/start/:idPatient' , component: QuizDoStartComponent},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent},
   {path: 'profil-list', component: ProfilList2Component},
-  {path: 'quiz-do/:id/end', component: QuizEndComponent},
+  {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent},
   { path: 'not-found', component: Error404Component },
   { path: '**', redirectTo: 'not-found' }
 

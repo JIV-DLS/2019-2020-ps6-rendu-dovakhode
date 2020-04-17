@@ -17,6 +17,7 @@ export class QuizListComponent implements OnInit {
   public themesValues = Object.values(themeSearch);
   public difficultiesValues = Object.values(difficulteSearch);
   public doQuiz;
+  public idPatient: number;
   public inviteToCreateQuiz = null;
   public searchedQuiz: Quiz = DEFAULT_QUIZ;
   loading: boolean;
@@ -29,6 +30,7 @@ export class QuizListComponent implements OnInit {
 
   ngOnInit() {
     this.doQuiz = (this.Activerouter.snapshot.params.do === 'true');
+    this.idPatient = + (this.Activerouter.snapshot.params.idPatient);
   }
   getAllQuiz() {
     this.loading = true;
@@ -56,7 +58,7 @@ export class QuizListComponent implements OnInit {
 
   selectQuiz(quiz: Quiz) {
     if ( this.doQuiz) {
-      this.router.navigate(['/quiz-do/' + quiz.id + '/start']);
+      this.router.navigate([ '/quiz-do/' + quiz.id + '/start/' + this.idPatient ]);
     } else {
       this.router.navigateByUrl('/quiz-edit/' + quiz.id);
     }

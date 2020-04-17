@@ -31,9 +31,10 @@ export class EvolutionService {
    this.emitEvolution();
 
   }
-  addEvolution(idQuiz: string) {
+  addEvolution(idQuiz: string, idPatient: number) {
     const evolution = new Evolution();
     evolution.quizId = parseInt(idQuiz, 10);
+    evolution.patientId = idPatient;
     return this.http.post<Evolution>(this.evolutionUrl, evolution).pipe(
       tap((newAnswer) => {
         console.log('Ajout Reussi');
