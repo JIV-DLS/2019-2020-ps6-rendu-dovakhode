@@ -4,7 +4,7 @@
     <mat-grid-tile colspan="5" rowspan="3">
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="3">
-      <button (click)="location.back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button color="primary" (click)="location.back()" mat-flat-button aria-label="Example icon-button with a heart icon">
         <mat-icon>reply</mat-icon>
         Retour
       </button>
@@ -13,12 +13,12 @@
     <mat-grid-tile colspan="6" rowspan="2">
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="6">
-      <button (click)="createAQuiz()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button color="accent" (click)="createAQuiz()" mat-flat-button aria-label="Example icon-button with a heart icon">
         <mat-icon style="font-size: 130px; width: 90%;height: 75%;">add</mat-icon>
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="6">
-      <button [routerLink]="['/quiz-list',{do:false}]" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button  color="warn" [routerLink]="['/quiz-list',{do:false}]" mat-flat-button aria-label="Example icon-button with a heart icon">
         <mat-icon style="font-size: 130px; width: 90%;height: 75%;">edit</mat-icon>
       </button>
     </mat-grid-tile>

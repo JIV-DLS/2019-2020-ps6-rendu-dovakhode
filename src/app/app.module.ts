@@ -77,6 +77,7 @@ import { FilterPipe } from './Profils/_pipes/filter.pipe';
 import {ProfilComponent} from './Profils/profil/profil.component';
 import { ProfilListDisplayComponent } from './profil-list-display/profil-list-display.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -145,6 +146,7 @@ const routes: Routes = [
     ProfilList2Component,
     FilterPipe,
     ProfilListDisplayComponent,
+    MatConfirmDialogComponent,
   ],
   entryComponents: [
     QuestionsComponent,
@@ -153,7 +155,8 @@ const routes: Routes = [
     EditQuestionComponent,
     AnswerAddComponent,
     NextQuestionComponent,
-    SnackModificationComponent
+    SnackModificationComponent,
+    MatConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
