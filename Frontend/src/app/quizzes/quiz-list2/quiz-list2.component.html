@@ -1,5 +1,5 @@
 <div style="background-color: white">
-<div  *ngIf="quizList.length == 0; else elseBlock ">
+<div  *ngIf="quizList.length == 0;">
   <span class="h4" style="width: 100%; text-align: center">Votre liste de quiz est vide, veuillez  créer un profil</span>
 </div>
   <mat-grid-list cols="5" rowHeight="80px" style="width: 100%; margin-top: 10px; padding-top: 50px;" >
@@ -46,24 +46,21 @@
         Retour
       </button>
     </mat-grid-tile>
-  </mat-grid-list>
-
-  <mat-grid-list cols="1">
-<ng-template #elseBlock>
-  <carousel [itemsPerSlide]="itemsPerSlide"
-            [singleSlideOffset]="singleSlideOffset"
-            [interval]="false"
-  >
-    <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList | quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}; let index=index"  class="mx-auto" >
-      <mat-card style="background-color: lightgray;" >
-        <img *ngIf="quiz.image!=''; "  mat-card-image [src]="quiz.image"  alt="image non trouvé" style="display: inline;width:100%;margin: 0; ">
-        <p>
-          {{quiz.label}}
-          </p>
-      </mat-card>
-    </slide>
-  </carousel>
-</ng-template>
+    <mat-grid-tile colspan="5" rowspan="5" *ngIf="quizList.length >0;">
+      <carousel [itemsPerSlide]="itemsPerSlide"
+                [singleSlideOffset]="singleSlideOffset"
+                [interval]="0"
+      >
+        <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList | quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}; let index=index"  class="mx-auto" >
+          <mat-card style="background-color: lightgray;" >
+            <img *ngIf="quiz.image!=''; "  mat-card-image [src]="quiz.image"  alt="{{quiz.image != null? quiz.image:'image non trouvé'}}" style="display: inline;width:100%;margin: 0; ">
+            <p>
+              {{quiz.label}}
+            </p>
+          </mat-card>
+        </slide>
+      </carousel>
+    </mat-grid-tile>
   </mat-grid-list>
 
 </div>
