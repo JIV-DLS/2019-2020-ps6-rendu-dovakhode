@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {Profil} from '../../../models/profil.model';
 import {ProfilServices} from '../../../services/profil.services';
 import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
+import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-profil-list2',
@@ -24,7 +25,8 @@ export class ProfilList2Component implements OnInit {
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,
-              public profilService: ProfilServices) {
+              public profilService: ProfilServices,
+              private matDialogService: DialogService) {
     this.getAllProfil();
   }
 
@@ -56,11 +58,12 @@ export class ProfilList2Component implements OnInit {
 
 
   SelectProfil(profil: Profil) {
-    if ( confirm ( 'Voulez vous vraiment lancer une partie de quiz avec le patient: ' + profil.nom + ' ?' ) ) {
-      if (this.doQuiz) {
-        this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
-      }
+  this.matDialogService.openConfirmDialog('Voulez vous vraiment lancer une partie de quiz avec le patient: ' +
+    profil.nom + ' ' + profil.prenom + ' ?').afterClosed().subscribe((res) => {
+    if (res) {
+      this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
     }
+  });
   }
 
   col() {
