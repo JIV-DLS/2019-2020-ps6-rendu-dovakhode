@@ -1,0 +1,16 @@
+<mat-tab-group [backgroundColor]="bgColor" color="accent" animationDuration="2000ms">
+
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon>view_list</mat-icon> Afficher les quizzes liste
+    </ng-template>
+    <app-quiz-list ></app-quiz-list>
+  </mat-tab>
+
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon>perm_media</mat-icon> Afficher les quizzes par photo
+    </ng-template>
+   <app-quiz-list2></app-quiz-list2>
+  </mat-tab>
+</mat-tab-group>

@@ -1,6 +1,7 @@
 <div  *ngIf="profilsList.length == 0; else elseBlock ">
     <span class="h4" style="width: 100%; text-align: center">Votre liste de profil est vide, veuillez  créer un profil</span>
 </div>
+
 <ng-template #elseBlock>
 <carousel [itemsPerSlide]="itemsPerSlide"
           [singleSlideOffset]="singleSlideOffset"
