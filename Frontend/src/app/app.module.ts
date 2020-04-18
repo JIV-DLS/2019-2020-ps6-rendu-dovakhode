@@ -78,10 +78,12 @@ import {ProfilComponent} from './Profils/profil/profil.component';
 import { ProfilListDisplayComponent } from './profil-list-display/profil-list-display.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+import { QuizDisplayListComponent } from './quizzes/quiz-display-list/quiz-display-list.component';
+import { QuizList2Component } from './quizzes/quiz-list2/quiz-list2.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'quiz-list', component: QuizListComponent},
+  {path: 'quiz-list', component: QuizDisplayListComponent},
   {path: 'home-do-quiz', component: HomeDoQuizComponent},
   {path: 'home-quiz-gestion', component: HomeQuizComponent},
   {path: 'home-profil-gestion', component: HomeProfilComponent},
@@ -147,6 +149,8 @@ const routes: Routes = [
     FilterPipe,
     ProfilListDisplayComponent,
     MatConfirmDialogComponent,
+    QuizDisplayListComponent,
+    QuizList2Component,
   ],
   entryComponents: [
     QuestionsComponent,

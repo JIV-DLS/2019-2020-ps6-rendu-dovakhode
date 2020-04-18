@@ -1,0 +1,69 @@
+<div style="background-color: white">
+<div  *ngIf="quizList.length == 0; else elseBlock ">
+  <span class="h4" style="width: 100%; text-align: center">Votre liste de quiz est vide, veuillez  créer un profil</span>
+</div>
+  <mat-grid-list cols="5" rowHeight="80px" style="width: 100%; margin-top: 10px; padding-top: 50px;" >
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field appearance="legacy">
+        <mat-label>Rechercher par Libéllé du quiz</mat-label>
+        <input [(ngModel)]="searchedQuiz.label" matInput placeholder="libéllé du quiz">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Thème</mat-label>
+        <mat-select [(value)]="searchedQuiz.theme">
+          <mat-option *ngFor="let theme of themesValues" [value]="theme" >
+            {{theme}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Sous Thème</mat-label>
+        <mat-select [(value)]="searchedQuiz.subTheme">
+          <mat-option *ngFor="let subtheme of themesValues" [value]="subtheme">
+            {{subtheme}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-form-field>
+        <mat-label>Difficulté</mat-label>
+        <mat-select [(value)]="searchedQuiz.difficulty">
+          <mat-option *ngFor="let difficulty of difficultiesValues" [value]="difficulty">
+            {{difficulty}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <button  color="primary" (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>reply</mat-icon>
+        Retour
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="1">
+<ng-template #elseBlock>
+  <carousel [itemsPerSlide]="itemsPerSlide"
+            [singleSlideOffset]="singleSlideOffset"
+            [interval]="false"
+  >
+    <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList | quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}; let index=index"  class="mx-auto" >
+      <mat-card style="background-color: lightgray;" >
+        <img *ngIf="quiz.image!=''; "  mat-card-image [src]="quiz.image"  alt="image non trouvé" style="display: inline;width:100%;margin: 0; ">
+        <p>
+          {{quiz.label}}
+          </p>
+      </mat-card>
+    </slide>
+  </carousel>
+</ng-template>
+  </mat-grid-list>
+
+</div>
