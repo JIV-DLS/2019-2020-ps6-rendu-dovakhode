@@ -2,4 +2,4 @@
   qui comporte {{quiz.questions.length}} question{{quiz.questions.length>1?'s':''}}.
 </p>
 <button  mat-raised-button color="primary" (click)="start(quiz)" class="commencer">C'est parti</button>
-<button  mat-raised-button  color="accent" [routerLink]="['/quiz-list',{do:true}]" class="retour">Retour</button>
+<button  mat-raised-button  color="accent" [routerLink]="['/quiz-list',{do:true , idPatient: idPatient}]" class="retour">Retour</button>

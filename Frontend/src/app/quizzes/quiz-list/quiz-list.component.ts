@@ -58,7 +58,8 @@ export class QuizListComponent implements OnInit {
 
   selectQuiz(quiz: Quiz) {
     if ( this.doQuiz) {
-      this.router.navigate([ '/quiz-do/' + quiz.id + '/start/' + this.idPatient ]);
+      this.router.navigate([ '/quiz-do/' + quiz.id + '/start' , { idPatient: this.idPatient}]);
+    //  this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
     } else {
       this.router.navigateByUrl('/quiz-edit/' + quiz.id);
     }
@@ -73,6 +74,12 @@ export class QuizListComponent implements OnInit {
   }
 
   back() {
-    if (this.doQuiz) {this.router.navigateByUrl('/home-do-quiz'); } else { this.location.back(); }
+    if (this.doQuiz ) {
+      if ( this.idPatient === 0 ) {
+        this.router.navigateByUrl('/home-do-quiz' );
+      } else {
+        this.router.navigate(['/profil-list' , {do: true}]);
+      }
+    } else { this.location.back(); }
   }
 }

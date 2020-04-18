@@ -38,7 +38,7 @@ export class QuizDoStartComponent implements OnInit {
   }
 
   retour() {
-    this.location.back();
+    this.router.navigate(['/quiz-list', { do: true, idPatient: this.idPatient } ]);
   }
   initialize(quiz) {
     this.quiz = quiz;
