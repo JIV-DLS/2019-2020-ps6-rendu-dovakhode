@@ -46,21 +46,22 @@
         Retour
       </button>
     </mat-grid-tile>
-    <mat-grid-tile colspan="5" rowspan="5" *ngIf="quizList.length >0;">
-      <carousel [itemsPerSlide]="itemsPerSlide"
-                [singleSlideOffset]="singleSlideOffset"
-                [interval]="0"
-      >
-        <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList | quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}; let index=index"  class="mx-auto" >
-          <mat-card style="background-color: lightgray;" >
-            <img *ngIf="quiz.image!=''; "  mat-card-image [src]="quiz.image"  alt="{{quiz.image != null? quiz.image:'image non trouvé'}}" style="display: inline;width:100%;margin: 0; ">
-            <p>
-              {{quiz.label}}
-            </p>
-          </mat-card>
-        </slide>
-      </carousel>
-    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="1" *ngIf="quizList.length >0;">
+  <carousel [itemsPerSlide]="itemsPerSlide"
+            [singleSlideOffset]="singleSlideOffset"
+            [interval]="false"
+  >
+    <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList | quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}; let index=index"  class="mx-auto" >
+      <mat-card style="background-color: lightgray;" >
+        <img *ngIf="quiz.image!=''; "  mat-card-image [src]="quiz.image"  alt="image non trouvé" style="display: inline;width:100%;margin: 0; ">
+        <p>
+          {{quiz.label}}
+          </p>
+      </mat-card>
+    </slide>
+  </carousel>
   </mat-grid-list>
 
 </div>
