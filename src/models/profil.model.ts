@@ -10,6 +10,7 @@ export  class Profil {
   recommandations: string;
   evolId: number;
   image?: string;
+  // tmpUrl?: string;
 
 
 }

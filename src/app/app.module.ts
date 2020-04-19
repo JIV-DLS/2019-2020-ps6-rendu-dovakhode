@@ -72,6 +72,7 @@ import { HomePlayWithProfilesComponent } from './home-play-with-profiles/home-pl
 
 import { HomeProfilComponent } from './home-profil/home-profil.component';
 import {ProfilComponent} from './Profils/profil/profil.component';
+import {ProfilEditComponent} from './Profils/profil/profil-edit/profil-edit.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -130,6 +131,7 @@ const routes: Routes = [
     HomeDoQuizComponent,
     HomeProfilComponent,
     QuizSearchPipe,
+    ProfilEditComponent,
 
     ProfilsAddComponent,
     ProfilComponent,

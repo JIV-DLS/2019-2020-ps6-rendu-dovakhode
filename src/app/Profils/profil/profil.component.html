@@ -3,7 +3,6 @@
     </mat-card-header>
     <mat-card-content style="border-bottom: black solid 1px;">
       <mat-grid-list cols="3" rowHeight="12px" style="width: 100%">
-
         <mat-grid-tile colspan="1" rowspan="4">
             <p>Nom: {{this.profil.nom}}</p>
         </mat-grid-tile>
@@ -29,17 +28,16 @@
         <mat-grid-tile colspan="1" rowspan="4">
             <p>Stade de la maladie: {{this.profil.stade}}</p>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="10">
+        <mat-grid-tile colspan="1" rowspan="5">
           <p>Recommandations:</p>
         </mat-grid-tile>
         <mat-grid-tile colspan="3" rowspan="10">
             <p>{{this.profil.recommandations}}</p>
         </mat-grid-tile>
-
       </mat-grid-list>
     </mat-card-content>
     <mat-card-actions style="padding-right: 12px;">
-          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" >Modifier le profil</button>
+          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="editProfile()" >Modifier le profil</button>
     </mat-card-actions>
   </mat-card>
 
