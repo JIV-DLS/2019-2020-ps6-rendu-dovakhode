@@ -26,43 +26,47 @@ export class ProfilEditComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.initiForm();
+    this.initiForm(this.profil);
   }
 
   get nom() {
     return this.profilForm.get('nom') as FormArray;
   }
-  initiForm() {
+  initiForm(profil: Profil) {
     this.profilForm = this.formbuilder.group({
-      nom: this.profil.nom,
-      age: this.profil.age,
-      prenom: this.profil.prenom,
-      stade: this.profil.stade,
-      sexe: this.profil.sexe,
-      recommandations: this.profil.recommandations,
-      image: this.profil.image
+      nom: profil.nom,
+      age: profil.age,
+      prenom: profil.prenom,
+      stade: profil.stade,
+      sexe: profil.sexe,
+      recommandations: profil.recommandations,
+      image: profil.image,
+      id: profil.id
     });
   }
 
   editTheProfil() {
     if (this.conform()) {
       const profil: Profil =  (this.profilForm.getRawValue()) as Profil;
-      // profil.tmpUrl = this.profilForm.get('imagePreview').value;
+      profil.image = this.profil.image;
       this.profileCreated.emit(profil);
+      this.profilService
+        .updateProfil(profil,  this.profilForm.get('image') == null ? null : this.profilForm.get('image').value )
+        .subscribe((quiz) => {
+          if (profil !== undefined) {
+            this.profil = profil;
+            this.imagePreview = profil.image;
+            this.initiForm(profil);
+          }
+        });
       /* tslint:disable */
       this.dialogRef.close({
-
         profil : profil});
+
     }
-    /*const form = this.profilForm.value;
-    const profil = ;
-    profil.prenom = form.prenom;
-    profil.nom = form.nom;
-    profil.age = +form.age;
-    profil.stade = form.stade;
-    profil.recommandations = form.recommandations;
-    profil.sexe = this.profilForm.get('sexe').value;*/
+
   }
+
   conform(){
     return true;
   }
