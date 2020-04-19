@@ -5,12 +5,12 @@
   <mat-grid-list cols="1" *ngIf="quizList.length >0;">
   <carousel [itemsPerSlide]="itemsPerSlide"
             [singleSlideOffset]="singleSlideOffset"
-            [interval]="false"
+            [interval]="0"
   >
     <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList; let index=index"  class="mx-auto" >
-      <mat-card style="background-color: lightgray;" >
-        <img *ngIf="quiz.image!=''; "  mat-card-image [src]="quiz.image"  alt="image non trouvé" style="display: inline;width:100%;margin: 0; ">
-        <p>
+      <mat-card style="background-color: white;height: 400px;" >
+        <img *ngIf="quiz.image.length>3; " style="height: 80%;" [src]="quiz.image?.length>0? quiz.image:'../../../assets/Default/imageNotFound.png'">
+        <p [style]="quiz.image?.length<3? 'height: 100%; padding-top: 40%;':'height: 20%;'">
           {{quiz.label}}
           </p>
       </mat-card>
