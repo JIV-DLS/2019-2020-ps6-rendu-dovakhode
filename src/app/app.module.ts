@@ -197,7 +197,7 @@ const routes: Routes = [
     EvolutionService,
     QuestionPlayedService,
     ProfilServices,
-
+    QuizSearchPipe
   ],
   bootstrap: [AppComponent]
 })
