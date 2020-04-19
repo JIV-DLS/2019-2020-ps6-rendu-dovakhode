@@ -17,6 +17,7 @@ export class QuizListComponent implements OnInit {
   public themesValues = Object.values(themeSearch);
   public difficultiesValues = Object.values(difficulteSearch);
   public doQuiz;
+  public idPatient: number;
   public inviteToCreateQuiz = null;
   public searchedQuiz: Quiz = DEFAULT_QUIZ;
   loading: boolean;
@@ -29,6 +30,8 @@ export class QuizListComponent implements OnInit {
 
   ngOnInit() {
     this.doQuiz = (this.Activerouter.snapshot.params.do === 'true');
+    this.idPatient = + (this.Activerouter.snapshot.params.idPatient);
+    this.getAllQuiz();
   }
   getAllQuiz() {
     this.loading = true;
@@ -56,7 +59,8 @@ export class QuizListComponent implements OnInit {
 
   selectQuiz(quiz: Quiz) {
     if ( this.doQuiz) {
-      this.router.navigate(['/quiz-do/' + quiz.id + '/start']);
+      this.router.navigate([ '/quiz-do/' + quiz.id + '/start' , { idPatient: this.idPatient}]);
+    //  this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
     } else {
       this.router.navigateByUrl('/quiz-edit/' + quiz.id);
     }
@@ -71,6 +75,12 @@ export class QuizListComponent implements OnInit {
   }
 
   back() {
-    if (this.doQuiz) {this.router.navigateByUrl('/home-do-quiz'); } else { this.location.back(); }
+    if (this.doQuiz ) {
+      if ( this.idPatient === 0 ) {
+        this.router.navigateByUrl('/home-do-quiz' );
+      } else {
+        this.router.navigate(['/profil-list' , {do: true}]);
+      }
+    } else { this.location.back(); }
   }
 }

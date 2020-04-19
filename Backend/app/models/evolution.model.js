@@ -6,5 +6,6 @@ module.exports = new BaseModel('Evolution', {
   questionPlayed: Joi.array(),
   quizId: Joi.number(),
   dateCreation: Joi.date(),
+  patientId:Joi.number(),
 
 })

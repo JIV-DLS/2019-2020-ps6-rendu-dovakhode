@@ -4,6 +4,7 @@ export class Evolution {
   id: number;
   questionPlayed: QuestionPlayed[];
   quizId: number;
+  patientId: number;
   dateCreation: Date;
 
   constructor() {

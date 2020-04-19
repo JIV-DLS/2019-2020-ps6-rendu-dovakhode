@@ -1,9 +1,7 @@
 <img *ngIf="!editable"  [src]="imagePreview?imagePreview:'../../../assets/Default/imageNotFound.png'"
-     style=" height: 100%;width: 100%;  border-radius: 10px;
-" [alt]="imagePreview?label:'NotFound Image'"/>
+     style=" height: 100%;width: 100%;" [alt]="imagePreview?label:'NotFound Image'"/>
 <img #imgShower *ngIf="editable" [src]="imagePreview?imagePreview:'../../../assets/Default/imageNotFound.png'" appDragNDropPhoto
-     (fileDropped)="uploadFile($event)" style=" height: 100%;width: 100%;  border-radius: 10px;
-" [alt]="imagePreview?label:'NotFound Image'"/>
+     (fileDropped)="uploadFile($event)" style=" height: 100%;width: 100%;" [alt]="imagePreview?label:'NotFound Image'"/>
 <input style="display: none" type="file" #imagePost id="imageUrl" (change)="onImagePick($event)">
 <span *ngIf="editable" #add class="Jbtn-edit" (click)="imagePost.click()" mat-flat-button aria-label="ajout de photo">
               <mat-icon>add_a_photo</mat-icon>

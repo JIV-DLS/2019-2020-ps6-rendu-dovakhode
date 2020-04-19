@@ -109,7 +109,7 @@ export class QuizDoComponent implements OnInit {
       }
       this.loading = false;
       if (this.index >= this.quiz.questions.length ) {
-        this.router.navigate(['/quiz-do/' + this.quiz.id + '/end']);
+        this.router.navigate(['/quiz-do/' + this.quiz.id + '/end/' + this.evolution.patientId]);
       }
     });
   }

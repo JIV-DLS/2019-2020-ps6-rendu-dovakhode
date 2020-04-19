@@ -1,0 +1,50 @@
+<mat-grid-list cols="5" rowHeight="80px" style="width: 100%; margin-top: 10px; padding-top: 50px;" >
+  <mat-grid-tile colspan="1" rowspan="1">
+    <mat-form-field appearance="legacy">
+      <mat-label>Rechercher par Libéllé du quiz</mat-label>
+      <input [(ngModel)]="searchedQuiz.label" matInput placeholder="libéllé du quiz">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <mat-form-field>
+      <mat-label>Thème</mat-label>
+      <mat-select [(value)]="searchedQuiz.theme">
+        <mat-option *ngFor="let theme of themesValues" [value]="theme" >
+          {{theme}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <mat-form-field>
+      <mat-label>Sous Thème</mat-label>
+      <mat-select [(value)]="searchedQuiz.subTheme">
+        <mat-option *ngFor="let subtheme of themesValues" [value]="subtheme">
+          {{subtheme}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <mat-form-field>
+      <mat-label>Difficulté</mat-label>
+      <mat-select [(value)]="searchedQuiz.difficulty">
+        <mat-option *ngFor="let difficulty of difficultiesValues" [value]="difficulty">
+          {{difficulty}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+    <button (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <mat-icon>reply</mat-icon>
+      Retour
+    </button>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="5" rowspan="1">
+    <p style="text-align: center;">Cliquez sur l'un des quizzes sous dessous pour le <b>
+      {{(doQuiz?'lancer':'modifier')}}!</b> <br/>
+      NB: La liste peut être vide si aucun quiz quiz ne suit les critères entrés!</p>
+  </mat-grid-tile>
+</mat-grid-list>
