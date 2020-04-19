@@ -28,7 +28,6 @@ export class ProfilComponent implements OnInit {
       data: this.profil
     });
     dialogRef.afterClosed().subscribe(response => {
-      alert(response.profil.age + '-- age response --');
       this.profilDialogOpened = false;
       this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
       });
