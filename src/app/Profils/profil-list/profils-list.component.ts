@@ -10,10 +10,10 @@ import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-profil-list2',
-  templateUrl: './profil-list.component.html',
-  styleUrls: ['./profil-list.component.scss']
+  templateUrl: './profils-list.component.html',
+  styleUrls: ['./profils-list.component.scss']
 })
-export class ProfilListComponent implements OnInit {
+export class ProfilsListComponent implements OnInit {
   public profilList: Profil[] = [];
   public themesValues = Object.values(themeSearch);
   public difficultiesValues = Object.values(difficulteSearch);
