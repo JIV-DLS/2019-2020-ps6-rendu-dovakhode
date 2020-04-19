@@ -80,6 +80,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import { QuizDisplayListComponent } from './quizzes/quiz-display-list/quiz-display-list.component';
 import { QuizList2Component } from './quizzes/quiz-list2/quiz-list2.component';
+import { QuizSearchBarComponent } from './searchBar/quiz-search-bar/quiz-search-bar.component';
+import { ProfilSearchBarComponent } from './searchBar/profil-search-bar/profil-search-bar.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -151,6 +153,8 @@ const routes: Routes = [
     MatConfirmDialogComponent,
     QuizDisplayListComponent,
     QuizList2Component,
+    QuizSearchBarComponent,
+    ProfilSearchBarComponent,
   ],
   entryComponents: [
     QuestionsComponent,
