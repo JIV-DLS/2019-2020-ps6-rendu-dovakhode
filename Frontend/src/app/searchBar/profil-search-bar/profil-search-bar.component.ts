@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Profil} from '../../../models/profil.model';
 import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
@@ -15,7 +14,6 @@ export class ProfilSearchBarComponent implements OnInit {
   @Input()
   doQuiz: any;
   constructor(public location: Location, private router: Router) { }
-
   ngOnInit(): void {
 
   }
