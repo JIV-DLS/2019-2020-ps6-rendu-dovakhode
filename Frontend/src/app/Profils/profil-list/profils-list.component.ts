@@ -14,22 +14,13 @@ import {DialogService} from '../../../services/dialog.service';
   styleUrls: ['./profils-list.component.scss']
 })
 export class ProfilsListComponent implements OnInit {
+  @Input()
   public profilList: Profil[] = [];
   public themesValues = Object.values(themeSearch);
   public difficultiesValues = Object.values(difficulteSearch);
   public doQuiz;
   public inviteToCreateProfil = null;
   loading: boolean;
-
-  @Input()
-  public profilsList: Profil[] = [];
-  public searchedProfil: Profil = DEFAULT_PROFIL;
-  public doQuizWithProfil = false;
-  itemsPerSlide = 3;
-  singleSlideOffset = true;
-  @Output()
-  profilSelected: EventEmitter<Profil> = new EventEmitter<Profil>();
-
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,
@@ -66,12 +57,12 @@ export class ProfilsListComponent implements OnInit {
 
 
   SelectProfil(profil: Profil) {
-  this.matDialogService.openConfirmDialog('Voulez vous vraiment lancer une partie de quiz avec le patient: ' +
-    profil.nom + ' ' + profil.prenom + ' ?').afterClosed().subscribe((res) => {
-    if (res) {
-      this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
-    }
-  });
+    this.matDialogService.openConfirmDialog('Voulez vous vraiment lancer une partie de quiz avec le patient: ' +
+      profil.nom + ' ' + profil.prenom + ' ?').afterClosed().subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
+      }
+    });
   }
 
   col() {
