@@ -2,13 +2,13 @@ import {Profil} from '../models/profil.model';
 
 
 export const DEFAULT_PROFIL: Profil = {
-  id: 2,
+  id: null,
   nom: '',
   prenom: '',
-  age: 50,
+  age: null,
   sexe: '',
   stade: '',
   recommandations: '',
-  evolId: 2,
+  evolId: null,
 
 };
