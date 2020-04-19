@@ -5,7 +5,7 @@
       <mat-icon>view_list</mat-icon> Afficher les profils patient par liste
     </ng-template>
     <app-profil-search-bar [doQuiz]="doquiz" [profilSearched]="profilSearched"></app-profil-search-bar>
-    <app-profil-list2 [profilList]="profilList |filter:{age: 0,prenom: profilSearched.prenom,recommandations:profilSearched.recommandations,sexe:profilSearched.sexe,stade:profilSearched.stade,id:0,nom:profilSearched.nom}"></app-profil-list2>
+    <app-profil-list2 [profilList]="profilList| filter:{age: 0,id: 0 ,nom:profilSearched.nom, prenom: profilSearched.prenom,recommandations: profilSearched.recommandations,sexe: profilSearched.sexe,stade:profilSearched.stade}"></app-profil-list2>
   </mat-tab>
 
   <mat-tab >
@@ -13,6 +13,6 @@
       <mat-icon>perm_media</mat-icon> Afficher les profils patient par photo
     </ng-template>
     <app-profil-search-bar [doQuiz]="doquiz" [profilSearched]="profilSearched " ></app-profil-search-bar>
-    <app-profil-list [profilsList]="profilList |filter:{age: 0,prenom: profilSearched.prenom,recommandations:profilSearched.recommandations,sexe:profilSearched.sexe,stade:profilSearched.stade,id:0,nom:profilSearched.nom}" ></app-profil-list>
+    <app-profil-list [profilsList]="profilList| filter:{age: 0,id: 0 ,nom:profilSearched.nom, prenom: profilSearched.prenom,recommandations: profilSearched.recommandations,sexe: profilSearched.sexe,stade:profilSearched.stade}" ></app-profil-list>
   </mat-tab>
 </mat-tab-group>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
 import {environment} from '../../../environments/environment';
+import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-quiz-less-info',
@@ -14,7 +15,7 @@ export class QuizLessInfoComponent implements OnInit {
   selectEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   deleteEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor() { }
+  constructor(private matDialogService: DialogService) { }
   hover: boolean;
   ngOnInit() {
     this.hover = false;
@@ -23,7 +24,13 @@ export class QuizLessInfoComponent implements OnInit {
     this.selectEmitter.emit(true);
   }
   delete() {
-    this.deleteEmitter.emit(confirm(environment.deleteWarning + this.quiz.label + ') ?'));
+    this.matDialogService.openConfirmDialog(environment.deleteWarning + this.quiz.label + ') ?'
+     ).afterClosed().subscribe((res) => {
+      if (res) {
+        this.deleteEmitter.emit(true);
+      }
+    });
+
   }
 
   col() {
