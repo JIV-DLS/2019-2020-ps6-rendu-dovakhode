@@ -7,7 +7,9 @@
 :host {
   color: $white;
 }
-
+span{
+  margin-left: 40%;
+}
 .header {
   height: $mat-card-header-size;
   background: $blue;

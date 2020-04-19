@@ -15,21 +15,20 @@ export class AppComponent implements OnInit {
               private location: Location) {
   }
   title = environment.appName;
-
-  ngOnInit(): void {
+  showFiller = false;
+  playingState() {
     const paths = this.location.path(true).split('/');
-    if (!(paths[1] === 'quiz-do' && paths[3] === undefined)) {
-      if (paths[1] === 'quiz-do' && paths[3] === 'end') {
-
-      } else {
-        this.runningQuizId = this.cookiesService.get(environment.runningQuiz);
-        if (this.runningQuizId) {
-          if (confirm('La progression d\'un quiz a été retrouvé. Voulez-vous la reprendre?')) {
-            this.router.navigateByUrl('/quiz-do/' + this.runningQuizId);
-          } else {
-            alert('La progression a été supprimé');
-            this.cookiesService.delete(environment.runningQuiz);
-          }
+    return !(paths[1] === 'quiz-do' && paths[3] === undefined) && !(paths[1] === 'quiz-do' && paths[3] === 'end');
+  }
+  ngOnInit(): void {
+    if (this.playingState()) {
+      this.runningQuizId = this.cookiesService.get(environment.runningQuiz);
+      if (this.runningQuizId) {
+        if (confirm('La progression d\'un quiz a été retrouvé. Voulez-vous la reprendre?')) {
+          this.router.navigateByUrl('/quiz-do/' + this.runningQuizId);
+        } else {
+          alert('La progression a été supprimé');
+          this.cookiesService.delete(environment.runningQuiz);
         }
       }
     }
