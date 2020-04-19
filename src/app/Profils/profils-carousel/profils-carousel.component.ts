@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ProfilServices} from '../../../services/profil.services';
@@ -13,8 +13,8 @@ import {DialogService} from '../../../services/dialog.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ProfilsCarouselComponent implements OnInit {
+  @Input()
   public profilsList: Profil[] = [];
-  public searchedProfil: Profil = DEFAULT_PROFIL;
   public inviteToCreateProfil = null;
   public doQuizWithProfil = false;
   itemsPerSlide = 3;
@@ -22,36 +22,6 @@ export class ProfilsCarouselComponent implements OnInit {
   public loading;
   @Output()
   profilSelected: EventEmitter<Profil> = new EventEmitter<Profil>();
-
-
-  slides = [
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/les_pièrres...1585240035409.jpg' },
-    {image: 'http://localhost:9428/images/quiz/les_pièrres...1585240035409.jpg' },
-    {image: 'http://localhost:9428/images/quiz/les_pièrres...1585240035409.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-    {image: 'http://localhost:9428/images/quiz/salut1587027225048.jpg' },
-
-  ];
 
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
@@ -93,7 +63,6 @@ export class ProfilsCarouselComponent implements OnInit {
       this.profilSelected.emit(profil);
     }
   }
-
 
 }
 
