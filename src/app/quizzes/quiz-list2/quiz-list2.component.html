@@ -54,7 +54,7 @@
             [interval]="false"
   >
     <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList | quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}; let index=index"  class="mx-auto" >
-      <mat-card style="background-color: lightgray;" >
+      <mat-card style="background-color: white;" >
         <img *ngIf="quiz.image!=''; "  mat-card-image [src]="quiz.image"  alt="image non trouvé" style="display: inline;width:100%;margin: 0; ">
         <p>
           {{quiz.label}}
