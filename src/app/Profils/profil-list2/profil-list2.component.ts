@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {difficulteSearch, themeSearch} from '../../../models/theme.models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
@@ -14,7 +14,7 @@ import {DialogService} from '../../../services/dialog.service';
   styleUrls: ['./profil-list2.component.scss']
 })
 export class ProfilList2Component implements OnInit {
-
+  @Input()
   public profilList: Profil[] = [];
   public themesValues = Object.values(themeSearch);
   public difficultiesValues = Object.values(difficulteSearch);
