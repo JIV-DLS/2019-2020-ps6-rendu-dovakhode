@@ -72,7 +72,7 @@ export class QuizDisplayListComponent implements OnInit {
       if ( this.idPatient === 0 ) {
         this.router.navigateByUrl('/home-do-quiz' );
       } else {
-        this.router.navigate(['/profil-list' , {do: true}]);
+        this.router.navigate(['/profils-carousel' , {do: true}]);
       }
     } else { this.location.back(); }
   }

@@ -66,13 +66,13 @@ import {ProfilServices} from '../services/profil.services';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import {MatRadioModule} from '@angular/material/radio';
-import { ProfilListComponent } from './Profils/profil-list/profil-list.component';
+import { ProfilsCarouselComponent } from './Profils/profils-carousel/profils-carousel.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { HomePlayWithProfilesComponent } from './home/home-play-with-profiles/home-play-with-profiles.component';
 
 import { HomeProfilComponent } from './home/home-profil/home-profil.component';
 import { ProfilLessInfoComponent } from './Profils/profil-less-info/profil-less-info.component';
-import { ProfilList2Component } from './Profils/profil-list2/profil-list2.component';
+import { ProfilListComponent } from './Profils/profil-list/profil-list.component';
 import { FilterPipe } from './Profils/_pipes/filter.pipe';
 import {ProfilComponent} from './Profils/profil/profil.component';
 import {ProfilEditComponent} from './Profils/profil-edit/profil-edit.component';
@@ -80,9 +80,11 @@ import { ProfilListDisplayComponent } from './Profils/profil-list-display/profil
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import { QuizDisplayListComponent } from './quizzes/quiz-display-list/quiz-display-list.component';
-import { QuizList2Component } from './quizzes/quiz-list2/quiz-list2.component';
+import { QuizList2Component } from './quizzes/quizzes-carousel/quiz-list2.component';
 import { QuizSearchBarComponent } from './searchBar/quiz-search-bar/quiz-search-bar.component';
 import { ProfilSearchBarComponent } from './searchBar/profil-search-bar/profil-search-bar.component';
+import { NavComponent } from './nav/nav.component';
+import { AsideNavComponent } from './aside-nav/aside-nav.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -96,7 +98,7 @@ const routes: Routes = [
   {path: 'quiz-do/:evol' , component: QuizDoComponent},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent},
-  {path: 'profil-list', component: ProfilListDisplayComponent},
+  {path: 'profils-carousel', component: ProfilListDisplayComponent},
   {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent},
   { path: 'not-found', component: Error404Component },
   { path: '**', redirectTo: 'not-found' }
@@ -146,10 +148,10 @@ const routes: Routes = [
     ProfilComponent,
     DragNDropPhotoDirective,
     ImageUploaderComponent,
-    ProfilListComponent,
+    ProfilsCarouselComponent,
     HomePlayWithProfilesComponent,
     ProfilLessInfoComponent,
-    ProfilList2Component,
+    ProfilListComponent,
     FilterPipe,
     ProfilListDisplayComponent,
     MatConfirmDialogComponent,
@@ -157,6 +159,8 @@ const routes: Routes = [
     QuizList2Component,
     QuizSearchBarComponent,
     ProfilSearchBarComponent,
+    NavComponent,
+    AsideNavComponent,
   ],
   entryComponents: [
     QuestionsComponent,
