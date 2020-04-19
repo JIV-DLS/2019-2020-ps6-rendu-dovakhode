@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Profil} from '../../models/profil.model';
-import {DEFAULT_PROFIL} from '../../mocks/profil-list.mock';
-import {ProfilServices} from '../../services/profil.services';
+import {Profil} from '../../../models/profil.model';
+import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
+import {ProfilServices} from '../../../services/profil.services';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({

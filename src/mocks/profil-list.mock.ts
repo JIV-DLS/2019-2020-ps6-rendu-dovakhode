@@ -9,6 +9,5 @@ export const DEFAULT_PROFIL: Profil = {
   sexe: '',
   stade: '',
   recommandations: '',
-  evolId: null,
 
 };
