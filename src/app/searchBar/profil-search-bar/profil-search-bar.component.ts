@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./profil-search-bar.component.scss']
 })
 export class ProfilSearchBarComponent implements OnInit {
-
+  @Input()
   profilSearched = DEFAULT_PROFIL;
   @Input()
   doQuiz: any;

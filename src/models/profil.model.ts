@@ -8,7 +8,6 @@ export  class Profil {
   sexe: string;
   stade: string;
   recommandations: string;
-  evolId: number;
   image?: string;
   // tmpUrl?: string;
 
