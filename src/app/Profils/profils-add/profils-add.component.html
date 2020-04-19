@@ -5,7 +5,15 @@
     </mat-card-header>
     <mat-card-content style="border-bottom: black solid 1px;">
       <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
+        <mat-grid-tile  colspan="7" rowspan="4">
 
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="4">
+          <button color="primary" (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+            <mat-icon>reply</mat-icon>
+            Retour
+          </button>
+        </mat-grid-tile>
         <mat-grid-tile colspan="4" rowspan="4">
           <mat-form-field >
             <mat-label>Nom*</mat-label>

@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {ProfilServices} from '../../../services/profil.services';
 import {Profil} from '../../../models/profil.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-profils-add',
@@ -13,7 +14,7 @@ export class ProfilsAddComponent implements OnInit {
   public profilForm: FormGroup;
   imagePreview: string;
   constructor(private formbuilder: FormBuilder, private profilService: ProfilServices, private Activerouter: ActivatedRoute,
-              private router: Router) { }
+              private router: Router, private location: Location) { }
 
   ngOnInit(): void {
     this.initiForm();
@@ -34,6 +35,9 @@ export class ProfilsAddComponent implements OnInit {
     });
   }
 
+  back() {
+  this.location.back();
+}
   addProfil() {
     const form = this.profilForm.value;
     const profil = new Profil();
@@ -52,4 +56,5 @@ export class ProfilsAddComponent implements OnInit {
     this.initiForm();
 
   }
+
 }
