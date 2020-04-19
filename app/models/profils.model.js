@@ -10,7 +10,6 @@ module.exports = new BaseModel('Profiles', {
   sexe: joi.string(),
   stade: joi.string(),
   recommandations: joi.string(),
-  evolId: joi.number(),
   image: joi.string().allow(''),
 
 })
