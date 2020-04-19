@@ -1,5 +1,5 @@
+import {Component, Input, OnInit} from '@angular/core';
 import {difficulteSearch, themeSearch} from '../../../models/theme.models';
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 
@@ -10,10 +10,11 @@ import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-profil-list2',
-  templateUrl: './profil-list.component.html',
-  styleUrls: ['./profil-list.component.scss']
+  templateUrl: './profil-list2.component.html',
+  styleUrls: ['./profil-list2.component.scss']
 })
-export class ProfilListComponent implements OnInit {
+export class ProfilList2Component implements OnInit {
+  @Input()
   public profilList: Profil[] = [];
   public themesValues = Object.values(themeSearch);
   public difficultiesValues = Object.values(difficulteSearch);
@@ -21,16 +22,6 @@ export class ProfilListComponent implements OnInit {
   public profilSearched = DEFAULT_PROFIL;
   public inviteToCreateProfil = null;
   loading: boolean;
-
-  @Input()
-  public profilsList: Profil[] = [];
-  public searchedProfil: Profil = DEFAULT_PROFIL;
-  public doQuizWithProfil = false;
-  itemsPerSlide = 3;
-  singleSlideOffset = true;
-  @Output()
-  profilSelected: EventEmitter<Profil> = new EventEmitter<Profil>();
-
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,
