@@ -2,14 +2,14 @@
   <mat-grid-tile colspan="1" rowspan="1">
     <mat-form-field appearance="legacy">
       <mat-label>Rechercher par nom du profil</mat-label>
-      <input matInput placeholder="Nom du patient" [(ngModel)]="profilSearched.nom">
+      <input matInput placeholder="Nom du patient" [(ngModel)]=" profilSearched.nom">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile colspan="1" rowspan="1">
     <mat-form-field>
       <mat-label>Prénom</mat-label>
-      <input matInput placeholder="Prénom du patient" [(ngModel)]="profilSearched.prenom">
+      <input matInput placeholder="Prénom du patient" [(ngModel)]=" profilSearched.prenom">
     </mat-form-field>
   </mat-grid-tile>
 
@@ -54,7 +54,7 @@
   </mat-grid-tile>
 
   <mat-grid-tile colspan="1" rowspan="1">
-    <button (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+    <button color="primary" (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
       <mat-icon>reply</mat-icon>
       Retour
     </button>
