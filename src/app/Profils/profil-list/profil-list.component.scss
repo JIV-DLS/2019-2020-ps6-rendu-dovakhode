@@ -24,16 +24,19 @@
 .carousel-indicators li{
   background-color: #1d2124;
 }
-
+/*
 .h4{
 position: fixed;
   top:50%;
   right: 0;
-}
+}*/
 p{
   text-align: center;
 }
 .carousel-item.active{
   margin: auto;
 }
-
+img{
+  width: 100%;
+  height: 100%;
+}

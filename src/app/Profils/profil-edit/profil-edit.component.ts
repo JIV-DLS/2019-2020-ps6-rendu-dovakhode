@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {ProfilServices} from '../../../../services/profil.services';
-import {Profil} from '../../../../models/profil.model';
+import {ProfilServices} from '../../../services/profil.services';
+import {Profil} from '../../../models/profil.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {ProfilComponent} from '../profil.component';
-import {Question} from '../../../../models/question.model';
+import {ProfilComponent} from '../profil/profil.component';
+import {Question} from '../../../models/question.model';
 
 @Component({
   selector: 'app-profil-edit',
