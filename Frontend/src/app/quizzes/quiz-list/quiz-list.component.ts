@@ -25,6 +25,7 @@ export class QuizListComponent implements OnInit {
 
   selectQuiz(quiz: Quiz) {
     this.selectEmitter.emit(quiz);
+    this.inviteToCreateQuiz = this.quizList.length === 0 ;
   }
 
   deleteQuiz($event: boolean, quiz: Quiz) {
