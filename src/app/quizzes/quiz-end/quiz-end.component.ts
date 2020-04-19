@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
 import {environment} from '../../../environments/environment';
+import {QuizService} from '../../../services/quiz.service';
+import {EvolutionService} from '../../../services/evolution.service';
+import {Quiz} from '../../../models/quiz.model';
 
 @Component({
   selector: 'app-quiz-end',
@@ -11,8 +14,10 @@ import {environment} from '../../../environments/environment';
 export class QuizEndComponent implements OnInit {
   id: string;
   idPatient: number;
+  quiz: Quiz;
+
   constructor(private route: ActivatedRoute, private router: Router,
-              private cookiesService: CookieService) { }
+              private cookiesService: CookieService, private quizSevice: QuizService , private evolution: EvolutionService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;

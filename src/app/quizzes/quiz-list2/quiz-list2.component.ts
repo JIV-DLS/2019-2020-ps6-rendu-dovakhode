@@ -27,7 +27,8 @@ export class QuizList2Component implements OnInit {
   @Output()
   profilSelected: EventEmitter<Profil> = new EventEmitter<Profil>();
 
-  constructor(private quizServicevice: QuizService, public route: ActivatedRoute, public router: Router, private location: Location) { }
+  constructor(private quizServicevice: QuizService, public route: ActivatedRoute, public router: Router, private location: Location) {
+    this.getAllQuiz(); }
 
   ngOnInit(): void {
     this.idPatient = + (this.route.snapshot.params.idPatient);
@@ -53,7 +54,8 @@ export class QuizList2Component implements OnInit {
       this.loading = false;
       if (!quiz) {
         // tslint:disable-next-line:max-line-length
-        if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) { this.getAllQuiz(); } else {alert('Veuillez conctater l\'administrateur'); return; }
+        if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) {
+          this.getAllQuiz(); } else {alert('Veuillez conctater l\'administrateur'); return; }
       }
 
       this.quizList = quiz;
