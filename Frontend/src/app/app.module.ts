@@ -75,8 +75,8 @@ import { ProfilLessInfoComponent } from './Profils/profil-less-info/profil-less-
 import { ProfilList2Component } from './Profils/profil-list2/profil-list2.component';
 import { FilterPipe } from './Profils/_pipes/filter.pipe';
 import {ProfilComponent} from './Profils/profil/profil.component';
-import {ProfilEditComponent} from './Profils/profil/profil-edit/profil-edit.component';
-import { ProfilListDisplayComponent } from './profil-list-display/profil-list-display.component';
+import {ProfilEditComponent} from './Profils/profil-edit/profil-edit.component';
+import { ProfilListDisplayComponent } from './Profils/profil-list-display/profil-list-display.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import { QuizDisplayListComponent } from './quizzes/quiz-display-list/quiz-display-list.component';
