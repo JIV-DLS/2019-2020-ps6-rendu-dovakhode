@@ -7,7 +7,7 @@ export  class Profil {
   age: number;
   sexe: string;
   stade: string;
-  recommandations: string;
+  recommandations?: string;
   image?: string;
   // tmpUrl?: string;
 
