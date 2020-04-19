@@ -28,16 +28,10 @@ export class ProfilComponent implements OnInit {
       data: this.profil
     });
     dialogRef.afterClosed().subscribe(response => {
+      alert(response.profil.age + '-- age response --');
       this.profilDialogOpened = false;
-      if (response != null) {
-        if (response.question && response.question.label) {
-          if (response.question && response.question.label) {
-            this.replaceBy(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
-          }
-        }
-      }
-
-    });
+      this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
+      });
   }
   private createProfilByData(profil) {
       return this.formBuilder.group({
@@ -50,7 +44,8 @@ export class ProfilComponent implements OnInit {
         image: profil.image
       });
     }
-    replaceBy(profil, data) {
+    replaceProfileByData(profil, data) {
+     // alert(data.age + '-- data age --');
       profil.age = data.age;
       profil.nom = data.nom;
       profil.prenom = data.prenom;
@@ -58,5 +53,6 @@ export class ProfilComponent implements OnInit {
       profil.recommandations = data.recommandations;
       profil.sexe = data.sexe;
       profil.image = data.image;
+     // alert(profil.age + ' -- replacing --');
     }
 }
