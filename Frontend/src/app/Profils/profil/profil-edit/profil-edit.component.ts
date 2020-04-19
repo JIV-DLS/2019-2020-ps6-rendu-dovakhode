@@ -49,7 +49,6 @@ export class ProfilEditComponent implements OnInit {
       const profil: Profil =  (this.profilForm.getRawValue()) as Profil;
       // profil.tmpUrl = this.profilForm.get('imagePreview').value;
       this.profileCreated.emit(profil);
-      alert( profil.age + '-- Age sent --');
       /* tslint:disable */
       this.dialogRef.close({
 
