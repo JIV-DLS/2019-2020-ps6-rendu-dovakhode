@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Profil} from '../../../models/profil.model';
-import {ProfilEditComponent} from './profil-edit/profil-edit.component';
+import {ProfilEditComponent} from '../profil-edit/profil-edit.component';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 import {Question} from '../../../models/question.model';
 import {FormBuilder} from '@angular/forms';

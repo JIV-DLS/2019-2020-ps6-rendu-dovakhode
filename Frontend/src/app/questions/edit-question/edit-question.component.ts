@@ -84,7 +84,7 @@ export class EditQuestionComponent implements OnInit {
     });
   }
   answerHaveImage(i: number) {
-    return (this.answers.at(i).value as Answer)?.tmpUrl?.length > 0;
+    return (this.answers.at(i).value as Answer)?.tmpUrl?.length > 0 || (this.answers.at(i).value as Answer)?.image?.length > 0;
   }
   questionFormValue() {
     return Question.questionFormValues(this.questionForm) as Question;

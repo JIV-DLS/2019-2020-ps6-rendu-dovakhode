@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {QuizAddComponent} from '../quizzes/quiz-add/quiz-add.component';
+import {QuizAddComponent} from '../../quizzes/quiz-add/quiz-add.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Location} from '@angular/common';
 @Component({
