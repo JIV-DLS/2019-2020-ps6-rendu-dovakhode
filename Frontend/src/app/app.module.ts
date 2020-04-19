@@ -72,7 +72,7 @@ import { HomePlayWithProfilesComponent } from './home/home-play-with-profiles/ho
 
 import { HomeProfilComponent } from './home/home-profil/home-profil.component';
 import { ProfilLessInfoComponent } from './Profils/profil-less-info/profil-less-info.component';
-import { ProfilListComponent } from './Profils/profil-list/profil-list.component';
+import { ProfilsListComponent } from './Profils/profil-list/profils-list.component';
 import { FilterPipe } from './Profils/_pipes/filter.pipe';
 import {ProfilComponent} from './Profils/profil/profil.component';
 import {ProfilEditComponent} from './Profils/profil-edit/profil-edit.component';
@@ -83,7 +83,6 @@ import { QuizDisplayListComponent } from './quizzes/quiz-display-list/quiz-displ
 import { QuizList2Component } from './quizzes/quizzes-carousel/quiz-list2.component';
 import { QuizSearchBarComponent } from './searchBar/quiz-search-bar/quiz-search-bar.component';
 import { ProfilSearchBarComponent } from './searchBar/profil-search-bar/profil-search-bar.component';
-import { NavComponent } from './nav/nav.component';
 import { AsideNavComponent } from './aside-nav/aside-nav.component';
 
 const routes: Routes = [
@@ -151,7 +150,7 @@ const routes: Routes = [
     ProfilsCarouselComponent,
     HomePlayWithProfilesComponent,
     ProfilLessInfoComponent,
-    ProfilListComponent,
+    ProfilsListComponent,
     FilterPipe,
     ProfilListDisplayComponent,
     MatConfirmDialogComponent,
@@ -159,7 +158,6 @@ const routes: Routes = [
     QuizList2Component,
     QuizSearchBarComponent,
     ProfilSearchBarComponent,
-    NavComponent,
     AsideNavComponent,
   ],
   entryComponents: [
