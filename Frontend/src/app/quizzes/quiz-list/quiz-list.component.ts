@@ -31,6 +31,7 @@ export class QuizListComponent implements OnInit {
   ngOnInit() {
     this.doQuiz = (this.Activerouter.snapshot.params.do === 'true');
     this.idPatient = + (this.Activerouter.snapshot.params.idPatient);
+    this.getAllQuiz();
   }
   getAllQuiz() {
     this.loading = true;
