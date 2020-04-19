@@ -21,6 +21,7 @@ export class ProfilListDisplayComponent implements OnInit {
 
   ngOnInit( ): void {
     this.doquiz = (this.route.snapshot.params.do === 'true');
+    this.getAllProfils();
   }
 
   getAllProfils() {

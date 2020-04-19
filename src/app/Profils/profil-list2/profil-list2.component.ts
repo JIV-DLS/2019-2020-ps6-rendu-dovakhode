@@ -19,7 +19,6 @@ export class ProfilList2Component implements OnInit {
   public themesValues = Object.values(themeSearch);
   public difficultiesValues = Object.values(difficulteSearch);
   public doQuiz;
-  public profilSearched = DEFAULT_PROFIL;
   public inviteToCreateProfil = null;
   loading: boolean;
   constructor(private Activerouter: ActivatedRoute,

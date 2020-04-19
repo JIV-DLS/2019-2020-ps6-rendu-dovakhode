@@ -15,7 +15,6 @@ import {DialogService} from '../../../services/dialog.service';
 export class ProfilListComponent implements OnInit {
   @Input()
   public profilsList: Profil[] = [];
-  public searchedProfil: Profil = DEFAULT_PROFIL;
   public inviteToCreateProfil = null;
   public doQuizWithProfil = false;
   itemsPerSlide = 3;
