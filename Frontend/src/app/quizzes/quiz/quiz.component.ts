@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {Question} from '../../../models/question.model';
 import {ActivatedRoute} from '@angular/router';
 import {QuizService} from '../../../services/quiz.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-quiz',
@@ -26,7 +27,11 @@ export class QuizComponent implements OnInit {
               private route: ActivatedRoute,
               private quizService: QuizService,
               public dialogRef: MatDialogRef<QuizComponent>,
-              @Inject(MAT_DIALOG_DATA) public quizDialog: Quiz) {
+              @Inject(MAT_DIALOG_DATA) public quizDialog: Quiz,
+              private location: Location) {
+  }
+  back() {
+    this.location.back();
   }
 
   ngOnInit() {
