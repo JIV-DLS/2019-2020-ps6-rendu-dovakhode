@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Profil} from '../../models/profil.model';
-import {DEFAULT_PROFIL} from '../../mocks/profil-list.mock';
+import {Profil} from '../../../models/profil.model';
+import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ProfilComponent} from '../Profils/profil/profil.component';
+import {ProfilComponent} from '../../Profils/profil/profil.component';
 
 @Component({
   selector: 'app-home-profil',
