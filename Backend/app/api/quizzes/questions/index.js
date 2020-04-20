@@ -1,7 +1,7 @@
 
 const { Router } = require('express')
 const fs = require('fs')
-const { Question } = require('../../../models')
+const { SubThemes } = require('../../../models')
 const { Answer } = require('../../../models')
 
 
@@ -14,7 +14,7 @@ const multer = require('../../../../middleware/question-multer-config')
 
 function getQuestionsByQuizId(id) {
   const idN = parseInt(id, 10)
-  const arr = Question.get()
+  const arr = SubThemes.get()
   const indexes = []; let i
   for (i = 0; i < arr.length; i++) {
     if ((arr[i].quizId == idN)) {
@@ -27,7 +27,7 @@ function getQuestionsByQuizId(id) {
 
 router.get('/:idQ', (req, res) => {
   try {
-    const question = Question.getById(req.params.idQ)
+    const question = SubThemes.getById(req.params.idQ)
     const answers = AnswersRouter.getAnswersByQuestionId(question.id)
     question.answers = answers != null ? answers : []
     res.status(200).json(question)
@@ -54,7 +54,7 @@ function createQuestion(obj = {}, req, index) {
   const { answers } = obj
   delete obj.tmpUrl
   delete obj.answers
-  const question = Question.create({ ...obj })
+  const question = SubThemes.create({ ...obj })
   const answersImage = getAnswersImage(req)
   for (let i = 0; i < answers.length; i++) {
     let answerImage
@@ -96,7 +96,7 @@ router.post('/', multer, (req, res) => {
 })
 
 function deleteEntireQuestion(id) {
-  Question.delete(id)
+  SubThemes.delete(id)
   const answers = AnswersRouter.getAnswersByQuestionId(id)
   if (answers != null) {
     for (let i = 0; i < answers.length; i++) {
@@ -119,7 +119,7 @@ function deleteEntireQuestion(id) {
 }
 router.delete('/:idQ', (req, res) => {
   try {
-    const tmp = Question.getById(req.params.idQ)
+    const tmp = SubThemes.getById(req.params.idQ)
     if (!tmp.image) tmp.image = ''
     const filename = tmp.image.split('/images/question/')[1]
     if (filename != null && filename.length > 1) {
@@ -146,7 +146,7 @@ function updateQuestion(id, obj, req, index) {
   const { answers } = obj
   delete obj.tmpUrl
   delete obj.answers
-  const question = Question.update(id, { ...obj })
+  const question = SubThemes.update(id, { ...obj })
   const answersImage = getAnswersImage(req)
   for (let i = 0; i < answers.length; i++) {
     let answerImage
@@ -183,7 +183,7 @@ function updateQuestion(id, obj, req, index) {
   return question
 }
 function getAQuestion(id) {
-  const question = Question.getById(id)
+  const question = SubThemes.getById(id)
   const answers = AnswersRouter.getQuestionsByQuizId(id)
   question.answers = answers != null ? answers : []
   return question
