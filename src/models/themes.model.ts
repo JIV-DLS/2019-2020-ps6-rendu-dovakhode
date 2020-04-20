@@ -5,9 +5,12 @@ export class Theme {
   label: string;
   subtheme: any[];
 
-  constructor() {
+  constructor(label?: string, id?: number) {
     this.label = '';
+    if (label) { this.label = label; }
     this.subtheme = [];
+
+    if (id) { this.id = id; }
   }
 }
 

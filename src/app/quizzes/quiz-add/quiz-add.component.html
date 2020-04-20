@@ -56,7 +56,7 @@
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile colspan="4" rowspan="4">
+      <mat-grid-tile colspan="3" rowspan="4">
         <mat-form-field>
           <mat-label>Thème*</mat-label>
           <mat-select [formControlName]="'theme'" >
@@ -67,8 +67,8 @@
           <mat-error *ngIf="theme.invalid">{{getThemeErrorMessage()}}</mat-error>
         </mat-form-field>
       </mat-grid-tile>
-
-      <mat-grid-tile colspan="4" rowspan="4">
+      <mat-grid-tile colspan="1" rowspan="4"><button mat-button (click)="manageTheme()"><mat-icon>add</mat-icon></button></mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="4">
         <mat-form-field>
           <mat-label>Sous-Thème</mat-label>
           <mat-select>
@@ -78,6 +78,7 @@
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="4"><button mat-button (click)="manageSubTheme()"><mat-icon>add</mat-icon></button></mat-grid-tile>
       <mat-grid-tile colspan="8" rowspan="1">
         <mat-divider></mat-divider>
       </mat-grid-tile>
