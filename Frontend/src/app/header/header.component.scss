@@ -16,3 +16,14 @@ span{
   padding: 0.5em;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
+
+@-webkit-keyframes rotation {
+  0%{rotation: 5deg}
+  50%{rotation: 10deg}
+  100%{rotation: 15deg}
+}
+mat-icon{
+  -webkit-animation-name: rotation; //on affecte l'animation clignote à notre bouton
+  -webkit-animation-duration: 0.7s; //on définit la durée de l'animation à 1s
+  -webkit-animation-iteration-count: initial; //on dit que l'animation se répétera à l'infini.
+}
