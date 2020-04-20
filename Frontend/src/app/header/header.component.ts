@@ -45,9 +45,9 @@ export class HeaderComponent implements OnInit {
         break;
       case 4:
         if (internPathsString[1].indexOf('start') === 0) {
-          this.routeName = 'Début du quiz';
-        } else {
           this.routeName = 'Fin du quiz';
+        } else {
+          this.routeName = 'Début du quiz';
         }
         break;
       default:
