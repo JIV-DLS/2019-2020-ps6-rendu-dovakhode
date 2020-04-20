@@ -199,21 +199,22 @@ export class QuizAddComponent implements OnInit {
     const dialogRef = this.dialog.open(ThemeListComponent, {
       width: '850px',
       maxHeight: '400px',
-      // data: this.questions.at(i).value
     });
     dialogRef.afterClosed().subscribe(response => {
 
     });
   }
-  manageSubTheme() {
-    const dialogRef = this.dialog.open(SubThemeListComponent, {
-      width: '850px',
-      maxHeight: '400px',
-      // data: this.questions.at(i).value
-    });
-    dialogRef.afterClosed().subscribe(response => {
+  manageSubTheme(idTheme: number) {
+    if (idTheme !== 0) {
+      const dialogRef = this.dialog.open(SubThemeListComponent, {
+        width: '850px',
+        maxHeight: '400px',
+        data: 0
+      });
+      dialogRef.afterClosed().subscribe(response => {
+      });
+    }
 
-    });
   }
 }
 
