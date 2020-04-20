@@ -16,8 +16,6 @@ import {DialogService} from '../../../services/dialog.service';
 export class ProfilsListComponent implements OnInit {
   @Input()
   public profilList: Profil[] = [];
-  public themesValues = Object.values(themeSearch);
-  public difficultiesValues = Object.values(difficulteSearch);
   public doQuiz;
   public inviteToCreateProfil = null;
   loading: boolean;
