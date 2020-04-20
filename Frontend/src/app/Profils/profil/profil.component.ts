@@ -29,7 +29,9 @@ export class ProfilComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(response => {
       this.profilDialogOpened = false;
+      if (response != null) {
       this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
+      }
       });
   }
   private createProfilByData(profil) {

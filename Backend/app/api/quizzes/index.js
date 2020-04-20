@@ -178,6 +178,7 @@ function updateQuiz(id, obj, req) {
   quiz.questions = questions
   return quiz
 }
+
 router.put('/:id', quizMulter, (req, res) => {
   try {
     updateQuiz(req.params.id, hasQuizImage(req) ? {

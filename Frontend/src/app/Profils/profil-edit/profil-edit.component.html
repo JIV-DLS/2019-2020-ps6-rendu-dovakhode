@@ -12,63 +12,63 @@
             <input  style="width: 100%"matInput placeholder="title" [formControlName]="'nom'" >
           </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile colspan="4" rowspan="16">
+      <mat-grid-tile colspan="4" rowspan="16">
           <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
             <mat-card-content style=" height: 100%;width: 100%;">
               <app-image-uploader editable="true" [label]="nom.value"  [imagePreview]="imagePreview" [form]="profilForm"></app-image-uploader>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
-        <mat-grid-tile colspan="4" rowspan="4">
-          <mat-form-field >
-            <mat-label>Prénom*</mat-label>
-            <input matInput placeholder="Prénom" [formControlName]="'prenom'" >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="4" rowspan="4">
+          <mat-grid-tile colspan="4" rowspan="4">
+             <mat-form-field >
+               <mat-label>Prénom*</mat-label>
+               <input matInput placeholder="Prénom" [formControlName]="'prenom'" >
+             </mat-form-field>
+           </mat-grid-tile>
+         <mat-grid-tile colspan="4" rowspan="4">
           <mat-form-field >
             <mat-label>Age*</mat-label>
             <input matInput type="number" min=0 max=150 placeholder="Age" [formControlName]="'age'" >
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="1" rowspan="4">
+       <mat-grid-tile colspan="1" rowspan="4">
 
           <mat-label style=" width: 100% ; color:gray" id="sexe">Sexe*</mat-label>
 
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="4">
-          <mat-radio-group  style="width: 65%" [formControlName]="'sexe'" aria-label="Select an option">
-            <mat-radio-button value="homme">Homme</mat-radio-button>
-            <mat-radio-button value="femme">Femme</mat-radio-button>
-          </mat-radio-group>
-        </mat-grid-tile>
+        <mat-radio-group style="width: 65%" [formControlName]="'sexe'" aria-label="Select an option">
+          <mat-radio-button value="homme" >Homme</mat-radio-button>
+          <mat-radio-button value="femme">Femme</mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
 
 
-        <mat-grid-tile colspan="8" rowspan="4">
-          <mat-form-field>
-            <mat-label>Stade de la maladie*</mat-label>
-            <mat-select [formControlName]="'stade'" >
-              <mat-option value="Stade 1">
-                Stade 1
-              </mat-option>
-              <mat-option value="Stade 2">
-                Stade 2
-              </mat-option>
-              <mat-option value="Stade 3">
-                Stade 3
-              </mat-option>
-            </mat-select>
+          <mat-grid-tile colspan="8" rowspan="4">
+            <mat-form-field>
+              <mat-label>Stade de la maladie*</mat-label>
+              <mat-select [formControlName]="'stade'" >
+                <mat-option value="Stade 1">
+                  Stade 1
+                </mat-option>
+                <mat-option value="Stade 2">
+                  Stade 2
+                </mat-option>
+                <mat-option value="Stade 3">
+                  Stade 3
+                </mat-option>
+              </mat-select>
 
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile colspan="8" rowspan="10" style="width: 100%">
-          <mat-form-field style="width: 100%">
-            <mat-label>Recommandations</mat-label>
-            <textarea matInput placeholder="Laisser des recommandations" [formControlName]="'recommandations'"></textarea>
-          </mat-form-field>
-        </mat-grid-tile>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="8" rowspan="10" style="width: 100%">
+            <mat-form-field style="width: 100%">
+              <mat-label>Recommandations</mat-label>
+              <textarea matInput placeholder="Laisser des recommandations" [formControlName]="'recommandations'"></textarea>
+            </mat-form-field>
+          </mat-grid-tile> -->
       </mat-grid-list>
 
     </mat-card-content>

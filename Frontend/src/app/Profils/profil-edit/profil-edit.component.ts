@@ -1,19 +1,31 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {ProfilServices} from '../../../services/profil.services';
 import {Profil} from '../../../models/profil.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {ProfilComponent} from '../profil/profil.component';
-import {Question} from '../../../models/question.model';
 
 @Component({
   selector: 'app-profil-edit',
   templateUrl: './profil-edit.component.html',
-  styleUrls: ['./profil-edit.component.scss']
+  styleUrls: ['./profil-edit.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ProfilEditComponent implements OnInit {
   public profilForm: FormGroup;
+  public value;
+
+
   imagePreview: string;
   @Output()
   profileCreated: EventEmitter<Profil> = new EventEmitter<Profil>();
@@ -26,6 +38,7 @@ export class ProfilEditComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+   // this.value = this.profil.sexe;
     this.initiForm(this.profil);
   }
 

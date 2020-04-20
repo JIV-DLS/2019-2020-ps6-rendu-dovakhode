@@ -136,7 +136,8 @@ export class QuizDoComponent implements OnInit {
     return this.quizForm.get('label') as FormArray;
   }
   nextQuestion(trials: number) {
-    this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, this.evolution.id, trials).subscribe();
+    this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, this.evolution.id, trials).subscribe((questionPlayed) => {
+     this.evolution.questionPlayed.push(questionPlayed) ;  });
 
     if (this.index < this.quiz.questions.length - 1) {
       this.index = this.index + 1;
