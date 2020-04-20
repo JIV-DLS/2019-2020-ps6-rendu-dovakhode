@@ -84,26 +84,28 @@ import { QuizList2Component } from './quizzes/quizzes-carousel/quiz-list2.compon
 import { QuizSearchBarComponent } from './searchBar/quiz-search-bar/quiz-search-bar.component';
 import { ProfilSearchBarComponent } from './searchBar/profil-search-bar/profil-search-bar.component';
 import { AsideNavComponent } from './aside-nav/aside-nav.component';
+import {RouteNames} from '../models/routeNames';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'quiz-list', component: QuizDisplayListComponent},
-  {path: 'home-do-quiz', component: HomeDoQuizComponent},
-  {path: 'home-quiz-gestion', component: HomeQuizComponent},
-  {path: 'home-profil-gestion', component: HomeProfilComponent},
-  {path: 'profil-add', component: ProfilsAddComponent},
-  {path: 'home-user', component: HomeUserComponent},
-  {path: 'quiz-edit/:id' , component: QuizzeEditComponent},
-  {path: 'quiz-do/:evol' , component: QuizDoComponent},
-  {path: 'quiz-do/:id/start' , component: QuizDoStartComponent},
-  {path: 'quiz/:idShowQuiz' , component: QuizComponent},
-  {path: 'profils-carousel', component: ProfilListDisplayComponent},
-  {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent},
-  { path: 'not-found', component: Error404Component },
-  { path: '**', redirectTo: 'not-found' }
-
+  {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
+  {path: 'quiz-list', component: QuizDisplayListComponent, data: {routeName: 'Liste de quiz'}},
+  {path: 'home-do-quiz', component: HomeDoQuizComponent, data: {routeName: 'Choix du type de quiz'}},
+  {path: 'home-quiz-gestion', component: HomeQuizComponent, data: {routeName: 'Gestion des quizs'}},
+  {path: 'home-profil-gestion', component: HomeProfilComponent, data: {routeName: 'Gestion des profils'}},
+  {path: 'profil-add', component: ProfilsAddComponent, data: {routeName: 'Ajout d\'un profil'}},
+  {path: 'home-user', component: HomeUserComponent, data: {routeName: 'Gestion utilisateur'}},
+  {path: 'quiz-edit/:id' , component: QuizzeEditComponent, data: {routeName: 'Modification d\'un quiz'}},
+  {path: 'quiz-do/:evol' , component: QuizDoComponent, data: {routeName: 'Jeu en cour'}},
+  {path: 'quiz-do/:id/start' , component: QuizDoStartComponent, data: {routeName: 'Debut du quiz'}},
+  {path: 'quiz/:idShowQuiz' , component: QuizComponent, data: {routeName: 'Affichage d\'un quiz'}},
+  {path: 'profils-carousel', component: ProfilListDisplayComponent, data: {routeName: 'Liste de profil'}},
+  {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent, data: {routeName: 'Jeu de quiz par un patient'}},
+  { path: 'not-found', component: Error404Component , data: {routeName: 'Page inacessible'}},
+  { path: '**', redirectTo: 'not-found', data: {routeName: 'Page inacessible'} }
 ];
-
+routes.forEach((eachRoute) => {
+  RouteNames.routeNamesObject[eachRoute.path.split('/')[0]] = eachRoute.data.routeName; // now all route paths are added to this prop
+});
 @NgModule({
   declarations: [
     AppComponent,
