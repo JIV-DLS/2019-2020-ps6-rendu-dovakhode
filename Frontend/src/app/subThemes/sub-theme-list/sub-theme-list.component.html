@@ -1,0 +1,43 @@
+
+<mat-card>
+  <mat-card-header>
+    <h3 layout-align="center">Ajout de sous-theme</h3>
+    <mat-card-title>
+      <!--<h6>Nombre totale de quesitons({{questions.length}})</h6>-->
+      <button (click)="dialogRef.close()"  color="warn" mat-flat-button aria-label="Close" style="position:absolute; right:10px;">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <mat-grid-list cols="4" rowHeight="53px">
+        <mat-grid-tile colspan="4" rowspan="1">
+          <mat-form-field style="width: 80%;">
+            <mat-label>Sous theme</mat-label>
+            <input matInput placeholder="contenu du sous-theme" type="text" #subtheme>
+          </mat-form-field>
+          <button color="primary" (click)="addSubTheme(subtheme.value)" mat-flat-button style="width: 20%;">
+            <mat-icon >add</mat-icon>
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4"  rowspan="4">
+          <div style="width: 100%; height: 200px; max-height: 200px;overflow-y: scroll;">
+            <mat-grid-list cols="4" rowHeight="20px" >
+              <div *ngFor="let subTheme of subThemes">
+                <mat-grid-tile colspan="3" rowspan="1">
+                  <span style="width: 80%">{{subTheme.label}}</span>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <button (click)="deleteSubTheme(subTheme.id, subTheme.label)" mat-flat-button>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-grid-tile>
+              </div>
+
+            </mat-grid-list>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+  </mat-card-content>
+</mat-card>
+

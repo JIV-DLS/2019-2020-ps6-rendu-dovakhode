@@ -85,6 +85,13 @@ import { QuizSearchBarComponent } from './searchBar/quiz-search-bar/quiz-search-
 import { ProfilSearchBarComponent } from './searchBar/profil-search-bar/profil-search-bar.component';
 import { AsideNavComponent } from './aside-nav/aside-nav.component';
 import {RouteNames} from '../models/routeNames';
+import { ThemeAddComponent } from './themes/theme-add/theme-add.component';
+import { ThemeListComponent } from './themes/theme-list/theme-list.component';
+import { SubThemeComponent } from './subThemes/sub-theme/sub-theme.component';
+import { SubThemeAddComponent } from './subThemes/sub-theme-add/sub-theme-add.component';
+import { SubThemeListComponent } from './subThemes/sub-theme-list/sub-theme-list.component';
+import {SubthemeService} from '../services/subtheme.service';
+import {ThemeServices} from '../services/theme.services';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
@@ -161,6 +168,11 @@ routes.forEach((eachRoute) => {
     QuizSearchBarComponent,
     ProfilSearchBarComponent,
     AsideNavComponent,
+    ThemeAddComponent,
+    ThemeListComponent,
+    SubThemeComponent,
+    SubThemeAddComponent,
+    SubThemeListComponent,
   ],
   entryComponents: [
     QuestionsComponent,
@@ -170,7 +182,9 @@ routes.forEach((eachRoute) => {
     AnswerAddComponent,
     NextQuestionComponent,
     SnackModificationComponent,
-    MatConfirmDialogComponent
+    MatConfirmDialogComponent,
+    ThemeListComponent,
+    SubThemeListComponent
   ],
   imports: [
     BrowserModule,
@@ -207,7 +221,9 @@ routes.forEach((eachRoute) => {
     EvolutionService,
     QuestionPlayedService,
     ProfilServices,
-    QuizSearchPipe
+    QuizSearchPipe,
+    ThemeServices,
+    SubthemeService
   ],
   bootstrap: [AppComponent]
 })

@@ -11,6 +11,8 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 import {Question} from '../../../models/question.model';
+import {SubThemeListComponent} from '../../subThemes/sub-theme-list/sub-theme-list.component';
+import {ThemeListComponent} from '../../themes/theme-list/theme-list.component';
 
 @Component({
   selector: 'app-quiz-form',
@@ -191,6 +193,27 @@ export class QuizAddComponent implements OnInit {
 
   deleteAttachment(index) {
     this.files.splice(index, 1);
+  }
+
+  manageTheme() {
+    const dialogRef = this.dialog.open(ThemeListComponent, {
+      width: '850px',
+      maxHeight: '400px',
+      // data: this.questions.at(i).value
+    });
+    dialogRef.afterClosed().subscribe(response => {
+
+    });
+  }
+  manageSubTheme() {
+    const dialogRef = this.dialog.open(SubThemeListComponent, {
+      width: '850px',
+      maxHeight: '400px',
+      // data: this.questions.at(i).value
+    });
+    dialogRef.afterClosed().subscribe(response => {
+
+    });
   }
 }
 
