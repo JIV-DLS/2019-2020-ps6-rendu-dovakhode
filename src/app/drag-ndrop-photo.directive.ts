@@ -71,8 +71,10 @@ export class DragNDropPhotoDirective {
                     });
                 } catch (err) {
                   alert('❌ Impossible de telecharger l\'image,' +
-                    ' les droits sont insuffisants, Veuillez la télécharger puis l\'importer ici' +
-                    ' ou essayer avec une autre image!');
+                    ' les droits sont insuffisants, Veuillez utilisez l\'icone 🔗' +
+                    'pour télécharger l\'image via son lien ou' +
+                    ' télécharger l\'image puis l\'importer ici' +
+                    ' ou carrément essayer avec une autre image!');
                   /*this.snack.open('❌ Impossible de telecharger l\'image,' +
                     ' les droits sont insuffisants, Veuillez importer une autre image!', 'close',
                     {

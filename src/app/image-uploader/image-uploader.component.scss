@@ -1,5 +1,5 @@
 
-.Jbtn-edit,.Jbtn-delete {
+.Jbtn-edit,.Jbtn-delete,.Jbtn-link {
   height: 33px;
   width: 60px;
   position: absolute;
@@ -22,6 +22,11 @@
 .Jbtn-delete {
 
   top: 90%;
+  left: 90%;
+}
+.Jbtn-link {
+  opacity: 1;
+  top: 12%;
   left: 90%;
 }
 .Jbtn-edit:hover,.Jbtn-delete:hover{
