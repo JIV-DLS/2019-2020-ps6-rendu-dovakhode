@@ -3,7 +3,7 @@
     <mat-icon *ngIf="isOpened">close</mat-icon>
     <mat-icon *ngIf="!isOpened">menu</mat-icon>
   </button>
-  <span>{{headerName}}</span>
+  <span>{{headerName}}{{routeName?.length>0?'  -  ':' '}}{{routeName}}</span>
     <app-user-nav></app-user-nav>
 
 </div>
