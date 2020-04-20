@@ -1,7 +1,7 @@
 
 const { Router } = require('express')
 const fs = require('fs')
-const { Question } = require('../../../models')
+const {  Question } = require('../../../models')
 const { Answer } = require('../../../models')
 
 
