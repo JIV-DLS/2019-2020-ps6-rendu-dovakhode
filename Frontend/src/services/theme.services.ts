@@ -6,8 +6,11 @@ import {catchError, tap} from 'rxjs/operators';
 import {environment} from '../environments/environment';
 import {Question} from '../models/question.model';
 import {Observable, of} from 'rxjs';
-import {Quiz} from '../models/quiz.model';
+import {Injectable} from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class ThemeServices {
   themeUrl = environment.url + '/theme';
 

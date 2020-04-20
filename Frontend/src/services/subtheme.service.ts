@@ -5,8 +5,11 @@ import {Question} from '../models/question.model';
 import {Observable, of, Subject} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Subtheme} from '../models/subtheme.model';
-import {Theme} from '../models/themes.model';
+import {Injectable} from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class SubthemeService {
 
   Subthemes: any[];
