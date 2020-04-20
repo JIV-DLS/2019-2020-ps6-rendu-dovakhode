@@ -49,9 +49,12 @@ router.delete('/:profilId', (req, res) => {
   }
 })
 
-router.put('/:profilId', (req, res) => {
+router.put('/:profilId',profilMulter, (req, res) => {
   try {
-    const profil = Profiles.update(req.params.profilId, { ...req.body })
+    const profil = Profiles.update( req.params.profilId,req.file? {...JSON.parse(req.body.profil),
+          image: `${req.protocol}://${req.get('host')}/images/profil/${req.file.filename}`,}:
+        { ...JSON.parse(req.body.profil),
+          image: '', })
     res.status(200).json(profil)
   } catch (err) {
     res.status(500).json(err)
