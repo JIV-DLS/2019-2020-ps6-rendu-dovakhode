@@ -50,8 +50,9 @@ export class DragNDropPhotoDirective {
         break;
       case 'string':
             evt.dataTransfer.items[0].getAsString(async _ => {
-              const imgUrl = decodeURIComponent(_.split(' ')[0].split('imgurl=')[1].split('&imgref')[0]);
-              if (imgUrl) {
+              if (_.indexOf('imgurl=') > 0 && _.indexOf('&imgref') > 0) {
+                const imgUrl =  decodeURIComponent(_.split(' ')[0].split('imgurl=')[1].split('&imgref')[0]);
+
                 /*this.snack.open(environment.snackInformation.operation.loading.get.image, 'close',
                   {
                     ...environment.snackInformation.successForAll
@@ -68,7 +69,7 @@ export class DragNDropPhotoDirective {
                       const anArray = [];
                       anArray.push(blob as File);
                       this.fileDropped.emit(anArray);
-                    });
+                    }).then();
                 } catch (err) {
                   alert('❌ Impossible de telecharger l\'image,' +
                     ' les droits sont insuffisants, Veuillez utilisez l\'icone 🔗' +
@@ -86,10 +87,11 @@ export class DragNDropPhotoDirective {
             // console.log(_)
             // console.log(new File(decodeURIComponent(_.split(' ')[0].split('imgurl=')[1].split('&imgref')[0]),'mon fichier'));
           } else {
-          this.snack.open('Pour l\'import depuis un site web, Veuillez par préférence choisir Google!', 'close',
+                alert('Pour l\'import glissé-déposé depuis un site web, Veuillez par préférence choisir Google!');
+          /*this.snack.open('Pour l\'import depuis un site web, Veuillez par préférence choisir Google!', 'close',
             {
               ...environment.snackInformation.informationForAll
-            }); }
+            });*/ }
 });
             break;
       default:
