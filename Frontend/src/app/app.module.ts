@@ -98,7 +98,7 @@ const routes: Routes = [
   {path: 'quiz-do/:evol' , component: QuizDoComponent, data: {routeName: 'Jeu en cour'}},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent, data: {routeName: 'Debut du quiz'}},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent, data: {routeName: 'Affichage d\'un quiz'}},
-  {path: 'profils-carousel', component: ProfilListDisplayComponent, data: {routeName: 'Liste de profil'}},
+  {path: 'profils-carousel', component: ProfilListDisplayComponent, data: {routeName: 'Choix du patient pour le jeu'}},
   {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent, data: {routeName: 'Jeu de quiz par un patient'}},
   { path: 'not-found', component: Error404Component , data: {routeName: 'Page inacessible'}},
   { path: '**', redirectTo: 'not-found', data: {routeName: 'Page inacessible'} }
