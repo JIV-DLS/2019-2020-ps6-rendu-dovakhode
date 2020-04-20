@@ -32,6 +32,7 @@ router.delete('/:themeId', (req, res) => {
 
 router.put('/:themeId', (req, res) => {
     try {
+        delete req.body.subtheme
         const theme = Theme.update(req.params.themeId, { ...req.body })
         res.status(200).json(theme)
     } catch (err) {
@@ -41,6 +42,7 @@ router.put('/:themeId', (req, res) => {
 
 router.post('/', (req, res) => {
     try {
+        delete req.body.subtheme
         const theme = Theme.create({ ...req.body })
         res.status(201).json(theme)
     } catch (err) {
