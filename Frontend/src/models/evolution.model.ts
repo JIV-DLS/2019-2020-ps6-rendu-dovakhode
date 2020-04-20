@@ -7,9 +7,17 @@ export class Evolution {
   patientId: number;
   dateCreation: Date;
 
-  constructor() {
-    this.id = 452 ;
-    this.questionPlayed = [];
-    this.dateCreation = new Date();
+  constructor(evolution?: Evolution) {
+      if (evolution) {
+        this.id = evolution.id;
+        this.questionPlayed = evolution.questionPlayed;
+        this.quizId = evolution.quizId;
+        this.patientId = evolution.patientId;
+        this.dateCreation = evolution.dateCreation;
+      } else {
+          this.id = 452;
+          this.questionPlayed = [];
+          this.dateCreation = new Date();
+        }
   }
 }
