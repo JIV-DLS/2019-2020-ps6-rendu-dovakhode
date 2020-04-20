@@ -1,8 +1,8 @@
 <div>
   <button mat-button class="example-header-image"  [matMenuTriggerFor]="menuQuizLauncher">Lancer un quiz</button>
   <mat-menu #menuQuizLauncher>
-    <button mat-button [routerLink]="['/quiz-list',{do:true,idPatient:0}]">sans patient</button>
-    <button mat-button [routerLink]="['/profils-carousel',{do:true}]">avec un patient</button>
+    <button mat-button [routerLink]="['/quiz-list',{do:true,idPatient:0}]">patient inconnu</button>
+    <button mat-button [routerLink]="['/profils-carousel',{do:true}]">patient connu</button>
   </mat-menu>
 </div>
 <div>
