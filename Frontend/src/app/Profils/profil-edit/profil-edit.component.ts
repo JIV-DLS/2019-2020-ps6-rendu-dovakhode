@@ -47,12 +47,13 @@ export class ProfilEditComponent implements OnInit {
 
   editTheProfil() {
     if (this.conform()) {
-      const profil: Profil =  (this.profilForm.getRawValue()) as Profil;
-      profil.image = this.profil.image;
-      this.profileCreated.emit(profil);
+      const profilToModify: Profil =  (this.profilForm.getRawValue()) as Profil;
+      profilToModify.image = this.profil.image;
+      this.profileCreated.emit(profilToModify);
+
       this.profilService
-        .updateProfil(profil,  this.profilForm.get('image') == null ? null : this.profilForm.get('image').value )
-        .subscribe((quiz) => {
+        .updateProfil(profilToModify,  this.profilForm.get('image') == null ? null : this.profilForm.get('image').value )
+        .subscribe((profil) => {
           if (profil !== undefined) {
             this.profil = profil;
             this.imagePreview = profil.image;
@@ -61,7 +62,7 @@ export class ProfilEditComponent implements OnInit {
         });
       /* tslint:disable */
       this.dialogRef.close({
-        profil : profil});
+        profil : profilToModify});
 
     }
 
