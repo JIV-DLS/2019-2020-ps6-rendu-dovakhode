@@ -1,7 +1,7 @@
 <div class="header">
   <button (click)="selectEmitter.emit(); isOpened=!isOpened" mat-flat-button aria-label="Example icon-button with a heart icon">
     <mat-icon *ngIf="isOpened">close</mat-icon>
-    <mat-icon *ngIf="!isOpened">list</mat-icon>
+    <mat-icon *ngIf="!isOpened">menu</mat-icon>
   </button>
   <span>{{headerName}}</span>
     <app-user-nav></app-user-nav>
