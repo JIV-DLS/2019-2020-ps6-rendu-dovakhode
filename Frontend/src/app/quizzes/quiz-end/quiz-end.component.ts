@@ -55,7 +55,7 @@ export class QuizEndComponent implements OnInit {
     for (const question of this.questionsPlayed) {
       if (question.trials <= 1) {
         resultat[0] += 1;
-      } else if (+question.trials === 2) {
+      } else if (+question.trials >= 2) {
         resultat[1] += 1;
       }
     }

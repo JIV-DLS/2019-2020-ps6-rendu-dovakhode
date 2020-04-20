@@ -6,5 +6,6 @@ module.exports = new BaseModel('QuestionPlayed', {
   trials: joi.number(),
   idQuestion: joi.number(),
   EvolutionId: joi.number(),
+  date: Joi.date()
 
 })

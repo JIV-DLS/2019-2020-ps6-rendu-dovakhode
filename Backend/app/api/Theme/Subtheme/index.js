@@ -11,6 +11,7 @@ function getById(idTheme, idSubTheme) {
     }
     return ques
 }
+
 function get(id) {
     const ques = []
     for (let i = 0; i < SubTheme.items.length; i++) {
