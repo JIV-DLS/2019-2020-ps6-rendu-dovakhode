@@ -2,18 +2,23 @@ import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from '../environments/environment';
 import {Question} from '../models/question.model';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Subtheme} from '../models/subtheme.model';
 import {Theme} from '../models/themes.model';
 
 export class SubthemeService {
+
+  Subthemes: any[];
+  subThemesSubject = new Subject<any[]>();
   constructor(private http: HttpClient, private snack: MatSnackBar) {}
 
   subThemeUrl(themeId) {
     return environment.url + '/theme/' + themeId + '/subThemes';
   }
-
+  emitSubThemes() {
+  this.subThemesSubject.next(this.Subthemes);
+  }
   addSubTheme(subTheme: Subtheme): Observable<Question> {
     return this.http.post<Question>(this.subThemeUrl(subTheme.idTheme), subTheme).pipe(
 

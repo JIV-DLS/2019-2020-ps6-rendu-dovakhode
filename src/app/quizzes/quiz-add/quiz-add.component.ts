@@ -11,6 +11,8 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 import {Question} from '../../../models/question.model';
+import {ThemeServices} from '../../../services/theme.services';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-quiz-form',
@@ -23,12 +25,15 @@ export class QuizAddComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<QuizAddComponent>,
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
-              public quizService: QuizService) {
+              public quizService: QuizService,
+              private themeService: ThemeServices) {
+
+    }
     // Form creation
     // You can also question-add validators to your inputs such as required, maxlength or even create your own validator!
     // More information: https://angular.io/guide/reactive-forms#simple-form-validation
     // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
-  }
+    // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
   get questions() {
     return this.quizForm.get('questions') as FormArray;
   }
@@ -48,7 +53,9 @@ export class QuizAddComponent implements OnInit {
    */
   @Input() quiz: Quiz = null;
   public quizForm: FormGroup;
-  public themesValues = Object.values(theme);
+  Subject: Subscription;
+  public themesValues = [];
+  public SubThemesValues = [];
   public difficultiesValues = Object.values(difficulte);
   private questionDialogOpened = false;
   public imagePreview: string;
@@ -58,6 +65,7 @@ export class QuizAddComponent implements OnInit {
     this.quiz = new Quiz();
     this.initializeTheForm();
   }
+
   initializeTheForm() {
     this.quizForm = this.quizzFormInitializer();
   }
@@ -81,6 +89,10 @@ export class QuizAddComponent implements OnInit {
       tmpUrl: question.tmpUrl,
       quizId: 0
     });
+  }
+
+  getSubTheme() {
+
   }
   addQuiz() {
     // We retrieve here the quiz object from the quizForm and we cast the type "as Quiz".
