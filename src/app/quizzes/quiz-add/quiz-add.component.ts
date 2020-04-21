@@ -47,6 +47,9 @@ export class QuizAddComponent implements OnInit {
   get theme() {
     return this.quizForm.get('theme') as FormArray;
   }
+  get subTheme() {
+    return this.quizForm.get('subTheme') as FormArray;
+  }
   get label() {
     return this.quizForm.get('label') as FormArray;
   }
@@ -148,7 +151,9 @@ export class QuizAddComponent implements OnInit {
     // Now, question-add your quiz in the list!
 
     quizToCreate.theme = this.quizForm.get('theme').value.label;
+    if (this.quizForm.get('subTheme').value != null) {
     quizToCreate.subTheme = this.quizForm.get('subTheme').value.label;
+    }
 
     this.quizService.addQuiz(quizToCreate, this.quizForm.get('image').value, this.questions.value).subscribe((quiz) => {
       if (quiz !== undefined) {
@@ -245,24 +250,28 @@ export class QuizAddComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(response => {
       if (response) {
-        this.themesValues = response;
+        if (this.themesValues.length !== response.length) {
+          this.theme.setValue(response[response.length - 1]);
+          this.themesValues = response; }
         this.subThemesValues = [];
       }
     });
   }
   manageSubTheme() {
-    if (this.idTheme) {
+    if (this.theme.value != null) {
       const dialogRef = this.dialog.open(SubThemeListComponent, {
         width: '850px',
         maxHeight: '400px',
-        data: this.idTheme
+        data: this.theme.value.id
       });
       dialogRef.afterClosed().subscribe(response => {
         if (response) {
-          this.subThemesValues = response ;
+          if (this.subThemesValues.length !== response.length) {
+            this.subTheme.setValue(response[response.length - 1]);
+            this.subThemesValues = response ; }
         }
       });
-    }
+    } else { alert('Veuillez sélectionner un thème!'); }
 
   }
 }
