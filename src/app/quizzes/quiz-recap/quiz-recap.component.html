@@ -1,11 +1,11 @@
 <mat-card>
   <mat-spinner *ngIf="loading"> </mat-spinner>
-  <mat-grid-list *ngIf="!loading" cols="4" rowHeight="48px">
+  <mat-grid-list *ngIf="!loading" cols="4" rowHeight="9%">
     <mat-grid-tile colspan="4" rowspan="1">
       <h4>🙃Recapitulation des bonnes réponses du quiz <b>{{quiz.label}}</b></h4>
     </mat-grid-tile>
-    <mat-grid-tile  colspan="4" rowspan="10" style="overflow-y:scroll;">
-      <div style="height: 462px;max-height: 462px;overflow-y:scroll; background-color: red">
+    <mat-grid-tile  colspan="4" rowspan="9" style="overflow-y:scroll;">
+      <div style="max-height: 50%;overflow-y:scroll; background-color: red">
         <app-question-recap [question]="this.quiz.questions[this.index]"></app-question-recap>
       </div>
     </mat-grid-tile>

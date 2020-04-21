@@ -12,6 +12,7 @@ import {NextQuestionComponent} from '../next-question/next-question.component';
 })
 export class QuestionRecapComponent implements OnInit {
   breakpoint;
+  rightAnswer;
   @Input() question: Question = DEFAULT_QUESTION;
   @Input() evolution: Evolution ;
   @Output()
@@ -20,6 +21,14 @@ export class QuestionRecapComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let i = 0;
+    this.rightAnswer = new Array();
+    for (const answer of this.question.answers) {
+      if (answer.isCorrect) {
+        this.rightAnswer.push(answer);
+        i++;
+      }
+    }
   }
 
 }
