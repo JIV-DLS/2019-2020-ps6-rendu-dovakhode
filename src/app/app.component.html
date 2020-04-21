@@ -1,8 +1,8 @@
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <app-aside-nav></app-aside-nav>
+  <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="playingState()">
+    <app-aside-nav ></app-aside-nav>
   </mat-drawer>
-  <app-header *ngIf="playingState()" (selectEmitter)="drawer.toggle()"></app-header>
+  <app-header [isOpened]="playingState()" *ngIf="playingState()" (selectEmitter)="drawer.toggle()"></app-header>
   <router-outlet></router-outlet>
 </mat-drawer-container>
 

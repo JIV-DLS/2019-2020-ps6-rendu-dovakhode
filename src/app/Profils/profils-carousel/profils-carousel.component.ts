@@ -16,6 +16,7 @@ import {Subject} from 'rxjs';
 export class ProfilsCarouselComponent implements OnInit {
 
   @Input()  profilChanged: Subject<any>;
+  @Input()  profilSearched: string;
   @Input()
   public profilsList: Profil[] = [];
   public inviteToCreateProfil = null;
@@ -31,7 +32,9 @@ export class ProfilsCarouselComponent implements OnInit {
               private location: Location,
               public profilService: ProfilServices,
               private matDialogService: DialogService) {
+    if (this.profilsList.length === 0) {
     this.getAllProfils();
+    }
   }
 
   ngOnInit() {

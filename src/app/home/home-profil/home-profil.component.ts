@@ -11,7 +11,7 @@ import {Subject} from 'rxjs';
   styleUrls: ['./home-profil.component.scss']
 })
 export class HomeProfilComponent implements OnInit {
-  public searchedProfil: Profil = DEFAULT_PROFIL;
+  public profilSearched: Profil = DEFAULT_PROFIL;
   profilChanged: Subject<null>;
   constructor( public dialog: MatDialog,
                private dialogRef: MatDialogRef<ProfilComponent>) { }
