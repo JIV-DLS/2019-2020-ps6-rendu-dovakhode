@@ -20,6 +20,14 @@ function get(id) {
     }
     return ques
 }
+router.delete('/:subThemeId', (req, res) => {
+    try {
+        SubTheme.delete(req.params.subThemeId)
+        res.status(200).json('deleted')
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
 router.put('/:subThemeId', (req, res) => {
     try {
         const subtheme = SubTheme.update(req.params.subThemeId, { ...req.body })
