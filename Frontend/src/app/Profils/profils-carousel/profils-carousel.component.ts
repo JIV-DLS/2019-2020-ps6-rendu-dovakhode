@@ -5,6 +5,7 @@ import {ProfilServices} from '../../../services/profil.services';
 import {Profil} from '../../../models/profil.model';
 import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 import {DialogService} from '../../../services/dialog.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-profil-list',
@@ -13,6 +14,8 @@ import {DialogService} from '../../../services/dialog.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ProfilsCarouselComponent implements OnInit {
+
+  @Input()  profilChanged: Subject<any>;
   @Input()
   public profilsList: Profil[] = [];
   public inviteToCreateProfil = null;
@@ -33,7 +36,9 @@ export class ProfilsCarouselComponent implements OnInit {
 
   ngOnInit() {
     this.doQuizWithProfil = (this.Activerouter.snapshot.params.do === 'true');
-
+    if (this.profilChanged) {
+      this.profilChanged.subscribe(_ => this.getAllProfils());
+    }
   }
 
   getAllProfils() {
