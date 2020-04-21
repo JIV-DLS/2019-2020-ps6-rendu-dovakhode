@@ -3,6 +3,7 @@ import {Profil} from '../../../models/profil.model';
 import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ProfilComponent} from '../../Profils/profil/profil.component';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-home-profil',
@@ -11,7 +12,7 @@ import {ProfilComponent} from '../../Profils/profil/profil.component';
 })
 export class HomeProfilComponent implements OnInit {
   public searchedProfil: Profil = DEFAULT_PROFIL;
-
+  profilChanged: Subject<null>;
   constructor( public dialog: MatDialog,
                private dialogRef: MatDialogRef<ProfilComponent>) { }
 
@@ -25,6 +26,9 @@ export class HomeProfilComponent implements OnInit {
       height: '80%',
       data: profil,
     });
-
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.profilChanged.next(null); }
+    });
   }
 }

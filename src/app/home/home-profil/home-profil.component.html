@@ -19,6 +19,6 @@
     </button>
   </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="3">
-     <app-profil-list (profilSelected)="viewProfil($event)"></app-profil-list>
+     <app-profil-list [profilChanged]="profilChanged" (profilSelected)="viewProfil($event)"></app-profil-list>
     </mat-grid-tile>
 </mat-grid-list>
