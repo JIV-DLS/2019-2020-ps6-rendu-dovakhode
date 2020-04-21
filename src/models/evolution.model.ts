@@ -6,6 +6,10 @@ export class Evolution {
   quizId: number;
   patientId: number;
   dateCreation: Date;
+  quizNom: string;
+  quizDifficulty: string;
+  quizQuestion: number;
+
 
   constructor(evolution?: Evolution) {
       if (evolution) {
@@ -14,10 +18,15 @@ export class Evolution {
         this.quizId = evolution.quizId;
         this.patientId = evolution.patientId;
         this.dateCreation = evolution.dateCreation;
+        this.quizNom = evolution.quizNom;
+        this.quizDifficulty = evolution.quizDifficulty;
+        this.quizQuestion = evolution.quizQuestion;
       } else {
           this.id = 452;
           this.questionPlayed = [];
           this.dateCreation = new Date();
+          this.quizNom = '';
+          this.quizDifficulty = '';
         }
   }
 }

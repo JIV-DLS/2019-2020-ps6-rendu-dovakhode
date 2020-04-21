@@ -44,7 +44,7 @@ export class QuizDoStartComponent implements OnInit {
     this.quiz = quiz;
   }
   start(quiz) {
-    this.evolservice.addEvolution('' + this.quiz.id, +this.idPatient).subscribe((evol ) => {
+    this.evolservice.addEvolution(this.quiz, +this.idPatient).subscribe((evol ) => {
       if (evol !== undefined) {
         console.log('voici l evol créée ' + evol.id + '' + evol.quizId);
         this.Evolution = evol;
