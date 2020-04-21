@@ -1,0 +1,37 @@
+.reponse-list{
+  justify-content: center;
+}
+
+mat-card-title{
+  height: 70%;
+  text-align: center;
+}
+
+.mat-card-header { justify-content: center; height: 30%;
+}
+.reponse{
+  justify-content: center;
+  align-content: center;
+  height: auto;
+}
+
+.mat-card-content{
+  height: available;
+}
+.page{
+  margin:1%;
+  position: absolute;
+  bottom: 0;
+  top:0;
+  right: 0;
+  left: 0;
+}
+
+
+app-answer{
+  width: 10%;
+  height: 40%;
+  margin: 2%;
+}
+app-image-uploader img{
+}
