@@ -86,7 +86,8 @@ export class QuizzeEditComponent implements OnInit {
       label: question.label,
       answers: this.formBuilder.array(question.answers),
       image: question.image,
-      tmpUrl: question.tmpUrl
+      tmpUrl: question.tmpUrl,
+      quizId: question.quizId
     });
   }
   openDialog(): void {
