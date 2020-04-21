@@ -5,20 +5,18 @@
        <p>Réponse</p>
      </mat-grid-tile>
      <mat-grid-tile colspan="1" rowspan="1">
-       <mat-slide-toggle (change)="answerWithImage = answerWithImageS.checked" #answerWithImageS>Réponses à image</mat-slide-toggle>
      </mat-grid-tile>
      <mat-grid-tile colspan="1" rowspan="1">
        <mat-checkbox  [formControlName]="'isCorrect'">Correct</mat-checkbox>
      </mat-grid-tile>
-     <mat-grid-tile colspan="3" rowspan="{{answerWithImage? 5:3}}">
-       <div style="width: 100%" >
-         <mat-form-field *ngIf="!answerWithImage" style="width: 100%">
-           <mat-label>answer </mat-label>
-           <input matInput placeholder="title" [formControlName]="'value'" >
-         </mat-form-field>
-         <app-image-uploader *ngIf="answerWithImage" editable="true" [label]="answerForm.get('value').value" [imagePreview]="imagePreview" [form]="answerForm"></app-image-uploader>
-       </div>
-
+         <mat-grid-tile colspan="3" rowspan="4">
+         <app-image-uploader editable="true" style="width: 100%" [label]="answerForm.get('value').value" [imagePreview]="imagePreview" [form]="answerForm"></app-image-uploader>
+         </mat-grid-tile>
+     <mat-grid-tile colspan="3" rowspan="2">
+       <mat-form-field  style="width: 100%">
+         <mat-label>answer </mat-label>
+         <input matInput placeholder="title" [formControlName]="'value'" >
+       </mat-form-field>
      </mat-grid-tile>
      <mat-grid-tile colspan="2" rowspan="1">
      </mat-grid-tile>

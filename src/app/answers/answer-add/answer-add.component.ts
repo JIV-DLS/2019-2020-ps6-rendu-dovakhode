@@ -10,8 +10,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 })
 
 export class AnswerAddComponent implements OnInit {
-constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<AnswerAddComponent>,
-            @Inject(MAT_DIALOG_DATA) public answerWithImage) {}
+constructor(public formBuilder: FormBuilder, public dialogRef: MatDialogRef<AnswerAddComponent>) {}
 
 
   answerForm: FormGroup;
