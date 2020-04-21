@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Answer} from '../../../models/answer.model';
 import {AnswerAddComponent} from '../../answers/answer-add/answer-add.component';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-edit-question',

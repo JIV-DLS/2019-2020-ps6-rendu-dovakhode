@@ -92,9 +92,13 @@ import { SubThemeAddComponent } from './subThemes/sub-theme-add/sub-theme-add.co
 import { SubThemeListComponent } from './subThemes/sub-theme-list/sub-theme-list.component';
 import {SubthemeService} from '../services/subtheme.service';
 import {ThemeServices} from '../services/theme.services';
+import { QuizRecapComponent } from './quizzes/quiz-recap/quiz-recap.component';
+import { QuestionRecapComponent } from './questions/question-recap/question-recap.component';
+import {AnswerRecapComponent} from './answers/answer-recap/answer-recap.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
+  {path: 'quiz-recap/:id', component: QuizRecapComponent, data: {routeName: 'Recapitulation des quizs'}},
   {path: 'quiz-list', component: QuizDisplayListComponent, data: {routeName: 'Liste de quiz'}},
   {path: 'home-do-quiz', component: HomeDoQuizComponent, data: {routeName: 'Choix du type de quiz'}},
   {path: 'home-quiz-gestion', component: HomeQuizComponent, data: {routeName: 'Gestion des quizs'}},
@@ -173,6 +177,9 @@ routes.forEach((eachRoute) => {
     SubThemeComponent,
     SubThemeAddComponent,
     SubThemeListComponent,
+    QuizRecapComponent,
+    QuestionRecapComponent,
+    AnswerRecapComponent,
   ],
   entryComponents: [
     QuestionsComponent,
