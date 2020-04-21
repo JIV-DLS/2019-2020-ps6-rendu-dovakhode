@@ -33,7 +33,6 @@ export class QuestionAddComponent implements OnInit {
   @Output()
   questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
   public imagePreview: string;
-  @ViewChild('answerWithImage') answerWithImage: MatSlideToggle;
 
   ngOnInit() {
     this.question = new Question();
@@ -61,7 +60,6 @@ export class QuestionAddComponent implements OnInit {
     });
   }
   dragAddAnswer() {
-    this.answerWithImage.checked = true;
     this.addAnswer();
   }
   addAnswer() {
@@ -73,9 +71,8 @@ export class QuestionAddComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AnswerAddComponent, {
-      width: '800px',
-      height: this.answerWithImage.checked ? '380px' : '300px',
-      data: this.answerWithImage.checked
+      width: '60%',
+      height: '60%',
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
