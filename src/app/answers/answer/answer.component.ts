@@ -10,7 +10,6 @@ import {QuestionPlayedService} from '../../../services/questionPlayed.service';
   styleUrls: ['./answer.component.scss']
 })
 export class AnswerComponent implements OnInit {
-  trials = 0;
   @Input()
   answer: Answer;
 
