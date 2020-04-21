@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   title = environment.appName;
   playingState() {
     const paths = this.location.path(true).split('/');
-    return !(paths[1] === 'quiz-do' && paths[3] === undefined) && !(paths[1] === 'quiz-do' && (paths[3] === 'end' || paths[3] === 'recap-start' || paths[3] === 'recap'));
+    return !(paths[1] === 'quiz-do');
   }
   ngOnInit(): void {
     if (this.playingState()) {

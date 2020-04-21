@@ -1,9 +1,11 @@
 app-question-recap{
-  height: 462px;
-  max-height: 462px;
+  max-height: 50%;
   overflow-y:scroll;
 }
 
 .suivant{
   background-color: #45c15c;
+}
+mat-card{
+  height: 100%;
 }
