@@ -23,7 +23,7 @@ export class HomeQuizComponent implements OnInit {
       case 0:
         dialogRef = this.dialog.open(QuizAddComponent, {
           width: '70%',
-          height: '60%',
+          height: '90%',
           closeOnNavigation: true
         });
         /*dialogRef.afterClosed().subscribe(quiz => {
