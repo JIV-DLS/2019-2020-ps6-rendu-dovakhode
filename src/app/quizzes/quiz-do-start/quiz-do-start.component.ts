@@ -18,7 +18,7 @@ export class QuizDoStartComponent implements OnInit {
   quiz: Quiz = DEFAULT_QUIZ;
   Evolution: Evolution;
   idPatient: number;
-
+  quit: number;
   constructor(public quizService: QuizService,
               private location: Location,
               private route: ActivatedRoute,
@@ -29,12 +29,22 @@ export class QuizDoStartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.quit = 0;
     this.idPatient = + (this.route.snapshot.params.idPatient);
     this.quizService.getQuizById ( + this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
         this.initialize(quiz);
       }, (error) => {this.retour(); });
 
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Escape') {
+        this.quit += 1;
+        if (this.quit >= 2) {
+          this.quit = 0;
+          this.quitter();
+        }
+      }
+    });
   }
 
   retour() {
@@ -55,6 +65,10 @@ export class QuizDoStartComponent implements OnInit {
     });
 
 
+  }
+
+  quitter() {
+    this.router.navigate(['/quiz-list', {do: true , idPatient: this.idPatient}]);
   }
 
 }
