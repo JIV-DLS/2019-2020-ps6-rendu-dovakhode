@@ -18,6 +18,8 @@ export class ProfilsListComponent implements OnInit {
   public profilList: Profil[] = [];
   public doQuiz;
   public inviteToCreateProfil = null;
+  @Output()
+  profilClicked: EventEmitter<Profil> = new EventEmitter<Profil>();
   loading: boolean;
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
@@ -45,7 +47,8 @@ export class ProfilsListComponent implements OnInit {
 
     });
   }
-  quizSelected(selected: boolean) {
+  quizSelected(profil: Profil) {
+    this.profilClicked.emit(profil);
   }
   deleteProfil(comfirm: boolean, profil: Profil) {
     if (comfirm) {this.profilService.deleteProfil(profil).subscribe(() => {

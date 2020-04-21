@@ -1,0 +1,33 @@
+<mat-grid-list cols="4" rowHeight="20px" >
+  <div  style="background-color: burlywood" *ngFor="let evol of reverseQuiz; ">
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%">Nom du Quiz joué: {{evol.quizNom}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%">Difficulté :{{evol.quizDifficulty}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%"> Dte de jeu: {{evol.dateCreation | date}}</span>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%">Nombre de question du quiz : {{evol.quizQuestion}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%">Nombre de question répondu du premier coup : {{FirstTrialSucceed(evol)}} / {{evol.quizQuestion}}</span>
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="5">
+
+      --------------------------------------------------------------------------------------------------
+    </mat-grid-tile>
+
+
+
+  </div>
+
+
+
+</mat-grid-list>
