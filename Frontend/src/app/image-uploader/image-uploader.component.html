@@ -1,5 +1,5 @@
 <img *ngIf="!editable"  [src]="imagePreview?imagePreview:'../../../assets/Default/imageNotFound.png'"
-     style=" height: 100%;width: 100%;" [alt]="imagePreview?label:'NotFound Image'"/>
+     style=" height: 100%;width: 90%;" [alt]="imagePreview?label:'NotFound Image'"/>
 <div style=" height: 100%;width: 100%;" *ngIf="editable">
   <div *ngIf="editByLink" style=" height: 100%;width: 100%;padding-top: 7%;">
     <p class="font-italic">Faite un clic droit sur l'image que vous aimeriez copier puis faite <b>Copier l'adresse de l'image</b> puis coller le dans le champs ci-dessous! Ensuite appuyer sur le bouton pour faire le téléchargement.</p>

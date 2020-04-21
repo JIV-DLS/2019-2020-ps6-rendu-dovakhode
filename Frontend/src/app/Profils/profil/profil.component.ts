@@ -31,6 +31,7 @@ export class ProfilComponent implements OnInit {
       this.profilDialogOpened = false;
       if (response != null) {
       this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
+      alert('-- New profil image --' + this.profil.image);
       }
       });
   }
@@ -46,7 +47,6 @@ export class ProfilComponent implements OnInit {
       });
     }
     replaceProfileByData(profil, data) {
-     // alert(data.age + '-- data age --');
       profil.age = data.age;
       profil.nom = data.nom;
       profil.prenom = data.prenom;
@@ -54,6 +54,5 @@ export class ProfilComponent implements OnInit {
       profil.recommandations = data.recommandations;
       profil.sexe = data.sexe;
       profil.image = data.image;
-     // alert(profil.age + ' -- replacing --');
     }
 }

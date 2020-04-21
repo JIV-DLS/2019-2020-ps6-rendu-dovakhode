@@ -24,11 +24,10 @@ import {ProfilComponent} from '../profil/profil.component';
 export class ProfilEditComponent implements OnInit {
   public profilForm: FormGroup;
   public value;
-
-
   imagePreview: string;
+
   @Output()
-  profileCreated: EventEmitter<Profil> = new EventEmitter<Profil>();
+  profileCreated: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(@Inject(MAT_DIALOG_DATA) public profil: Profil,
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<ProfilComponent>,
@@ -40,6 +39,7 @@ export class ProfilEditComponent implements OnInit {
   ngOnInit(): void {
    // this.value = this.profil.sexe;
     this.initiForm(this.profil);
+    // this.imagePreview = this.profil.image;
   }
 
   get nom() {
@@ -61,9 +61,7 @@ export class ProfilEditComponent implements OnInit {
   editTheProfil() {
     if (this.conform()) {
       const profilToModify: Profil =  (this.profilForm.getRawValue()) as Profil;
-      profilToModify.image = this.profil.image;
-      this.profileCreated.emit(profilToModify);
-
+      this.profileCreated.emit(true);
       this.profilService
         .updateProfil(profilToModify,  this.profilForm.get('image') == null ? null : this.profilForm.get('image').value )
         .subscribe((profil) => {
@@ -76,9 +74,10 @@ export class ProfilEditComponent implements OnInit {
       /* tslint:disable */
       this.dialogRef.close({
         profil : profilToModify});
-
     }
-
+  }
+  cancelEdit () {
+    this.initiForm(this.profil);
   }
 
   conform(){
