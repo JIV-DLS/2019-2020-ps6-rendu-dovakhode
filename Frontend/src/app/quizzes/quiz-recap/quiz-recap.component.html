@@ -16,16 +16,22 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1">
-      <button color="primary" style="width: 100%;height: 100%;" (click)="precedent()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button *ngIf="(index != 0)" color="primary" style="width: 100%;height: 100%;" (click)="precedent()" mat-flat-button aria-label="Example icon-button with a heart icon">
         <mat-icon>keyboard_arrow_left</mat-icon>
         Précédent
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1">
-      <button color="primary" style="width: 100%;height: 100%;" (click)="suivant()" mat-flat-button aria-label="Example icon-button with a heart icon">
-        <mat-icon>keyboard_arrow_right</mat-icon>
+      <button *ngIf="(index < quiz.questions.length - 1); else elseBlock" color="primary" style="width: 100%;height: 100%;" (click)="suivant()" mat-flat-button aria-label="Example icon-button with a heart icon">
         Suivant
+        <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
+      <ng-template #elseBlock>
+        <button class="suivant" color="primary" style="width: 100%;height: 100%;" (click)="suivant()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Fin
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </ng-template>
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>
