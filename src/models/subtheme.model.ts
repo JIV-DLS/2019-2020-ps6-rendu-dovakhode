@@ -1,11 +1,11 @@
 export class Subtheme {
   id: number;
-  idTheme: number;
+  themeId: number;
   label: string;
-  constructor(label?: string, idTheme?: number, id?: number) {
+  constructor(label?: string, themeId?: number, id?: number) {
     this.label = '';
     if (label) { this.label = label; }
-    if (idTheme) { this.idTheme = idTheme; }
+    if (themeId) { this.themeId = themeId; }
     if (id) { this.id = id; }
   }
 

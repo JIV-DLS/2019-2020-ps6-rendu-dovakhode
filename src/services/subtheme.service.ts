@@ -23,7 +23,7 @@ export class SubthemeService {
   this.subThemesSubject.next(this.Subthemes);
   }
   addSubTheme(subTheme: Subtheme): Observable<Question> {
-    return this.http.post<Question>(this.subThemeUrl(subTheme.idTheme), subTheme).pipe(
+    return this.http.post<Question>(this.subThemeUrl(subTheme.themeId), subTheme).pipe(
 
       tap((newQuestion: Question) => {
       }),
@@ -31,7 +31,7 @@ export class SubthemeService {
     );
   }
   deleteSubTheme(subTheme: Subtheme): Observable<Subtheme>  {
-    return this.http.delete< Subtheme>(this.subThemeUrl(subTheme.idTheme) + '/' + subTheme.id).pipe(
+    return this.http.delete< Subtheme>(this.subThemeUrl(subTheme.themeId) + '/' + subTheme.id).pipe(
       tap((quizDeleted) => {
       }),
       catchError(this.handleError< Subtheme>('deleteSubTheme', undefined))
@@ -46,7 +46,7 @@ export class SubthemeService {
   }
 
   updateSubTheme(subTheme: Subtheme): Observable<Subtheme>  {
-    return this.http.put< Subtheme>(this.subThemeUrl(subTheme.idTheme) + '/' + subTheme.id, subTheme).pipe(
+    return this.http.put< Subtheme>(this.subThemeUrl(subTheme.themeId) + '/' + subTheme.id, subTheme).pipe(
       tap((quizDeleted) => {
       }),
       catchError(this.handleError< Subtheme>('UpdateSubTheme', undefined))

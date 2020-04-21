@@ -22,8 +22,8 @@ export class HomeQuizComponent implements OnInit {
     switch (dialogNumber) {
       case 0:
         dialogRef = this.dialog.open(QuizAddComponent, {
-          width: this.dialogWidth,
-          maxHeight: this.dialogHeight,
+          width: '70%',
+          height: '60%',
           closeOnNavigation: true
         });
         /*dialogRef.afterClosed().subscribe(quiz => {
