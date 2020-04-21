@@ -20,6 +20,6 @@ export class QuizStartRecapComponent implements OnInit {
   }
 
   goRecap() {
-    this.router.navigate(['/quiz-do/' + this.quizId + '/quiz-recap/' + this.patientId, { idEvolution: this.evolutionId}]);
+    this.router.navigate(['/quiz-do/' + this.quizId + '/recap/' + this.patientId, { idEvolution: this.evolutionId}]);
   }
 }

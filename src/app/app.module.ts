@@ -100,8 +100,8 @@ import { QuizStartRecapComponent } from './quizzes/quiz-start-recap/quiz-start-r
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
-  {path: 'quiz-do/:id/quiz-recap/:idPatient', component: QuizRecapComponent, data: {routeName: 'Recapitulation des quizs'}},
-  {path: 'quiz-do/:id/quiz-recap-start/:idPatient', component: QuizStartRecapComponent, data: {routeName: 'Recapitulation des quizs'}},
+  {path: 'quiz-do/:id/recap/:idPatient', component: QuizRecapComponent, data: {routeName: 'Recapitulation des quizs'}},
+  {path: 'quiz-do/:id/recap-start/:idPatient', component: QuizStartRecapComponent, data: {routeName: 'Recapitulation des quizs'}},
   {path: 'quiz-list', component: QuizDisplayListComponent, data: {routeName: 'Liste de quiz'}},
   {path: 'home-do-quiz', component: HomeDoQuizComponent, data: {routeName: 'Choix du type de quiz'}},
   {path: 'home-quiz-gestion', component: HomeQuizComponent, data: {routeName: 'Gestion des quizs'}},
