@@ -34,7 +34,7 @@ export class QuizRecapComponent implements OnInit {
     this.index = this.index < this.quiz.questions.length - 1 ? this.index + 1 : this.quiz.questions.length - 1;
   }
 
-  private retour() {
+  public retour() {
   this.location.back();
   }
 
