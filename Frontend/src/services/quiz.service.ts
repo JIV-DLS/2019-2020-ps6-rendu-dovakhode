@@ -79,7 +79,9 @@ export class QuizService {
           quiz.questions[i].answers[j].tmpUrl = ' ';
           // quiz.questions[i].answers[i].image = ' ';
           if (typeof questions[i].answers[j].image === 'object' && questions[i].answers[j].image !== null) {
+            if (quiz.questions[i].answers[j].value === null) {
             quiz.questions[i].answers[j].value = quiz.questions[i].label + '_' + j + '_';
+            }
             quizData.append('quiz_image', questions[i].answers[j].image, 'answer_' + i + '_' + j + ' ' + questions[i].answers[j].value);
           }
         }
