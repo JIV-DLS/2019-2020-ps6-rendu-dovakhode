@@ -4,7 +4,7 @@
     <mat-card-header>
     </mat-card-header>
     <mat-card-content style="border-bottom: black solid 1px;">
-      <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
+      <mat-grid-list cols="8" rowHeight="13px" style="width: 100%">
 
         <mat-grid-tile colspan="4" rowspan="4">
           <mat-form-field >
@@ -15,7 +15,7 @@
       <mat-grid-tile colspan="4" rowspan="16">
           <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
             <mat-card-content style=" height: 100%;width: 100%;">
-              <app-image-uploader editable="true" [label]="nom.value"  [imagePreview]="imagePreview" [form]="profilForm"></app-image-uploader>
+              <app-image-uploader editable="true" [label]="nom.value"  [imagePreview]="profil.image" [form]="profilForm"></app-image-uploader>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
@@ -63,7 +63,7 @@
 
             </mat-form-field>
           </mat-grid-tile>
-          <mat-grid-tile colspan="8" rowspan="10" style="width: 100%">
+          <mat-grid-tile colspan="8" rowspan="8" style="width: 100%">
             <mat-form-field style="width: 100%">
               <mat-label>Recommandations</mat-label>
               <textarea matInput placeholder="Laisser des recommandations" [formControlName]="'recommandations'"></textarea>
@@ -73,9 +73,12 @@
 
     </mat-card-content>
     <mat-card-footer style="padding-right: 12px;">
-      <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
-        <mat-grid-tile colspan="8" rowspan="4">
-          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="editTheProfil()">Confirmer la modification</button>
+      <mat-grid-list cols="8" rowHeight="12px" style="width: 100%">
+        <mat-grid-tile colspan="4" rowspan="4">
+          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="editTheProfil()">Confirmer la modification</button>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" rowspan="4">
+          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-secondary" (click)="cancelEdit()">Annuler la modification</button>
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-footer>
