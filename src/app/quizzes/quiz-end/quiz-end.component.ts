@@ -52,11 +52,13 @@ export class QuizEndComponent implements OnInit {
   resultat() {
     console.log(this.questionsPlayed);
     const resultat = [ 0 , 0 ];
-    for (const question of this.questionsPlayed) {
-      if (question.trials <= 1) {
-        resultat[0] += 1;
-      } else if (+question.trials >= 2) {
-        resultat[1] += 1;
+    if (this.questionsPlayed !== undefined) {
+      for (const question of this.questionsPlayed) {
+        if (question.trials <= 1) {
+          resultat[0] += 1;
+        } else if (+question.trials >= 2) {
+          resultat[1] += 1;
+        }
       }
     }
     return resultat;
