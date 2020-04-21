@@ -95,6 +95,7 @@ import {ThemeServices} from '../services/theme.services';
 import { QuizRecapComponent } from './quizzes/quiz-recap/quiz-recap.component';
 import { QuestionRecapComponent } from './questions/question-recap/question-recap.component';
 import {AnswerRecapComponent} from './answers/answer-recap/answer-recap.component';
+import { NomprenomPipe } from './Profils/_pipes/subDirectory/nomprenom.pipe';
 import { QuizStartRecapComponent } from './quizzes/quiz-start-recap/quiz-start-recap.component';
 
 const routes: Routes = [
@@ -182,6 +183,7 @@ routes.forEach((eachRoute) => {
     QuizRecapComponent,
     QuestionRecapComponent,
     AnswerRecapComponent,
+    NomprenomPipe,
     QuizStartRecapComponent,
   ],
   entryComponents: [

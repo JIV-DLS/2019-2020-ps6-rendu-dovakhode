@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const { Evolution } = require('../../models')
+const { QuestionPlayed } = require('../../models')
 const questionPlayedRouter = require('./questionPlayed')
 
 const router = new Router()
@@ -26,8 +27,9 @@ router.get('/', (req, res) => {
 })
 router.get('/:evolutionId', (req, res) => {
   try {
-    const quiz = Evolution.getById(req.params.evolutionId)
-    res.status(200).json(quiz)
+    const evolution = Evolution.getById(req.params.evolutionId)
+    evolution.questionPlayed = QuestionPlayed.get().filter(questionPlayed => questionPlayed.EvolutionId === evolution.id);
+    res.status(200).json(evolution)
   } catch (err) {
     res.status(500).json(err)
   }
