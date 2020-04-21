@@ -7,5 +7,8 @@ module.exports = new BaseModel('Evolution', {
   quizId: Joi.number(),
   dateCreation: Joi.date(),
   patientId:Joi.number(),
+  quizNom: Joi.string(),
+  quizDifficulty : Joi.string(),
+  quizQuestion : Joi.number(),
 
 })
