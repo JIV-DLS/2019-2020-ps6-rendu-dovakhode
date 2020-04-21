@@ -1,4 +1,4 @@
-import { NomprenomPipe } from './nomprenom.pipe';
+import { NomprenomPipe } from './subDirectory/nomprenom.pipe';
 
 describe('NomprenomPipe', () => {
   it('create an instance', () => {
