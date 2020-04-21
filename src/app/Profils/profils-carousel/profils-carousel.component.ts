@@ -16,7 +16,7 @@ import {Subject} from 'rxjs';
 export class ProfilsCarouselComponent implements OnInit {
 
   @Input()  profilChanged: Subject<any>;
-  @Input()  profilSearched: string;
+  @Input()  profilSearched = '';
   @Input()
   public profilsList: Profil[] = [];
   public inviteToCreateProfil = null;
