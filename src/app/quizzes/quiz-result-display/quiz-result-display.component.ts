@@ -4,6 +4,7 @@ import {Evolution} from '../../../models/evolution.model';
 import {EvolutionService} from '../../../services/evolution.service';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
+import {Location} from '@angular/common';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
 
 @Component({
@@ -15,10 +16,10 @@ export class QuizResultDisplayComponent implements OnInit {
 
   idPatient: number;
   evolTab: Evolution[] = [];
-  reverseQuiz: Evolution[] = [];
+  reverseEvolTab: Evolution[] = [];
   public quiz: Quiz;
   public  nbEssai = 0;
-  constructor(private route: ActivatedRoute , private evolutionService: EvolutionService, private quizService: QuizService) { }
+  constructor(private route: ActivatedRoute , private evolutionService: EvolutionService, private quizService: QuizService, private location: Location) { }
 
   ngOnInit() {
     this.idPatient = +this.route.snapshot.params.id;
@@ -30,12 +31,15 @@ export class QuizResultDisplayComponent implements OnInit {
     } );
 
   }
+  public back() {
+    this.location.back();
+  }
 
   reverseArr(input) {
     for (let i = input.length - 1; i >= 0; i--) {
-      this.reverseQuiz.push(input[i]);
+      this.reverseEvolTab.push(input[i]);
     }
-    this.evolTab = this.reverseQuiz;
+    this.evolTab = this.reverseEvolTab;
   }
 
   FirstTrialSucceed(evol: Evolution) {
