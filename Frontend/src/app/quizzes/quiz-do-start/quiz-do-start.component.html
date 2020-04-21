@@ -1,5 +1,5 @@
-<p>Bienvenue sur le quiz "{{quiz.label}}"
+<p class="titre">Bienvenue sur le quiz "{{quiz.label}}"
   qui comporte {{quiz.questions.length}} question{{quiz.questions.length>1?'s':''}}.
 </p>
+<h6> Cliquez sur le bouton ci-dessous pour commencer</h6>
 <button  mat-raised-button color="primary" (click)="start(quiz)" class="commencer">C'est parti</button>
-<button  mat-raised-button  color="accent" [routerLink]="['/quiz-list',{do:true , idPatient: idPatient}]" class="retour">Retour</button>
