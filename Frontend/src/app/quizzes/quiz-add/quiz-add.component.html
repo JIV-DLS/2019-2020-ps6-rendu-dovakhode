@@ -59,9 +59,9 @@
       <mat-grid-tile colspan="3" rowspan="4">
         <mat-form-field>
           <mat-label>Thème*</mat-label>
-          <mat-select (change)="getSubTheme()" [formControlName]="'theme'" >
+          <mat-select #matSelect (selectionChange)="getSubTheme(matSelect.value)" [formControlName]="'theme'" >
             <mat-option *ngFor="let theme of themesValues" [value]="theme">
-              {{theme}}
+              {{theme.label}}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="theme.invalid">{{getThemeErrorMessage()}}</mat-error>
@@ -71,14 +71,14 @@
       <mat-grid-tile colspan="3" rowspan="4">
         <mat-form-field>
           <mat-label>Sous-Thème</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let Subtheme of SubThemesValues" [value]="theme">
-              {{Subtheme}}
+          <mat-select [formControlName]="'subTheme'">
+            <mat-option *ngFor="let subtheme of subThemesValues" [value]="subtheme">
+              {{subtheme.label}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="4"><button mat-button (click)="manageSubTheme(0)"><mat-icon>add</mat-icon></button></mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="4"><button mat-button (click)="manageSubTheme()"><mat-icon>add</mat-icon></button></mat-grid-tile>
       <mat-grid-tile colspan="8" rowspan="1">
         <mat-divider></mat-divider>
       </mat-grid-tile>

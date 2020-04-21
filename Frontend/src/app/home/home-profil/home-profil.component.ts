@@ -21,8 +21,8 @@ export class HomeProfilComponent implements OnInit {
   viewProfil(profil: Profil) {
     console.log(profil.nom);
     const dialogRef = this.dialog.open(ProfilComponent, {
-      width: '90%',
-      height: '80%',
+      width: '70%',
+      height: '60%',
       data: profil,
     });
 

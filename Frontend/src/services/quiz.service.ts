@@ -10,6 +10,7 @@ import {SnackSuccessComponent} from '../app/snack/snack-success/snack-success.co
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {FormArray} from '@angular/forms';
+import {Theme} from '../models/themes.model';
 
 
 @Injectable({

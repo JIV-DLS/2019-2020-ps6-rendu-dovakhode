@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { QuizService } from '../../../services/quiz.service';
@@ -15,6 +15,9 @@ import {ThemeServices} from '../../../services/theme.services';
 import {Subscription} from 'rxjs';
 import {SubThemeListComponent} from '../../subThemes/sub-theme-list/sub-theme-list.component';
 import {ThemeListComponent} from '../../themes/theme-list/theme-list.component';
+import {SubthemeService} from '../../../services/subtheme.service';
+import {Subtheme} from '../../../models/subtheme.model';
+import {Theme} from '../../../models/themes.model';
 
 @Component({
   selector: 'app-quiz-form',
@@ -23,19 +26,21 @@ import {ThemeListComponent} from '../../themes/theme-list/theme-list.component';
 })
 
 export class QuizAddComponent implements OnInit {
+  public idTheme: any;
 
   constructor(public dialogRef: MatDialogRef<QuizAddComponent>,
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
               public quizService: QuizService,
-              private themeService: ThemeServices) {
+              public themeService: ThemeServices,
+              public subThemeService: SubthemeService) {
 
-    }
-    // Form creation
-    // You can also question-add validators to your inputs such as required, maxlength or even create your own validator!
-    // More information: https://angular.io/guide/reactive-forms#simple-form-validation
-    // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
-    // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
+  }
+  // Form creation
+  // You can also question-add validators to your inputs such as required, maxlength or even create your own validator!
+  // More information: https://angular.io/guide/reactive-forms#simple-form-validation
+  // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
+  // Advanced validation: https://angular.io/guide/form-validation#reactive-form-validation
   get questions() {
     return this.quizForm.get('questions') as FormArray;
   }
@@ -55,17 +60,39 @@ export class QuizAddComponent implements OnInit {
    */
   @Input() quiz: Quiz = null;
   public quizForm: FormGroup;
-  Subject: Subscription;
-  public themesValues = [];
-  public SubThemesValues = [];
+  subscription: Subscription;
+  public themesValues: Theme[];
+  public subThemesValues: Subtheme[];
   public difficultiesValues = Object.values(difficulte);
   private questionDialogOpened = false;
   public imagePreview: string;
   files: any = [];
 
+  changeColor() {
+    console.log('je suis laaaaa');
+  }
   ngOnInit() {
     this.quiz = new Quiz();
     this.initializeTheForm();
+    this.getAllTheme();
+    this.subscription = this.subThemeService.subThemesSubject.subscribe((subthemes) => {
+       this.subThemesValues = subthemes;
+     });
+
+  }
+
+  private getAllTheme() {
+    this.themeService.getTheme().subscribe((themes) => {
+      this.themesValues = themes;
+    });
+  }
+
+  getThemId(label: string ) {
+    for (let i = 0 ; i <= this.themesValues.length; i++) {
+      if (this.themesValues[i].label === label) {
+        return this.themesValues[i].id;
+      }
+    }
   }
 
   initializeTheForm() {
@@ -93,8 +120,11 @@ export class QuizAddComponent implements OnInit {
     });
   }
 
-  getSubTheme() {
-
+  getSubTheme(value: Theme) {
+    this.idTheme = value.id;
+    this.subThemeService.getSubTheme(this.idTheme).subscribe((subThemes) => {
+      this.subThemeService.Subthemes = subThemes;
+      this.subThemeService.emitSubThemes(); });
   }
   addQuiz() {
     // We retrieve here the quiz object from the quizForm and we cast the type "as Quiz".
@@ -104,10 +134,7 @@ export class QuizAddComponent implements OnInit {
       return;
     }
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
-     // quizToCreate.question = [];
-    if (quizToCreate.subTheme == null) {
-      quizToCreate.subTheme = quizToCreate.theme;
-    }
+    // quizToCreate.question = [];
     if (quizToCreate.difficulty == null) {
       quizToCreate.difficulty = difficulte.Normale;
     }
@@ -116,20 +143,24 @@ export class QuizAddComponent implements OnInit {
     // Do you need to log your object here in your class? Uncomment the code below
     // and open your console in your browser by pressing F12 and choose the tab "Console".
     // You will see your quiz object when you click on the create button.
-     // console.log('Add quiz: ', quizToCreate);
+    // console.log('Add quiz: ', quizToCreate);
 
     // Now, question-add your quiz in the list!
+
+    quizToCreate.theme = this.quizForm.get('theme').value.label;
+    quizToCreate.subTheme = this.quizForm.get('subTheme').value.label;
+
     this.quizService.addQuiz(quizToCreate, this.quizForm.get('image').value, this.questions.value).subscribe((quiz) => {
       if (quiz !== undefined) {
-       this.quiz = quiz;
-       this.dialogRef.close(quiz);
-       this.initializeTheForm();
+        this.quiz = quiz;
+        this.dialogRef.close(quiz);
+        this.initializeTheForm();
       }
-     }); // getQuiz().push(quizToCreate);
-     /*this.snackBar.openFromComponent(SnackModificationComponent, {
-      duration: 1000,
-      data: 'Quizz created succesfuly!'
-    });*/
+    }); // getQuiz().push(quizToCreate);
+    /*this.snackBar.openFromComponent(SnackModificationComponent, {
+     duration: 1000,
+     data: 'Quizz created succesfuly!'
+   });*/
   }
 
 
@@ -143,8 +174,8 @@ export class QuizAddComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionAddComponent, {
-      width: '850px',
-      maxHeight: '500px',
+      width: '650px',
+      height: '800px',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
     });
     dialogRef.afterClosed().subscribe(questionForm => {
@@ -161,16 +192,16 @@ export class QuizAddComponent implements OnInit {
   }
 
   getLabelErrorMessage() {
-      if (this.label.hasError('required')) {
-        return environment.formFieldRequired;
-      }
-      return this.label.hasError('minLenght') ? 'Veuillez entrer 5 caractère au minimum' : '';
+    if (this.label.hasError('required')) {
+      return environment.formFieldRequired;
+    }
+    return this.label.hasError('minLenght') ? 'Veuillez entrer 5 caractère au minimum' : '';
   }
   getThemeErrorMessage() {
-      if (this.theme.hasError('required')) {
-        return environment.formSelectRequired;
-      }
-      return this.theme.hasError('minLenght') ? 'Veuillez entrer 3 caractère au minimum' : '';
+    if (this.theme.hasError('required')) {
+      return environment.formSelectRequired;
+    }
+    return this.theme.hasError('minLenght') ? 'Veuillez entrer 3 caractère au minimum' : '';
   }
 
   deleteImage() {
@@ -213,17 +244,23 @@ export class QuizAddComponent implements OnInit {
       maxHeight: '400px',
     });
     dialogRef.afterClosed().subscribe(response => {
-
+      if (response) {
+        this.themesValues = response;
+        this.subThemesValues = [];
+      }
     });
   }
-  manageSubTheme(idTheme: number) {
-    if (idTheme !== 0) {
+  manageSubTheme() {
+    if (this.idTheme) {
       const dialogRef = this.dialog.open(SubThemeListComponent, {
         width: '850px',
         maxHeight: '400px',
-        data: 0
+        data: this.idTheme
       });
       dialogRef.afterClosed().subscribe(response => {
+        if (response) {
+          this.subThemesValues = response ;
+        }
       });
     }
 

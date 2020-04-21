@@ -30,7 +30,7 @@ export class ThemeServices {
       catchError(this.handleError<Question>('UpdateTheme', undefined))
     );
   }
-  getTheme(): Observable<Theme[]>  {
+  getTheme()  {
     return this.http.get<Theme[]>(this.themeUrl).pipe(
       tap((theme) => {
       }),
