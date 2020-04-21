@@ -174,8 +174,8 @@ export class QuizAddComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(QuestionAddComponent, {
-      width: '650px',
-      height: '800px',
+      width: '60%',
+      height: '70%',
       data: this.quiz ? this.quiz.questions : DEFAULT_QUIZ.questions
     });
     dialogRef.afterClosed().subscribe(questionForm => {
