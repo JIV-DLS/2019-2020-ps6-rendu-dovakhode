@@ -95,10 +95,14 @@ import {ThemeServices} from '../services/theme.services';
 import { QuizRecapComponent } from './quizzes/quiz-recap/quiz-recap.component';
 import { QuestionRecapComponent } from './questions/question-recap/question-recap.component';
 import {AnswerRecapComponent} from './answers/answer-recap/answer-recap.component';
+import { NomprenomPipe } from './Profils/_pipes/subDirectory/nomprenom.pipe';
+import { QuizResultDisplayComponent } from './quizzes/quiz-result-display/quiz-result-display.component';
+import { QuizStartRecapComponent } from './quizzes/quiz-start-recap/quiz-start-recap.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
-  {path: 'quiz-recap/:id', component: QuizRecapComponent, data: {routeName: 'Recapitulation des quizs'}},
+  {path: 'quiz-do/:id/recap/:idPatient', component: QuizRecapComponent, data: {routeName: 'Recapitulation des quizs'}},
+  {path: 'quiz-do/:id/recap-start/:idPatient', component: QuizStartRecapComponent, data: {routeName: 'Recapitulation des quizs'}},
   {path: 'quiz-list', component: QuizDisplayListComponent, data: {routeName: 'Liste de quiz'}},
   {path: 'home-do-quiz', component: HomeDoQuizComponent, data: {routeName: 'Choix du type de quiz'}},
   {path: 'home-quiz-gestion', component: HomeQuizComponent, data: {routeName: 'Gestion des quizs'}},
@@ -109,6 +113,7 @@ const routes: Routes = [
   {path: 'quiz-do/:evol' , component: QuizDoComponent, data: {routeName: 'Jeu en cour'}},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent, data: {routeName: 'Debut du quiz'}},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent, data: {routeName: 'Affichage d\'un quiz'}},
+  {path: 'resultats/:id' , component: QuizResultDisplayComponent, data: {routeName: 'Resultats'}},
   {path: 'profils-carousel', component: ProfilListDisplayComponent, data: {routeName: 'Choix du patient pour le jeu'}},
   {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent, data: {routeName: 'Jeu de quiz par un patient'}},
   { path: 'not-found', component: Error404Component , data: {routeName: 'Page inacessible'}},
@@ -180,6 +185,11 @@ routes.forEach((eachRoute) => {
     QuizRecapComponent,
     QuestionRecapComponent,
     AnswerRecapComponent,
+    NomprenomPipe,
+    QuizResultDisplayComponent,
+
+    QuizStartRecapComponent,
+
   ],
   entryComponents: [
     QuestionsComponent,

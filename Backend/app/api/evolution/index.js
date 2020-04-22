@@ -1,8 +1,17 @@
 const { Router } = require('express')
 const { Evolution } = require('../../models')
+const { QuestionPlayed } = require('../../models')
 const questionPlayedRouter = require('./questionPlayed')
 
 const router = new Router()
+
+function getByIdPatient(id) {
+  const ques = []
+  for (let i = 0; i < Evolution.items.length; i++) {
+    if (Evolution.items[i].patientId === parseInt(id, 10)) { ques.push(Evolution.items[i]) }
+  }
+  return ques
+}
 
 router.post('/', (req, res) => {
   try {
@@ -24,10 +33,23 @@ router.get('/', (req, res) => {
     res.status(500).json(err)
   }
 })
+router.get('/patient/:idPatient', (req, res) => {
+  try {
+    const evolution = getByIdPatient(req.params.idPatient)
+    evolution.questionPlayed = QuestionPlayed.get().filter(questionPlayed => questionPlayed.EvolutionId === evolution.id);
+    res.status(200).json(evolution)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
+
+
 router.get('/:evolutionId', (req, res) => {
   try {
-    const quiz = Evolution.getById(req.params.evolutionId)
-    res.status(200).json(quiz)
+    const evolution = Evolution.getById(req.params.evolutionId)
+    evolution.questionPlayed = QuestionPlayed.get().filter(questionPlayed => questionPlayed.EvolutionId === evolution.id);
+    res.status(200).json(evolution)
   } catch (err) {
     res.status(500).json(err)
   }

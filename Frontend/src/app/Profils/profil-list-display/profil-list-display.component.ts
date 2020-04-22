@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Profil} from '../../../models/profil.model';
 import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 import {ProfilServices} from '../../../services/profil.services';

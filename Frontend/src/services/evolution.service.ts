@@ -31,9 +31,12 @@ export class EvolutionService {
    this.emitEvolution();
 
   }
-  addEvolution(idQuiz: string, idPatient: number) {
+  addEvolution(quiz: Quiz, idPatient: number) {
     const evolution = new Evolution();
-    evolution.quizId = parseInt(idQuiz, 10);
+    evolution.quizId = quiz.id;
+    evolution.quizQuestion = quiz.questions.length;
+    evolution.quizDifficulty = quiz.difficulty;
+    evolution.quizNom = quiz.label ;
     evolution.patientId = idPatient;
     return this.http.post<Evolution>(this.evolutionUrl, evolution).pipe(
       tap((newAnswer) => {
@@ -71,6 +74,24 @@ export class EvolutionService {
         console.log('Récupération reussie');
       }),
       catchError(this.handleError<Evolution>('getEvolution', undefined))
+    );
+  }
+
+  getEvolutionByPatientId(id: number): Observable<Evolution[]> {
+    const url = this.evolutionUrl + '/patient/' + id.toString();
+    return this.http.get<Evolution[]>(url).pipe(
+      tap((quiz) => {
+        console.log('Récupération reussie');
+      }),
+      catchError(this.handleError<Evolution[]>('getEvolution', undefined))
+    );
+  }
+  getAll()  {
+    return this.http.get<Evolution[]>(this.evolutionUrl).pipe(
+      tap((quiz) => {
+        console.log('Récupération reussie');
+      }),
+      catchError(this.handleError<Evolution[]>('getEvolution', undefined))
     );
   }
 

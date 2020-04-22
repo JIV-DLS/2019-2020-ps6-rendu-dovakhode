@@ -1,0 +1,41 @@
+<mat-grid-list cols="4" rowHeight="20px" >
+  <mat-grid-tile colspan="3" rowspan="4">
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="4">
+    <button color="primary" class="backButton" (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <mat-icon>reply</mat-icon>
+      Retour
+    </button>
+  </mat-grid-tile>
+  <div  style="background-color: burlywood" *ngFor="let evol of reverseEvolTab; ">
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%">Nom du Quiz joué: {{evol.quizNom}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%">Difficulté :{{evol.quizDifficulty}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%"> Dte de jeu: {{evol.dateCreation | date}}</span>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%">Nombre de question du quiz : {{evol.quizQuestion}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <span style="width: 80%">Nombre de question répondu du premier coup : {{FirstTrialSucceed(evol)}} / {{evol.quizQuestion}}</span>
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="5">
+
+      --------------------------------------------------------------------------------------------------
+    </mat-grid-tile>
+
+
+
+  </div>
+
+
+
+</mat-grid-list>

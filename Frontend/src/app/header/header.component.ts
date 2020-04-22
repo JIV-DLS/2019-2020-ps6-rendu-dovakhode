@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {Quiz} from '../../models/quiz.model';
 import {Location} from '@angular/common';
@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
   headerName = environment.appName;
   routeName = '';
-  isOpened = false;
+  @Input() isOpened;
   public routeNames = RouteNames;
   @Output()
   selectEmitter: EventEmitter<null> = new EventEmitter<null>();
