@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Quiz} from '../../../models/quiz.model';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {difficulte, theme} from '../../../models/theme.models';
 import {Location} from '@angular/common';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,11 +9,8 @@ import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {Evolution} from '../../../models/evolution.model';
 import {EvolutionService} from '../../../services/evolution.service';
 import {QuestionPlayedService} from '../../../services/questionPlayed.service';
-import {Subscription} from 'rxjs';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
-import {Question} from '../../../models/question.model';
 import {QuestionService} from '../../../services/question.service';
-
 @Component({
   selector: 'app-quiz-do',
   templateUrl: './quiz-do.component.html',
@@ -25,15 +21,8 @@ export class QuizDoComponent implements OnInit {
   questionList: QuestionPlayed[] = [];
   index = 0;
   quiz: Quiz = DEFAULT_QUIZ;
-  private imageChanged: boolean;
-  private savedImage: string;
-  private questionDialogOpened = false;
   public quizForm: FormGroup;
-  public themesValues = Object.values(theme);
-  public difficultiesValues = Object.values(difficulte);
-  private imagePreview: string;
   loading: boolean;
-  evolutionSubscription: Subscription;
   constructor(private location: Location,
               public quizService: QuizService,
               private route: ActivatedRoute,
@@ -42,14 +31,13 @@ export class QuizDoComponent implements OnInit {
               public formBuilder: FormBuilder,
               private evolService: EvolutionService,
               private questionplayed: QuestionPlayedService,
-              private questionService: QuestionService) {
-
-  }
+              private questionService: QuestionService) {}
 
   ngOnInit() {
     this.loading = true;
     this.startWithEvolution();
   }
+
   startWithEvolution() {
     this.index = 0;
     const idEvol = +(this.route.snapshot.params.evol);
@@ -64,36 +52,28 @@ export class QuizDoComponent implements OnInit {
                 this.shuffle(this.quiz.questions[i].answers);
               }
               this.getQuestionPlayedList();
-
               this.shuffle(this.quiz.questions);
             }
           }, (error) => {this.retour(); });
       }
     );
   }
-
   shuffle(array) {
     // tslint:disable-next-line:one-variable-per-declaration
     let currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
-
       // And swap it with the current element.
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-
     return array;
   }
   initializeTheForm() {
     this.quizForm = this.quizzFormInitializer();
-
   }
 
   getQuestionPlayedList() {
@@ -109,13 +89,12 @@ export class QuizDoComponent implements OnInit {
       }
       this.loading = false;
       if (this.index >= this.quiz.questions.length ) {
-        this.router.navigate(['/quiz-do/' + this.quiz.id + '/end/' + this.evolution.patientId, { idEvolution: this.evolution.id}]);
+        this.router.navigate(['/quiz-do/' + this.quiz.id + '/recap-start/' + this.evolution.patientId, { idEvolution: this.evolution.id}]);
       }
     });
   }
 
   quizzFormInitializer() {
-
     return this.formBuilder.group({
       id: this.quiz.id,
       label: [this.quiz.label, [ Validators.required, Validators.minLength(5)]],
@@ -135,9 +114,10 @@ export class QuizDoComponent implements OnInit {
   get label() {
     return this.quizForm.get('label') as FormArray;
   }
+
   nextQuestion(trials: number) {
-    this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, this.evolution.id, trials).subscribe((questionPlayed) => {
-     console.log('ici' + questionPlayed); });
+    this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, this.evolution.id, trials).subscribe();
+
 
     if (this.index < this.quiz.questions.length - 1) {
       this.index = this.index + 1;

@@ -2,7 +2,7 @@
   <mat-grid-tile colspan="3" rowspan="1">
     <mat-form-field appearance="legacy">
       <mat-label>Rechercher par Nom ou Prenom</mat-label>
-      <input [(ngModel)]="searchedProfil.nom + searchedProfil.prenom" matInput placeholder="libéllé du profil">
+      <input #patientSearched [(ngModel)]="profilSearched.nom + profilSearched.prenom" matInput placeholder="libéllé du profil">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </mat-grid-tile>
@@ -19,6 +19,6 @@
     </button>
   </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="3">
-     <app-profil-list [profilChanged]="profilChanged" (profilSelected)="viewProfil($event)"></app-profil-list>
+     <app-profil-list [profilSearched]="patientSearched.value" [profilChanged]="profilChanged" (profilSelected)="viewProfil($event)"></app-profil-list>
     </mat-grid-tile>
 </mat-grid-list>

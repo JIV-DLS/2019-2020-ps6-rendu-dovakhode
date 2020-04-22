@@ -5,6 +5,7 @@ import {ProfilEditComponent} from '../profil-edit/profil-edit.component';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 import {Question} from '../../../models/question.model';
 import {FormBuilder} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profil',
@@ -16,7 +17,8 @@ export class ProfilComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public profil: Profil,
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<ProfilComponent>,
-              public formBuilder: FormBuilder) { }
+              public formBuilder: FormBuilder,
+              private  router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,6 +36,11 @@ export class ProfilComponent implements OnInit {
       alert('-- New profil image --' + this.profil.image);
       }
       });
+  }
+
+  results() {
+    this.router.navigate(['resultats/' + '' + this.profil.id]);
+    this.dialogRef.close(ProfilEditComponent);
   }
   private createProfilByData(profil) {
       return this.formBuilder.group({

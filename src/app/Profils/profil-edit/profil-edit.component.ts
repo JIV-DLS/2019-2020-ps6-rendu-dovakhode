@@ -57,6 +57,7 @@ export class ProfilEditComponent implements OnInit {
     });
   }
 
+
   editTheProfil() {
     if (this.conform()) {
       const profilToModify: Profil =  (this.profilForm.getRawValue()) as Profil;
