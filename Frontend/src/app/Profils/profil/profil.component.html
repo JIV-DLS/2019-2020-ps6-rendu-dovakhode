@@ -13,22 +13,22 @@
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="4">
+        <mat-grid-tile colspan="1" rowspan="3">
             <p>Prénom: {{this.profil.prenom}}</p>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="4">
+        <mat-grid-tile colspan="1" rowspan="3">
             <p>Age: {{this.profil.age}}</p>
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="1" rowspan="4">
-            <mat-radio-button checked>{{this.profil.sexe}}</mat-radio-button>
+        <mat-grid-tile colspan="1" rowspan="3">
+            <p>{{this.profil.sexe}}</p>
         </mat-grid-tile>
 
 
-        <mat-grid-tile colspan="1" rowspan="4">
+        <mat-grid-tile colspan="1" rowspan="3">
             <p>Stade de la maladie: {{this.profil.stade}}</p>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="5">
+        <mat-grid-tile colspan="3" rowspan="4">
           <p>Recommandations:</p>
         </mat-grid-tile>
         <mat-grid-tile colspan="3" rowspan="10">
@@ -36,8 +36,13 @@
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-content>
-    <mat-card-actions style="padding-right: 12px;">
-          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="editProfile()" >Modifier le profil</button>
-    </mat-card-actions>
+    <mat-grid-list cols="2" rowHeight="50px">
+      <mat-grid-tile colspan="1" rowspan="1" style="padding-right: 12px;">
+            <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="editProfile()" >Modifier le profil</button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1" >
+            <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-secondary" (click)="deleteProfile()" >Supprimer le profil</button>
+      </mat-grid-tile>
+    </mat-grid-list>
   </mat-card>
 
