@@ -37,7 +37,6 @@ export class ProfilEditComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-   // this.value = this.profil.sexe;
     this.initiForm(this.profil);
     // this.imagePreview = this.profil.image;
   }
@@ -77,7 +76,8 @@ export class ProfilEditComponent implements OnInit {
     }
   }
   cancelEdit () {
-    this.initiForm(this.profil);
+    //this.initiForm(this.profil);
+    this.dialogRef.close(this.profil);
   }
 
   conform(){

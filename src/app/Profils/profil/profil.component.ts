@@ -55,4 +55,6 @@ export class ProfilComponent implements OnInit {
       profil.sexe = data.sexe;
       profil.image = data.image;
     }
+    deleteProfile() {
+    }
 }
