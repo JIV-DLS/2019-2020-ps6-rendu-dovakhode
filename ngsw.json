@@ -1,0 +1,102 @@
+{
+  "configVersion": 1,
+  "timestamp": 1587655024567,
+  "index": "https://RmannLePhilosopheFou.github.io/test/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://RmannLePhilosopheFou.github.io/test/favicon.ico",
+        "https://RmannLePhilosopheFou.github.io/test/index.html",
+        "https://RmannLePhilosopheFou.github.io/test/main-es2015.bacd84169c04aa03f88a.js",
+        "https://RmannLePhilosopheFou.github.io/test/main-es5.bacd84169c04aa03f88a.js",
+        "https://RmannLePhilosopheFou.github.io/test/manifest.webmanifest",
+        "https://RmannLePhilosopheFou.github.io/test/polyfills-es2015.f90e9ab9e7004c2b671b.js",
+        "https://RmannLePhilosopheFou.github.io/test/polyfills-es5.120d76875c0adc945dc7.js",
+        "https://RmannLePhilosopheFou.github.io/test/runtime-es2015.1eba213af0b233498d9d.js",
+        "https://RmannLePhilosopheFou.github.io/test/runtime-es5.1eba213af0b233498d9d.js",
+        "https://RmannLePhilosopheFou.github.io/test/styles.220f5d2f5e6ff12452b1.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/Contre-la-constipation-misez-sur-les-boissons-chaudes.jpg",
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/ThaiDrinks03.jpg",
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/chemise-a-carreaux-urban-classics-sans-manches.jpg",
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/defaultUserImage.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/imageNotFound.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/quel-temps-prevoit-on-hiver-2017-quebec.jpg",
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/quizBackground.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/quizBackground2.jpg",
+        "https://RmannLePhilosopheFou.github.io/test/assets/Default/vetements-d-hiver-19476-660x400.jpg",
+        "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-128x128.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-144x144.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-152x152.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-192x192.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-384x384.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-512x512.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-72x72.png",
+        "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-96x96.png",
+        "https://RmannLePhilosopheFou.github.io/test/defaultUserImage.bc98f0a4c19429df8e68.png",
+        "https://RmannLePhilosopheFou.github.io/test/quizBackground2.ca3e54c593093aacfa60.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/Contre-la-constipation-misez-sur-les-boissons-chaudes.jpg": "44fbb208217dcf12b43203ffb2c8c48ad898465b",
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/ThaiDrinks03.jpg": "7d8f33f7da81031eb8aeb60d5986409939e55a7d",
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/chemise-a-carreaux-urban-classics-sans-manches.jpg": "8f93da0d5a39f489d6ef2bd7adb2a6dce3e97f86",
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/defaultUserImage.png": "911fcba5ffbeeb3fca34b118fbaed44940a7915d",
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/imageNotFound.png": "7b90b3102b8698f204e129afa7070a6d59cdd59b",
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/quel-temps-prevoit-on-hiver-2017-quebec.jpg": "a96cbc93fd9bde365ed9fd221f5aba40dcda4bd8",
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/quizBackground.png": "cae6058a076fc052a4f492ad0b0c59c5fb953d90",
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/quizBackground2.jpg": "114f8d7f5c9c3bb43bbe641017868bf30a6bb37d",
+    "https://RmannLePhilosopheFou.github.io/test/assets/Default/vetements-d-hiver-19476-660x400.jpg": "f6d11264b47ff96e5cfbc7f447688b965fd79796",
+    "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://RmannLePhilosopheFou.github.io/test/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://RmannLePhilosopheFou.github.io/test/defaultUserImage.bc98f0a4c19429df8e68.png": "911fcba5ffbeeb3fca34b118fbaed44940a7915d",
+    "https://RmannLePhilosopheFou.github.io/test/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "https://RmannLePhilosopheFou.github.io/test/index.html": "fb6942c1566d84f39d0b37d35d097dea930131d5",
+    "https://RmannLePhilosopheFou.github.io/test/main-es2015.bacd84169c04aa03f88a.js": "bbb50d19ef28dcbc428ed7fa33a933038e1b0c7d",
+    "https://RmannLePhilosopheFou.github.io/test/main-es5.bacd84169c04aa03f88a.js": "ad15cd422f046c76c64ff7ca345dc6536741dbb5",
+    "https://RmannLePhilosopheFou.github.io/test/manifest.webmanifest": "1ca00590785ed9f00e1779cbd58ac9b438e0fcef",
+    "https://RmannLePhilosopheFou.github.io/test/polyfills-es2015.f90e9ab9e7004c2b671b.js": "72ad4ccc0a3916ae4598199447cdeadd6d380570",
+    "https://RmannLePhilosopheFou.github.io/test/polyfills-es5.120d76875c0adc945dc7.js": "1ef89a2a59d89687e9ba84945fcfd43c394130b6",
+    "https://RmannLePhilosopheFou.github.io/test/quizBackground2.ca3e54c593093aacfa60.jpg": "114f8d7f5c9c3bb43bbe641017868bf30a6bb37d",
+    "https://RmannLePhilosopheFou.github.io/test/runtime-es2015.1eba213af0b233498d9d.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://RmannLePhilosopheFou.github.io/test/runtime-es5.1eba213af0b233498d9d.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://RmannLePhilosopheFou.github.io/test/styles.220f5d2f5e6ff12452b1.css": "c6169b42f83d609fffeae4d4e23e01e347fa31d4"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
