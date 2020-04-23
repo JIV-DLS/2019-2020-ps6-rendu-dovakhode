@@ -256,7 +256,7 @@ export class QuestionService {
       console.log('suppression de la question \'' + deletedQuestions[i].label + '\'');
       this.http.delete<Question>(this.questionUrl(deletedQuestions[i].quizId) + '/' + deletedQuestions[i].id).pipe(
         tap((questionDeleted) => {
-          console.log('suppression de la question \'' + deletedQuestions[i].label + '\' réussie!');
+          console.log('suppression de la question \'' + questionDeleted.label + '\' réussie!');
         }),
         catchError(this.handleError<Question>('deleteQuestion', undefined))
       ).subscribe();

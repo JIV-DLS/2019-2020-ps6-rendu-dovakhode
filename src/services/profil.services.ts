@@ -74,7 +74,7 @@ export class ProfilServices {
     ;
     return this.http.delete<Profil>(this.profilUrl + '/' + profil.id).pipe(
       tap((prof) => {
-        console.log('Suppression reussie');
+        console.log('Suppression  de ' + prof.nom + 'reussie');
         this.snack.open(environment.snackInformation.operation.succeeded.delete.profil, 'close',
           {
             ...environment.snackInformation.successForAll
@@ -86,7 +86,7 @@ export class ProfilServices {
     );
   }
   updateProfil(profil: Profil, image: File): Observable<Profil> {
-   // console.log('image : ' + image);
+    alert('image : ' + image);
     this.snack.open( environment.snackInformation.operation.loading.update.profil, 'close',
       {
         ...environment.snackInformation.loadingUpdate
@@ -94,7 +94,8 @@ export class ProfilServices {
     ;
     const profilData = new FormData();
     if (typeof image === 'object' && image !== null) {
-      profilData.append('profil_image', image,  'profil ' + profil.nom + ' ' + profil.prenom);
+      profilData.delete(profil.nom);
+      profilData.append('profil_image', image, profil.nom);
     }
 
     profilData.append('profil', JSON.stringify(profil));
