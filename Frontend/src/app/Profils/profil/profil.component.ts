@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, OnChanges, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Profil} from '../../../models/profil.model';
 import {ProfilEditComponent} from '../profil-edit/profil-edit.component';
@@ -6,21 +6,25 @@ import {EditQuestionComponent} from '../../questions/edit-question/edit-question
 import {Question} from '../../../models/question.model';
 import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
+import {ProfilServices} from '../../../services/profil.services';
 
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
   styleUrls: ['./profil.component.scss']
 })
-export class ProfilComponent implements OnInit {
+export class ProfilComponent implements OnInit, OnChanges {
   private profilDialogOpened = false;
   constructor(@Inject(MAT_DIALOG_DATA) public profil: Profil,
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<ProfilComponent>,
               public formBuilder: FormBuilder,
-              private  router: Router) { }
+              private profilService: ProfilServices,
+              private router: Router) { }
 
   ngOnInit(): void {
+  }
+  ngOnChanges(): void {
   }
 
   editProfile() {
@@ -33,9 +37,14 @@ export class ProfilComponent implements OnInit {
       this.profilDialogOpened = false;
       if (response != null) {
       this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
-      alert('-- New profil image --' + this.profil.image);
+      this.profil.image = response.image;
       }
       });
+    this.dialogRef.close(true);
+  }
+  deleteProfile() {
+    this.profilService.deleteProfil(this.profil);
+    this.dialogRef.close(true);
   }
 
   results() {
@@ -60,8 +69,5 @@ export class ProfilComponent implements OnInit {
       profil.stade = data.stade;
       profil.recommandations = data.recommandations;
       profil.sexe = data.sexe;
-      profil.image = data.image;
-    }
-    deleteProfile() {
     }
 }

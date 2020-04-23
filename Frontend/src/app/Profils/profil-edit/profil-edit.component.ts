@@ -73,7 +73,8 @@ export class ProfilEditComponent implements OnInit {
         });
       /* tslint:disable */
       this.dialogRef.close({
-        profil : profilToModify});
+        profil : profilToModify,
+        image: profilToModify.image});
     }
   }
   cancelEdit () {
