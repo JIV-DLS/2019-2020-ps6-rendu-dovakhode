@@ -1,5 +1,16 @@
 <button style="height: 100%;width: 100%;"  *ngIf="checked==null||checked!=null&&checked==true"  mat-raised-button type="button" [class.btn-success]="checked"   id = "{{answer.id}}" (click)="checkAnswer()">
-  <app-image-uploader *ngIf="answer.image!=null" imagePreview="{{answer.image}}"></app-image-uploader>
-  <span style="height: 100%;width: 100%;" *ngIf="answer.image==null">{{answer.value}}</span>
+  <mat-grid-list cols="1" rowHeight="2:0.057">
+    <mat-grid-tile *ngIf="answer.image!=null" colspan="1" rowspan="{{answer.value == ' ' ? 10 : 8}}">
+      <app-image-uploader  imagePreview="{{answer.image}}">{{answer.value}}</app-image-uploader>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="answer.value!=' '" colspan="1" rowspan="{{answer.image == null ? 10 : 2}}">
+      <div *ngIf="answer.image == null; else elseBlock">
+        <p style="height: 100%;width: 100%;position: relative;top: 50%" >{{answer.value}}</p>
+      </div>
+      <ng-template #elseBlock>
+        <p style="height: 100%;width: 100%;" >{{answer.value}}</p>
+      </ng-template>
+    </mat-grid-tile>
+  </mat-grid-list>
 </button>
 
