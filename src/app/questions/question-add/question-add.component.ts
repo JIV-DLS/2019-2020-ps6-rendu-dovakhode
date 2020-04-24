@@ -119,7 +119,13 @@ export class QuestionAddComponent implements OnInit {
       alert('Ajoutez un titre à votre question');
       return false;
     }
-    return true;
+    for (const answer of this.answers.value) {
+      if (answer.isCorrect) {
+        return true;
+      }
+    }
+    alert('Ajouter au moins une réponse correcte');
+    return false;
   }
 
   close() {
