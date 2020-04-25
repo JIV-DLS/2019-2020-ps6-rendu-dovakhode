@@ -13,13 +13,13 @@ import { QuestionComponent } from './questions/question/question.component';
 import {QuestionsComponent} from './questions/questions.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  _MatMenuDirectivesModule,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-  MatButtonModule,
-  MatCardModule, MatCheckboxModule,
-  MatDialogModule,
-  MatGridListModule, MatIconModule,
-  MatInputModule, MatMenuModule, MatSnackBar, MatSnackBarModule
+    _MatMenuDirectivesModule,
+    MAT_DIALOG_DEFAULT_OPTIONS,
+    MatButtonModule,
+    MatCardModule, MatCheckboxModule,
+    MatDialogModule,
+    MatGridListModule, MatIconModule,
+    MatInputModule, MatMenuModule, MatProgressBarModule, MatSnackBar, MatSnackBarModule
 } from '@angular/material';
 import { QuestionAddComponent } from './questions/question-add/question-add.component';
 import {AnswersComponent } from './answers/answers.component';
@@ -98,6 +98,7 @@ import {AnswerRecapComponent} from './answers/answer-recap/answer-recap.componen
 import { NomprenomPipe } from './Profils/_pipes/subDirectory/nomprenom.pipe';
 import { QuizResultDisplayComponent } from './quizzes/quiz-result-display/quiz-result-display.component';
 import { QuizStartRecapComponent } from './quizzes/quiz-start-recap/quiz-start-recap.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
@@ -190,6 +191,8 @@ routes.forEach((eachRoute) => {
 
     QuizStartRecapComponent,
 
+    FooterComponent,
+
   ],
   entryComponents: [
     QuestionsComponent,
@@ -203,34 +206,35 @@ routes.forEach((eachRoute) => {
     ThemeListComponent,
     SubThemeListComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatCardModule,
-    MatGridListModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatSnackBarModule,
-    _MatMenuDirectivesModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatDividerModule,
-    ScrollingModule,
-    MatSelectModule,
-    MatProgressSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    FormsModule,
-    MatSlideToggleModule,
-    MatRadioModule,
-    CarouselModule.forRoot(),
-    MatTabsModule,
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(routes),
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatCardModule,
+        MatGridListModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatSnackBarModule,
+        _MatMenuDirectivesModule,
+        MatMenuModule,
+        MatSidenavModule,
+        MatDividerModule,
+        ScrollingModule,
+        MatSelectModule,
+        MatProgressSpinnerModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        FormsModule,
+        MatSlideToggleModule,
+        MatRadioModule,
+        CarouselModule.forRoot(),
+        MatTabsModule,
+        MatProgressBarModule,
+    ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     { provide: MatDialogRef, useValue: {} },

@@ -39,3 +39,12 @@ h6{
   font-size: medium;
   color: #0c5460;
 }
+.animate{
+  animation: zoom 1s infinite;
+  animation-delay: 30s;
+}
+@keyframes zoom {
+  0% {font-size: medium;}
+  50% {font-size: large;}
+  100% {font-size: medium;}
+}

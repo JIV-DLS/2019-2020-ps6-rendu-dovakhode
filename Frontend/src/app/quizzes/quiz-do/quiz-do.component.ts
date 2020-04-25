@@ -21,7 +21,6 @@ export class QuizDoComponent implements OnInit {
   questionList: QuestionPlayed[] = [];
   index = 0;
   quiz: Quiz = DEFAULT_QUIZ;
-  public quizForm: FormGroup;
   loading: boolean;
   constructor(private location: Location,
               public quizService: QuizService,
@@ -34,17 +33,18 @@ export class QuizDoComponent implements OnInit {
               private questionService: QuestionService) {}
 
   ngOnInit() {
-    this.loading = true;
     this.startWithEvolution();
   }
 
   startWithEvolution() {
+    this.loading = true;
     this.index = 0;
     const idEvol = +(this.route.snapshot.params.evol);
     this.evolService.getEvolutionById(idEvol).subscribe((evol) => {
         this.evolution = evol;
         this.quizService.getQuizById(+evol.quizId)
           .subscribe((quiz) => {
+            this.loading = false;
             if (quiz) {
               this.quiz = quiz;
               // tslint:disable-next-line:prefer-for-of
@@ -53,6 +53,7 @@ export class QuizDoComponent implements OnInit {
               }
               this.getQuestionPlayedList();
               this.shuffle(this.quiz.questions);
+              this.evolService.evolutionProgressValue.next({did: this.index, total: this.quiz.questions.length});
             }
           }, (error) => {this.retour(); });
       }
@@ -71,9 +72,6 @@ export class QuizDoComponent implements OnInit {
       array[randomIndex] = temporaryValue;
     }
     return array;
-  }
-  initializeTheForm() {
-    this.quizForm = this.quizzFormInitializer();
   }
 
   getQuestionPlayedList() {
@@ -94,33 +92,11 @@ export class QuizDoComponent implements OnInit {
     });
   }
 
-  quizzFormInitializer() {
-    return this.formBuilder.group({
-      id: this.quiz.id,
-      label: [this.quiz.label, [ Validators.required, Validators.minLength(5)]],
-      theme: [this.quiz.theme, [ Validators.required, Validators.minLength(3)]],
-      subTheme: [this.quiz.subTheme],
-      difficulty: [this.quiz.difficulty],
-      questions: [this.quiz.questions != null ? this.quiz.questions : []],
-      image: [null]
-    });
-  }
-  get questions() {
-    return this.quizForm.get('questions') as FormArray;
-  }
-  get theme() {
-    return this.quizForm.get('theme') as FormArray;
-  }
-  get label() {
-    return this.quizForm.get('label') as FormArray;
-  }
-
   nextQuestion(trials: number) {
     this.questionplayed.addQuestionPlayed(this.quiz.questions[this.index].id, this.evolution.id, trials).subscribe();
-
-
     if (this.index < this.quiz.questions.length - 1) {
-      this.index = this.index + 1;
+      this.index++;
+      this.evolService.evolutionProgressValue.next({did: this.index, total: this.quiz.questions.length});
     } else {
       this.startWithEvolution();
     }

@@ -5,7 +5,7 @@
     <p class="font-italic">Faite un clic droit sur l'image que vous aimeriez copier puis faite <b>Copier l'adresse de l'image</b> puis coller le dans le champs ci-dessous! Ensuite appuyer sur le bouton pour faire le téléchargement.</p>
     <mat-form-field style="width: 80%;">
       <mat-label>Lien de l'image</mat-label>
-      <input matInput placeholder="http://exampledelien.com/monimage.png ou data:image/jpeg;base64,/9j/4AAQSk..." type="url" #link>
+      <input (blur)="indicateToDownload()" matInput placeholder="http://exampledelien.com/monimage.png ou data:image/jpeg;base64,/9j/4AAQSk..." type="url" #link>
     </mat-form-field>
     <button color="primary" (click)="uploadByLink(link)" mat-flat-button style="width: 20%;">
       <mat-icon >move_to_inbox</mat-icon>

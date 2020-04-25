@@ -99,6 +99,9 @@ export class ImageUploaderComponent implements OnInit {
       ;*/
     }
   }
+  indicateToDownload() {
+    this.imgLinkError('Pour télécharger cliquer sur le bouton de téléchargement!');
+  }
   uploadByLink(link: HTMLInputElement) {
 
     if (link.value.length > 0 && link.checkValidity()) {
