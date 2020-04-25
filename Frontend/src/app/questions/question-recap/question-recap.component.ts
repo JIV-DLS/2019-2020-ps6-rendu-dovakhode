@@ -21,6 +21,10 @@ export class QuestionRecapComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.rightAns();
+  }
+
+  rightAns() {
     let i = 0;
     this.rightAnswer = new Array();
     for (const answer of this.question.answers) {
@@ -29,6 +33,6 @@ export class QuestionRecapComponent implements OnInit {
         i++;
       }
     }
+    return this.rightAnswer;
   }
-
 }

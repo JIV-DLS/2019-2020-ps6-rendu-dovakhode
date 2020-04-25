@@ -1,6 +1,5 @@
 
 button {
-
   align-content: center;
 }
 img{
@@ -13,4 +12,14 @@ button:hover{
 }
 .btn-success:hover{
   background-color: #28a745;
+}
+
+app-image-uploader{
+  height: 100%;
+  width: 100%;
+}
+
+p{
+  text-align: center;
+  font-size: 1.5vw;
 }
