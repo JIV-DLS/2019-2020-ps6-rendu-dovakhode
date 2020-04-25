@@ -12,23 +12,9 @@ import {Subject} from 'rxjs';
 })
 export class HomeProfilComponent implements OnInit {
   public profilSearched: Profil = DEFAULT_PROFIL;
-  profilChanged: Subject<null>;
   constructor( public dialog: MatDialog,
                private dialogRef: MatDialogRef<ProfilComponent>) { }
 
   ngOnInit(): void {
-  }
-
-  viewProfil(profil: Profil) {
-    console.log(profil.nom);
-    const dialogRef = this.dialog.open(ProfilComponent, {
-      width: '70%',
-      height: '80%',
-      data: profil,
-    });
-    dialogRef.afterClosed().subscribe(data => {
-      if (data) {
-        this.profilChanged.next(null); }
-    });
   }
 }

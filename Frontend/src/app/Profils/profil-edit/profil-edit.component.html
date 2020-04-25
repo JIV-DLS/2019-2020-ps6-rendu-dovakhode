@@ -15,7 +15,8 @@
       <mat-grid-tile colspan="4" rowspan="16">
           <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
             <mat-card-content style=" height: 100%;width: 100%;">
-              <app-image-uploader editable="true" [label]="nom.value"  [imagePreview]="profil.image" [form]="profilForm"></app-image-uploader>
+              <app-image-uploader editable="true" [imageReestablisher]="imageReestablisher" [label]="nom.value" [imagePreview]="imagePreview"
+                                  [form]="profilForm" (imageChanged)="imageChanged=true;" (imageDeleted)="deleteImage()" [savedImage]="savedImage"></app-image-uploader>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
@@ -75,7 +76,7 @@
     <mat-card-footer style="padding-right: 12px;">
       <mat-grid-list cols="8" rowHeight="12px" style="width: 100%">
         <mat-grid-tile colspan="4" rowspan="4">
-          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="editTheProfil()">Confirmer la modification</button>
+          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-primary"  [disabled]="!imageChanged&&!profilForm.dirty" (click)="editTheProfil()">Confirmer la modification</button>
         </mat-grid-tile>
         <mat-grid-tile colspan="4" rowspan="4">
           <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-secondary" (click)="cancelEdit()">Annuler la modification</button>

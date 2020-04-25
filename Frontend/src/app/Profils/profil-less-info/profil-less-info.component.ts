@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Profil} from '../../../models/profil.model';
 import {environment} from '../../../environments/environment';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profil-less-info',
@@ -15,10 +16,11 @@ export class ProfilLessInfoComponent implements OnInit {
   selectEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   deleteEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor() { }
+  constructor(private  Activerouter: ActivatedRoute) { }
   hover: boolean;
   ngOnInit() {
     this.hover = false;
+    this.do = (this.Activerouter.snapshot.params.do === 'true');
   }
   select() {
     this.selectEmitter.emit(true);
@@ -29,8 +31,10 @@ export class ProfilLessInfoComponent implements OnInit {
 
   col() {
     if (this.do) {
+      // alert('Doing quiz');
       return 9;
     } else {
+      alert('Edition');
       return 10;
     }
   }

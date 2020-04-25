@@ -4,9 +4,10 @@ import {Profil} from '../../../models/profil.model';
 import {ProfilEditComponent} from '../profil-edit/profil-edit.component';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
 import {Question} from '../../../models/question.model';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ProfilServices} from '../../../services/profil.services';
+import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-profil',
@@ -15,16 +16,34 @@ import {ProfilServices} from '../../../services/profil.services';
 })
 export class ProfilComponent implements OnInit, OnChanges {
   private profilDialogOpened = false;
+  public profilForm: FormGroup;
   constructor(@Inject(MAT_DIALOG_DATA) public profil: Profil,
               public dialog: MatDialog,
               private dialogRef: MatDialogRef<ProfilComponent>,
               public formBuilder: FormBuilder,
               private profilService: ProfilServices,
-              private router: Router) { }
+              private router: Router,
+              private matDialogService: DialogService) { }
 
   ngOnInit(): void {
+    this.initiForm(this.profil);
   }
   ngOnChanges(): void {
+  }
+  initiForm(profil: Profil) {
+    this.profilForm = this.formBuilder.group({
+      nom: profil.nom,
+      age: profil.age,
+      prenom: profil.prenom,
+      stade: profil.stade,
+      sexe: profil.sexe,
+      recommandations: profil.recommandations,
+      image: profil.image,
+      id: profil.id
+    });
+  }
+  profilImage() {
+    return this.profil.image;
   }
 
   editProfile() {
@@ -38,13 +57,23 @@ export class ProfilComponent implements OnInit, OnChanges {
       if (response != null) {
       this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
       this.profil.image = response.image;
+      window.location.reload();
+      /*this.dialogRef.close({
+          del: false
+        });*/
       }
-      });
-    this.dialogRef.close(true);
+    });
   }
   deleteProfile() {
-    this.profilService.deleteProfil(this.profil);
-    this.dialogRef.close(true);
+    this.matDialogService.openConfirmDialog('Voulez vous vraiment supprimer le profil de  ' +
+      this.profil.prenom + ' ' + this.profil.nom + ' ?').afterClosed().subscribe((res) => {
+        if (res) {
+          this.dialogRef.close({
+            del: true
+          });
+        }
+    });
+
   }
 
   results() {
@@ -69,5 +98,6 @@ export class ProfilComponent implements OnInit, OnChanges {
       profil.stade = data.stade;
       profil.recommandations = data.recommandations;
       profil.sexe = data.sexe;
+      profil.image = data.image;
     }
 }

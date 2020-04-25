@@ -14,6 +14,7 @@ import {Profil} from '../../../models/profil.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {ProfilComponent} from '../profil/profil.component';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-profil-edit',
@@ -25,6 +26,9 @@ export class ProfilEditComponent implements OnInit {
   public profilForm: FormGroup;
   public value;
   imagePreview: string;
+  public imageChanged: boolean;
+  public savedImage: string;
+  imageReestablisher: Subject<null> = new Subject();
 
   @Output()
   profileCreated: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -40,11 +44,17 @@ export class ProfilEditComponent implements OnInit {
     this.initiForm(this.profil);
     // this.imagePreview = this.profil.image;
   }
-
+  deleteImage() {
+    this.imageChanged = true;
+    this.profil.image = '';
+  }
   get nom() {
     return this.profilForm.get('nom') as FormArray;
   }
   initiForm(profil: Profil) {
+    this.imageChanged = false;
+    this.imagePreview = profil.image.length > 1 ? profil.image : null;
+    this.savedImage = this.imagePreview;
     this.profilForm = this.formbuilder.group({
       nom: profil.nom,
       age: profil.age,
@@ -61,28 +71,29 @@ export class ProfilEditComponent implements OnInit {
   editTheProfil() {
     if (this.conform()) {
       const profilToModify: Profil =  (this.profilForm.getRawValue()) as Profil;
+      profilToModify.image = this.profil.image;
       this.profileCreated.emit(true);
       this.profilService
         .updateProfil(profilToModify,  this.profilForm.get('image') == null ? null : this.profilForm.get('image').value )
         .subscribe((profil) => {
           if (profil !== undefined) {
             this.profil = profil;
-            this.imagePreview = profil.image;
+            this.savedImage = profil.image;
             this.initiForm(profil);
           }
         });
-      /* tslint:disable */
+
       this.dialogRef.close({
         profil : profilToModify,
         image: profilToModify.image});
     }
   }
-  cancelEdit () {
-    //this.initiForm(this.profil);
+  cancelEdit() {
+    // this.initiForm(this.profil);
     this.dialogRef.close(this.profil);
   }
 
-  conform(){
+  conform() {
     return true;
   }
 }

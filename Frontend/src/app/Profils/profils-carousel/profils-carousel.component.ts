@@ -6,6 +6,8 @@ import {Profil} from '../../../models/profil.model';
 import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 import {DialogService} from '../../../services/dialog.service';
 import {Subject} from 'rxjs';
+import {ProfilComponent} from '../profil/profil.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-profil-list',
@@ -26,11 +28,12 @@ export class ProfilsCarouselComponent implements OnInit {
   public loading;
   @Output()
   profilSelected: EventEmitter<Profil> = new EventEmitter<Profil>();
-
+  private eventEdit: boolean;
   constructor(private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,
               public profilService: ProfilServices,
+              public dialog: MatDialog,
               private matDialogService: DialogService) {
     if (this.profilsList.length === 0) {
     this.getAllProfils();
@@ -68,9 +71,29 @@ export class ProfilsCarouselComponent implements OnInit {
         }
       });
     } else {
-      this.profilSelected.emit(profil);
+      this.viewProfil(profil);
     }
   }
-
+  deleteProfil(profil: Profil) {
+    this.profilService.deleteProfil(profil).subscribe(() => {
+      this.getAllProfils();
+    });
+  }
+  viewProfil(profil: Profil) {
+    console.log(profil.nom);
+    const dialogRef = this.dialog.open(ProfilComponent, {
+      width: '70%',
+      height: '80%',
+      data: profil,
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        if  (data.del) {
+          this.deleteProfil(profil);
+        }
+        this.profilChanged.next(null);
+      }
+    });
+  }
 }
 
