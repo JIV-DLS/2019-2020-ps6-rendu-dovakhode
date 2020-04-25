@@ -246,6 +246,7 @@ export class QuizAddComponent implements OnInit {
   manageTheme() {
     const dialogRef = this.dialog.open(ThemeListComponent, {
       width: '850px',
+      disableClose: true,
       maxHeight: '400px',
     });
     dialogRef.afterClosed().subscribe(response => {
@@ -262,6 +263,7 @@ export class QuizAddComponent implements OnInit {
       const dialogRef = this.dialog.open(SubThemeListComponent, {
         width: '850px',
         maxHeight: '400px',
+        disableClose: true,
         data: this.theme.value.id
       });
       dialogRef.afterClosed().subscribe(response => {
