@@ -61,9 +61,9 @@
         <mat-grid-tile colspan="4" rowspan="4">
           <mat-form-field>
             <mat-label>Thème</mat-label>
-            <mat-select [formControlName]="'theme'">
-              <mat-option *ngFor="let theme of themesValues" [value]="theme">
-                {{theme}}
+            <mat-select  #matSelect (selectionChange)="getSubTheme()" [formControlName]="'theme'">
+              <mat-option  *ngFor="let theme of themesValues" [value]="theme.label">
+                {{theme.label}}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="theme.invalid">{{getThemeErrorMessage()}}</mat-error>
@@ -73,9 +73,9 @@
         <mat-grid-tile colspan="4" rowspan="4">
           <mat-form-field>
             <mat-label>Sous-Thème</mat-label>
-            <mat-select [formControlName]="'subTheme'">
-              <mat-option *ngFor="let theme of themesValues" [value]="theme">
-                {{theme}}
+            <mat-select (click)="getSubTheme()" [formControlName]="'subTheme'">
+              <mat-option *ngFor="let subThemes of subThemesValues" [value]="subThemes.label">
+                {{subThemes.label}}
               </mat-option>
             </mat-select>
           </mat-form-field>

@@ -11,9 +11,13 @@ import {environment} from '../../../environments/environment';
 import {QuestionService} from '../../../services/question.service';
 import {Question} from '../../../models/question.model';
 import {AnswersService} from '../../../services/answers.service';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
+import {ThemeServices} from "../../../services/theme.services";
+import {Theme} from "../../../models/themes.model";
+import {Subtheme} from "../../../models/subtheme.model";
+import {SubthemeService} from "../../../services/subtheme.service";
 
 @Component({
   selector: 'app-quizze-edit',
@@ -28,6 +32,8 @@ export class QuizzeEditComponent implements OnInit {
               public formBuilder: FormBuilder,
               private questionService: QuestionService,
               private answerService: AnswersService,
+              private themeServices: ThemeServices,
+              private subThemeService: SubthemeService
   ) { }
   get questions() {
     return this.quizForm.get('questions') as FormArray;
@@ -38,18 +44,20 @@ export class QuizzeEditComponent implements OnInit {
   get label() {
     return this.quizForm.get('label') as FormArray;
   }
+  public subThemesValues: Subtheme[]=[];
   quiz: Quiz;
   public imageChanged: boolean;
   public savedImage: string;
   private savedQuestions: Question[];
   private questionDialogOpened = false;
   public quizForm: FormGroup;
-  public themesValues = Object.values(theme);
+  public themesValues : Theme[] = [];
   public difficultiesValues = Object.values(difficulte);
   public imagePreview: string;
   loading: boolean;
   others: boolean;
   private deletedQuestions = [];
+  subscription: Subscription;
   private deletedAnswers = [];
   imageReestablisher: Subject<null> = new Subject();
   ngOnInit() {
@@ -57,10 +65,40 @@ export class QuizzeEditComponent implements OnInit {
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
         this.loading = false;
+        this.subscription = this.subThemeService.subThemesSubject.subscribe((subthemes) => {
+          this.subThemesValues=subthemes;
+        });
         this.initializeTheForm(quiz);
         this.imagePreview = quiz.image.length > 1 ? quiz.image : null;
         this.savedImage = this.imagePreview;
+        this.getAllTheme();
+        this.subThemesValues.push(new Subtheme(quiz.subTheme));
 }, (error) => {this.retour(); });
+
+
+  }
+  getThemId(label: string ) {
+    for (let i = 0 ; i <= this.themesValues.length; i++) {
+      if (this.themesValues[i].label === label) {
+        return this.themesValues[i].id;
+      }
+    }
+  }
+
+  getSubTheme() {
+    console.log("here");
+    console.log(this.quizForm.get('theme').value)
+    const id=this.getThemId(this.quizForm.get('theme').value);
+    this.subThemeService.getSubTheme(id).subscribe((subThemes) => {
+      this.subThemeService.Subthemes = subThemes;
+      console.log(this.subThemesValues);
+      this.subThemeService.emitSubThemes(); });
+  }
+  private getAllTheme() {
+    this.themeServices.getTheme().subscribe((themes) => {
+      this.themesValues = themes;
+
+    });
   }
   initializeTheForm(quiz) {
     this.others = false;
@@ -116,6 +154,10 @@ export class QuizzeEditComponent implements OnInit {
     const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
     quizToModify.dateModification = new Date();
     quizToModify.image = this.quiz.image;
+    quizToModify.theme = this.quizForm.get('theme').value;
+    if (this.quizForm.get('subTheme').value != null) {
+      quizToModify.subTheme = this.quizForm.get('subTheme').value;
+    }
     if (this.deletedQuestions) {this.questionService.deleteQuestions(this.deletedQuestions); }
     if (this.deletedAnswers) {this.answerService.deleteAnswers(this.deletedAnswers); }
     this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value, this.questions.value).subscribe((quiz) => {

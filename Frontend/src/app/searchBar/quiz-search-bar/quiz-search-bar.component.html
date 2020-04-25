@@ -9,9 +9,9 @@
   <mat-grid-tile colspan="1" rowspan="1">
     <mat-form-field>
       <mat-label>Thème</mat-label>
-      <mat-select [(value)]="searchedQuiz.theme">
-        <mat-option *ngFor="let theme of themesValues" [value]="theme" >
-          {{theme}}
+      <mat-select #mat [(value)]="searchedQuiz.theme" (selectionChange)="getSubTheme(mat)">
+        <mat-option *ngFor="let theme of themesValues" [value]="theme.label" >
+          {{theme.label}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -20,8 +20,8 @@
     <mat-form-field>
       <mat-label>Sous Thème</mat-label>
       <mat-select [(value)]="searchedQuiz.subTheme">
-        <mat-option *ngFor="let subtheme of themesValues" [value]="subtheme">
-          {{subtheme}}
+        <mat-option *ngFor="let subtheme of subThemesValues" [value]="subtheme.label">
+          {{subtheme.label}}
         </mat-option>
       </mat-select>
     </mat-form-field>

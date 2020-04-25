@@ -21,6 +21,7 @@ export class QuizListComponent implements OnInit {
   deleteEmitter: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
   ngOnInit(): void {
+
   }
 
   selectQuiz(quiz: Quiz) {
