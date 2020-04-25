@@ -86,13 +86,13 @@ export class ProfilServices {
     );
   }
   updateProfil(profil: Profil, image: File): Observable<Profil> {
-    alert('image : ' + image);
     this.snack.open( environment.snackInformation.operation.loading.update.profil, 'close',
       {
         ...environment.snackInformation.loadingUpdate
       })
     ;
     const profilData = new FormData();
+    console.log(image);
     if (typeof image === 'object' && image !== null) {
       profilData.delete(profil.nom);
       profilData.append('profil_image', image, profil.nom);
