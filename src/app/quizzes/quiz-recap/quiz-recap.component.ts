@@ -35,12 +35,15 @@ export class QuizRecapComponent implements OnInit {
     this.index = this.index > 0 ? this.index - 1 : 0;
   }
 
+  goToEnd() {
+    this.router.navigate(['/quiz-do/' + this.quiz.id + '/end/' + this.patientId, { idEvolution: this.evolutionId}]);
+  }
 
   suivant() {
     if (this.index < this.quiz.questions.length - 1) {
       this.index = this.index + 1;
     } else {
-      this.router.navigate(['/quiz-do/' + this.quiz.id + '/end/' + this.patientId, { idEvolution: this.evolutionId}]);
+      this.goToEnd();
     }
 
   }

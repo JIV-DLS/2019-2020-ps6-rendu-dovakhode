@@ -5,7 +5,7 @@
         <app-image-uploader imagePreview="{{question.image}}"></app-image-uploader>
       </div>
       <b>{{question?.label}}</b>
-      <h6>Cliquez sur l'une des réponses ci-dessous</h6>
+      <h6 [class]="indicationClass">Cliquez sur l'une des réponses ci-dessous</h6>
     </mat-card-title>
     </mat-card-header>
     <mat-card-content style="  width: 100%;

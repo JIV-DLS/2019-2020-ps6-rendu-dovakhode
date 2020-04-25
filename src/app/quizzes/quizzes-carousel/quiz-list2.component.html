@@ -11,7 +11,8 @@
       <mat-card style="background-color: white;height: 400px;" >
         <img *ngIf="quiz.image.length>3; " style="height: 80%; width: 100%; " [src]="quiz.image?.length>0? quiz.image:'../../../assets/Default/imageNotFound.png'">
         <p [style]="quiz.image?.length<3? 'height: 100%; padding-top: 40%;':'height: 20%;'">
-          {{quiz.label}}
+          {{quiz.label}}<br/>
+          {{quiz.questions.length + ' question' + (quiz.questions.length>1? 's':'')}}
           </p>
       </mat-card>
     </slide>

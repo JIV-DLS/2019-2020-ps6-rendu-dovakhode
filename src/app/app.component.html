@@ -4,5 +4,6 @@
   </mat-drawer>
   <app-header [isOpened]="playingState()" *ngIf="playingState()" (selectEmitter)="drawer.toggle()"></app-header>
   <router-outlet></router-outlet>
+  <app-footer [isPlaying]="patientPlaying()"></app-footer>
 </mat-drawer-container>
 

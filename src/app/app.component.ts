@@ -16,8 +16,11 @@ export class AppComponent implements OnInit {
   }
   title = environment.appName;
   playingState() {
+    return !(this.location.path(true).split('/')[1] === 'quiz-do');
+  }
+  patientPlaying() {
     const paths = this.location.path(true).split('/');
-    return !(paths[1] === 'quiz-do');
+    return (paths.length <= 3 && paths[1] === 'quiz-do');
   }
   ngOnInit(): void {
     if (this.playingState()) {

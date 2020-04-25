@@ -3,17 +3,16 @@ import {environment} from '../environments/environment';
 import {Evolution} from '../models/evolution.model';
 import {Observable, of, Subject} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Answer} from '../models/answer.model';
 import {catchError, tap} from 'rxjs/operators';
-import {Question} from '../models/question.model';
 import {Quiz} from '../models/quiz.model';
 import {Injectable} from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
 export class EvolutionService {
- evolutionSubject = new Subject<Evolution>();
- evolution = new Evolution();
+  evolutionProgressValue = new Subject<{did: number, total: number}>();
+  evolutionSubject = new Subject<Evolution>();
+  evolution = new Evolution();
 
   constructor(private http: HttpClient, private snack: MatSnackBar) {
   }

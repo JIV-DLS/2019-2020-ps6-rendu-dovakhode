@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Question} from '../../../models/question.model';
 import {DEFAULT_QUESTION} from '../../../mocks/question-list.mock';
 import {MatDialog} from '@angular/material/dialog';
@@ -17,6 +17,7 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
   trials: number;
   @Output()
   next: EventEmitter<number> = new EventEmitter<number>();
+  indicationClass = 'animate';
   constructor( public dialog: MatDialog
   ) { }
 
@@ -43,6 +44,9 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.indicationClass = '';
+    setTimeout(() =>    this.indicationClass = 'animate'
+      , 1000);
     this.trials = 0;
     console.log(changes);
   }
