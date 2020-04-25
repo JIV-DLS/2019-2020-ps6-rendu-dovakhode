@@ -9,14 +9,14 @@
         <mat-grid-tile colspan="2" rowspan="16">
           <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
             <mat-card-content style=" height: 100%;width: 100%;">
-              <app-image-uploader *ngIf="profil.image!=null" imagePreview="{{profil.image}}"></app-image-uploader>
+              <app-image-uploader *ngIf="profil.image!=null" [imagePreview]="profilImage()"></app-image-uploader>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="3">
             <p>Prénom: {{this.profil.prenom}}</p>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="3">
+        <mat-grid-tile colspan="1" rowspan="3"  >
             <p>Age: {{this.profil.age}}</p>
         </mat-grid-tile>
 
