@@ -57,7 +57,6 @@ export class ProfilComponent implements OnInit, OnChanges {
       if (response != null) {
       this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
       this.profil.image = response.image;
-      window.location.reload();
       /*this.dialogRef.close({
           del: false
         });*/
