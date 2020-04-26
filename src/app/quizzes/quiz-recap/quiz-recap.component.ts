@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
@@ -15,12 +15,14 @@ export class QuizRecapComponent implements OnInit {
   patientId: number;
   evolutionId: number;
   loading: boolean;
+  quit: number;
   constructor(private location: Location,
               private quizService: QuizService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.quit = 0;
     this.evolutionId = +(this.route.snapshot.params.idEvolution);
     this.patientId = +(this.route.snapshot.params.idPatient);
     this.loading = true;
@@ -31,6 +33,19 @@ export class QuizRecapComponent implements OnInit {
       }, (error) => {this.retour(); });
   }
 
+  @HostListener('window:keyup', ['$event'])
+  onKey(e: any) {
+    if (e.key === 'Escape') {
+      this.quit += 1;
+      if (this.quit >= 2) {
+        this.quit = 0;
+        this.quitter();
+      }
+    }
+  }
+  quitter() {
+    this.router.navigate(['/quiz-list', {do: true , idPatient: this.patientId}]);
+  }
   precedent() {
     this.index = this.index > 0 ? this.index - 1 : 0;
   }

@@ -14,10 +14,10 @@ import {AnswersService} from '../../../services/answers.service';
 import {Subject, Subscription} from 'rxjs';
 import {QuestionAddComponent} from '../../questions/question-add/question-add.component';
 import {EditQuestionComponent} from '../../questions/edit-question/edit-question.component';
-import {ThemeServices} from "../../../services/theme.services";
-import {Theme} from "../../../models/themes.model";
-import {Subtheme} from "../../../models/subtheme.model";
-import {SubthemeService} from "../../../services/subtheme.service";
+import {ThemeServices} from '../../../services/theme.services';
+import {Theme} from '../../../models/themes.model';
+import {Subtheme} from '../../../models/subtheme.model';
+import {SubthemeService} from '../../../services/subtheme.service';
 
 @Component({
   selector: 'app-quizze-edit',
@@ -44,14 +44,14 @@ export class QuizzeEditComponent implements OnInit {
   get label() {
     return this.quizForm.get('label') as FormArray;
   }
-  public subThemesValues: Subtheme[]=[];
+  public subThemesValues: Subtheme[] = [];
   quiz: Quiz;
   public imageChanged: boolean;
   public savedImage: string;
   private savedQuestions: Question[];
   private questionDialogOpened = false;
   public quizForm: FormGroup;
-  public themesValues : Theme[] = [];
+  public themesValues: Theme[] = [];
   public difficultiesValues = Object.values(difficulte);
   public imagePreview: string;
   loading: boolean;
@@ -66,7 +66,7 @@ export class QuizzeEditComponent implements OnInit {
       .subscribe((quiz) => {
         this.loading = false;
         this.subscription = this.subThemeService.subThemesSubject.subscribe((subthemes) => {
-          this.subThemesValues=subthemes;
+          this.subThemesValues = subthemes;
         });
         this.initializeTheForm(quiz);
         this.imagePreview = quiz.image.length > 1 ? quiz.image : null;
@@ -86,9 +86,9 @@ export class QuizzeEditComponent implements OnInit {
   }
 
   getSubTheme() {
-    console.log("here");
-    console.log(this.quizForm.get('theme').value)
-    const id=this.getThemId(this.quizForm.get('theme').value);
+    console.log('here');
+    console.log(this.quizForm.get('theme').value);
+    const id = this.getThemId(this.quizForm.get('theme').value);
     this.subThemeService.getSubTheme(id).subscribe((subThemes) => {
       this.subThemeService.Subthemes = subThemes;
       console.log(this.subThemesValues);
