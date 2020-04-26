@@ -5,6 +5,8 @@ import {difficulteSearch, themeSearch} from '../../../models/theme.models';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {Location} from '@angular/common';
 import {QuizService} from '../../../services/quiz.service';
+import {DeviceDetectorService} from 'ngx-device-detector';
+
 
 @Component({
   selector: 'app-quiz-display-list',
@@ -16,7 +18,8 @@ export class QuizDisplayListComponent implements OnInit {
               private Activerouter: ActivatedRoute,
               private router: Router,
               private location: Location,
-              public quizService: QuizService) {
+              public quizService: QuizService,
+              private deviceService: DeviceDetectorService) {
     this.getAllQuiz(); }
 
   bgColor = 'primary';
@@ -75,5 +78,14 @@ export class QuizDisplayListComponent implements OnInit {
         this.router.navigate(['/profils-carousel' , {do: true}]);
       }
     } else { this.location.back(); }
+  }
+
+  motQuitter() {
+    if (this.deviceService.isTablet() || this.deviceService.isMobile()) {
+      return 'Touchez sur la barre de progression pour quitter un quiz à tout moment';
+    } else {
+      return 'Appuyer sur echap 2 fois pour quitter un quiz à tout moment';
+
+    }
   }
 }
