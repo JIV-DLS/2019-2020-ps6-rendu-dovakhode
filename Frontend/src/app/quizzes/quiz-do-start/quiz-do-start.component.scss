@@ -1,31 +1,25 @@
 .titre{
   text-align: center;
-  font-size: 50px;
+  font-size: 5vw;
   font-family: -apple-system;
-  margin-top: 50px;
+  margin-top: 5%;
 }
 button{
 
-  font-size: x-large;
+  font-size: 4vw;
+  padding: auto;
   font-family: -apple-system;
   border-style: solid solid double solid;
-  border-bottom-width: 5px;
-  border-right-width: 5px;
+  border-bottom-width: 0.7vw;
+  border-right-width: 0.9vw;
   border-color: #555555;
 }
 
 .commencer{
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
   margin: auto;
-  padding: 90px;
+  padding: 10%;
 }
-.retour{
-  position: absolute;
-  top: 90%; left: 2%;
-}
-
 h6{
-  text-align: center;
+  font-size: 2.5vw;
 }
