@@ -1,2 +1,2 @@
 <mat-spinner *ngIf="loading"> </mat-spinner>
-<app-question-do *ngIf="!loading" [evolution]="this.evolution" [question]="this.quiz.questions[this.index]" (next)="nextQuestion($event)" ></app-question-do>
+<app-question-do *ngIf="!loading" [progression]="progression" [evolution]="this.evolution" [question]="this.quiz.questions[this.index]" (next)="nextQuestion($event)" ></app-question-do>

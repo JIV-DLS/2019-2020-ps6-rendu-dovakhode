@@ -17,6 +17,7 @@ import {QuestionService} from '../../../services/question.service';
   styleUrls: ['./quiz-do.component.scss']
 })
 export class QuizDoComponent implements OnInit {
+  progression: {did: number, total: number};
   evolution: Evolution;
   questionList: QuestionPlayed[] = [];
   index = 0;
@@ -30,9 +31,10 @@ export class QuizDoComponent implements OnInit {
               public formBuilder: FormBuilder,
               private evolService: EvolutionService,
               private questionplayed: QuestionPlayedService,
-              private questionService: QuestionService) {}
+              private questionService: QuestionService, private evolutionService: EvolutionService) {}
 
   ngOnInit() {
+    this.evolutionService.evolutionProgressValue.subscribe(progression => this.progression = progression);
     this.startWithEvolution();
   }
 

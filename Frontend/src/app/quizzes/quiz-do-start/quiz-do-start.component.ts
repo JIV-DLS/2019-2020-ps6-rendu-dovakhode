@@ -69,7 +69,9 @@ export class QuizDoStartComponent implements OnInit {
     }
   }
   quitter() {
-    this.router.navigate(['/quiz-list', {do: true , idPatient: this.idPatient}]);
+    if (confirm(( 'Voulez-vous vraiment retourner au choix de quiz?'))) {
+      this.router.navigate(['/quiz-list', {do: true, idPatient: this.idPatient}]);
+    }
   }
 
 }

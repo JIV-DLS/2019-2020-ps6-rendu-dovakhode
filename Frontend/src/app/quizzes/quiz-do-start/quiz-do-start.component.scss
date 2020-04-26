@@ -1,8 +1,9 @@
 .titre{
   text-align: center;
-  font-size: 5vw;
+  font-size: 4vw;
   font-family: -apple-system;
   margin-top: 5%;
+  line-height: 100%;
 }
 button{
 
@@ -10,16 +11,19 @@ button{
   padding: auto;
   font-family: -apple-system;
   border-style: solid solid double solid;
-  border-bottom-width: 0.7vw;
-  border-right-width: 0.9vw;
+  border-bottom-width: 0.5vw;
+  border-right-width: 0.7vw;
   border-color: #555555;
 }
 
 .commencer{
   display: flex;
   margin: auto;
-  padding: 10%;
+  padding: 8%;
 }
 h6{
-  font-size: 2.5vw;
+  color: #0c5460;
+  text-align: center;
+  font-size: 2vw;
+  margin-bottom: 2%;
 }

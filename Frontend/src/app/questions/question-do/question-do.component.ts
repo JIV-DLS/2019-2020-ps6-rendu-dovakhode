@@ -16,6 +16,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {NextQuestionComponent} from '../next-question/next-question.component';
 import {Evolution} from '../../../models/evolution.model';
 import {Router} from '@angular/router';
+import {EvolutionService} from '../../../services/evolution.service';
 
 @Component({
   selector: 'app-question-do',
@@ -23,6 +24,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./question-do.component.scss']
 })
 export class QuestionDoComponent implements OnInit, OnChanges  {
+  @Input()
+  progression: {did: number, total: number};
   quit: number;
   @Input() question: Question = DEFAULT_QUESTION;
   @Input() evolution: Evolution ;
@@ -30,8 +33,7 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
   @Output()
   next: EventEmitter<number> = new EventEmitter<number>();
   indicationClass = 'animate';
-  constructor( public dialog: MatDialog, private router: Router,
-
+  constructor( public dialog: MatDialog, private router: Router, private evolutionService: EvolutionService,
   ) { }
 
   ngOnInit() {
@@ -50,7 +52,12 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
     }
   }
   quitter() {
-    this.router.navigate(['/quiz-list', {do: true , idPatient: this.evolution.patientId}]);
+    console.log(this.progression);
+    // tslint:disable-next-line:max-line-length
+    if (confirm((this.progression.did > 0 ? (this.progression.did + ' ' + (this.progression.did > 1 ? 'questions jouées' : 'question joué') + ' sur ' + this.progression.total + ' .') : 'Il reste ' + this.progression.total + ' questions .') +
+      '\nVoulez-vous vraiment retourner au choix de quiz?')) {
+      this.router.navigate(['/quiz-list', {do: true, idPatient: this.evolution.patientId}]);
+    }
   }
   nextQuestion(next: boolean) {
     if (next) {
