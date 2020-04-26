@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../../../models/quiz.model';
@@ -28,6 +28,7 @@ export class QuizDoStartComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
     this.quit = 0;
     this.idPatient = + (this.route.snapshot.params.idPatient);
@@ -36,15 +37,6 @@ export class QuizDoStartComponent implements OnInit {
         this.initialize(quiz);
       }, (error) => {this.retour(); });
 
-    document.addEventListener('keyup', (e) => {
-      if (e.key === 'Escape') {
-        this.quit += 1;
-        if (this.quit >= 2) {
-          this.quit = 0;
-          this.quitter();
-        }
-      }
-    });
   }
 
   retour() {
@@ -66,7 +58,16 @@ export class QuizDoStartComponent implements OnInit {
 
 
   }
-
+  @HostListener('window:keyup', ['$event'])
+  onKey(e: any) {
+    if (e.key === 'Escape') {
+      this.quit += 1;
+      if (this.quit >= 2) {
+        this.quit = 0;
+        this.quitter();
+      }
+    }
+  }
   quitter() {
     this.router.navigate(['/quiz-list', {do: true , idPatient: this.idPatient}]);
   }

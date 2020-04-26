@@ -3,11 +3,11 @@ import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {difficulteSearch, themeSearch} from '../../../models/theme.models';
-import {ThemeServices} from "../../../services/theme.services";
-import {Theme} from "../../../models/themes.model";
-import {Subscription} from "rxjs";
-import {SubthemeService} from "../../../services/subtheme.service";
-import {Subtheme} from "../../../models/subtheme.model";
+import {ThemeServices} from '../../../services/theme.services';
+import {Theme} from '../../../models/themes.model';
+import {Subscription} from 'rxjs';
+import {SubthemeService} from '../../../services/subtheme.service';
+import {Subtheme} from '../../../models/subtheme.model';
 
 @Component({
   selector: 'app-quiz-search-bar',
@@ -20,10 +20,10 @@ export class QuizSearchBarComponent implements OnInit {
   @Input()
   public doQuiz;
   subscription: Subscription;
-  subThemesValues: Subtheme[]=[];
+  subThemesValues: Subtheme[] = [];
   @Input()
   searchedQuiz = DEFAULT_QUIZ;
-  public themesValues : Theme[] =[];
+  public themesValues: Theme[] = [];
   public difficultiesValues = Object.values(difficulteSearch);
   constructor(private router: Router , public location: Location, private themeService: ThemeServices, private subThemeService: SubthemeService) { }
 
@@ -47,12 +47,13 @@ export class QuizSearchBarComponent implements OnInit {
     }
   }
   getSubTheme(value) {
-    console.log(value.value)
-    const id=this.getThemId(value.value);
+    console.log(value.value);
+    const id = this.getThemId(value.value);
     this.subThemeService.getSubTheme(id).subscribe((subThemes) => {
       this.subThemeService.Subthemes = subThemes;
       this.subThemeService.emitSubThemes();
-    this.subThemesValues.push(new Subtheme())});
+      this.subThemesValues.push(new Subtheme());
+    });
 
   }
   back() {
