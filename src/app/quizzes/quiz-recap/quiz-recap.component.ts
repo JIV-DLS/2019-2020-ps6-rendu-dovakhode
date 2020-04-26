@@ -44,7 +44,9 @@ export class QuizRecapComponent implements OnInit {
     }
   }
   quitter() {
-    this.router.navigate(['/quiz-list', {do: true , idPatient: this.patientId}]);
+    if (confirm(( 'Voulez-vous vraiment retourner au choix de quiz?'))) {
+      this.router.navigate(['/quiz-list', {do: true, idPatient: this.patientId}]);
+    }
   }
   precedent() {
     this.index = this.index > 0 ? this.index - 1 : 0;
