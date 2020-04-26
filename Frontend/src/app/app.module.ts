@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import {DeviceDetectorModule} from 'ngx-device-detector';
 import { AppComponent } from './app.component';
 import { QuizListComponent } from './quizzes/quiz-list/quiz-list.component';
 import { QuizComponent } from './quizzes/quiz/quiz.component';
@@ -207,6 +207,7 @@ routes.forEach((eachRoute) => {
     SubThemeListComponent
   ],
     imports: [
+        DeviceDetectorModule.forRoot(),
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
