@@ -1,10 +1,13 @@
 <mat-card class="page" >
   <mat-card-header>
     <mat-card-title>
-      <div *ngIf="question.image!=null" style="height: 80%;margin-left: 25%;margin-right: 25%">
+      <div *ngIf="question.image!=null" style="height: 90%;margin-left: 25%;margin-right: 25%">
         <app-image-uploader imagePreview="{{question.image}}"></app-image-uploader>
       </div>
-      <b>{{question?.label}}</b>
+      <b *ngIf="question.image == null; else elseBlock" style="font-size: 3vw">{{question?.label}}</b>
+      <ng-template #elseBlock>
+        <b style="font-size: 2vw">{{question?.label}}</b>
+      </ng-template>
       <h6 [class]="indicationClass">Cliquez sur l'une des réponses ci-dessous</h6>
     </mat-card-title>
     </mat-card-header>
