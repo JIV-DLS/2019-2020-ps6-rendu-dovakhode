@@ -23,6 +23,7 @@ export class ImageUploaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.savedImage = this.imagePreview;
     if (this.imageReestablisher) {
     this.imageReestablisher.subscribe(_ => {
       this.restablishImage();
