@@ -1,6 +1,6 @@
 <div style="background-color: white">
 <div  *ngIf="quizList.length == 0;">
-  <span class="h4" style="width: 100%; text-align: center">Votre liste de quiz est vide, veuillez  créer un profil</span>
+  <span class="h4" style="width: 100%; text-align: center">Votre liste de quiz est vide, veuillez en créer</span>
 </div>
   <mat-grid-list cols="1" *ngIf="quizList.length >0;">
   <carousel [itemsPerSlide]="itemsPerSlide"
