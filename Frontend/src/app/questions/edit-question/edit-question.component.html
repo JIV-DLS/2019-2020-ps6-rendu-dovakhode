@@ -73,7 +73,7 @@
       </mat-grid-list>
       <mat-grid-list cols="2" rowHeight="50px">
         <mat-grid-tile colspan="1" rowspan="1" >
-          <button class="mt-2 btn btn-sm" mat-button (dragover)="dragAddAnswer();" #ansButton (click)="addAnswer()" style="width: 50%">Ajouter une réponse <span class="badge">{{answers.length}}</span></button>
+          <button [disabled]="answers.length>3" (mouseover)="answersLenghtReached()" class="mt-2 btn btn-sm btn-primary" mat-button (dragover)="dragAddAnswer();" #ansButton (click)="addAnswer()" style="width: 50%">Ajouter une réponse <span class="badge">{{answers.length}}</span></button>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="1">
           <button mat-button (click)="editTheQuestion() " type="submit" class=" btn btn-success btn-block btn-primary" style="width:100% ">Modifier la question</button>

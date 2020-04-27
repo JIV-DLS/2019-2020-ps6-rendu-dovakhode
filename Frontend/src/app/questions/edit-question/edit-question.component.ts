@@ -70,7 +70,7 @@ export class EditQuestionComponent implements OnInit {
     if (this.answers.length < 4) {
       this.openDialog();
     } else {
-      alert('Vous ne pouvez pas ajouter plus de 4 réponses à une question');
+      this.alertAnswersLenghtReached();
     }
   }
   openDialog(): void {
@@ -135,5 +135,13 @@ export class EditQuestionComponent implements OnInit {
 
   close() {
     this.dialogRef.close(null);
+  }
+
+  alertAnswersLenghtReached() {
+    alert('Vous ne pouvez pas ajouter plus de 4 réponses à une question, Veuillez en supprimé puis rééssayer.');
+  }
+
+  answersLenghtReached() {
+    if(this.answers.length>3)this.alertAnswersLenghtReached();
   }
 }

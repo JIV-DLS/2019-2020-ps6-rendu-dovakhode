@@ -15,7 +15,7 @@ export class ImageUploaderComponent implements OnInit {
   @Input() label: string;
   @Input() form: FormGroup;
   @Input() editable: boolean;
-  @Output() imageChanged: EventEmitter<null> = new EventEmitter<null>();
+  @Output() imageChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() imageDeleted: EventEmitter<null> = new EventEmitter<null>();
   @ViewChild('imgShower') imgShower: ElementRef;
   editByLink = false;
@@ -25,11 +25,13 @@ export class ImageUploaderComponent implements OnInit {
   ngOnInit() {
     if (this.imageReestablisher) {
     this.imageReestablisher.subscribe(_ => {
-      this.imagePreview = this.savedImage;
+      this.restablishImage();
     });
     }
   }
-
+  restablishImage() {
+    this.imagePreview = this.savedImage;
+  }
   loadImageFile(file) {
     this.form.get('image').patchValue(file);
     this.form.get('image').updateValueAndValidity();
@@ -38,7 +40,7 @@ export class ImageUploaderComponent implements OnInit {
     reader.onload = () => {
       if (this.form.get('image').valid) {
         this.editByLink = false;
-        this.imageChanged.emit();
+        this.imageChanged.emit(true);
         this.imagePreview = reader.result as string;
         if (this.imgShower) {
         this.imgShower.nativeElement.src = this.imagePreview;
@@ -125,5 +127,11 @@ export class ImageUploaderComponent implements OnInit {
     } else {
       this.imgLinkError('le texte fourni n\'est pas un lien valide!');
     }
+  }
+
+  askNrestablishImage() {
+    if (confirm('Voulez-vous vraiment réétablir l\'image?')) {
+      this.restablishImage();
+      this.imageChanged.emit(false); }
   }
 }
