@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
 import {environment} from '../../../environments/environment';
@@ -23,6 +23,8 @@ export class QuizEndComponent implements OnInit {
   quiz: Quiz;
   evolution: Evolution;
   questionsPlayed: QuestionPlayed[];
+  quit: number;
+
 
   constructor(private route: ActivatedRoute, private router: Router,
               private cookiesService: CookieService, private quizSevice: QuizService ,
@@ -31,6 +33,7 @@ export class QuizEndComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.quit = 0;
     this.id = this.route.snapshot.params.id;
     this.idPatient = +(this.route.snapshot.params.idPatient);
     this.evolutionService.getEvolutionById(+this.route.snapshot.paramMap.get('idEvolution')).subscribe((evol) => {
@@ -63,19 +66,21 @@ export class QuizEndComponent implements OnInit {
     });
 
   }
-
-  resultat() {
-    console.log(this.questionsPlayed);
-    const resultat = [ 0 , 0 ];
-    if (this.questionsPlayed !== undefined) {
-      for (const question of this.questionsPlayed) {
-        if (question.trials <= 1) {
-          resultat[0] += 1;
-        } else if (+question.trials >= 2) {
-          resultat[1] += 1;
-        }
+  @HostListener('window:keyup', ['$event'])
+  onKey(e: any) {
+    if (e.key === 'Escape') {
+      this.quit += 1;
+      if (this.quit >= 2) {
+        this.quit = 0;
+        this.dialog.closeAll();
+        this.quitter();
       }
     }
-    return resultat;
   }
+  quitter() {
+    if (confirm('\nVoulez-vous vraiment retourner au choix de quiz?')) {
+      this.router.navigate(['/quiz-list', {do: true, idPatient: this.evolution.patientId}]);
+    }
+  }
+
 }

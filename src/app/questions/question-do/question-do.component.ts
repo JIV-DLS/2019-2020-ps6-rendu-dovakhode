@@ -47,6 +47,7 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
       this.quit += 1;
       if (this.quit >= 2) {
         this.quit = 0;
+        this.dialog.closeAll();
         this.quitter();
       }
     }
