@@ -7,9 +7,9 @@
             [singleSlideOffset]="singleSlideOffset"
             [interval]="false"
   >
-    <slide (click)="selectProfil(profil)" *ngFor="let profil of profilsList| nomprenom:{age: 0,id: 0 ,nom: profilSearched, prenom: profilSearched,recommandations: '',sexe: '',stade:''}; let index=index"  class="mx-auto" >
-      <mat-card style="background-color: white;height: 400px;" >
-        <img *ngIf="profil.image.length>3; " style="height: 75%; width: 100%" [src]="profil.image?.length>0? profil.image:'../../../assets/Default/imageNotFound.png'">
+    <slide  (click)="selectProfil(profil)" *ngFor="let profil of profilsList| nomprenom:{age: 0,id: 0 ,nom: profilSearched, prenom: profilSearched,recommandations: '',sexe: '',stade:''}; let index=index"  class="mx-auto" >
+      <mat-card class="profil" >
+        <img *ngIf="profil.image.length>3; " style="height: 70%; width: 100%" [src]="profil.image?.length>0? profil.image:'../../../assets/Default/imageNotFound.png'">
         <p [style]="profil.image?.length<3? 'height: 100%; padding-top: 35%;':'height: 25%;'">
           {{profil.prenom}}
           <br>
