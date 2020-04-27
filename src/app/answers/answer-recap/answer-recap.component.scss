@@ -1,17 +1,14 @@
 
-button {
+mat-card{
   align-content: center;
+  text-align: center;
+  background-color: #05cd39;
+  font-size: 2vw;
+  color: white;
 }
 img{
   height: 50%;
   width: 50%;
-}
-button:hover{
-  background-color: #6c757d;
-  cursor: pointer;
-}
-.btn-success:hover{
-  background-color: #28a745;
 }
 
 app-image-uploader{
@@ -20,8 +17,8 @@ app-image-uploader{
 }
 
 p{
-  padding-top: 2%;
-  margin-top: 5%;
+  padding-top: 1%;
+  margin-top: 1%;
   white-space: pre-line;
   line-height: 100%;
 }
