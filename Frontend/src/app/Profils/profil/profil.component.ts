@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, OnChanges, OnInit, Output, SimpleChange} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Profil} from '../../../models/profil.model';
 import {ProfilEditComponent} from '../profil-edit/profil-edit.component';
@@ -14,7 +14,7 @@ import {DialogService} from '../../../services/dialog.service';
   templateUrl: './profil.component.html',
   styleUrls: ['./profil.component.scss']
 })
-export class ProfilComponent implements OnInit, OnChanges {
+export class ProfilComponent implements OnInit {
   private profilDialogOpened = false;
   public profilForm: FormGroup;
   constructor(@Inject(MAT_DIALOG_DATA) public profil: Profil,
@@ -27,8 +27,6 @@ export class ProfilComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.initiForm(this.profil);
-  }
-  ngOnChanges(): void {
   }
   initiForm(profil: Profil) {
     this.profilForm = this.formBuilder.group({
@@ -57,6 +55,7 @@ export class ProfilComponent implements OnInit, OnChanges {
       if (response != null) {
       this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
       this.profil.image = response.image;
+      document.location.reload();
       /*this.dialogRef.close({
           del: false
         });*/
