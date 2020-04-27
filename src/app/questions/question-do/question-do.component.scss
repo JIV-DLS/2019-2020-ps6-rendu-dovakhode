@@ -36,7 +36,7 @@ width: 100%;
 app-image-uploader img{
 }
 h6{
-  font-size: medium;
+  font-size: 1vw;
   color: #0c5460;
 }
 .animate{
@@ -44,7 +44,10 @@ h6{
   animation-delay: 30s;
 }
 @keyframes zoom {
-  0% {font-size: medium;}
-  50% {font-size: large;}
-  100% {font-size: medium;}
+  0% { font-size: 1vw;}
+  50% {font-size: 1.1vw;}
+  100% {font-size: 1.2vw;}
+}
+b{
+  font-size: 1.5vw;
 }

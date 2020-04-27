@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
@@ -9,13 +9,15 @@ import {Quiz} from '../../../models/quiz.model';
   templateUrl: './quiz-recap.component.html',
   styleUrls: ['./quiz-recap.component.scss']
 })
-export class QuizRecapComponent implements OnInit {
+export class QuizRecapComponent implements OnInit, OnChanges {
   public quiz: Quiz;
   public index = 0;
   patientId: number;
   evolutionId: number;
   loading: boolean;
   quit: number;
+  indicationClass = 'animate';
+
   constructor(private location: Location,
               private quizService: QuizService,
               private route: ActivatedRoute,
@@ -58,6 +60,7 @@ export class QuizRecapComponent implements OnInit {
 
   suivant() {
     if (this.index < this.quiz.questions.length - 1) {
+      this.ngOnChanges();
       this.index = this.index + 1;
     } else {
       this.goToEnd();
@@ -69,5 +72,9 @@ export class QuizRecapComponent implements OnInit {
   public retour() {
     this.location.back();
   }
-
+  ngOnChanges(): void {
+    this.indicationClass = '';
+    setTimeout(() =>    this.indicationClass = 'animate'
+      , 70);
+  }
 }
