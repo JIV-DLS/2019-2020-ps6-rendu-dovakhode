@@ -8,6 +8,9 @@ import {Quiz} from '../../../models/quiz.model';
 import {Evolution} from '../../../models/evolution.model';
 import {QuestionPlayedService} from '../../../services/questionPlayed.service';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {QuizEndInfoComponent} from '../quiz-end-info/quiz-end-info.component';
+import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 
 @Component({
   selector: 'app-quiz-end',
@@ -23,7 +26,9 @@ export class QuizEndComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
               private cookiesService: CookieService, private quizSevice: QuizService ,
-              private evolutionService: EvolutionService, private questionPlayedService: QuestionPlayedService) { }
+              private evolutionService: EvolutionService, private questionPlayedService: QuestionPlayedService,
+              public dialog: MatDialog, public dialogRef: MatDialogRef<QuizEndInfoComponent>
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
@@ -49,6 +54,16 @@ export class QuizEndComponent implements OnInit {
   begining() {
     this.router.navigate(['quiz-list']);
   }
+
+  info() {
+    const dialogRef = this.dialog.open(QuizEndInfoComponent, {
+      width: '60%',
+      height: '60%',
+      data: this.evolution ? this.evolution : null,
+    });
+
+  }
+
   resultat() {
     console.log(this.questionsPlayed);
     const resultat = [ 0 , 0 ];

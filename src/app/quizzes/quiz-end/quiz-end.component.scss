@@ -24,22 +24,27 @@
 
 
 
+p{
+  position: relative;
+  bottom: 25%;
+  margin: auto;
+  color: white;
+  font-size: 2.5vw;
+  height: fit-content;
 
+}
 #text1{
+  font-size: 3vw;
+  color: white;
+  padding: auto;
+  text-align: center;
   border-radius: 25px;
-  margin-top: 20px;
-  margin-left: 30%;
-  margin-right: 25%;
-  padding-left: 47px;
-  padding-top: 15px;
-  width: 600px;
- height: 60px;
- background: #0cc10c;
+  place-content: center;
+  margin: 1%;
+  width: 70%;
+ height: fit-content;
+  background-color: #28a745;
   box-shadow: 5px 10px #888888;
-  position: absolute;
-  animation: mymove 5s infinite;
-  animation-delay: 2s;
-  animation-direction:alternate;
 }
 #btn2{
   margin-left: 80px;
@@ -65,23 +70,33 @@ div.bouton-aligne{
   margin-top: -100px;
 }
 
-button{
-  width: 90%;
-  height: 90%;
-}
+
 @-webkit-keyframes clignote {
   0%{box-shadow:0px 0px 25px #4183C4;}
   50%{box-shadow:0px 0px 0px #4183C4;}
   100%{box-shadow:0px 0px 25px #4183C4;}
 }
 #btn1{
+  margin: auto;
+  padding: auto;
   font-weight: bold;
-  text-shadow: 0 1px 0 white;
+  white-space: pre-wrap;
   border-radius: 3px;
-  padding: 5px 10px;
+  font-size: 2vw;
+  text-justify: auto;
+  width: 100%;
+  height: 80%;
   border: 1px solid #DDD;
   box-shadow:0px 0px 20px #4183C4;
-  -webkit-animation-name: clignote; //on affecte l'animation clignote à notre bouton
-  -webkit-animation-duration: 0.7s; //on définit la durée de l'animation à 1s
-  -webkit-animation-iteration-count:infinite; //on dit que l'animation se répétera à l'infini.
+}
+#faire{
+  height: 100%;
+  width: 100%;
+  font-size: 3vw;
+  color: white;
+  text-align: center;
+}
+.info{
+  height: fit-content;
+  width: fit-content;
 }
