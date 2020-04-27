@@ -86,7 +86,19 @@ export class DragNDropPhotoDirective {
 
             // console.log(_)
             // console.log(new File(decodeURIComponent(_.split(' ')[0].split('imgurl=')[1].split('&imgref')[0]),'mon fichier'));
-          } else {
+          } else if (_.value.includes('data', 0)) {
+                console.log('data');
+                if ( _.value.indexOf('base64') > 0) {
+
+                  const anArray = [];
+                  anArray.push(this.dataURItoBlob(_.value.split('base64,')[1]) as File);
+                  this.fileDropped.emit(anArray);
+                } else { alert('Désolé le format de l\'image n\'est pas connu ou n\'a pas été fourni dans le lien!(base64 requis)'); }
+              } else if (_.value.includes('http', 0)) {
+
+                console.log('http');
+                this.downloadImageUrl(_.value).then(r => console.log(r));
+              } else {
                 alert('Pour l\'import glissé-déposé depuis un site web, Veuillez par préférence choisir Google!');
           /*this.snack.open('Pour l\'import depuis un site web, Veuillez par préférence choisir Google!', 'close',
             {
@@ -106,4 +118,36 @@ export class DragNDropPhotoDirective {
 
   }
 
+  private dataURItoBlob(dataURI: string) {
+      const byteString = window.atob(dataURI);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([int8Array], { type: 'image/jpeg' });
+      return blob;
+  }
+
+   private async downloadImageUrl(url: any) {
+    try {
+      await fetch(url)
+        .then(res => res.blob()) // Gets the response and returns it as a blob
+        .then(blob => {
+          const anArray = [];
+          anArray.push(blob as File);
+          this.fileDropped.emit(anArray);
+        });
+    } catch (err) {
+      alert('❌ Impossible de telecharger l\'image,' +
+        ' les droits sont insuffisants, Veuillez la télécharger puis l\'importer ici' +
+        ' ou essayer avec une autre image!');
+      /*this.snack.open('❌ Impossible de telecharger l\'image,' +
+        ' les droits sont insuffisants, Veuillez importer une autre image!', 'close',
+        {
+          ...environment.snackInformation.errorForAll
+        })
+      ;*/
+    }
+  }
 }
