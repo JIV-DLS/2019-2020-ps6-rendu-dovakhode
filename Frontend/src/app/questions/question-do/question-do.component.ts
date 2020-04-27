@@ -67,6 +67,7 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
         width: '950px',
         maxHeight: '500px',
         disableClose: true,
+        closeOnNavigation: true,
       });
       dialogRef.afterClosed().subscribe(result => {
         this.next.emit(this.trials);
