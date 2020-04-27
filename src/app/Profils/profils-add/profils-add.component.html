@@ -5,8 +5,7 @@
     </mat-card-header>
     <mat-card-content style="border-bottom: black solid 1px;">
       <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
-        <mat-grid-tile  colspan="7" rowspan="4">
-
+        <mat-grid-tile  colspan="7" rowspan="1">
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="4">
           <button color="primary" (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
@@ -54,7 +53,7 @@
         </mat-grid-tile>
 
 
-        <mat-grid-tile colspan="8" rowspan="4">
+        <mat-grid-tile colspan="8" rowspan="3">
           <mat-form-field>
             <mat-label>Stade de la maladie*</mat-label>
             <mat-select [formControlName]="'stade'" >
@@ -84,7 +83,7 @@
     <mat-card-footer style="padding-right: 12px;">
       <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
         <mat-grid-tile colspan="8" rowspan="4">
-          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-success" (click)="addProfil()">Créer le profil</button>
+          <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="addProfil()">Créer le profil</button>
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-footer>
