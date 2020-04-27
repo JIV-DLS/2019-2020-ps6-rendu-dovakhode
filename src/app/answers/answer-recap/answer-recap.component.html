@@ -5,10 +5,10 @@
     </mat-grid-tile>
     <mat-grid-tile style="height: 100%;width: 100%;" *ngIf="answer.value!=' '" colspan="1" rowspan="{{answer.image == null ? 10 : 3}}">
       <div *ngIf="answer.image == null; else elseBlock">
-        <p style="height: 100%;width: 100%;position: relative;top: 50%" >{{answer.value}}</p>
+        <p style="height: 100%;width: 100%;position: relative;top: 50%;font-size: 1.5vw;" >{{answer.value}}</p>
       </div>
       <ng-template  #elseBlock>
-        <p style="height: 100%;width: 100%;" >{{answer.value}} </p>
+        <p style="height: 100%;width: 100%;  font-size: 1.5vw;" >{{answer.value}} </p>
       </ng-template>
     </mat-grid-tile>
   </mat-grid-list>

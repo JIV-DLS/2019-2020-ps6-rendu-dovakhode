@@ -33,7 +33,6 @@ export class EditQuestionComponent implements OnInit {
   @Output()
   questionCreated: EventEmitter<Question> = new EventEmitter<Question>();
   public imagePreview: string;
-  @ViewChild('answerWithImage') answerWithImage: MatSlideToggle;
 
   ngOnInit() {
     this.question = new Question(this.questionEdition);
@@ -63,21 +62,19 @@ export class EditQuestionComponent implements OnInit {
     });
   }
   dragAddAnswer() {
-    this.answerWithImage.checked = true;
     this.addAnswer();
   }
   addAnswer() {
     if (this.answers.length < 4) {
       this.openDialog();
     } else {
-      alert('Vous ne pouvez pas ajouter plus de 4 réponses à une question');
+      this.alertAnswersLenghtReached();
     }
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AnswerAddComponent, {
-      width: '800px',
-      height: this.answerWithImage.checked ? '380px' : '300px',
-      data: this.answerWithImage.checked
+      width: '60%',
+      height: '60%',
     });
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
@@ -135,5 +132,13 @@ export class EditQuestionComponent implements OnInit {
 
   close() {
     this.dialogRef.close(null);
+  }
+
+  alertAnswersLenghtReached() {
+    alert('Vous ne pouvez pas ajouter plus de 4 réponses à une question, Veuillez en supprimé puis rééssayer.');
+  }
+
+  answersLenghtReached() {
+    if(this.answers.length>3)this.alertAnswersLenghtReached();
   }
 }

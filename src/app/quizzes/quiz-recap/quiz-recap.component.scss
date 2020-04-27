@@ -9,3 +9,19 @@ app-question-recap{
 mat-card{
   height: 100%;
 }
+h4{
+  font-size: 2.5vw;
+}
+b{
+
+  font-size: 3vw;
+}
+.animate{
+  animation: zoom 1.7s infinite;
+  animation-delay: 7s;
+}
+@keyframes zoom {
+  0%{box-shadow:0 0 5vw blue;}
+  50%{box-shadow:0 0 0 blue;}
+  100%{box-shadow:0 0 5vw blue;}
+}
