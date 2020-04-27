@@ -22,6 +22,9 @@
     <span class="Jbtn-delete" *ngIf="imagePreview" (click)="deleteImage();" mat-flat-button aria-label="suppression de photo">
                   <mat-icon>delete</mat-icon>
 </span>
+    <span class="Jbtn-renew" *ngIf="imagePreview&&savedImage!=imagePreview" (click)="askNrestablishImage();" mat-flat-button aria-label="restauration de la photo">
+                  <mat-icon>autorenew</mat-icon>
+</span>
   </div>
   <span class="Jbtn-link" (dragover)="editByLink = editByLink == true? false: editByLink" (click)="editByLink=!editByLink" mat-flat-button aria-label="ajout de photo via un lien">
                   <mat-icon *ngIf="!editByLink">link</mat-icon>

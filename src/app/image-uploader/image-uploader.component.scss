@@ -1,5 +1,5 @@
 
-.Jbtn-edit,.Jbtn-delete,.Jbtn-link {
+.Jbtn-edit,.Jbtn-delete,.Jbtn-link,.Jbtn-renew {
   height: 33px;
   width: 60px;
   position: absolute;
@@ -29,7 +29,12 @@
   top: 12%;
   left: 90%;
 }
-.Jbtn-edit:hover,.Jbtn-delete:hover{
+.Jbtn-renew {
+  opacity: 0.7;
+  top: 90%;
+  left: 12%;
+}
+.Jbtn-edit:hover,.Jbtn-delete:hover,.Jbtn-renew:hover,.Jbtn-link:hover{
   opacity: 1;
 }
 .uploadfilecontainer {
