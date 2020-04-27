@@ -3,12 +3,12 @@
     </mat-card-header>
     <mat-card-content style="border-bottom: black solid 1px;">
       <mat-grid-list cols="3" rowHeight="12px" style="width: 100%">
-        <mat-grid-tile colspan="1" rowspan="4">
+        <mat-grid-tile colspan="1" rowspan="5">
             <p>Nom: {{this.profil.nom}}</p>
         </mat-grid-tile>
         <mat-grid-tile colspan="2" rowspan="16">
-          <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
-            <mat-card-content style=" height: 100%;width: 100%;">
+          <mat-card style="border: black solid 3px; height: 100%;width: 80%; padding: 1px;">
+            <mat-card-content style=" height: 100%;width: 111%;">
               <app-image-uploader *ngIf="profil.image!=null" [imagePreview]="profilImage()"></app-image-uploader>
             </mat-card-content>
           </mat-card>
@@ -28,7 +28,7 @@
         <mat-grid-tile colspan="1" rowspan="3">
             <p>Stade de la maladie: {{this.profil.stade}}</p>
         </mat-grid-tile>
-        <mat-grid-tile colspan="3" rowspan="4">
+        <mat-grid-tile colspan="3" rowspan="3">
           <p>Recommandations:</p>
         </mat-grid-tile>
         <mat-grid-tile colspan="3" rowspan="10">
