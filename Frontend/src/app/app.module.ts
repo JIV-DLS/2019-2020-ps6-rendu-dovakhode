@@ -99,6 +99,7 @@ import { NomprenomPipe } from './Profils/_pipes/subDirectory/nomprenom.pipe';
 import { QuizResultDisplayComponent } from './quizzes/quiz-result-display/quiz-result-display.component';
 import { QuizStartRecapComponent } from './quizzes/quiz-start-recap/quiz-start-recap.component';
 import { FooterComponent } from './footer/footer.component';
+import { QuizEndInfoComponent } from './quizzes/quiz-end-info/quiz-end-info.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
@@ -192,6 +193,8 @@ routes.forEach((eachRoute) => {
     QuizStartRecapComponent,
 
     FooterComponent,
+
+    QuizEndInfoComponent,
 
   ],
   entryComponents: [
