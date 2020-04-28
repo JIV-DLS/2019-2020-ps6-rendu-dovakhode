@@ -5,8 +5,8 @@ import {EvolutionService} from '../../../services/evolution.service';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
 import {QuestionPlayedService} from '../../../services/questionPlayed.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Quiz} from "../../../models/quiz.model";
-import {QuizService} from "../../../services/quiz.service";
+import {Quiz} from '../../../models/quiz.model';
+import {QuizService} from '../../../services/quiz.service';
 
 @Component({
   selector: 'app-quiz-end-info',
@@ -27,7 +27,7 @@ export class QuizEndInfoComponent implements OnInit {
     this.questionsPlayed = this.evolution.questionPlayed;
     this.quizService.getQuizById(this.evolution.quizId).subscribe((quiz) => {
       this.quiz = quiz;
-    })
+    });
   }
   FirstTrialSucceed() {
     let nb = 0;
@@ -42,16 +42,14 @@ export class QuizEndInfoComponent implements OnInit {
     }
     return nb;
   }
-  AfterFirstTrial()
-  {
-    const  nb=this.FirstTrialSucceed();
+  AfterFirstTrial() {
+    const  nb = this.FirstTrialSucceed();
     return this.quiz.questions.length - nb;
   }
 
-  Pourcentage()
-  {
-    const  nb1= this.FirstTrialSucceed();
-    const nb2= (nb1*100)/this.quiz.questions.length;
+  Pourcentage() {
+    const  nb1 = this.FirstTrialSucceed();
+    const nb2 = (nb1 * 100) / this.quiz.questions.length;
     return nb2.toFixed(2);
   }
   resultat() {
