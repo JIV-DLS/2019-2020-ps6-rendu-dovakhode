@@ -61,7 +61,7 @@ export class QuizEndComponent implements OnInit {
   info() {
     const dialogRef = this.dialog.open(QuizEndInfoComponent, {
       width: '60%',
-      height: '60%',
+      height: '65%',
       data: this.evolution ? this.evolution : null,
     });
 
