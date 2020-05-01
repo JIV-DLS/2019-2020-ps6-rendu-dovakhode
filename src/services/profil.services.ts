@@ -25,7 +25,7 @@ export class ProfilServices {
 
   addProfil(profil: Profil, image?: File) {
 
-    this.snack.open(environment.snackInformation.operation.loading.post.profil, 'close',
+    this.snack.open(environment.snackInformation.operation.loading.post.profile, 'close',
       {
         ...environment.snackInformation.loadingPost
       })

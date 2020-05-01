@@ -89,7 +89,7 @@ export const environment = {
           quiz: '⏳ Enregistrement du quiz en cours...',
           question: '⏳ Enregistrement de la question en cours...',
           answer: '⏳ Enregistrement de la réponse en cours...',
-          profil: '⏳ Enregistrement du profil en cours...'
+          profile: '⏳ Enregistrement du profil en cours...'
         }},
       succeeded: {
         getAll: {
