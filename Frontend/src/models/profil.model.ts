@@ -9,7 +9,7 @@ export  class Profil {
   stade: string;
   recommandations?: string;
   image?: string;
-  // tmpUrl?: string;
+  tmpUrl?: string;
 
 
 }

@@ -14,7 +14,7 @@ import {Profil} from '../../../models/profil.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {ProfilComponent} from '../profil/profil.component';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-profil-edit',
@@ -23,10 +23,13 @@ import {Subject} from 'rxjs';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class ProfilEditComponent implements OnInit {
+  public StateType: any;
+  private stateSubject: BehaviorSubject<any>;
   public profilForm: FormGroup;
   public value;
   imagePreview: string;
   public imageChanged: boolean;
+  public imageEvent: EventEmitter<boolean>;
   public savedImage: string;
   imageReestablisher: Subject<null> = new Subject();
 
@@ -37,12 +40,14 @@ export class ProfilEditComponent implements OnInit {
               private dialogRef: MatDialogRef<ProfilComponent>,
               private formbuilder: FormBuilder,
               private profilService: ProfilServices,
-              private Activerouter: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private Activerouter: ActivatedRoute) { }
+  ngOnInit() {
+    this.profilService.getProfilById ( + this.Activerouter.snapshot.paramMap.get('id'))
+      .subscribe((profil) => {
+        this.initiForm(profil);
+      }, (error) => {this.cancelEdit(); });
 
-  ngOnInit(): void {
-    this.initiForm(this.profil);
-    // this.imagePreview = this.profil.image;
   }
   deleteImage() {
     this.imageChanged = true;
@@ -56,25 +61,23 @@ export class ProfilEditComponent implements OnInit {
     this.imagePreview = profil.image.length > 1 ? profil.image : null;
     this.savedImage = this.imagePreview;
     this.profilForm = this.formbuilder.group({
-      nom: profil.nom,
-      age: profil.age,
-      prenom: profil.prenom,
-      stade: profil.stade,
-      sexe: profil.sexe,
-      recommandations: profil.recommandations,
-      image: profil.image,
+      nom: [profil.nom],
+      age: [profil.age],
+      prenom: [profil.prenom],
+      stade: [profil.stade],
+      sexe: [profil.sexe],
+      recommandations: [profil.recommandations],
+      image: [null],
       id: profil.id
     });
   }
-
-
   editTheProfil() {
     if (this.conform()) {
       const profilToModify: Profil =  (this.profilForm.getRawValue()) as Profil;
       profilToModify.image = this.profil.image;
-      this.profileCreated.emit(true);
+      alert('this.profilFrom.get(\'image\').value = ' + this.profilForm.get('image').value);
       this.profilService
-        .updateProfil(profilToModify,  this.profilForm.get('image') == null ? null : this.profilForm.get('image').value )
+        .updateProfil(profilToModify,  this.profilForm.get('image').value )
         .subscribe((profil) => {
           if (profil !== undefined) {
             this.profil = profil;
@@ -82,17 +85,12 @@ export class ProfilEditComponent implements OnInit {
             this.initiForm(profil);
           }
         });
-
-      this.dialogRef.close({
-        profil : profilToModify,
-        image: profilToModify.image});
+      this.router.navigateByUrl('/home-profil-gestion');
     }
   }
   cancelEdit() {
-    // this.initiForm(this.profil);
-    this.dialogRef.close(this.profil);
+    this.router.navigateByUrl('/home-profil-gestion');
   }
-
   conform() {
     return true;
   }

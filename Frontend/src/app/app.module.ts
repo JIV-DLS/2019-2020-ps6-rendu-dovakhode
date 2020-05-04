@@ -117,6 +117,7 @@ const routes: Routes = [
   {path: 'quiz/:idShowQuiz' , component: QuizComponent, data: {routeName: 'Affichage d\'un quiz'}},
   {path: 'resultats/:id' , component: QuizResultDisplayComponent, data: {routeName: 'Resultats'}},
   {path: 'profils-carousel', component: ProfilListDisplayComponent, data: {routeName: 'Choix du patient pour le jeu'}},
+  {path: 'profil-edit/:id' , component: ProfilEditComponent, data: {routeName: 'Modification d\'un profil'}},
   {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent, data: {routeName: 'Jeu de quiz par un patient'}},
   { path: 'not-found', component: Error404Component , data: {routeName: 'Page inacessible'}},
   { path: '**', redirectTo: 'not-found', data: {routeName: 'Page inacessible'} }
