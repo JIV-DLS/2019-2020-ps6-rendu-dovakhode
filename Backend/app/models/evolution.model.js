@@ -1,4 +1,4 @@
-const Joi = require('joi')
+const Joi = require('joi');
 const BaseModel = require('../utils/base-model.js')
 
 module.exports = new BaseModel('Evolution', {
@@ -11,4 +11,4 @@ module.exports = new BaseModel('Evolution', {
   quizDifficulty : Joi.string(),
   quizQuestion : Joi.number(),
 
-})
+});
