@@ -5,8 +5,8 @@
       <mat-icon>view_list</mat-icon> Afficher les quizzes par liste
     </ng-template>
     <app-quiz-search-bar [searchedQuiz]="searchedQuiz" [idPatient]="idPatient" [doQuiz]="doQuiz"></app-quiz-search-bar>
-    <p >{{motQuitter()}}</p>
-    <app-quiz-list (selectEmitter)="selectQuiz($event)" (deleteEmitter)="deleteQuiz($event)" [quizList]="quizList| quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}"></app-quiz-list>
+    <p *ngIf="doQuiz">{{motQuitter()}}</p>
+    <app-quiz-list [doQuiz]="doQuiz" (selectEmitter)="selectQuiz($event)" (deleteEmitter)="deleteQuiz($event)" [quizList]="quizList| quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}"></app-quiz-list>
   </mat-tab>
 
   <mat-tab >

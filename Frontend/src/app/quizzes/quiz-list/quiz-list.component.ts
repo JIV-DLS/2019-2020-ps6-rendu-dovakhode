@@ -12,6 +12,7 @@ export class QuizListComponent implements OnInit {
   public quizList: Quiz[];
   @Input()
   loading: boolean;
+  @Input()
   doQuiz: any;
   inviteToCreateQuiz: any;
 
@@ -21,7 +22,6 @@ export class QuizListComponent implements OnInit {
   deleteEmitter: EventEmitter<Quiz> = new EventEmitter<Quiz>();
 
   ngOnInit(): void {
-
   }
 
   selectQuiz(quiz: Quiz) {

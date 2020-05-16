@@ -7,8 +7,8 @@
     <mat-grid-tile colspan="1" rowspan="1">
       <button mat-button style="font-size: 1vw" (click)="goToEnd()">Fin</button>
     </mat-grid-tile>
-    <mat-grid-tile  colspan="8" rowspan="8" style="overflow-y:scroll;">
-      <div style="max-height: 50%;overflow-y:scroll; background-color: red">
+    <mat-grid-tile  colspan="8" rowspan="8" >
+      <div style="max-height: 50%;background-color: red">
         <app-question-recap [question]="this.quiz.questions[this.index]"></app-question-recap>
       </div>
     </mat-grid-tile>

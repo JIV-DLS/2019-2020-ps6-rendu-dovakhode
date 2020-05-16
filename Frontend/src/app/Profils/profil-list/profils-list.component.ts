@@ -68,9 +68,9 @@ export class ProfilsListComponent implements OnInit {
 
   col() {
     if (this.doQuiz) {
-      return 10;
+      return 9;
     } else {
-      return 11;
+      return 10;
     }
   }
 

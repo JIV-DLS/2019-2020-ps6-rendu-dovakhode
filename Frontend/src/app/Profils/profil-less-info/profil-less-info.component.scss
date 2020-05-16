@@ -5,14 +5,15 @@
   background-color: #6c757d;
 }
 .leftBorder{
-  border-right: solid 0.3px black;
+  border-right: solid 0.1px black;
 }
 
 mat-grid-tile{
   padding: 20px;
 }
 mat-grid-list{
-  margin:10px;
+  margin-top:1%;
   padding: 20px;
   border: thick double black ;
 }
+h5{ font-size: 2vw}

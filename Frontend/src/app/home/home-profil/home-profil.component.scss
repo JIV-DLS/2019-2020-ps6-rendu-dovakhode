@@ -5,6 +5,7 @@
   border: 1px solid #DDD;
   box-shadow:0px 0px 20px #4183C4;
 
+
 }
 app-profil-list{
   width: 100%;
@@ -20,4 +21,8 @@ app-profil-list{
 button,mat-form-field{
   width: 95%;
   height: 75%;
+}
+button{
+  font-size: 1.5vw;
+
 }
