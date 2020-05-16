@@ -90,6 +90,7 @@ export class ImageUploaderComponent implements OnInit {
         .then(blob => {
           this.loadImageFile(blob as File);
         });
+      return 'done';
     } catch (err) {
       alert('❌ Impossible de telecharger l\'image,' +
         ' les droits sont insuffisants, Veuillez la télécharger puis l\'importer ici' +
@@ -100,6 +101,7 @@ export class ImageUploaderComponent implements OnInit {
           ...environment.snackInformation.errorForAll
         })
       ;*/
+      return err;
     }
   }
   indicateToDownload() {
