@@ -43,6 +43,11 @@ export class ProfilComponent implements OnInit {
   public profilImage() {
     return this.profilForm.get('image').value;
   }
+  addQuiz()
+  {
+    this.dialogRef.close();
+    this.router.navigate(['/quiz-add',{idPatient:this.profil.id}]);
+  }
 
   editProfile() {
     this.dialogRef.close();

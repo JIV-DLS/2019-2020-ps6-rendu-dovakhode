@@ -11,6 +11,7 @@ export class Quiz {
     questions: Question[];
     dateCreation?: Date;
     dateModification?: Date;
+    idPatient?: number;
     constructor(quiz?: Quiz) {
       if (quiz) {
         this.id = quiz.id;
@@ -23,6 +24,7 @@ export class Quiz {
         quiz.questions.forEach(question => this.questions.push(new Question(question)));
         this.dateCreation = quiz.dateCreation;
         this.dateModification = quiz.dateModification;
+        this.idPatient= quiz.idPatient;
      } else {
         this.id = 0;
         this.questions = []; }

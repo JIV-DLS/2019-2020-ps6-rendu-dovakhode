@@ -52,6 +52,13 @@ function createQuiz(obj, req) {
   quiz.questions = questions
   return quiz
 }
+function getQuizByPatientId(id) {
+  const quiz = []
+  for (let i = 0; i <Quiz.items.length; i++) {
+    if (Quiz.items[i].idPatient === parseInt(id, 10)) { quiz.push(Quiz.items[i]) }
+  }
+  return quiz
+}
 function getAQuiz(id) {
   const quiz = Quiz.getById(id)
   const questions = QuestionsRouter.getQuestionsByQuizId(id)
@@ -76,6 +83,18 @@ router.get('/', (req, res) => {
     res.status(500).json(err)
   }
 })
+router.get('/patient/:idPatient', (req, res) => {
+  try {
+    const quizzes = getQuizByPatientId(req.params.idPatient).sort((a, b) => new Date(b.dateModification) - new Date(a.dateModification))
+    for (let i = 0; i < quizzes.length; i++) { quizzes[i].questions = QuestionsRouter.getQuestionsByQuizId(quizzes[i].id) }
+
+    res.status(200).json(quizzes)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
+
 function hasQuizImage(req) {
   return req.files[0] && req.files[0].originalname.indexOf('quiz') === 0
 }

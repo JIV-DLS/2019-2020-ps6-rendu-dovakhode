@@ -22,7 +22,7 @@
   </mat-grid-list>
   <div style="max-height: 430px;overflow-y: scroll;">
     <mat-spinner *ngIf="loading"></mat-spinner>
-    <app-profil-less-info class="quiz" (selectEmitter) ="quizSelected($event)" (deleteEmitter)="deleteProfil($event,profil)"
+    <app-profil-less-info class="quiz" (selectEmitter) ="profilSelected($event)" (deleteEmitter)="deleteProfil($event,profil)"
                           (selectEmitter)="SelectProfil(profil)" [do]="this.doQuiz" *ngFor="let profil of profilList " [profil]="profil"></app-profil-less-info>
     <div style="display: flex" *ngIf="inviteToCreateProfil">
       <span class="h4" style="width: 40%; text-align: center">Votre liste est vide veuillez ajouter un profil patient</span>

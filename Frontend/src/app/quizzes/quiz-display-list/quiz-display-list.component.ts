@@ -38,18 +38,44 @@ export class QuizDisplayListComponent implements OnInit {
   }
   getAllQuiz() {
     this.loading = true;
-    this.quizService.getQuiz().subscribe((quiz) => {
+    if(this.idPatient===0 || !this.doQuiz) {
+      this.quizService.getQuiz().subscribe((quiz) => {
 
-      this.loading = false;
-      if (!quiz) {
-        // tslint:disable-next-line:max-line-length
-        if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) { this.getAllQuiz(); } else {alert('Veuillez conctater l\'administrateur'); return; }
-      }
+        this.loading = false;
+        if (!quiz) {
+          // tslint:disable-next-line:max-line-length
+          if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) {
+            this.getAllQuiz();
+          } else {
+            alert('Veuillez conctater l\'administrateur');
+            return;
+          }
+        }
 
-      this.quizList = quiz;
-      this.inviteToCreateQuiz = this.quizList.length === 0 ;
+        this.quizList = quiz;
+        this.inviteToCreateQuiz = this.quizList.length === 0;
 
-    });
+      });
+    }
+    else {
+      this.quizService.getPatientQuiz(this.idPatient).subscribe((quiz) => {
+
+        this.loading = false;
+        if (!quiz) {
+          // tslint:disable-next-line:max-line-length
+          if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) {
+            this.getAllQuiz();
+          } else {
+            alert('Veuillez conctater l\'administrateur');
+            return;
+          }
+        }
+
+        this.quizList = quiz;
+        this.inviteToCreateQuiz = this.quizList.length === 0;
+
+      });
+    }
   }
   quizSelected(selected: boolean) {
   }

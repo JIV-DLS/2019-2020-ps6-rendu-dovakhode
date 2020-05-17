@@ -11,4 +11,5 @@ module.exports = new BaseModel('Quiz', {
   dateModification: Joi.date(),
   questions: Joi.array(),
   image: Joi.string().allow(''),
+  idPatient:Joi.number().allow(null),
 })

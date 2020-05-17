@@ -25,6 +25,8 @@ function getQuestionsByQuizId(id) {
   return indexes
 }
 
+
+
 router.get('/:idQ', (req, res) => {
   try {
     const question = Question.getById(req.params.idQ)

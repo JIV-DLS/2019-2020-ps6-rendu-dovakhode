@@ -47,7 +47,7 @@ export class ProfilsListComponent implements OnInit {
 
     });
   }
-  quizSelected(profil: Profil) {
+ profilSelected(profil: Profil) {
     this.profilClicked.emit(profil);
   }
   deleteProfil(comfirm: boolean, profil: Profil) {

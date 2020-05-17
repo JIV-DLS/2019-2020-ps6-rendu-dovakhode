@@ -18,6 +18,7 @@ import {ThemeListComponent} from '../../themes/theme-list/theme-list.component';
 import {SubthemeService} from '../../../services/subtheme.service';
 import {Subtheme} from '../../../models/subtheme.model';
 import {Theme} from '../../../models/themes.model';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-quiz-form',
@@ -27,13 +28,15 @@ import {Theme} from '../../../models/themes.model';
 
 export class QuizAddComponent implements OnInit {
   public idTheme: any;
+  public idPatient: number;
 
   constructor(public dialogRef: MatDialogRef<QuizAddComponent>,
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
               public quizService: QuizService,
               public themeService: ThemeServices,
-              public subThemeService: SubthemeService) {
+              public subThemeService: SubthemeService,
+              public activatedRoute: ActivatedRoute ) {
 
   }
   // Form creation
@@ -76,6 +79,7 @@ export class QuizAddComponent implements OnInit {
   }
   ngOnInit() {
     this.quiz = new Quiz();
+    this.idPatient = + (this.activatedRoute.snapshot.params.idPatient);
     this.initializeTheForm();
     this.getAllTheme();
     this.subscription = this.subThemeService.subThemesSubject.subscribe((subthemes) => {
@@ -137,6 +141,7 @@ export class QuizAddComponent implements OnInit {
       return;
     }
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
+    quizToCreate.idPatient = this.idPatient;
     // quizToCreate.question = [];
     if (quizToCreate.difficulty == null) {
       quizToCreate.difficulty = difficulte.Normale;
