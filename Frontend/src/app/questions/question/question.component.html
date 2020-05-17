@@ -3,7 +3,7 @@
     <b>Question N°{{number}}</b>
   </mat-card-title>
   <mat-card-content>
-    <mat-grid-list cols="6" rowHeight="9.8%">
+    <mat-grid-list cols="6" rowHeight="9.9%">
 
       <mat-grid-tile *ngIf="question.image!==null && question.image.length>2"
         colspan="6"
@@ -19,9 +19,13 @@
 
         <!-- *ngFor="let answer of question?.answers"<span style="width: 100%;height: 100%;" [class.btn-primary]="answer.isCorrect" [class.btn-secondary]="!answer.isCorrect">{{answer.value}}</span>-->
       </mat-grid-tile>
+      <mat-grid-tile *ngIf="question.image ===null"
+                     colspan="6"
+                     rowspan="3">
+      </mat-grid-tile>
       <mat-grid-tile
         colspan="6"
-        rowspan="3">
+        rowspan="3" style="">
         <h6>{{question.label}}</h6>
       </mat-grid-tile>
       <mat-grid-tile

@@ -7,8 +7,12 @@
 :host {
   color: $white;
 }
-span{
-  margin-left: 40%;
+.header_title{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5vw;
+  text-align: center;
 }
 .header {
   height: $mat-card-header-size;

@@ -6,15 +6,16 @@
   <carousel [itemsPerSlide]="itemsPerSlide"
             [singleSlideOffset]="singleSlideOffset"
             [interval]="0"
+            [showIndicators]="false"
   >
-    <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList; let index=index"  class="mx-auto" >
-      <mat-card style="background-color: white;height: 400px;" >
-        <img *ngIf="quiz.image.length>3; " style="height: 80%; width: 100%; " [src]="quiz.image?.length>0? quiz.image:'../../../assets/Default/imageNotFound.png'">
-        <p [style]="quiz.image?.length<3? 'height: 100%; padding-top: 40%;':'height: 20%;'">
-          {{quiz.label}}<br/>
+    <slide (click)="selectQuiz(quiz)" *ngFor="let quiz of quizList; let index=index"  class="mx-auto"  >
+      <button mat-raised-button style="background-color: white;height: 25vw;margin: 1%;width: 100%" >
+        <img *ngIf="quiz.image.length>3; " style="max-width: 70%;height:auto;max-height:80%;margin: auto;display: block;" [src]="quiz.image?.length>0? quiz.image:'../../../assets/Default/imageNotFound.png'">
+        <p [style]="quiz.image?.length<3? 'height: 100%; padding-top: 35%;':'height: 20%;'">
+          {{quiz.label}}<br>
           {{(quiz.questions.length>0?(quiz.questions.length + ' question' + (quiz.questions.length>1? 's':'')):'aucune question')}}
           </p>
-      </mat-card>
+      </button>
     </slide>
   </carousel>
   </mat-grid-list>

@@ -6,16 +6,17 @@
   <carousel [itemsPerSlide]="itemsPerSlide"
             [singleSlideOffset]="singleSlideOffset"
             [interval]="false"
+            [showIndicators]="false"
   >
     <slide  (click)="selectProfil(profil)" *ngFor="let profil of profilsList| nomprenom:{age: 0,id: 0 ,nom: profilSearched, prenom: profilSearched,recommandations: '',sexe: '',stade:''}; let index=index"  class="mx-auto" >
-      <mat-card class="profil" >
-        <img *ngIf="profil.image.length>3; " style="height: 70%; width: 100%" [src]="profil.image?.length>0? profil.image:'../../../assets/Default/imageNotFound.png'">
-        <p [style]="profil.image?.length<3? 'height: 100%; padding-top: 35%;':'height: 25%;'">
+      <button mat-raised-button class="profil" >
+        <img *ngIf="profil.image.length>3; " style="height: auto; max-width: 70%;max-height:80%;" [src]="profil.image?.length>0? profil.image:'../../../assets/Default/imageNotFound.png'">
+        <p [style]="profil.image?.length<3? 'height: 100%; padding-top: 25%;':'height: 25%;'">
           {{profil.prenom}}
           <br>
           {{profil.nom}}
         </p>
-      </mat-card>
+      </button>
     </slide>
   </carousel>
 </ng-template>
