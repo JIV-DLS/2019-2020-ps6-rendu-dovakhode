@@ -31,7 +31,14 @@
       </mat-drawer-content>
     </mat-drawer-container>-->
     <mat-grid-list cols="8" rowHeight="14px" style="width: 100%">
-
+      <mat-grid-tile  colspan="7" rowspan="3">
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="3">
+        <button color="primary" (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+          <mat-icon>reply</mat-icon>
+          Retour
+        </button>
+      </mat-grid-tile>
       <mat-grid-tile colspan="4" rowspan="4">
         <mat-form-field >
           <mat-label>Libellé*</mat-label>
@@ -41,7 +48,7 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="4" rowspan="16">
         <mat-card style="border: black solid 3px; height: 90%;width: 90%; padding: 2px;">
-          <mat-card-content style=" height: 100%;width: 100%;">
+          <mat-card-content style="height: 100%;width: 100%;">
             <app-image-uploader editable="true" [label]="label.value" [imagePreview]="imagePreview" [form]="quizForm"></app-image-uploader>
             </mat-card-content>
         </mat-card>

@@ -82,7 +82,7 @@ export class QuizDoComponent implements OnInit {
       this.questionList = questions;
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.questionList.length; i++) {
-        if (this.questionList[i].trials < 2) {
+        if (this.questionList[i].trials < 2 || this.questionList[i].trials > 3) {
           const id = this.questionList[i].idQuestion;
           this.questionService.deleteQuestionFromQuiz(this.questionService.getQuestionByIdFromQuiz(id, this.quiz), this.quiz);
         }

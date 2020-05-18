@@ -1,1 +1,1 @@
-<mat-progress-bar *ngIf="isPlaying" (click)="interruptProgression()" color="primary" mode="determinate" [value]="progression.did*100/progression.total"></mat-progress-bar>
+<mat-progress-bar *ngIf="isPlaying&&progression!=null" (click)="interruptProgression()" color="primary" mode="determinate" [value]="progression.did*100/progression.total"></mat-progress-bar>

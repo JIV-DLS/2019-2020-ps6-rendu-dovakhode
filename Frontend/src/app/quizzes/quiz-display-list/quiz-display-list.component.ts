@@ -38,7 +38,7 @@ export class QuizDisplayListComponent implements OnInit {
   }
   getAllQuiz() {
     this.loading = true;
-    if(this.idPatient===0 || !this.doQuiz) {
+    if (this.idPatient === 0 || !this.doQuiz) {
       this.quizService.getQuiz().subscribe((quiz) => {
 
         this.loading = false;
@@ -56,8 +56,7 @@ export class QuizDisplayListComponent implements OnInit {
         this.inviteToCreateQuiz = this.quizList.length === 0;
 
       });
-    }
-    else {
+    } else {
       this.quizService.getPatientQuiz(this.idPatient).subscribe((quiz) => {
 
         this.loading = false;

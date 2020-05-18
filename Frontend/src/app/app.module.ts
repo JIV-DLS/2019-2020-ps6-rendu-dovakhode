@@ -100,7 +100,7 @@ import { QuizResultDisplayComponent } from './quizzes/quiz-result-display/quiz-r
 import { QuizStartRecapComponent } from './quizzes/quiz-start-recap/quiz-start-recap.component';
 import { FooterComponent } from './footer/footer.component';
 import { QuizEndInfoComponent } from './quizzes/quiz-end-info/quiz-end-info.component';
-import {ProfilForNewQuizComponent} from "./Profils/profil-for-new-quiz/profil-for-new-quiz.component";
+import {ProfilForNewQuizComponent} from './Profils/profil-for-new-quiz/profil-for-new-quiz.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
@@ -115,8 +115,8 @@ const routes: Routes = [
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent, data: {routeName: 'Modification d\'un quiz'}},
   {path: 'quiz-do/:evol' , component: QuizDoComponent, data: {routeName: 'Jeu en cour'}},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent, data: {routeName: 'Debut du quiz'}},
-  {path: 'quiz-add' , component: QuizAddComponent, data: {routeName:'Création d\'un quiz '}},
-  {path: 'profil-for-newQuiz' , component: ProfilForNewQuizComponent, data: {routeName:'Selectionnez le profil pour lequel vous souhaitez créer le quiz '}},
+  {path: 'quiz-add' , component: QuizAddComponent, data: {routeName: 'Création d\'un quiz '}},
+  {path: 'profil-for-newQuiz' , component: ProfilForNewQuizComponent, data: {routeName: 'Selectionnez le profil pour lequel vous souhaitez créer le quiz '}},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent, data: {routeName: 'Affichage d\'un quiz'}},
   {path: 'resultats/:id' , component: QuizResultDisplayComponent, data: {routeName: 'Resultats'}},
   {path: 'profils-carousel', component: ProfilListDisplayComponent, data: {routeName: 'Choix du patient pour le jeu'}},

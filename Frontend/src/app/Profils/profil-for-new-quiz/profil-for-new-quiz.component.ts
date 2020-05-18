@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Profil} from "../../../models/profil.model";
-import {DEFAULT_PROFIL} from "../../../mocks/profil-list.mock";
+import {Profil} from '../../../models/profil.model';
+import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 
 @Component({
   selector: 'app-profil-for-new-quiz',
@@ -9,7 +9,7 @@ import {DEFAULT_PROFIL} from "../../../mocks/profil-list.mock";
 })
 export class ProfilForNewQuizComponent implements OnInit {
   public profilSearched: Profil = DEFAULT_PROFIL;
-  public add=true;
+  public add = true;
   constructor() { }
 
   ngOnInit(): void {

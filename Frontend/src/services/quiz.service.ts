@@ -120,9 +120,8 @@ export class QuizService {
     );
   }*/
 
-getPatientQuiz(idPatient): Observable<Quiz[]>
-{
-  return this.http.get<Quiz[]>(QuizService.quizUrl+'/patient/'+idPatient+'').pipe(
+getPatientQuiz(idPatient): Observable<Quiz[]> {
+  return this.http.get<Quiz[]>(QuizService.quizUrl + '/patient/' + idPatient + '').pipe(
     tap((quiz) => {
     }),
     catchError(this.handleError<Quiz[]>('getQuiz', undefined))

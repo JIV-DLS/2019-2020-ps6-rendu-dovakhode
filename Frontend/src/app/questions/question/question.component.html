@@ -1,4 +1,4 @@
-<mat-card style="width: 100%; height: 100%">
+<mat-card style="width: 210px; height: 100%">
   <mat-card-title>
     <b>Question N°{{number}}</b>
   </mat-card-title>
@@ -21,12 +21,12 @@
       </mat-grid-tile>
       <mat-grid-tile *ngIf="question.image ===null"
                      colspan="6"
-                     rowspan="3">
+                     rowspan="1">
       </mat-grid-tile>
       <mat-grid-tile
         colspan="6"
-        rowspan="3" style="">
-        <h6>{{question.label}}</h6>
+        rowspan="{{question.image ===null?'5':'3'}}" style="">
+        <h6 style="height: {{question.image ===null?'100':'50'}}px; font-size: {{question.image ===null?'x-large':'large'}}; overflow: hidden; text-overflow: ellipsis;">{{question.label}}</h6>
       </mat-grid-tile>
       <mat-grid-tile
         colspan="6"
