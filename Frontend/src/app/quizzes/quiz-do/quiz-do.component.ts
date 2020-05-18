@@ -78,19 +78,24 @@ export class QuizDoComponent implements OnInit {
 
   getQuestionPlayedList() {
     this.questionplayed.getQuestionPlayed('' + this.evolution.id).subscribe((questions) => {
+
       this.questionList = [];
-      this.questionList = questions;
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.questionList.length; i++) {
-        if (this.questionList[i].trials < 2 || this.questionList[i].trials > 3) {
-          const id = this.questionList[i].idQuestion;
-          this.questionService.deleteQuestionFromQuiz(this.questionService.getQuestionByIdFromQuiz(id, this.quiz), this.quiz);
+      if (questions != null) {
+        this.questionList = questions;
+        console.log(questions);
+        this.questionList.forEach(question => {
+          if (question.trials < 2 || question.trials > 3) {
+            const id = question.idQuestion;
+            this.questionService.deleteQuestionFromQuiz(this.questionService.getQuestionByIdFromQuiz(id, this.quiz), this.quiz);
+          }
+        });
+        this.loading = false;
+        if (this.index >= this.quiz.questions.length ) {
+          this.router.navigate(['/quiz-do/' + this.quiz.id + '/recap-start/' + this.evolution.patientId, { idEvolution: this.evolution.id}]);
         }
       }
-      this.loading = false;
-      if (this.index >= this.quiz.questions.length ) {
-        this.router.navigate(['/quiz-do/' + this.quiz.id + '/recap-start/' + this.evolution.patientId, { idEvolution: this.evolution.id}]);
-      }
+
+
     });
   }
 

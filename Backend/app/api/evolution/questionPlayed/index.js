@@ -18,6 +18,9 @@ function get(id) {
       let finded = false;
       for (let j=0;j<ques.length;j++){
         if(ques[j].idQuestion==QuestionPlayed.items[i].idQuestion){
+          if(QuestionPlayed.items[i].trials == 1)
+          ques[j].trials=1;
+          else
           ques[j].trials++;
           finded = true;
           break;
