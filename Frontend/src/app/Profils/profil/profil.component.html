@@ -2,7 +2,7 @@
     <mat-card-header>
     </mat-card-header>
     <mat-card-content style="border-bottom: black solid 1px;">
-      <mat-grid-list cols="3" rowHeight="12px" style="width: 100%">
+      <mat-grid-list cols="3" rowHeight="11.5px" style="width: 100%">
         <mat-grid-tile colspan="1" rowspan="5">
           <p><b>Nom:</b> {{this.profil.nom}}</p>
         </mat-grid-tile>
@@ -36,7 +36,7 @@
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-content>
-    <mat-grid-list cols="3" rowHeight="50px">
+    <mat-grid-list cols="3" rowHeight="5vw">
       <mat-grid-tile colspan="1" rowspan="1" style="padding-right: 12px;">
             <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-primary" (click)="editProfile()" >Modifier le profil</button>
       </mat-grid-tile>
@@ -47,8 +47,8 @@
             <button style="height: 70%;width: 100%;" mat-button type="button" class="btn btn-secondary" (click)="deleteProfile()" >Supprimer le profil</button>
       </mat-grid-tile>
     </mat-grid-list>
-  <mat-grid-list cols="3" rowHeight="50px">
-    <mat-grid-tile colspan="1" rowspan="1" style="padding-right: 12px;">
+  <mat-grid-list cols="3" rowHeight="5vw">
+    <mat-grid-tile colspan="1" rowspan="1" style="padding-right: 2%; padding-left: 2%">
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1" >
       <button style="height: 70%;width: 100%;" mat-flat-button type="button" class="btn btn-success"  (click)="addQuiz()" >Lui créer un nouveau quiz</button>
