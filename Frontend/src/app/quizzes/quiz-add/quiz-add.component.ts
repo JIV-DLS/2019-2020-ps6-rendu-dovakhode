@@ -18,7 +18,8 @@ import {ThemeListComponent} from '../../themes/theme-list/theme-list.component';
 import {SubthemeService} from '../../../services/subtheme.service';
 import {Subtheme} from '../../../models/subtheme.model';
 import {Theme} from '../../../models/themes.model';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-quiz-form',
@@ -36,7 +37,8 @@ export class QuizAddComponent implements OnInit {
               public quizService: QuizService,
               public themeService: ThemeServices,
               public subThemeService: SubthemeService,
-              public activatedRoute: ActivatedRoute ) {
+              public activatedRoute: ActivatedRoute,
+              private location: Location) {
 
   }
   // Form creation
@@ -281,6 +283,10 @@ export class QuizAddComponent implements OnInit {
       });
     } else { alert('Veuillez sélectionner un thème!'); }
 
+  }
+
+  back() {
+    this.location.back();
   }
 }
 

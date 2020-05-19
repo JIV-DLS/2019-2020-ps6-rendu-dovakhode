@@ -72,11 +72,10 @@ export class ProfilsCarouselComponent implements OnInit {
         }
       });
     }
-    if(this.doQuizWithProfil!=true && this.add)
-    {
+    if (this.doQuizWithProfil !== true && this.add) {
      this.goToAdd(profil);
     }
-    if(this.add!=true && this.doQuizWithProfil!=true){
+    if (this.add !== true && this.doQuizWithProfil !== true) {
       this.viewProfil(profil);
     }
   }
@@ -102,9 +101,8 @@ export class ProfilsCarouselComponent implements OnInit {
     });
   }
 
-  goToAdd(profil:Profil)
-  {
-    this.router.navigate(['quiz-add',{idPatient:profil.id}] );
+  goToAdd(profil: Profil) {
+    this.router.navigate(['quiz-add', {idPatient: profil.id}] );
   }
 }
 
