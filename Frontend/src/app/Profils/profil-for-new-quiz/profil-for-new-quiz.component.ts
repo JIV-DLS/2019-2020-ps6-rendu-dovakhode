@@ -8,6 +8,8 @@ import {DEFAULT_PROFIL} from "../../../mocks/profil-list.mock";
   styleUrls: ['./profil-for-new-quiz.component.scss']
 })
 export class ProfilForNewQuizComponent implements OnInit {
+  bgcolor = 'primary';
+  color = 'accent';
   public profilSearched: Profil = DEFAULT_PROFIL;
   public add=true;
   constructor() { }

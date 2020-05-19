@@ -11,6 +11,7 @@ import {Location} from '@angular/common';
   styleUrls: ['./profils-add.component.scss']
 })
 export class ProfilsAddComponent implements OnInit {
+  bgColor = 'primary';
   public profilForm: FormGroup;
   imagePreview: string;
   constructor(private formbuilder: FormBuilder, private profilService: ProfilServices, private Activerouter: ActivatedRoute,

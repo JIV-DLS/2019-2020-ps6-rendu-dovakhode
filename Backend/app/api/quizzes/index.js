@@ -55,7 +55,7 @@ function createQuiz(obj, req) {
 function getQuizByPatientId(id) {
   const quiz = []
   for (let i = 0; i <Quiz.items.length; i++) {
-    if (Quiz.items[i].idPatient === parseInt(id, 10)) { quiz.push(Quiz.items[i]) }
+    if (Quiz.items[i].idPatient === parseInt(id, 10) || Quiz.items[i].idPatient ===0) { quiz.push(Quiz.items[i]) }
   }
   return quiz
 }
