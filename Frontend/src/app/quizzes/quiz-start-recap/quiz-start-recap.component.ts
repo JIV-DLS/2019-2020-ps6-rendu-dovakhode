@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-quiz-start-recap',
@@ -12,7 +13,7 @@ export class QuizStartRecapComponent implements OnInit {
   patientId: number;
   evolutionId: number;
   constructor( private route: ActivatedRoute,
-               private router: Router) { }
+               private router: Router, private matDialogService: DialogService) { }
 
   ngOnInit(): void {
     this.quit = 0;
@@ -31,9 +32,12 @@ export class QuizStartRecapComponent implements OnInit {
     }
   }
   quitter() {
-    if (confirm(( 'Voulez-vous vraiment retourner au choix de quiz?'))) {
-      this.router.navigate(['/quiz-list', {do: true, idPatient: this.patientId}]);
-    }
+    // tslint:disable-next-line:max-line-length
+    this.matDialogService.openConfirmDialog(( 'Voulez-vous vraiment retourner au choix de quiz?')).afterClosed().subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/quiz-list', {do: true, idPatient: this.patientId}]);
+      }
+    });
   }
   goRecap() {
     this.router.navigate(['/quiz-do/' + this.quizId + '/recap/' + this.patientId, { idEvolution: this.evolutionId}]);

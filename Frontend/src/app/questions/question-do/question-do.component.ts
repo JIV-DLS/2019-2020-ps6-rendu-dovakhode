@@ -16,7 +16,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {NextQuestionComponent} from '../next-question/next-question.component';
 import {Evolution} from '../../../models/evolution.model';
 import {Router} from '@angular/router';
-import {EvolutionService} from '../../../services/evolution.service';
+import {Profil} from '../../../models/profil.model';
+import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-question-do',
@@ -33,7 +34,7 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
   @Output()
   next: EventEmitter<number> = new EventEmitter<number>();
   indicationClass = 'animate';
-  constructor( public dialog: MatDialog, private router: Router, private evolutionService: EvolutionService,
+  constructor( public dialog: MatDialog, private router: Router, private matDialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -55,11 +56,14 @@ export class QuestionDoComponent implements OnInit, OnChanges  {
   quitter() {
     console.log(this.progression);
     // tslint:disable-next-line:max-line-length
-    if (confirm((this.progression.did > 0 ? (this.progression.did + ' ' + (this.progression.did > 1 ? 'questions jouées' : 'question joué') + ' sur ' + this.progression.total + ' .') : 'Il reste ' + this.progression.total + ' questions .') +
-      '\nVoulez-vous vraiment retourner au choix de quiz?')) {
-      this.router.navigate(['/quiz-list', {do: true, idPatient: this.evolution.patientId}]);
+    this.matDialogService.openConfirmDialog((this.progression.did > 0 ? (this.progression.did + ' ' + (this.progression.did > 1 ? 'questions jouées' : 'question joué') + ' sur ' + this.progression.total + ' .') : 'Il reste ' + this.progression.total + ' questions .') +
+      '\nVoulez-vous vraiment retourner au choix de quiz?').afterClosed().subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/quiz-list', {do: true, idPatient: this.evolution.patientId}]);
+      }
+    });
     }
-  }
+
   nextQuestion(next: boolean) {
     if (next) {
       this.quit = 0;

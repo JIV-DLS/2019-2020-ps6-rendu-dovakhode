@@ -8,6 +8,7 @@ import {EvolutionService} from '../../../services/evolution.service';
 import {Evolution} from '../../../models/evolution.model';
 import {CookieService} from 'ngx-cookie-service';
 import {environment} from '../../../environments/environment';
+import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-quiz-do-start',
@@ -24,7 +25,8 @@ export class QuizDoStartComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private evolservice: EvolutionService,
-              private cookiesService: CookieService) {
+              private cookiesService: CookieService,
+              private matDialogService: DialogService) {
 
   }
 
@@ -69,9 +71,11 @@ export class QuizDoStartComponent implements OnInit {
     }
   }
   quitter() {
-    if (confirm(( 'Voulez-vous vraiment retourner au choix de quiz?'))) {
-      this.router.navigate(['/quiz-list', {do: true, idPatient: this.idPatient}]);
-    }
+    this.matDialogService.openConfirmDialog(( 'Voulez-vous vraiment retourner au choix de quiz?')).afterClosed().subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/quiz-list', {do: true, idPatient: this.idPatient}]);
+      }
+    });
   }
 
 }

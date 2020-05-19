@@ -156,6 +156,10 @@ export class QuizzeEditComponent implements OnInit {
       this.quizForm.markAllAsTouched();
       return;
     }
+    if (this.questions.length === 0) {
+      alert('Veuillez ajouter au moins une question');
+      return;
+    }
     const quizToModify: Quiz = this.quizForm.getRawValue() as Quiz;
     quizToModify.dateModification = new Date();
     quizToModify.image = this.quiz.image;

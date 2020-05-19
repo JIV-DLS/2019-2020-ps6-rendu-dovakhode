@@ -143,6 +143,10 @@ export class QuizAddComponent implements OnInit {
       this.quizForm.markAllAsTouched();
       return;
     }
+    if (this.questions.length === 0) {
+      alert('Veuillez ajouter au moins une question');
+      return;
+    }
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
     quizToCreate.idPatient = this.idPatient;
     // quizToCreate.question = [];

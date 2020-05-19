@@ -11,6 +11,7 @@ import {QuestionPlayed} from '../../../models/questionPlayed.model';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {QuizEndInfoComponent} from '../quiz-end-info/quiz-end-info.component';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
+import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-quiz-end',
@@ -29,7 +30,7 @@ export class QuizEndComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router,
               private cookiesService: CookieService, private quizSevice: QuizService ,
               private evolutionService: EvolutionService, private questionPlayedService: QuestionPlayedService,
-              public dialog: MatDialog, public dialogRef: MatDialogRef<QuizEndInfoComponent>
+              public dialog: MatDialog, public dialogRef: MatDialogRef<QuizEndInfoComponent>, private matDialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -78,9 +79,11 @@ export class QuizEndComponent implements OnInit {
     }
   }
   quitter() {
-    if (confirm('\nVoulez-vous vraiment retourner au choix de quiz?')) {
-      this.router.navigate(['/quiz-list', {do: true, idPatient: this.evolution.patientId}]);
-    }
+    this.matDialogService.openConfirmDialog(( 'Voulez-vous vraiment retourner au choix de quiz?')).afterClosed().subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/quiz-list', {do: true, idPatient: this.evolution.patientId}]);
+      }
+    });
   }
 
 }
