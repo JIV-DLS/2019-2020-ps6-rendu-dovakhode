@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, AfterContentInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, AfterContentChecked} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { Quiz } from '../../../models/quiz.model';
   templateUrl: './quiz-list.component.html',
   styleUrls: ['./quiz-list.component.scss']
 })
-export class QuizListComponent implements OnInit {
+export class QuizListComponent implements OnInit, AfterContentChecked {
 
   @Input()
   public quizList: Quiz[];
@@ -23,6 +23,10 @@ export class QuizListComponent implements OnInit {
 constructor() {
 }
   ngOnInit(): void {
+  }
+  ngAfterContentChecked(): void {
+    this.inviteToCreateQuiz = this.quizList.length === 0 ;
+
   }
 
   selectQuiz(quiz: Quiz) {
