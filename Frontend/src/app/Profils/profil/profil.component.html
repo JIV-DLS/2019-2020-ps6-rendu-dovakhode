@@ -4,7 +4,7 @@
     <mat-card-content style="border-bottom: black solid 1px;">
       <mat-grid-list cols="3" rowHeight="12px" style="width: 100%">
         <mat-grid-tile colspan="1" rowspan="5">
-            <p>Nom: {{this.profil.nom}}</p>
+          <p><b>Nom:</b> {{this.profil.nom}}</p>
         </mat-grid-tile>
         <mat-grid-tile colspan="2" rowspan="16">
           <mat-card style="border: black solid 3px; height: 100%;width: 80%; padding: 1px;">
@@ -14,22 +14,22 @@
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="3">
-            <p>Prénom: {{this.profil.prenom}}</p>
+          <p><b>Prénom:</b> {{this.profil.prenom}}</p>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="3"  >
-            <p>Age: {{this.profil.age}}</p>
+          <p><b>Age:</b> {{this.profil.age}}</p>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1" rowspan="3">
-            <p>{{this.profil.sexe}}</p>
+          <p><b>Sexe: </b>{{this.profil.sexe}}</p>
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="1" rowspan="3">
-            <p>Stade de la maladie: {{this.profil.stade}}</p>
+          <p><b>Stade de la maladie:</b> {{this.profil.stade}}</p>
         </mat-grid-tile>
         <mat-grid-tile colspan="3" rowspan="3">
-          <p>Recommandations:</p>
+          <p><b>Recommandations:</b></p>
         </mat-grid-tile>
         <mat-grid-tile colspan="3" rowspan="10">
             <p>{{this.profil.recommandations}}</p>

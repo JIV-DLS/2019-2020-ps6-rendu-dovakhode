@@ -12,7 +12,6 @@
   <mat-menu #menuQuiz xPosition="after">
     <button mat-menu-item  [routerLink]="['/home-quiz-gestion']">Ajouter un quiz</button>
     <button mat-menu-item  [routerLink]="['/quiz-list',{do:false}]">Modifier un quiz</button>
-    <button mat-menu-item  [routerLink]="['/quiz-list',{do:false}]">Supprimer un quiz</button>
   </mat-menu>
 </div>
 <div>
@@ -20,8 +19,7 @@
   Gérer les profils</button>
   <mat-menu #menuProfil xPosition="after">
     <button mat-menu-item routerLink="/profil-add">Ajouter un patient</button>
-    <button mat-menu-item [routerLink]="['/home-profil-gestion']">Modifier un patient</button>
-    <button mat-menu-item  [routerLink]="['/home-profil-gestion']">Supprimer un patient</button>
+    <button mat-menu-item [routerLink]="['/home-profil-gestion']">Voir un patient</button>
   </mat-menu>
 </div>
 
