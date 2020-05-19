@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {EvolutionService} from '../../services/evolution.service';
 import {Location} from '@angular/common';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {DialogService} from '../../services/dialog.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,7 +15,8 @@ export class FooterComponent implements OnInit {
   isTablet: boolean;
   isMobile: boolean;
   progression: {did: number, total: number};
-  constructor(public evolutionService: EvolutionService, private location: Location, private deviceService: DeviceDetectorService) {
+  constructor(public evolutionService: EvolutionService, private location: Location, private deviceService: DeviceDetectorService,
+              private matDialogService: DialogService) {
       this.isTablet =  this.deviceService.isTablet();
       this.isMobile = this.deviceService.isMobile();
   }
@@ -26,11 +28,13 @@ export class FooterComponent implements OnInit {
   interruptProgression() {
     if ( this.isTablet || this.isMobile ) {
       // tslint:disable-next-line:max-line-length
-      if (confirm((this.progression.did > 0 ? (this.progression.did + ' ' + (this.progression.did > 1 ? 'questions jouées' : 'questios joué') + ' sur ' + this.progression.total) : 'Aucune question n\'a été jouée! ' + this.progression.total + ' questions restantes.') +
-        '\nVoulez-vous vraiment retourner au choix de quiz?')) {
-        this.location.back();
-        this.location.back();
-      }
+      this.matDialogService.openConfirmDialog((this.progression.did > 0 ? (this.progression.did + ' ' + (this.progression.did > 1 ? 'questions jouées' : 'question joué') + ' sur ' + this.progression.total + ' .') : 'Il reste ' + this.progression.total + ' questions .') +
+        '\nVoulez-vous vraiment retourner au choix de quiz?').afterClosed().subscribe((res) => {
+        if (res) {
+          this.location.back();
+          this.location.back();
+        }
+      });
     }
   }
 }
