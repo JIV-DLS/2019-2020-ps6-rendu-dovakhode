@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../../../models/quiz.model';
 import {difficulteSearch, themeSearch} from '../../../models/theme.models';
@@ -23,6 +23,7 @@ export class QuizDisplayListComponent implements OnInit {
     this.getAllQuiz(); }
 
   bgColor = 'primary';
+  @Input() show : true;
 
   public quizList: Quiz[] = [];
   public doQuiz;
@@ -36,9 +37,13 @@ export class QuizDisplayListComponent implements OnInit {
     this.idPatient = + (this.Activerouter.snapshot.params.idPatient);
     this.getAllQuiz();
   }
+  ngOnDestroy():void
+  {
+this.show=true;
+  }
   getAllQuiz() {
     this.loading = true;
-    if (this.idPatient === 0 || !this.doQuiz) {
+    if (this.idPatient === 0 && this.doQuiz|| !this.doQuiz && isNaN(this.idPatient)) {
       this.quizService.getQuiz().subscribe((quiz) => {
 
         this.loading = false;
@@ -90,7 +95,7 @@ export class QuizDisplayListComponent implements OnInit {
       this.router.navigate([ '/quiz-do/' + quiz.id + '/start' , { idPatient: this.idPatient}]);
       //  this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
     } else {
-      this.router.navigateByUrl('/quiz-edit/' + quiz.id);
+      this.router.navigate(['/quiz-edit/' + quiz.id, { idPatient: this.idPatient}]);
     }
   }
 

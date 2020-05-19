@@ -1,4 +1,4 @@
-<mat-tab-group [backgroundColor]="bgColor" color="accent" animationDuration="900ms">
+<mat-tab-group [backgroundColor]="bgColor" color="accent" animationDuration="900ms" *ngIf="show">
 
   <mat-tab >
     <ng-template mat-tab-label>
@@ -17,3 +17,7 @@
     <app-quiz-list2 (selectEmitter)="selectQuiz($event)" [quizList]="quizList| quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}"></app-quiz-list2>
   </mat-tab>
 </mat-tab-group>
+<app-quiz-search-bar [searchedQuiz]="searchedQuiz" [idPatient]="idPatient" [doQuiz]="doQuiz"  *ngIf="!show"></app-quiz-search-bar>
+<p *ngIf="doQuiz">{{motQuitter()}}</p>
+<app-quiz-list [doQuiz]="doQuiz" (selectEmitter)="selectQuiz($event)" (deleteEmitter)="deleteQuiz($event)" [quizList]="quizList| quizSearch: {questionsEqualsTo:null,id: 0,questions: [],label: searchedQuiz.label,theme: searchedQuiz.theme, subTheme:searchedQuiz.subTheme, difficulty: searchedQuiz.difficulty}"  *ngIf="!show"></app-quiz-list>
+

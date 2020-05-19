@@ -57,8 +57,38 @@ function getQuizByPatientId(id) {
   for (let i = 0; i <Quiz.items.length; i++) {
     if (Quiz.items[i].idPatient === parseInt(id, 10) || Quiz.items[i].idPatient ===0) { quiz.push(Quiz.items[i]) }
   }
+  deleteDuplication(quiz);
   return quiz
 }
+function deleteDuplication(quiz)
+{
+  console.log("here");
+  for(let i=0; i<quiz.length;i++)
+  {
+    console.log("here");
+    for(let j=0; j<quiz.length;j++)
+    {
+
+      if(quiz[i].label===quiz[j].label && quiz[i].idPatient!==quiz[j].idPatient)
+      {
+        if(quiz[i].idPatient===0)
+        {
+         const index = quiz.indexOf(quiz[i]);
+          quiz.splice(index, 1);
+        }
+        else
+        {
+          const index= quiz.indexOf(quiz[j]);
+          quiz.splice(index, 1);
+        }
+
+      }
+
+    }
+  }
+
+}
+
 function getAQuiz(id) {
   const quiz = Quiz.getById(id)
   const questions = QuestionsRouter.getQuestionsByQuizId(id)

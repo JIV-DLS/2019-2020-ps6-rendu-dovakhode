@@ -1,0 +1,47 @@
+<mat-tab-group [backgroundColor]="bgcolor" color="accent" animationDuration="900ms">
+
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon>view_list</mat-icon> Modifier un quiz pour un patient
+    </ng-template>
+    <mat-grid-list cols=8 rowHeight="100px" style="width: 100%; margin-top: 10px; padding-top: 50px;" >
+      <mat-grid-tile colspan="3" rowspan="1">
+        <mat-form-field appearance="legacy">
+          <mat-label>Rechercher par Nom ou Prenom</mat-label>
+          <input #patientSearched [(ngModel)]="profilSearched.nom + profilSearched.prenom" matInput placeholder="libéllé du profil">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="3" rowspan="1">
+        <button id="btnCreateProfil" routerLink="/profil-add" style="width: 60%" mat-flat-button aria-label="Example icon-button with a heart icon">
+          <mat-icon>add</mat-icon>
+          Créer un profil
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile  colspan="2" rowspan="1" >
+        <button color="primary" class="backButton" [routerLink]="['/']" mat-flat-button aria-label="Example icon-button with a heart icon">
+          <mat-icon>reply</mat-icon>
+          Retour
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="8" rowspan="1">
+      </mat-grid-tile>
+      <mat-grid-tile colspan="8" rowspan="3">
+        <app-profil-list  [modify]= "modify" [profilSearched]="patientSearched.value" ></app-profil-list>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon>perm_media</mat-icon> Modifier un quiz en général
+    </ng-template>
+    <app-quiz-display-list [show]="false"></app-quiz-display-list>
+
+  </mat-tab>
+</mat-tab-group>
+
+
+
+
+

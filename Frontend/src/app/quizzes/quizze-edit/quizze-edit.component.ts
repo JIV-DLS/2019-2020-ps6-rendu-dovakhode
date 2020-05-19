@@ -46,6 +46,7 @@ export class QuizzeEditComponent implements OnInit {
   }
   public subThemesValues: Subtheme[] = [];
   quiz: Quiz;
+  quizTest: Quiz;
   public imageChanged: boolean;
   public savedImage: string;
   private savedQuestions: Question[];
@@ -56,14 +57,18 @@ export class QuizzeEditComponent implements OnInit {
   public imagePreview: string;
   loading: boolean;
   others: boolean;
+  idPatient:number;
   private deletedQuestions = [];
   subscription: Subscription;
   private deletedAnswers = [];
   imageReestablisher: Subject<null> = new Subject();
   ngOnInit() {
     this.loading = true;
+    this.idPatient = + (this.route.snapshot.params.idPatient);
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
+        this.quizTest=quiz;
+        console.log(this.quizTest.idPatient);
         this.loading = false;
         this.subscription = this.subThemeService.subThemesSubject.subscribe((subthemes) => {
           this.subThemesValues = subthemes;
@@ -158,17 +163,35 @@ export class QuizzeEditComponent implements OnInit {
     if (this.quizForm.get('subTheme').value != null) {
       quizToModify.subTheme = this.quizForm.get('subTheme').value;
     }
-    if (this.deletedQuestions) {this.questionService.deleteQuestions(this.deletedQuestions); }
-    if (this.deletedAnswers) {this.answerService.deleteAnswers(this.deletedAnswers); }
-    this.quizService.updateQuiz(quizToModify,  this.quizForm.get('image').value, this.questions.value).subscribe((quiz) => {
-      if (quiz !== undefined) {
-        this.quiz = quiz;
-        this.savedImage = quiz.image;
-        this.deletedQuestions = [];
-        this.deletedAnswers = [];
-        this.initializeTheForm(quiz);
-      }
-    });
+    if (this.deletedQuestions) {
+      this.questionService.deleteQuestions(this.deletedQuestions);
+    }
+    if (this.deletedAnswers) {
+      this.answerService.deleteAnswers(this.deletedAnswers);
+    }
+    if (this.quizTest.idPatient === 0 && !isNaN(this.idPatient)) {
+
+      quizToModify.idPatient=this.idPatient;
+this.quizService.addQuiz(quizToModify,this.quizForm.get('image').value,this.questions.value,1).subscribe((quiz) => {
+  if (quiz !== undefined) {
+    this.quiz = quiz;
+    this.savedImage = quiz.image;
+    this.deletedQuestions = [];
+    this.deletedAnswers = [];
+    this.initializeTheForm(quiz);
+  }
+});
+    } else {
+      this.quizService.updateQuiz(quizToModify, this.quizForm.get('image').value, this.questions.value).subscribe((quiz) => {
+        if (quiz !== undefined) {
+          this.quiz = quiz;
+          this.savedImage = quiz.image;
+          this.deletedQuestions = [];
+          this.deletedAnswers = [];
+          this.initializeTheForm(quiz);
+        }
+      });
+    }
   }
 
   getLabelErrorMessage() {
