@@ -57,7 +57,7 @@ export class QuizzeEditComponent implements OnInit {
   public imagePreview: string;
   loading: boolean;
   others: boolean;
-  idPatient:number;
+  idPatient: number;
   private deletedQuestions = [];
   subscription: Subscription;
   private deletedAnswers = [];
@@ -67,7 +67,7 @@ export class QuizzeEditComponent implements OnInit {
     this.idPatient = + (this.route.snapshot.params.idPatient);
     this.quizService.getQuizById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((quiz) => {
-        this.quizTest=quiz;
+        this.quizTest = quiz;
         console.log(this.quizTest.idPatient);
         this.loading = false;
         this.subscription = this.subThemeService.subThemesSubject.subscribe((subthemes) => {
@@ -171,8 +171,8 @@ export class QuizzeEditComponent implements OnInit {
     }
     if (this.quizTest.idPatient === 0 && !isNaN(this.idPatient)) {
 
-      quizToModify.idPatient=this.idPatient;
-this.quizService.addQuiz(quizToModify,this.quizForm.get('image').value,this.questions.value,1).subscribe((quiz) => {
+      quizToModify.idPatient = this.idPatient;
+      this.quizService.addQuiz(quizToModify, this.quizForm.get('image').value, this.questions.value, 1).subscribe((quiz) => {
   if (quiz !== undefined) {
     this.quiz = quiz;
     this.savedImage = quiz.image;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Profil} from "../../../models/profil.model";
-import {DEFAULT_PROFIL} from "../../../mocks/profil-list.mock";
+import {Profil} from '../../../models/profil.model';
+import {DEFAULT_PROFIL} from '../../../mocks/profil-list.mock';
 
 @Component({
   selector: 'app-profil-for-edit-quiz',

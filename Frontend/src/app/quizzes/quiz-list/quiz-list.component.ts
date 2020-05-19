@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, AfterContentInit} from '@angular/core';
 import { Quiz } from '../../../models/quiz.model';
 
 @Component({
@@ -20,7 +20,8 @@ export class QuizListComponent implements OnInit {
   selectEmitter: EventEmitter<Quiz> = new EventEmitter<Quiz>();
   @Output()
   deleteEmitter: EventEmitter<Quiz> = new EventEmitter<Quiz>();
-
+constructor() {
+}
   ngOnInit(): void {
   }
 

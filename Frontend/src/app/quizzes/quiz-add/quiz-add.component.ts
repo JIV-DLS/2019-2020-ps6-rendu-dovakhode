@@ -67,7 +67,7 @@ export class QuizAddComponent implements OnInit {
    * More information about Reactive Forms: https://angular.io/guide/reactive-forms#step-1-creating-a-formgroup-instance
    */
   @Input() quiz: Quiz = null;
- public defaultId=0;
+ public defaultId = 0;
   public quizForm: FormGroup;
   subscription: Subscription;
   public themesValues: Theme[];
@@ -80,9 +80,9 @@ export class QuizAddComponent implements OnInit {
 
   ngOnInit() {
     this.quiz = new Quiz();
-    isNaN(this.activatedRoute.snapshot.params.idPatient)?
-      this.idPatient=this.defaultId: this.idPatient= +this.activatedRoute.snapshot.params.idPatient;
-   console.log(this.idPatient);
+    isNaN(this.activatedRoute.snapshot.params.idPatient) ?
+      this.idPatient = this.defaultId : this.idPatient = +this.activatedRoute.snapshot.params.idPatient;
+    console.log(this.idPatient);
     this.initializeTheForm();
     this.getAllTheme();
     this.subscription = this.subThemeService.subThemesSubject.subscribe((subthemes) => {
