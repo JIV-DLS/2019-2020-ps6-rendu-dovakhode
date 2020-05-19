@@ -60,6 +60,18 @@ function getQuizByPatientId(id) {
   deleteDuplication(quiz);
   return quiz
 }
+
+function get()
+{
+
+    const quiz = []
+    for (let i = 0; i <Quiz.items.length; i++) {
+      if (Quiz.items[i].idPatient === 0 || Quiz.items[i].idPatient ===0) { quiz.push(Quiz.items[i]) }
+    }
+    deleteDuplication(quiz);
+    return quiz
+
+}
 function deleteDuplication(quiz)
 {
   console.log("here");
@@ -105,7 +117,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/', (req, res) => {
   try {
-    const quizzes = Quiz.get().sort((a, b) => new Date(b.dateModification) - new Date(a.dateModification))
+    const quizzes = get().sort((a, b) => new Date(b.dateModification) - new Date(a.dateModification))
     for (let i = 0; i < quizzes.length; i++) { quizzes[i].questions = QuestionsRouter.getQuestionsByQuizId(quizzes[i].id) }
 
     res.status(200).json(quizzes)
