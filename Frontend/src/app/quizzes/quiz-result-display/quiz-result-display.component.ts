@@ -55,7 +55,6 @@ export class QuizResultDisplayComponent implements OnInit {
     for (let i = 1; i < this.quizEvolutionGrouped.length; i++) {
       const data = [];
       const label = this.quizEvolutionGrouped[i].quizNom;
-      const borderColor = this.randomRGBA(this.quizEvolutionGrouped[i].id);
       // tslint:disable-next-line:prefer-for-of
       for (let j = 0; j < this.quizEvolutionGrouped[i].suit.length; j++) {
         data.push({
@@ -132,19 +131,6 @@ export class QuizResultDisplayComponent implements OnInit {
         this.quizEvolutionGrouped[this.quizEvolutionGrouped.length - 1].suit.push(this.evolTab[i]);
       }
     }
-  }
-  randomInt() {
-    return Math.round(100);
-  }
-  randomRGBA(id) {
-    // tslint:disable-next-line:one-variable-per-declaration
-    const o = Math.round, r = Math.random, s = 255 ;
-    id = (id / o(r())) % 200;
-    const plus = id % 255;
-    const red = ((o(o(r() * s)) - plus) % 100) ;
-    const green = ((o(o(r() * s)) + plus) % 155);
-    const blue = (o(r() * s) + plus);
-    return 'rgb(' + red + ',' + green + ',' + blue + ')';
   }
 
 }
