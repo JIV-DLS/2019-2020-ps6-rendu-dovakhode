@@ -23,7 +23,7 @@ export class QuizDisplayListComponent implements OnInit, OnDestroy {
     this.getAllQuiz(); }
 
   bgColor = 'primary';
-  @Input() show: true;
+  @Input() show = true;
 
   public quizList: Quiz[] = [];
   public doQuiz;
@@ -39,7 +39,7 @@ export class QuizDisplayListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.show = true;
+    this.show = false;
   }
   getAllQuiz() {
     this.loading = true;
