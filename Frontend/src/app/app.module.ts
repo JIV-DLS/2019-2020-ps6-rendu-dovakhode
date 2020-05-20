@@ -102,6 +102,7 @@ import { FooterComponent } from './footer/footer.component';
 import { QuizEndInfoComponent } from './quizzes/quiz-end-info/quiz-end-info.component';
 import {ProfilForNewQuizComponent} from './Profils/profil-for-new-quiz/profil-for-new-quiz.component';
 import { ProfilForEditQuizComponent } from './Profils/profil-for-edit-quiz/profil-for-edit-quiz.component';
+import {DatePipe} from '@angular/common';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
@@ -258,7 +259,8 @@ routes.forEach((eachRoute) => {
     ProfilServices,
     QuizSearchPipe,
     ThemeServices,
-    SubthemeService
+    SubthemeService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
