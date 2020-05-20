@@ -38,7 +38,7 @@ export class QuizEndInfoComponent implements OnInit {
   }
 
   Pourcentage() {
-    return this.evolutionService.Pourcentage(this.questionsPlayed, this.questionsPlayed);
+    return this.evolutionService.Pourcentage(this.questionsPlayed, this.quiz);
 
   }
   resultat() {
