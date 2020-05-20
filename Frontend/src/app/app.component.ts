@@ -23,16 +23,6 @@ export class AppComponent implements OnInit {
     return (paths.length <= 3 && paths[1] === 'quiz-do');
   }
   ngOnInit(): void {
-    if (this.playingState()) {
-      this.runningQuizId = this.cookiesService.get(environment.runningQuiz);
-      if (this.runningQuizId) {
-        if (confirm('La progression d\'un quiz a été retrouvé. Voulez-vous la reprendre?')) {
-          this.router.navigateByUrl('/quiz-do/' + this.runningQuizId);
-        } else {
-          alert('La progression a été supprimé');
-          this.cookiesService.delete(environment.runningQuiz);
-        }
-      }
-    }
+
   }
 }
