@@ -36,7 +36,7 @@ export class QuizStartRecapComponent implements OnInit {
 
           this.evolution.succesRate = +pourcentage;
 
-          this.evolutionService.updateEvolution(this.evolution).subscribe();
+          this.evolutionService.updateEvolution(this.evolution, 1).subscribe();
         });
       }
     );
