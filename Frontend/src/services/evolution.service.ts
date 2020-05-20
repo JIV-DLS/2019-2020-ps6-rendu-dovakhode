@@ -96,20 +96,25 @@ export class EvolutionService {
 
 
   updateEvolution(evolutionToModify: Evolution, id?: number): Observable<Evolution> {
-    this.snack.open( environment.snackInformation.operation.loading.update.quiz, 'close',
-      {
-        ...environment.snackInformation.loadingUpdate
-      })
-    ;
+
+    if (id !== 1) {
+      this.snack.open(environment.snackInformation.operation.loading.update.quiz, 'close',
+        {
+          ...environment.snackInformation.loadingUpdate
+        })
+      ;
+    }
 
     return this.http.put<Evolution>(this.evolutionUrl  + '/' + evolutionToModify.id, evolutionToModify).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');
-        this.snack.open( environment.snackInformation.operation.succeeded.update.quiz, 'close',
-          {
-            ...environment.snackInformation.successForAll
-          })
-        ;
+        if (id !== 1) {
+          this.snack.open(environment.snackInformation.operation.succeeded.update.quiz, 'close',
+            {
+              ...environment.snackInformation.successForAll
+            })
+          ;
+        }
       }),
       catchError(this.handleError<Evolution>('updateEvolution', undefined))
     );
