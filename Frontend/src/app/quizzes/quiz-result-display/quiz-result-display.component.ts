@@ -43,7 +43,6 @@ export class QuizResultDisplayComponent implements OnInit {
     this.idPatient = +this.route.snapshot.params.id;
     // console.log(this.idPatient);
     this.evolutionService.getEvolutionByPatientId(this.idPatient).subscribe((res) => {
-      console.log(res);
       this.evolTab = res;
       // this.reverseArr(this.evolTab);
       this.groupByQuizEvolution();
@@ -74,8 +73,6 @@ export class QuizResultDisplayComponent implements OnInit {
       });
     }
 
-    console.log(this.quizEvolutionGrouped);
-    console.log(dataSet);
     this.chart = new Chart('lineChart', {
       data: dataSet,
       animationEnabled: true,
@@ -119,7 +116,6 @@ export class QuizResultDisplayComponent implements OnInit {
     return nb;
   }
   groupByQuizEvolution() {
-    console.log(this.evolTab);
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.evolTab.length; i++) {
       let finded = false;
@@ -152,12 +148,3 @@ export class QuizResultDisplayComponent implements OnInit {
   }
 
 }
-/* private toggleDataSeries: (e) => {
-    // tslint:disable-next-line:align
-    if(typeof(e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
-    e.dataSeries.visible = false;
-  } else {
-   e.dataSeries.visible = true;
-  }
-      this.test.render();
-  }*/

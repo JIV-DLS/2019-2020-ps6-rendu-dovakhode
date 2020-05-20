@@ -50,9 +50,7 @@ export class QuizDoStartComponent implements OnInit {
   start(quiz) {
     this.evolservice.addEvolution(this.quiz, +this.idPatient).subscribe((evol ) => {
       if (evol !== undefined) {
-        console.log('voici l evol créée ' + evol.id + '' + evol.quizId);
         this.Evolution = evol;
-        console.log('ok' + this.Evolution.id);
         this.cookiesService.set(environment.runningQuiz, this.Evolution.id + '');
         this.router.navigateByUrl('/quiz-do/' + this.Evolution.id);
       }

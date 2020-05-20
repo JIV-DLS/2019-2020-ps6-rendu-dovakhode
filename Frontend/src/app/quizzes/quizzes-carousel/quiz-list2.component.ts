@@ -24,7 +24,6 @@ export class QuizList2Component implements OnInit {
   }
 
   selectQuiz(quiz: Quiz) {
-    console.log(quiz);
     this.selectEmitter.emit(quiz);
   }
 }

@@ -82,7 +82,6 @@ export class QuizDoComponent implements OnInit {
       this.questionList = [];
       if (questions != null) {
         this.questionList = questions;
-        console.log(questions);
         this.questionList.forEach(question => {
           if (question.trials < 2 || question.trials > 3) {
             const id = question.idQuestion;
