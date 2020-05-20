@@ -79,7 +79,7 @@ export class QuizResultDisplayComponent implements OnInit {
         text: 'Nombre de jeu de quiz total éffectué: ' + this.evolTab.length
       },
       axisX: {
-        valueFormatString: 'DD MMM,YY HH'
+        valueFormatString: 'DD MMM,YY '
       },
       axisY: {
         title: 'Pourcentage de réussite des quizs',
