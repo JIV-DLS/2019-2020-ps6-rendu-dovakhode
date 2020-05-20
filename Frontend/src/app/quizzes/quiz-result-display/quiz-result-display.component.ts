@@ -5,9 +5,13 @@ import {EvolutionService} from '../../../services/evolution.service';
 import {QuizService} from '../../../services/quiz.service';
 import {Quiz} from '../../../models/quiz.model';
 import {DatePipe, Location} from '@angular/common';
-import {Chart} from 'chart.js';
+import * as CanvasJS from '../../canvasjs/canvasjs.min';
+// import * as CanvasJS from './canvasjs.min';
+// import {Chart} from 'canvasjs';
+// import {Chart} from 'chart.js';
+import {Chart} from '../../canvasjs/canvasjs.min';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
-// import * as CanvasJS from 'canvasjs';
+
 
 @Component({
   selector: 'app-quiz-result-display',
@@ -15,46 +19,29 @@ import {QuestionPlayed} from '../../../models/questionPlayed.model';
   styleUrls: ['./quiz-result-display.component.scss']
 })
 export class QuizResultDisplayComponent implements OnInit {
-  // private test: CanvasJS.Chart;
   constructor(private datePipe: DatePipe, private route: ActivatedRoute , private evolutionService: EvolutionService, private quizService: QuizService, private location: Location) { }
+  // private test: CanvasJS.Chart;
+  private chart: Chart;
 
-  LineChart: Chart;
   idPatient: number;
   evolTab: Evolution[] = [];
   quizEvolutionGrouped = [{id: 0, quizNom: '', suit: []}];
   title = 'Résultat de tous les quizs';
   public quiz: Quiz;
-  public  nbEssai = 0;
 
   public chartType = 'line';
-
-  public chartDatasets: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
-  ];
-
-  public chartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-  public chartColors: Array<any> = [
-    {
-      backgroundColor: 'rgba(105, 0, 132, .2)',
-      borderColor: 'rgba(200, 99, 132, .7)',
-      borderWidth: 2,
-    },
-    {
-      backgroundColor: 'rgba(0, 137, 132, .2)',
-      borderColor: 'rgba(0, 10, 130, .7)',
-      borderWidth: 2,
+  private toggleDataSeries =  (e) => {
+    if (typeof(e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+    } else {
+      e.dataSeries.visible = true;
     }
-  ];
-
-  public chartOptions: any = {
-    responsive: true
-  };
+    this.chart.render();
+  }
 
   ngOnInit() {
     this.idPatient = +this.route.snapshot.params.id;
-    console.log(this.idPatient);
+    // console.log(this.idPatient);
     this.evolutionService.getEvolutionByPatientId(this.idPatient).subscribe((res) => {
       console.log(res);
       this.evolTab = res;
@@ -62,14 +49,6 @@ export class QuizResultDisplayComponent implements OnInit {
       this.groupByQuizEvolution();
       this.buildChart();
     } );
-  }
-  toggleDataSeries(e) {
-    if (typeof(e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
-      e.dataSeries.visible = false;
-    } else {
-      e.dataSeries.visible = true;
-    }
-    // this.test.render();
   }
   buildChart() {
     const dataSet = [];
@@ -82,7 +61,8 @@ export class QuizResultDisplayComponent implements OnInit {
       for (let j = 0; j < this.quizEvolutionGrouped[i].suit.length; j++) {
         data.push({
           x: new Date(this.quizEvolutionGrouped[i].suit[j].dateCreation),
-          y: this.quizEvolutionGrouped[i].suit[j].succesRate});
+          y: this.quizEvolutionGrouped[i].suit[j].succesRate
+        });
         // labels.push(this.datePipe.transform(this.quizEvolutionGrouped[i].suit[j].dateCreation,'yyyy-MM-dd') );
       }
       dataSet.push({
@@ -96,17 +76,17 @@ export class QuizResultDisplayComponent implements OnInit {
 
     console.log(this.quizEvolutionGrouped);
     console.log(dataSet);
-    /*this.test = new CanvasJS.Chart('lineChart', {
+    this.chart = new Chart('lineChart', {
       data: dataSet,
       animationEnabled: true,
       title: {
-        text: 'Statistiques'
+        text: 'Nombre de jeu de quiz total éffectué: ' + this.evolTab.length
       },
       axisX: {
-        valueFormatString: 'DD MMM,YY'
+        valueFormatString: 'DD MMM,YY HH-MM'
       },
       axisY: {
-        title: 'Nomnres de contenaire',
+        title: 'Pourcentage de réussite des quizs',
         includeZero: false,
         suffix: ' '
       },
@@ -119,40 +99,10 @@ export class QuizResultDisplayComponent implements OnInit {
         shared: true
       }
     });
-*/
-    this.LineChart = new Chart('lineChart', {
-      type: 'line',
-      data: {
-        labels,
-        datasets: dataSet
-      },
-      options: {
-        title: {
-          text: 'Line Chart',
-          display: true
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
-
+    this.chart.render();
   }
   public back() {
     this.location.back();
-  }
-
-  reverseArr(input) {
-    const reverseEvolTab: Evolution[] = [];
-
-    for (let i = input.length - 1; i >= 0; i--) {
-      reverseEvolTab.push(input[i]);
-    }
-    this.evolTab = reverseEvolTab;
   }
 
   FirstTrialSucceed(evol: Evolution) {
@@ -187,7 +137,9 @@ export class QuizResultDisplayComponent implements OnInit {
       }
     }
   }
-
+  randomInt() {
+    return Math.round(100);
+  }
   randomRGBA(id) {
     // tslint:disable-next-line:one-variable-per-declaration
     const o = Math.round, r = Math.random, s = 255 ;
@@ -200,3 +152,12 @@ export class QuizResultDisplayComponent implements OnInit {
   }
 
 }
+/* private toggleDataSeries: (e) => {
+    // tslint:disable-next-line:align
+    if(typeof(e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
+    e.dataSeries.visible = false;
+  } else {
+   e.dataSeries.visible = true;
+  }
+      this.test.render();
+  }*/
