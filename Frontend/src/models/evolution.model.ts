@@ -30,7 +30,7 @@ export class Evolution {
       this.dateCreation = new Date();
       this.quizNom = '';
       this.quizDifficulty = '';
-      this.succesRate = -1;
+      this.succesRate = 0;
     }
   }
 }

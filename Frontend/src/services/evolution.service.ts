@@ -182,4 +182,23 @@ export class EvolutionService {
       return of(result as T);
     };
   }
+  FirstTrialSucceed(questionsPlayed) {
+    let nb = 0;
+    // tslint:disable-next-line:prefer-const
+    let arrayQues: number[] = [];
+    for (const el of questionsPlayed) {
+      if (el.trials <= 1 && arrayQues.includes(el.idQuestion) === false ) {
+        nb = nb + 1;
+        arrayQues.push(el.idQuestion);
+      }
+      arrayQues.push(el.idQuestion);
+    }
+    return nb;
+  }
+
+  Pourcentage(questionPlayed, quiz) {
+    const  nb1 = this.FirstTrialSucceed(questionPlayed);
+    const nb2 = (nb1 * 100) / quiz.questions.length;
+    return nb2.toFixed(2);
+  }
 }
