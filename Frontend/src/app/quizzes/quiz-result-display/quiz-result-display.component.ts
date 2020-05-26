@@ -70,12 +70,6 @@ export class QuizResultDisplayComponent implements OnInit, DoCheck {
         data: quiz
       });
     });
-    /*if (typeof(e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
-      e.dataSeries.visible = false;
-    } else {
-      e.dataSeries.visible = true;
-    }
-    this.chart.render();*/
   }
 
   ngOnInit() {
