@@ -75,7 +75,6 @@ export class ProfilEditComponent implements OnInit {
     if (this.conform()) {
       const profilToModify: Profil =  (this.profilForm.getRawValue()) as Profil;
       profilToModify.image = this.profil.image;
-      alert('this.profilFrom.get(\'image\').value = ' + this.profilForm.get('image').value);
       this.profilService
         .updateProfil(profilToModify,  this.profilForm.get('image').value )
         .subscribe((profil) => {
