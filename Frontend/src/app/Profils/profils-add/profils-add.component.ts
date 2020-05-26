@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProfilServices} from '../../../services/profil.services';
 import {Profil} from '../../../models/profil.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-profils-add',
@@ -11,6 +13,7 @@ import {Location} from '@angular/common';
   styleUrls: ['./profils-add.component.scss']
 })
 export class ProfilsAddComponent implements OnInit {
+  bgColor = 'primary';
   public profilForm: FormGroup;
   imagePreview: string;
   constructor(private formbuilder: FormBuilder, private profilService: ProfilServices, private Activerouter: ActivatedRoute,
@@ -26,7 +29,7 @@ export class ProfilsAddComponent implements OnInit {
   initiForm() {
     this.profilForm = this.formbuilder.group({
       nom: '',
-      age: 70,
+      age: [ 70 , [ Validators.required, Validators.min(50)]],
       prenom: '',
       stade: '',
       sexe: '',
@@ -34,11 +37,25 @@ export class ProfilsAddComponent implements OnInit {
       image: [null]
     });
   }
+  get age() {
+    return this.profilForm.get('age') as FormArray;
+  }
+  getAgeErrorMessage() {
+    if (this.age.hasError('required')) {
+      return environment.incorrectAge;
+    }
+  }
 
   back() {
-  this.location.back();
-}
+    this.location.back();
+  }
   addProfil() {
+    // We retrieve here the quiz object from the quizForm and we cast the type "as Quiz".
+    if (this.profilForm.invalid) {
+      alert(environment.formFieldsRequired);
+      this.profilForm.markAllAsTouched();
+      return;
+    }
     const form = this.profilForm.value;
     const profil = new Profil();
     profil.prenom = form.prenom;

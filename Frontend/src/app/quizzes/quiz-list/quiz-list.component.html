@@ -1,5 +1,5 @@
-<div style="background-color: white">
-  <mat-grid-list cols="{{col()}}" rowHeight="40px" style="width: 100%; border-bottom: #1b1e21 1px solid;">
+<div style="background-color: white;margin-right: 1%;margin-left: 1%">
+  <mat-grid-list cols="{{col()}}" rowHeight="2:1" style="width: 100%; border-bottom: #1b1e21 1px solid;">
     <mat-grid-tile colspan="3" rowspan="1" >
       <h3 >Libéllé</h3>
     </mat-grid-tile>
@@ -13,10 +13,10 @@
       <h3>Question(s)</h3>
     </mat-grid-tile>
     <mat-grid-tile *ngIf="!doQuiz" colspan="1" rowspan="1">
-      <h3>Actions</h3>
+      <h3>Supp.</h3>
     </mat-grid-tile>
   </mat-grid-list>
-  <div style="max-height: 430px;overflow-y: scroll;">
+  <div style="margin-right: 1%;margin-left: 1%">
     <mat-spinner *ngIf="loading"></mat-spinner>
     <app-quiz-less-info class="quiz" (deleteEmitter)="deleteQuiz($event,quiz)" (selectEmitter)="selectQuiz(quiz)" [do]="this.doQuiz" *ngFor="let quiz of quizList" [quiz]="quiz"></app-quiz-less-info>
     <div style="display: flex" *ngIf="inviteToCreateQuiz">

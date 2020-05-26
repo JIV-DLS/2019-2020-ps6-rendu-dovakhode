@@ -3,6 +3,7 @@ import {QuizService} from '../../../services/quiz.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Quiz} from '../../../models/quiz.model';
+import {DialogService} from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-quiz-recap',
@@ -21,7 +22,7 @@ export class QuizRecapComponent implements OnInit, OnChanges {
   constructor(private location: Location,
               private quizService: QuizService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router, private matDialogService: DialogService) { }
 
   ngOnInit(): void {
     this.quit = 0;
@@ -46,9 +47,11 @@ export class QuizRecapComponent implements OnInit, OnChanges {
     }
   }
   quitter() {
-    if (confirm(( 'Voulez-vous vraiment retourner au choix de quiz?'))) {
-      this.router.navigate(['/quiz-list', {do: true, idPatient: this.patientId}]);
-    }
+    this.matDialogService.openConfirmDialog(( 'Voulez-vous vraiment retourner au choix de quiz?')).afterClosed().subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/quiz-list', {do: true, idPatient: this.patientId}]);
+      }
+    });
   }
   precedent() {
     this.index = this.index > 0 ? this.index - 1 : 0;

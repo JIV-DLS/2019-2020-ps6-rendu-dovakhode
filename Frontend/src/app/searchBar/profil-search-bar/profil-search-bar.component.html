@@ -1,7 +1,7 @@
 <mat-grid-list cols="5" rowHeight="80px" style="width: 100%; margin-top: 10px;  margin-bottom: 10px; padding-top: 50px; border-radius: 1%;" >
   <mat-grid-tile colspan="1" rowspan="1">
     <mat-form-field appearance="legacy">
-      <mat-label>Rechercher par nom du profil</mat-label>
+      <mat-label>Nom</mat-label>
       <input matInput placeholder="Nom du patient" [(ngModel)]=" profilSearched.nom">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
@@ -10,6 +10,7 @@
     <mat-form-field>
       <mat-label>Prénom</mat-label>
       <input matInput placeholder="Prénom du patient" [(ngModel)]=" profilSearched.prenom">
+      <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </mat-grid-tile>
 

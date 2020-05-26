@@ -30,8 +30,10 @@ export class QuizComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public quizDialog: Quiz,
               private location: Location) {
   }
-  back() {
+  back(closeDialog: boolean) {
+    if (!closeDialog) {
     this.location.back();
+    } else { this.dialogRef.close(); }
   }
 
   ngOnInit() {

@@ -43,8 +43,8 @@ export class QuizService {
   public quizzes$: BehaviorSubject<Quiz[]> = new BehaviorSubject(this.quizzes);
   index: number;
 
-  addQuiz(quiz: Quiz, image: File, questions: FormArray): Observable<Quiz> {
-    this.snack.open(environment.snackInformation.operation.loading.post.quiz, 'close',
+  addQuiz(quiz: Quiz, image: File, questions: FormArray, check?: number): Observable<Quiz> {
+    this.snack.open((check === 1) ? environment.snackInformation.operation.loading.update.quiz : environment.snackInformation.operation.loading.post.quiz,  'close',
       {
         ...environment.snackInformation.loadingPost
       })
@@ -53,7 +53,7 @@ export class QuizService {
       this.createQuizData(image, quiz, questions)).pipe(
       tap((newQuiz: Quiz) => {
         console.log('Ajout reussi');
-        this.snack.open( environment.snackInformation.operation.succeeded.post.quiz, 'Afficher',
+        this.snack.open((check === 1) ? environment.snackInformation.operation.loading.update.quiz : environment.snackInformation.operation.succeeded.post.quiz, 'Afficher',
           {
             ...environment.snackInformation.successForAll
           }).onAction().subscribe(() => {
@@ -119,6 +119,14 @@ export class QuizService {
       }
     );
   }*/
+
+getPatientQuiz(idPatient): Observable<Quiz[]> {
+  return this.http.get<Quiz[]>(QuizService.quizUrl + '/patient/' + idPatient + '').pipe(
+    tap((quiz) => {
+    }),
+    catchError(this.handleError<Quiz[]>('getQuiz', undefined))
+  );
+}
   getQuiz(): Observable<Quiz[]>  {
     return this.http.get<Quiz[]>(QuizService.quizUrl).pipe(
       tap((quiz) => {

@@ -47,7 +47,7 @@ export class ProfilsListComponent implements OnInit {
 
     });
   }
-  quizSelected(profil: Profil) {
+ profilSelected(profil: Profil) {
     this.profilClicked.emit(profil);
   }
   deleteProfil(comfirm: boolean, profil: Profil) {
@@ -68,9 +68,9 @@ export class ProfilsListComponent implements OnInit {
 
   col() {
     if (this.doQuiz) {
-      return 10;
+      return 9;
     } else {
-      return 11;
+      return 10;
     }
   }
 

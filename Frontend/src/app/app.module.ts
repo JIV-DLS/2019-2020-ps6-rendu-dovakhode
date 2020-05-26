@@ -100,6 +100,9 @@ import { QuizResultDisplayComponent } from './quizzes/quiz-result-display/quiz-r
 import { QuizStartRecapComponent } from './quizzes/quiz-start-recap/quiz-start-recap.component';
 import { FooterComponent } from './footer/footer.component';
 import { QuizEndInfoComponent } from './quizzes/quiz-end-info/quiz-end-info.component';
+import {ProfilForNewQuizComponent} from './Profils/profil-for-new-quiz/profil-for-new-quiz.component';
+import { ProfilForEditQuizComponent } from './Profils/profil-for-edit-quiz/profil-for-edit-quiz.component';
+import {DatePipe} from '@angular/common';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {routeName: 'Acceuil'}},
@@ -114,9 +117,13 @@ const routes: Routes = [
   {path: 'quiz-edit/:id' , component: QuizzeEditComponent, data: {routeName: 'Modification d\'un quiz'}},
   {path: 'quiz-do/:evol' , component: QuizDoComponent, data: {routeName: 'Jeu en cour'}},
   {path: 'quiz-do/:id/start' , component: QuizDoStartComponent, data: {routeName: 'Debut du quiz'}},
+  {path: 'quiz-add' , component: QuizAddComponent, data: {routeName: 'Création d\'un quiz '}},
+  {path: 'profil-for-EditQuiz' , component: ProfilForEditQuizComponent, data: {routeName: 'Selectionnez le mode de modification '}},
+  {path: 'profil-for-newQuiz' , component: ProfilForNewQuizComponent, data: {routeName: 'Selectionnez le mode de création '}},
   {path: 'quiz/:idShowQuiz' , component: QuizComponent, data: {routeName: 'Affichage d\'un quiz'}},
   {path: 'resultats/:id' , component: QuizResultDisplayComponent, data: {routeName: 'Resultats'}},
   {path: 'profils-carousel', component: ProfilListDisplayComponent, data: {routeName: 'Choix du patient pour le jeu'}},
+  {path: 'profil-edit/:id' , component: ProfilEditComponent, data: {routeName: 'Modification d\'un profil'}},
   {path: 'quiz-do/:id/end/:idPatient', component: QuizEndComponent, data: {routeName: 'Jeu de quiz par un patient'}},
   { path: 'not-found', component: Error404Component , data: {routeName: 'Page inacessible'}},
   { path: '**', redirectTo: 'not-found', data: {routeName: 'Page inacessible'} }
@@ -196,6 +203,10 @@ routes.forEach((eachRoute) => {
 
     QuizEndInfoComponent,
 
+    ProfilForNewQuizComponent,
+
+    ProfilForEditQuizComponent,
+
   ],
   entryComponents: [
     QuestionsComponent,
@@ -248,7 +259,8 @@ routes.forEach((eachRoute) => {
     ProfilServices,
     QuizSearchPipe,
     ThemeServices,
-    SubthemeService
+    SubthemeService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

@@ -22,6 +22,8 @@ export class ProfilsCarouselComponent implements OnInit {
   @Input()
   public profilsList: Profil[] = [];
   public inviteToCreateProfil = null;
+  @Input() public add = false;
+  @Input() public modify = false;
   public doQuizWithProfil = false;
   itemsPerSlide = 3;
   singleSlideOffset = true;
@@ -70,7 +72,15 @@ export class ProfilsCarouselComponent implements OnInit {
           this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
         }
       });
-    } else {
+    }
+    if (this.doQuizWithProfil !== true && this.add) {
+     this.goToAdd(profil);
+    }
+    if (this.doQuizWithProfil !== true && this.add !== true && this.modify) {
+      console.log('ici');
+      this.update(profil);
+    }
+    if (this.add !== true && this.modify !== true && this.doQuizWithProfil !== true) {
       this.viewProfil(profil);
     }
   }
@@ -94,6 +104,13 @@ export class ProfilsCarouselComponent implements OnInit {
         this.profilChanged.next(null);
       }
     });
+  }
+
+  update(profil: Profil) {
+    this.router.navigate(['quiz-list', {do: false, idPatient: profil.id}]);
+  }
+  goToAdd(profil: Profil) {
+    this.router.navigate(['quiz-add', {idPatient: profil.id}] );
   }
 }
 

@@ -18,6 +18,8 @@ import {ThemeListComponent} from '../../themes/theme-list/theme-list.component';
 import {SubthemeService} from '../../../services/subtheme.service';
 import {Subtheme} from '../../../models/subtheme.model';
 import {Theme} from '../../../models/themes.model';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-quiz-form',
@@ -27,13 +29,16 @@ import {Theme} from '../../../models/themes.model';
 
 export class QuizAddComponent implements OnInit {
   public idTheme: any;
+  public idPatient: number;
 
   constructor(public dialogRef: MatDialogRef<QuizAddComponent>,
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
               public quizService: QuizService,
               public themeService: ThemeServices,
-              public subThemeService: SubthemeService) {
+              public subThemeService: SubthemeService,
+              public activatedRoute: ActivatedRoute,
+              private location: Location) {
 
   }
   // Form creation
@@ -62,6 +67,7 @@ export class QuizAddComponent implements OnInit {
    * More information about Reactive Forms: https://angular.io/guide/reactive-forms#step-1-creating-a-formgroup-instance
    */
   @Input() quiz: Quiz = null;
+ public defaultId = 0;
   public quizForm: FormGroup;
   subscription: Subscription;
   public themesValues: Theme[];
@@ -71,11 +77,12 @@ export class QuizAddComponent implements OnInit {
   public imagePreview: string;
   files: any = [];
 
-  changeColor() {
-    console.log('je suis laaaaa');
-  }
+
   ngOnInit() {
     this.quiz = new Quiz();
+    isNaN(this.activatedRoute.snapshot.params.idPatient) ?
+      this.idPatient = this.defaultId : this.idPatient = +this.activatedRoute.snapshot.params.idPatient;
+    console.log(this.idPatient);
     this.initializeTheForm();
     this.getAllTheme();
     this.subscription = this.subThemeService.subThemesSubject.subscribe((subthemes) => {
@@ -136,7 +143,12 @@ export class QuizAddComponent implements OnInit {
       this.quizForm.markAllAsTouched();
       return;
     }
+    if (this.questions.length === 0) {
+      alert('Veuillez ajouter au moins une question');
+      return;
+    }
     const quizToCreate: Quiz = this.quizForm.getRawValue() as Quiz;
+    quizToCreate.idPatient = this.idPatient;
     // quizToCreate.question = [];
     if (quizToCreate.difficulty == null) {
       quizToCreate.difficulty = difficulte.Normale;
@@ -275,6 +287,10 @@ export class QuizAddComponent implements OnInit {
       });
     } else { alert('Veuillez sélectionner un thème!'); }
 
+  }
+
+  back() {
+    this.location.back();
   }
 }
 

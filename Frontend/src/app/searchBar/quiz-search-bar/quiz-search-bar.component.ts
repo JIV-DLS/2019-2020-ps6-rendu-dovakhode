@@ -47,7 +47,6 @@ export class QuizSearchBarComponent implements OnInit {
     }
   }
   getSubTheme(value) {
-    console.log(value.value);
     const id = this.getThemId(value.value);
     this.subThemeService.getSubTheme(id).subscribe((subThemes) => {
       this.subThemeService.Subthemes = subThemes;

@@ -13,12 +13,12 @@
     <mat-grid-tile colspan="6" rowspan="2">
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="6">
-      <button color="accent" (click)="createAQuiz()" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button color="accent" routerLink="/profil-for-newQuiz" mat-flat-button aria-label="Example icon-button with a heart icon">
         <mat-icon style="font-size: 130px; width: 90%;height: 75%;">add</mat-icon>
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="6">
-      <button  color="warn" [routerLink]="['/quiz-list',{do:false}]" mat-flat-button aria-label="Example icon-button with a heart icon">
+      <button  color="warn" [routerLink]="['/profil-for-EditQuiz']" mat-flat-button aria-label="Example icon-button with a heart icon">
         <mat-icon style="font-size: 130px; width: 90%;height: 75%;">edit</mat-icon>
       </button>
     </mat-grid-tile>

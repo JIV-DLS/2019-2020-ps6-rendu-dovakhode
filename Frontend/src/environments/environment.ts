@@ -126,7 +126,8 @@ export const environment = {
       }
     }
   },
-  runningQuiz: 'DovaQuiz'
+  runningQuiz: 'DovaQuiz',
+  incorrectAge: 'L\'age saisit est incorrect!'
 
 
 };

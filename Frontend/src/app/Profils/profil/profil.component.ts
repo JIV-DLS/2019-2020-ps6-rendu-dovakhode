@@ -40,27 +40,32 @@ export class ProfilComponent implements OnInit {
       id: profil.id
     });
   }
-  profilImage() {
-    return this.profil.image;
+  public profilImage() {
+    return this.profilForm.get('image').value;
+  }
+  addQuiz() {
+    this.dialogRef.close();
+    this.router.navigate(['/quiz-add', {idPatient: this.profil.id}]);
   }
 
   editProfile() {
-    const dialogRef = this.dialog.open(ProfilEditComponent, {
-      width: '950px',
-      maxHeight: '500px',
-      data: this.profil
-    });
-    dialogRef.afterClosed().subscribe(response => {
-      this.profilDialogOpened = false;
-      if (response != null) {
-      this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
-      this.profil.image = response.image;
-      document.location.reload();
-      /*this.dialogRef.close({
-          del: false
-        });*/
-      }
-    });
+    this.dialogRef.close();
+    this.router.navigateByUrl('/profil-edit/' + this.profil.id);
+   /*const dialogRef = this.dialog.open(ProfilEditComponent, {
+    width: '950px',
+    maxHeight: '500px',
+    data: this.profil
+  });
+  dialogRef.afterClosed().subscribe(response => {
+    this.profilDialogOpened = false;
+    if (response != null) {
+    this.replaceProfileByData(this.profil, {...this.createProfilByData(response.profil).getRawValue()});
+    this.profil.image = response.image;
+    /*this.dialogRef.close({
+        del: false
+      });
+    }
+  });*/
   }
   deleteProfile() {
     this.matDialogService.openConfirmDialog('Voulez vous vraiment supprimer le profil de  ' +

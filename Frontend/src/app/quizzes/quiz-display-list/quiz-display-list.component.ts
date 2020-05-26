@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../../../models/quiz.model';
 import {difficulteSearch, themeSearch} from '../../../models/theme.models';
@@ -13,7 +13,7 @@ import {DeviceDetectorService} from 'ngx-device-detector';
   templateUrl: './quiz-display-list.component.html',
   styleUrls: ['./quiz-display-list.component.scss']
 })
-export class QuizDisplayListComponent implements OnInit {
+export class QuizDisplayListComponent implements OnInit, OnDestroy {
   constructor(public route: ActivatedRoute,
               private Activerouter: ActivatedRoute,
               private router: Router,
@@ -23,6 +23,7 @@ export class QuizDisplayListComponent implements OnInit {
     this.getAllQuiz(); }
 
   bgColor = 'primary';
+  @Input() show = true;
 
   public quizList: Quiz[] = [];
   public doQuiz;
@@ -36,20 +37,49 @@ export class QuizDisplayListComponent implements OnInit {
     this.idPatient = + (this.Activerouter.snapshot.params.idPatient);
     this.getAllQuiz();
   }
+
+  ngOnDestroy(): void {
+    this.show = false;
+  }
   getAllQuiz() {
     this.loading = true;
-    this.quizService.getQuiz().subscribe((quiz) => {
+    if (this.idPatient === 0 && this.doQuiz || !this.doQuiz && isNaN(this.idPatient)) {
+      this.quizService.getQuiz().subscribe((quiz) => {
 
-      this.loading = false;
-      if (!quiz) {
-        // tslint:disable-next-line:max-line-length
-        if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) { this.getAllQuiz(); } else {alert('Veuillez conctater l\'administrateur'); return; }
-      }
+        this.loading = false;
+        if (!quiz) {
+          // tslint:disable-next-line:max-line-length
+          if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) {
+            this.getAllQuiz();
+          } else {
+            alert('Veuillez conctater l\'administrateur');
+            return;
+          }
+        }
 
-      this.quizList = quiz;
-      this.inviteToCreateQuiz = this.quizList.length === 0 ;
+        this.quizList = quiz;
+        this.inviteToCreateQuiz = this.quizList.length === 0;
 
-    });
+      });
+    } else {
+      this.quizService.getPatientQuiz(this.idPatient).subscribe((quiz) => {
+
+        this.loading = false;
+        if (!quiz) {
+          // tslint:disable-next-line:max-line-length
+          if (confirm('une erreur de chargement s\'est produite voulez-vous rééssayer?')) {
+            this.getAllQuiz();
+          } else {
+            alert('Veuillez conctater l\'administrateur');
+            return;
+          }
+        }
+
+        this.quizList = quiz;
+        this.inviteToCreateQuiz = this.quizList.length === 0;
+
+      });
+    }
   }
   quizSelected(selected: boolean) {
   }
@@ -65,7 +95,7 @@ export class QuizDisplayListComponent implements OnInit {
       this.router.navigate([ '/quiz-do/' + quiz.id + '/start' , { idPatient: this.idPatient}]);
       //  this.router.navigate(['/quiz-list', { do: true, idPatient: profil.id } ]);
     } else {
-      this.router.navigateByUrl('/quiz-edit/' + quiz.id);
+      this.router.navigate(['/quiz-edit/' + quiz.id, { idPatient: this.idPatient}]);
     }
   }
 

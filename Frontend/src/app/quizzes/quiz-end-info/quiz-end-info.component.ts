@@ -30,17 +30,7 @@ export class QuizEndInfoComponent implements OnInit {
     });
   }
   FirstTrialSucceed() {
-    let nb = 0;
-    // tslint:disable-next-line:prefer-const
-    let arrayQues: number[] = [];
-    for (const el of this.questionsPlayed) {
-      if (el.trials <= 1 && arrayQues.includes(el.idQuestion) === false ) {
-        nb = nb + 1;
-        arrayQues.push(el.idQuestion);
-      }
-      arrayQues.push(el.idQuestion);
-    }
-    return nb;
+   return this.evolutionService.FirstTrialSucceed(this.questionsPlayed);
   }
   AfterFirstTrial() {
     const  nb = this.FirstTrialSucceed();
@@ -48,9 +38,8 @@ export class QuizEndInfoComponent implements OnInit {
   }
 
   Pourcentage() {
-    const  nb1 = this.FirstTrialSucceed();
-    const nb2 = (nb1 * 100) / this.quiz.questions.length;
-    return nb2.toFixed(2);
+    return this.evolutionService.Pourcentage(this.questionsPlayed, this.quiz);
+
   }
   resultat() {
     const resultat = [ 0 , 0 ];

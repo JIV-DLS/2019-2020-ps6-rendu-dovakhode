@@ -95,21 +95,26 @@ export class EvolutionService {
   }
 
 
-  updateEvolution(evolutionToModify: Evolution): Observable<Evolution> {
-    this.snack.open( environment.snackInformation.operation.loading.update.quiz, 'close',
-      {
-        ...environment.snackInformation.loadingUpdate
-      })
-    ;
+  updateEvolution(evolutionToModify: Evolution, id?: number): Observable<Evolution> {
+
+    if (id !== 1) {
+      this.snack.open(environment.snackInformation.operation.loading.update.quiz, 'close',
+        {
+          ...environment.snackInformation.loadingUpdate
+        })
+      ;
+    }
 
     return this.http.put<Evolution>(this.evolutionUrl  + '/' + evolutionToModify.id, evolutionToModify).pipe(
       tap((createdQuiz) => {
         console.log('Modification reussie');
-        this.snack.open( environment.snackInformation.operation.succeeded.update.quiz, 'close',
-          {
-            ...environment.snackInformation.successForAll
-          })
-        ;
+        if (id !== 1) {
+          this.snack.open(environment.snackInformation.operation.succeeded.update.quiz, 'close',
+            {
+              ...environment.snackInformation.successForAll
+            })
+          ;
+        }
       }),
       catchError(this.handleError<Evolution>('updateEvolution', undefined))
     );
@@ -181,5 +186,24 @@ export class EvolutionService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+  FirstTrialSucceed(questionsPlayed) {
+    let nb = 0;
+    // tslint:disable-next-line:prefer-const
+    let arrayQues: number[] = [];
+    for (const el of questionsPlayed) {
+      if (el.trials <= 1 && arrayQues.includes(el.idQuestion) === false ) {
+        nb = nb + 1;
+        arrayQues.push(el.idQuestion);
+      }
+      arrayQues.push(el.idQuestion);
+    }
+    return nb;
+  }
+
+  Pourcentage(questionPlayed, quiz) {
+    const  nb1 = this.FirstTrialSucceed(questionPlayed);
+    const nb2 = (nb1 * 100) / quiz.questions.length;
+    return nb2.toFixed(2);
   }
 }

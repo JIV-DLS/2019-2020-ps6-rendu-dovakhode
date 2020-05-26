@@ -10,15 +10,15 @@
     </mat-grid-tile>
 
     <mat-grid-tile colspan="6" rowspan="6">
-      <p style="text-align: center; ">Cliquez sur un des buttons pour lancer un quiz </p>
+      <p style="text-align: center;font-size: 2vw ">Cliquez sur un des buttons pour lancer un quiz </p>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="6">
-      <button style="font-size: 30px"  color="warn" [routerLink]="['/quiz-list',{do:true,idPatient:0}]" mat-flat-button aria-label="Example icon-button with a heart icon">
-        Lancer un quiz rapide sans profil
+      <button style="font-size: 2vw"  color="warn" [routerLink]="['/quiz-list',{do:true,idPatient:0}]" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Lancer un quiz rapide sans profil patient
       </button>    </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="6">
-      <button style="font-size: 30px; font-style: normal"  color="accent" [routerLink]="['/profils-carousel',{do:true}]" mat-flat-button aria-label="Example icon-button with a heart icon">
-        Lancer un quiz avec un patient
+      <button style="font-size: 2vw; font-style: normal"  color="accent" [routerLink]="['/profils-carousel',{do:true}]" mat-flat-button aria-label="Example icon-button with a heart icon">
+        Lancer un quiz avec un profil patient
       </button>    </mat-grid-tile>
   </mat-grid-list>
 </div>

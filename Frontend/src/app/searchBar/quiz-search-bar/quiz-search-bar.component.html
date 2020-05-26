@@ -1,9 +1,9 @@
 <mat-grid-list cols="5" rowHeight="80px" style="background-color: white; width: 100%; margin-top: 10px; margin-bottom: 10px; padding-top: 50px; border-radius: 1%;" >
   <mat-grid-tile colspan="1" rowspan="1">
     <mat-form-field appearance="legacy">
-      <mat-label>Rechercher par Libéllé du quiz</mat-label>
+      <mat-label>Libéllé du quiz</mat-label>
       <input [(ngModel)]="searchedQuiz.label" matInput placeholder="libéllé du quiz">
-      <mat-icon matSuffix>search</mat-icon>
+      <mat-icon style="size: auto" matSuffix>search</mat-icon>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile colspan="1" rowspan="1">
@@ -19,7 +19,9 @@
   <mat-grid-tile colspan="1" rowspan="1">
     <mat-form-field>
       <mat-label>Sous Thème</mat-label>
-      <mat-select [(value)]="searchedQuiz.subTheme">
+      <mat-select [(value)]="searchedQuiz.subTheme" >
+        <mat-option *ngIf="subThemesValues.length ==0" value="">
+        </mat-option>
         <mat-option *ngFor="let subtheme of subThemesValues" [value]="subtheme.label">
           {{subtheme.label}}
         </mat-option>
@@ -42,9 +44,8 @@
       Retour
     </button>
   </mat-grid-tile>
-  <mat-grid-tile colspan="5" rowspan="1">
-    <p style="text-align: center;">Cliquez sur l'un des quizzes sous dessous pour le <b>
+  <mat-grid-tile *ngIf="doQuiz!=null" colspan="5" rowspan="1">
+    <p style="text-align: center;">Cliquez sur l'un des quiz ci-dessous pour le <b>
       {{(doQuiz?'lancer':'modifier')}}!</b> <br/>
-      NB: La liste peut être vide si aucun quiz quiz ne suit les critères entrés!</p>
   </mat-grid-tile>
 </mat-grid-list>

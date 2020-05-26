@@ -1,3 +1,4 @@
+const {Evolution} = require('../../models')
 
 const { Router } = require('express')
 
@@ -52,6 +53,55 @@ function createQuiz(obj, req) {
   quiz.questions = questions
   return quiz
 }
+function getQuizByPatientId(id) {
+  const quiz = []
+  for (let i = 0; i <Quiz.items.length; i++) {
+    if (Quiz.items[i].idPatient === parseInt(id, 10) || Quiz.items[i].idPatient ===0) { quiz.push(Quiz.items[i]) }
+  }
+  deleteDuplication(quiz);
+  return quiz
+}
+
+function get()
+{
+
+    const quiz = []
+    for (let i = 0; i <Quiz.items.length; i++) {
+      if (Quiz.items[i].idPatient === 0 || Quiz.items[i].idPatient ===0) { quiz.push(Quiz.items[i]) }
+    }
+    deleteDuplication(quiz);
+    return quiz
+
+}
+function deleteDuplication(quiz)
+{
+  console.log("here");
+  for(let i=0; i<quiz.length;i++)
+  {
+    console.log("here");
+    for(let j=0; j<quiz.length;j++)
+    {
+
+      if(quiz[i].label===quiz[j].label && quiz[i].idPatient!==quiz[j].idPatient)
+      {
+        if(quiz[i].idPatient===0)
+        {
+         const index = quiz.indexOf(quiz[i]);
+          quiz.splice(index, 1);
+        }
+        else
+        {
+          const index= quiz.indexOf(quiz[j]);
+          quiz.splice(index, 1);
+        }
+
+      }
+
+    }
+  }
+
+}
+
 function getAQuiz(id) {
   const quiz = Quiz.getById(id)
   const questions = QuestionsRouter.getQuestionsByQuizId(id)
@@ -68,7 +118,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/', (req, res) => {
   try {
-    const quizzes = Quiz.get().sort((a, b) => new Date(b.dateModification) - new Date(a.dateModification))
+    const quizzes = get().sort((a, b) => new Date(b.dateModification) - new Date(a.dateModification))
     for (let i = 0; i < quizzes.length; i++) { quizzes[i].questions = QuestionsRouter.getQuestionsByQuizId(quizzes[i].id) }
 
     res.status(200).json(quizzes)
@@ -76,6 +126,18 @@ router.get('/', (req, res) => {
     res.status(500).json(err)
   }
 })
+router.get('/patient/:idPatient', (req, res) => {
+  try {
+    const quizzes = getQuizByPatientId(req.params.idPatient).sort((a, b) => new Date(b.dateModification) - new Date(a.dateModification))
+    for (let i = 0; i < quizzes.length; i++) { quizzes[i].questions = QuestionsRouter.getQuestionsByQuizId(quizzes[i].id) }
+
+    res.status(200).json(quizzes)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
+
 function hasQuizImage(req) {
   return req.files[0] && req.files[0].originalname.indexOf('quiz') === 0
 }
@@ -186,10 +248,17 @@ router.put('/:id', quizMulter, (req, res) => {
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.files[0].filename}`,
     } : {
       ...JSON.parse(req.body.quiz),
-    }, req)
-    res.status(201).json(getAQuiz(req.params.id))
+    }, req);
+    const quizUpdated = getAQuiz(req.params.id);
+    Evolution.get().filter(evolutionConcerned=>evolutionConcerned.quizId === quizUpdated.id).forEach(
+        evolutionToModify=>{
+          evolutionToModify.quizNom = quizUpdated.label;
+          Evolution.update(evolutionToModify.id,evolutionToModify);
+        }
+    );
+    res.status(201).json(quizUpdated)
   } catch (err) {
-    console.log(err)
+    console.log(err);
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
     } else {

@@ -14,7 +14,23 @@ function getById(idQuiz, idQues) {
 function get(id) {
   const ques = []
   for (let i = 0; i < QuestionPlayed.items.length; i++) {
-    if (QuestionPlayed.items[i].EvolutionId === parseInt(id, 10)) { ques.push(QuestionPlayed.items[i]) }
+    if (QuestionPlayed.items[i].EvolutionId === parseInt(id, 10)) {
+      let finded = false;
+      for (let j=0;j<ques.length;j++){
+        if(ques[j].idQuestion==QuestionPlayed.items[i].idQuestion){
+          if(QuestionPlayed.items[i].trials == 1)
+          ques[j].trials=1;
+          else
+          ques[j].trials++;
+          finded = true;
+          break;
+        }
+      }
+      if(!finded){
+        if(QuestionPlayed.items[i].trials>1)
+        QuestionPlayed.items[i].trials = 2;
+      ques.push(QuestionPlayed.items[i])}
+    }
   }
   return ques
 }
