@@ -50,7 +50,7 @@ export class DragNDropPhotoDirective {
         break;
       case 'string':
             evt.dataTransfer.items[0].getAsString(async _ => {
-              if (_ != null && _.value !== undefined) {
+              if (_ !== null && _ !== undefined) {
                 if (_.indexOf('imgurl=') > 0 && _.indexOf('&imgref') > 0) {
                   const imgUrl =  decodeURIComponent(_.split(' ')[0].split('imgurl=')[1].split('&imgref')[0]);
 
