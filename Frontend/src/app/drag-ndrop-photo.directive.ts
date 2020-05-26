@@ -53,7 +53,6 @@ export class DragNDropPhotoDirective {
               if (_ !== null && _ !== undefined) {
                 if (_.indexOf('imgurl=') > 0 && _.indexOf('&imgref') > 0) {
                   const imgUrl =  decodeURIComponent(_.split(' ')[0].split('imgurl=')[1].split('&imgref')[0]);
-
                   /*this.snack.open(environment.snackInformation.operation.loading.get.image, 'close',
                     {
                       ...environment.snackInformation.successForAll

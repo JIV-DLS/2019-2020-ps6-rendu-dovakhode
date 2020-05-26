@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck, KeyValueDiffers, KeyValueDiffer } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Evolution} from '../../../models/evolution.model';
 import {EvolutionService} from '../../../services/evolution.service';
@@ -11,6 +11,7 @@ import * as CanvasJS from '../../canvasjs/canvasjs.min';
 // import {Chart} from 'chart.js';
 import {Chart} from '../../canvasjs/canvasjs.min';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
+import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 
 
 @Component({
@@ -18,8 +19,11 @@ import {QuestionPlayed} from '../../../models/questionPlayed.model';
   templateUrl: './quiz-result-display.component.html',
   styleUrls: ['./quiz-result-display.component.scss']
 })
-export class QuizResultDisplayComponent implements OnInit {
-  constructor(private datePipe: DatePipe, private route: ActivatedRoute , private evolutionService: EvolutionService, private quizService: QuizService, private location: Location) { }
+export class QuizResultDisplayComponent implements OnInit, DoCheck {
+  constructor(private datePipe: DatePipe, private route: ActivatedRoute , private evolutionService: EvolutionService, private quizService: QuizService, private location: Location,
+              private differs: KeyValueDiffers) {
+    this.differ = this.differs.find(this.searchedQuiz).create();
+  }
   // private test: CanvasJS.Chart;
   private chart: Chart;
 
@@ -27,9 +31,33 @@ export class QuizResultDisplayComponent implements OnInit {
   evolTab: Evolution[] = [];
   quizEvolutionGrouped = [{id: 0, quizNom: '', suit: []}];
   title = 'Résultat de tous les quizs';
-  public quiz: Quiz;
+  differ: KeyValueDiffer<string, any>;
 
-  public chartType = 'line';
+  quiz: Quiz;
+  chartType = 'line';
+  searchedQuiz: Quiz = DEFAULT_QUIZ;
+
+
+  ngDoCheck() {
+    const change = this.differ.diff(this.searchedQuiz);
+    if (change) {
+      const searchedResult = [];
+      console.log(this.searchedQuiz.label);
+      console.log(this.searchedQuiz.label.length);
+      if (this.searchedQuiz.label.length > 0) {
+        this.quizEvolutionGrouped.forEach(_ => {
+          if (_.quizNom.includes(this.searchedQuiz.label)) {searchedResult.push(_); }
+        });
+        this.buildChart(searchedResult);
+      } else {
+        this.buildChart(this.quizEvolutionGrouped);
+      }
+      /*change.forEachChangedItem(item => {
+        console.log('item changed', item);
+      });*/
+    }
+  }
+
   private toggleDataSeries =  (e) => {
     if (typeof(e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
       e.dataSeries.visible = false;
@@ -46,20 +74,20 @@ export class QuizResultDisplayComponent implements OnInit {
       this.evolTab = res;
       // this.reverseArr(this.evolTab);
       this.groupByQuizEvolution();
-      this.buildChart();
+      this.buildChart(this.quizEvolutionGrouped);
     } );
   }
-  buildChart() {
+  buildChart(quizEvolutionGrouped) {
     const dataSet = [];
     const labels = [];
-    for (let i = 1; i < this.quizEvolutionGrouped.length; i++) {
+    for (let i = 1; i < quizEvolutionGrouped.length; i++) {
       const data = [];
-      const label = this.quizEvolutionGrouped[i].quizNom;
+      const label = quizEvolutionGrouped[i].quizNom + '(' + quizEvolutionGrouped[i].suit.length + ')';
       // tslint:disable-next-line:prefer-for-of
-      for (let j = 0; j < this.quizEvolutionGrouped[i].suit.length; j++) {
+      for (let j = 0; j < quizEvolutionGrouped[i].suit.length; j++) {
         data.push({
-          x: new Date(this.quizEvolutionGrouped[i].suit[j].dateCreation),
-          y: this.quizEvolutionGrouped[i].suit[j].succesRate
+          x: new Date(quizEvolutionGrouped[i].suit[j].dateCreation),
+          y: quizEvolutionGrouped[i].suit[j].succesRate
         });
         // labels.push(this.datePipe.transform(this.quizEvolutionGrouped[i].suit[j].dateCreation,'yyyy-MM-dd') );
       }
