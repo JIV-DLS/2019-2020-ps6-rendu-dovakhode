@@ -12,6 +12,9 @@ import * as CanvasJS from '../../canvasjs/canvasjs.min';
 import {Chart} from '../../canvasjs/canvasjs.min';
 import {QuestionPlayed} from '../../../models/questionPlayed.model';
 import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
+import {SubThemeListComponent} from '../../subThemes/sub-theme-list/sub-theme-list.component';
+import {MatDialog} from '@angular/material';
+import {QuizComponent} from '../quiz/quiz.component';
 
 
 @Component({
@@ -21,7 +24,8 @@ import {DEFAULT_QUIZ} from '../../../mocks/quiz-list.mock';
 })
 export class QuizResultDisplayComponent implements OnInit, DoCheck {
   constructor(private datePipe: DatePipe, private route: ActivatedRoute , private evolutionService: EvolutionService, private quizService: QuizService, private location: Location,
-              private differs: KeyValueDiffers) {
+              private differs: KeyValueDiffers,
+              public dialog: MatDialog) {
     this.differ = this.differs.find(this.searchedQuiz).create();
   }
   // private test: CanvasJS.Chart;
@@ -36,21 +40,20 @@ export class QuizResultDisplayComponent implements OnInit, DoCheck {
   quiz: Quiz;
   chartType = 'line';
   searchedQuiz: Quiz = DEFAULT_QUIZ;
+  currentDisplayQuizResultList = [];
 
 
   ngDoCheck() {
     const change = this.differ.diff(this.searchedQuiz);
     if (change) {
       const searchedResult = [];
-      console.log(this.searchedQuiz.label);
-      console.log(this.searchedQuiz.label.length);
       if (this.searchedQuiz.label.length > 0) {
         this.quizEvolutionGrouped.forEach(_ => {
-          if (_.quizNom.includes(this.searchedQuiz.label)) {searchedResult.push(_); }
+          if (_.quizNom.toLowerCase().includes(this.searchedQuiz.label.toLowerCase())) {searchedResult.push(_); }
         });
         this.buildChart(searchedResult);
       } else {
-        this.buildChart(this.quizEvolutionGrouped);
+        this.buildChart(this.quizEvolutionGrouped, 1);
       }
       /*change.forEachChangedItem(item => {
         console.log('item changed', item);
@@ -58,13 +61,21 @@ export class QuizResultDisplayComponent implements OnInit, DoCheck {
     }
   }
 
-  private toggleDataSeries =  (e) => {
-    if (typeof(e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
+  private showQuizDetails =  (e) => {
+    console.log(+e.dataSeries.dataPoints[0].id);
+    this.quizService.getQuizById(+e.dataSeries.dataPoints[0].id).subscribe(quiz => {
+      const dialogRef = this.dialog.open(QuizComponent, {
+        width: '1250px',
+        maxHeight: '1200px',
+        data: quiz
+      });
+    });
+    /*if (typeof(e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
       e.dataSeries.visible = false;
     } else {
       e.dataSeries.visible = true;
     }
-    this.chart.render();
+    this.chart.render();*/
   }
 
   ngOnInit() {
@@ -74,20 +85,24 @@ export class QuizResultDisplayComponent implements OnInit, DoCheck {
       this.evolTab = res;
       // this.reverseArr(this.evolTab);
       this.groupByQuizEvolution();
-      this.buildChart(this.quizEvolutionGrouped);
+      this.buildChart(this.quizEvolutionGrouped, 1);
     } );
   }
-  buildChart(quizEvolutionGrouped) {
+  buildChart(quizEvolutionGrouped, startAt?: number) {
+    this.currentDisplayQuizResultList = quizEvolutionGrouped;
+    let totalNumber = 0;
     const dataSet = [];
     const labels = [];
-    for (let i = 1; i < quizEvolutionGrouped.length; i++) {
+    for (let i = startAt ? startAt : 0; i < quizEvolutionGrouped.length; i++) {
       const data = [];
       const label = quizEvolutionGrouped[i].quizNom + '(' + quizEvolutionGrouped[i].suit.length + ')';
       // tslint:disable-next-line:prefer-for-of
       for (let j = 0; j < quizEvolutionGrouped[i].suit.length; j++) {
+        totalNumber++;
         data.push({
           x: new Date(quizEvolutionGrouped[i].suit[j].dateCreation),
-          y: quizEvolutionGrouped[i].suit[j].succesRate
+          y: quizEvolutionGrouped[i].suit[j].succesRate,
+          id: quizEvolutionGrouped[i].id
         });
         // labels.push(this.datePipe.transform(this.quizEvolutionGrouped[i].suit[j].dateCreation,'yyyy-MM-dd') );
       }
@@ -104,7 +119,7 @@ export class QuizResultDisplayComponent implements OnInit, DoCheck {
       data: dataSet,
       animationEnabled: true,
       title: {
-        text: 'Nombre de jeu de quiz total éffectué: ' + this.evolTab.length
+        text: 'Nombre de jeu de quiz total éffectué: ' + totalNumber
       },
       axisX: {
         valueFormatString: 'DD MMM,YY '
@@ -117,7 +132,7 @@ export class QuizResultDisplayComponent implements OnInit, DoCheck {
       legend: {
         cursor: 'pointer',
         fontSize: 16,
-        itemclick: this.toggleDataSeries
+        itemclick: this.showQuizDetails
       },
       toolTip: {
         shared: true
@@ -160,5 +175,4 @@ export class QuizResultDisplayComponent implements OnInit, DoCheck {
       }
     }
   }
-
 }

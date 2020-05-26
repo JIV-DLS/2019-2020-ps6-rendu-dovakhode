@@ -11,26 +11,27 @@
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="5">
-        <button color="primary" (click)="back()" mat-flat-button aria-label="Example icon-button with a heart icon">
+        <button *ngIf="this.quizDialog == null" color="primary" (click)="back(false)" mat-flat-button aria-label="Retour">
           <mat-icon>reply</mat-icon>
           Retour
+        </button>
+        <button *ngIf="this.quizDialog != null" color="warn" (click)="back(true)" mat-flat-button aria-label="Close">
+          <mat-icon>close</mat-icon>
+          Fermer
         </button>
       </mat-grid-tile>
 
       <mat-grid-tile style=" text-align: left;" colspan="1" rowspan="4">
-        <span style="text-decoration: underline #555555;">Title: </span>
+        <span style="text-decoration: underline #555555;">Titre: </span>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="4">
         <span>{{quiz.label}}</span>
       </mat-grid-tile>
-      <mat-grid-tile colspan="2" rowspan="16">
-        <mat-card style="border: black solid 3px; height: 90%;width: 90%;">
-          <mat-card-content style=" height: 100%;width: 100%;">
-            <img [src]="quiz.image?quiz.image:'../../../assets/Default/imageNotFound.png'" style=" height: 100%;width: 100%;" alt="NotFound Image"/></mat-card-content>
-        </mat-card>
+      <mat-grid-tile colspan="2" rowspan="18">
+            <app-image-uploader [label]="quiz.image.length>4? quiz.label:'Aucune image'" [imagePreview]="quiz.image"></app-image-uploader>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="4">
-        <span style="text-decoration: underline #555555; text-align: left;">Theme: </span>
+        <span style="text-decoration: underline #555555; text-align: left;">Thème: </span>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="4">
         <span >{{quiz.theme}}</span>
@@ -52,7 +53,8 @@
       <mat-grid-tile colspan="4" rowspan="3" >
         <span style="text-decoration: underline #555555; text-align: left;">Listes des questions(<span class="badge">{{quiz.questions?.length}}</span>):</span>
       </mat-grid-tile>
-      <mat-grid-tile colspan="4" rowspan="20">
+      <mat-grid-tile colspan="4" rowspan="28">
+
         <div style="display: flex; border: black solid 3px; height: 100%;width: 100%; overflow-x: scroll">
           <app-question *ngFor="let question of quiz.questions; let i=index;"  [number]="i+1" [question]="question" ></app-question>
         </div>

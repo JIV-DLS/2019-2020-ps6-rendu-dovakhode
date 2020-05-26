@@ -1,3 +1,4 @@
+const {Evolution} = require('../../models')
 
 const { Router } = require('express')
 
@@ -247,10 +248,17 @@ router.put('/:id', quizMulter, (req, res) => {
       image: `${req.protocol}://${req.get('host')}/images/quiz/${req.files[0].filename}`,
     } : {
       ...JSON.parse(req.body.quiz),
-    }, req)
-    res.status(201).json(getAQuiz(req.params.id))
+    }, req);
+    const quizUpdated = getAQuiz(req.params.id);
+    Evolution.get().filter(evolutionConcerned=>evolutionConcerned.quizId === quizUpdated.id).forEach(
+        evolutionToModify=>{
+          evolutionToModify.quizNom = quizUpdated.label;
+          Evolution.update(evolutionToModify.id,evolutionToModify);
+        }
+    );
+    res.status(201).json(quizUpdated)
   } catch (err) {
-    console.log(err)
+    console.log(err);
     if (err.name === 'ValidationError') {
       res.status(400).json(err.extra)
     } else {
