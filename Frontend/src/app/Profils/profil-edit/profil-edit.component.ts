@@ -41,7 +41,9 @@ export class ProfilEditComponent implements OnInit {
               private formbuilder: FormBuilder,
               private profilService: ProfilServices,
               private router: Router,
-              private Activerouter: ActivatedRoute) { }
+              private Activerouter: ActivatedRoute) {
+
+  }
   ngOnInit() {
     this.profilService.getProfilById ( + this.Activerouter.snapshot.paramMap.get('id'))
       .subscribe((profil) => {
@@ -67,7 +69,7 @@ export class ProfilEditComponent implements OnInit {
       stade: [profil.stade],
       sexe: [profil.sexe],
       recommandations: [profil.recommandations],
-      image: [null],
+      image: profil.image,
       id: profil.id
     });
   }
@@ -75,7 +77,6 @@ export class ProfilEditComponent implements OnInit {
     if (this.conform()) {
       const profilToModify: Profil =  (this.profilForm.getRawValue()) as Profil;
       profilToModify.image = this.profil.image;
-      alert('this.profilFrom.get(\'image\').value = ' + this.profilForm.get('image').value);
       this.profilService
         .updateProfil(profilToModify,  this.profilForm.get('image').value )
         .subscribe((profil) => {
